@@ -30,15 +30,19 @@ lifeos-dashboard/
 
 ## 🌐 Deployment
 
+### Vercel (Recommended) ✅
+**Live URL:** `https://lifeos-dashboard-xxx.vercel.app` *(update after deployment)*
+
+1. Import repo at [vercel.com/new](https://vercel.com/new)
+2. Framework preset: **Other** (static)
+3. Deploy!
+
+See [DEPLOY.md](./DEPLOY.md) for detailed manual deployment steps.
+
 ### GitHub Pages (Alternative)
 1. Push to GitHub
 2. Enable GitHub Pages in repo settings
 3. Set source to main branch
-
-### Vercel (Recommended)
-1. Import repo at [vercel.com](https://vercel.com)
-2. Framework preset: **Other** (static)
-3. Deploy!
 
 No build command needed - it's pure HTML/CSS/JS.
 
