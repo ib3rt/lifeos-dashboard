@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>b3rt | Systems, Automation & Life OS</title>
+    <meta name="description" content="Building systems, automating life, and sharing the journey. Tech, productivity, and entrepreneurship.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8B5CF6;
+            --primary-dark: #7C3AED;
+            --accent: #10B981;
+            --neutral: #64748B;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+            --code: #1E293B;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header {
+            padding: 40px 0;
+            text-align: center;
+        }
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .hero h1 span {
+            color: var(--primary);
+        }
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--neutral);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Terminal */
+        .terminal {
+            background: var(--code);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            text-align: left;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .terminal-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .terminal-dot.red { background: #EF4444; }
+        .terminal-dot.yellow { background: #F59E0B; }
+        .terminal-dot.green { background: #10B981; }
+        .terminal-body {
+            color: #E2E8F0;
+            line-height: 1.8;
+        }
+        .terminal-body .comment { color: #64748B; }
+        .terminal-body .prompt { color: var(--accent); }
+        
+        /* Links Grid */
+        .links {
+            padding: 60px 0;
+        }
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .link-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .link-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139,92,246,0.2);
+        }
+        .link-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .link-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .link-card p {
+            font-size: 0.9rem;
+            color: var(--neutral);
+        }
+        
+        /* Projects */
+        .projects {
+            padding: 60px 0;
+            background: white;
+        }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .project-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+        .project-item:hover {
+            background: #E2E8F0;
+        }
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .project-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .project-info p {
+            color: var(--neutral);
+            font-size: 0.9rem;
+        }
+        .project-status {
+            margin-left: auto;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-live { background: var(--accent); color: white; }
+        .status-building { background: var(--primary); color: white; }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--neutral);
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .social-links a {
+            color: var(--neutral);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .terminal { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">b3rt</a>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Building <span>Systems</span>,<br>Automating <span>Life</span>.</h1>
+            <p>Entrepreneur. Tech enthusiast. Productivity nerd. Currently building an AI-powered business empire while documenting the journey.</p>
+        </div>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+            </div>
+            <div class="terminal-body">
+                <span class="comment"># Current Status</span><br>
+                <span class="prompt">$</span> whoami<br>
+                → Entrepreneur building AI-powered businesses<br><br>
+                <span class="prompt">$</span> ps aux | grep active_projects<br>
+                → Sparkling Solutions (Airbnb cleaning)<br>
+                → BE Repaired (Handyman services)<br>
+                → Systematic (YouTube channel)<br>
+                → Life OS (AI assistant)<br><br>
+                <span class="prompt">$</span> cat location.txt<br>
+                → Building remotely, living intentionally<br><br>
+                <span class="prompt">$</span> uptime<br>
+                → Always optimizing ⚡
+            </div>
+        </div>
+    </section>
+
+    <section class="links">
+        <div class="container">
+            <div class="links-grid">
+                <a href="#" class="link-card">
+                    <div class="link-icon">📝</div>
+                    <h3>Latest Posts</h3>
+                    <p>Thoughts on systems, automation, and entrepreneurship</p>
+                </a>
+                <a href="#" class="link-card">
+                    <div class="link-icon">🎥</div>
+                    <h3>YouTube</h3>
+                    <p>Faceless channel documenting the build</p>
+                </a>
+                <a href="#" class="link-card">
+                    <div class="link-icon">💼</div>
+                    <h3>Projects</h3>
+                    <p>Active businesses and side hustles</p>
+                </a>
+                <a href="#" class="link-card">
+                    <div class="link-icon">🛠️</div>
+                    <h3>Tools & Stack</h3>
+                    <p>Software, hardware, and workflows</p>
+                </a>
+                <a href="#" class="link-card">
+                    <div class="link-icon">📊</div>
+                    <h3>Analytics</h3>
+                    <p>Open metrics and growth tracking</p>
+                </a>
+                <a href="#" class="link-card">
+                    <div class="link-icon">✉️</div>
+                    <h3>Newsletter</h3>
+                    <p>Weekly insights, no spam</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects">
+        <div class="container">
+            <h2 class="section-title">Active Projects</h2>
+            <div class="project-list">
+                <a href="#" class="project-item">
+                    <div class="project-icon">✨</div>
+                    <div class="project-info">
+                        <h4>Sparkling Solutions</h4>
+                        <p>Airbnb cleaning service. Professional turnover for 5-star reviews.</p>
+                    </div>
+                    <span class="project-status status-live">Live</span>
+                </a>
+                <a href="#" class="project-item">
+                    <div class="project-icon">🔧</div>
+                    <div class="project-info">
+                        <h4>BE Repaired</h4>
+                        <p>Handyman services. Fix it right, fix it once.</p>
+                    </div>
+                    <span class="project-status status-live">Live</span>
+                </a>
+                <a href="#" class="project-item">
+                    <div class="project-icon">🦾</div>
+                    <div class="project-info">
+                        <h4>Life OS</h4>
+                        <p>AI-powered personal operating system with 12 specialized agents.</p>
+                    </div>
+                    <span class="project-status status-live">Live</span>
+                </a>
+                <a href="#" class="project-item">
+                    <div class="project-icon">📹</div>
+                    <div class="project-info">
+                        <h4>Systematic (YouTube)</h4>
+                        <p>Faceless channel documenting the build journey.</p>
+                    </div>
+                    <span class="project-status status-building">Building</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#">𝕏</a>
+                <a href="#">GitHub</a>
+                <a href="#">YouTube</a>
+                <a href="#">Telegram</a>
+            </div>
+            <p>&copy; 2026 b3rt. Built with systems, coffee, and AI.</p>
+        </div>
+    </footer>
+</body>
+</html>

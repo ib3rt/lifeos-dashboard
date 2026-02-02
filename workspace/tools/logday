@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+#
+# logday - Daily Log Creator for Life OS
+# Creates structured daily log files with timestamped entries
+#
+# Usage: logday [OPTIONS] [MESSAGE]
+
+set -euo pipefail
+
+LOG_DIR="${LIFE_OS_LOG_DIR:-$HOME/.openclaw/workspace/memory}"
+DATE_FORMAT="%Y-%m-%d"
+TIME_FORMAT="%H:%M:%S"
+
+get_log_file() { date +"$LOG_DIR/$DATE_FORMAT.md"; }
+ensure_dir() { mkdir -p "$LOG_DIR"; }
+
+init_log() {
+    local f="$1"
+    [[ -f "$f" ]] && return
+    echo "# Daily Log: $(date '+%A, %B %d, %Y')" > "$f"
+    echo "" >> "$f"
+}
+
+add_entry() {
+    local f="$1" msg="$2" cat="${3:-}"
+    local ts=$(date +"$TIME_FORMAT")
+    local prefix="- **[$ts]**"
+    [[ -n "$cat" ]] && prefix="$prefix [$cat]"
+    echo "$prefix $msg" >> "$f"
+}
+
+show_log() {
+    local f="$1"
+    [[ -f "$f" ]] || { echo "No log for today"; exit 0; }
+    cat "$f"
+}
+
+list_logs() {
+    ls -1t "$LOG_DIR"/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md 2>/dev/null | head -10 | while read f; do
+        local n=$(grep -c '^\- ' "$f" 2>/dev/null || echo 0)
+        printf "%-20s (%s entries)\n" "$(basename "$f" .md)" "$n"
+    done
+}
+
+case "${1:-}" in
+    -l|--list) list_logs; exit 0 ;;
+    -h|--help) echo "Usage: logday [MESSAGE] [-c CATEGORY] [-l]"; exit 0 ;;
+esac
+
+LOG_FILE=$(get_log_file)
+ensure_dir
+init_log "$LOG_FILE"
+
+if [[ $# -eq 0 ]]; then
+    show_log "$LOG_FILE"
+else
+    CATEGORY=""
+    while [[ $1 == -* ]]; do
+        case $1 in
+            -c|--category) CATEGORY="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+    MSG="$*"
+    [[ -n "$MSG" ]] && add_entry "$LOG_FILE" "$MSG" "$CATEGORY" && echo "✓ Logged to $(basename "$LOG_FILE")"
+fi

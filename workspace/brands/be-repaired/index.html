@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BE Repaired | Handyman Services</title>
+    <meta name="description" content="Professional handyman services. Fix it right, fix it once. Licensed, bonded, and insured.">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1E40AF;
+            --primary-dark: #1E3A8A;
+            --accent: #EA580C;
+            --neutral: #475569;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+            --success: #10B981;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+        h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header {
+            background: var(--dark);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo span { color: var(--accent); }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        .cta-button {
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(15,23,42,0.9), rgba(30,64,175,0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%230f172a" width="100" height="100"/></svg>');
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+        .hero .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 2px solid white;
+        }
+        
+        /* Trust Badges */
+        .trust {
+            background: white;
+            padding: 2rem 0;
+            border-bottom: 3px solid var(--accent);
+        }
+        .trust-grid {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        .trust-icon {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        
+        /* Services */
+        .services {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--neutral);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: translateX(10px);
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .service-card p {
+            color: var(--neutral);
+            margin-bottom: 1rem;
+        }
+        .service-price {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        footer p {
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                BE <span>Repaired</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact" class="cta-button">Free Estimate</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Your Home, Handled.</h1>
+            <p class="tagline">Fix it right. Fix it once.</p>
+            <div class="hero-cta">
+                <a href="#quote" class="btn-primary">Get Free Estimate</a>
+                <a href="#services" class="btn-secondary">Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <span class="trust-icon">✓</span>
+                    <span>Licensed & Insured</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">★</span>
+                    <span>20+ Years Experience</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">⚡</span>
+                    <span>Same-Day Service</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">🛡️</span>
+                    <span>Satisfaction Guaranteed</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">No job too small. No shortcuts taken.</p>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>🔧 Quick Fixes</h3>
+                    <p>Door adjustments, fixture replacement, drywall patches, caulking, light electrical and plumbing work.</p>
+                    <div class="service-price">1-2 hours | $75-150</div>
+                </div>
+                <div class="service-card">
+                    <h3>🚪 Installations</h3>
+                    <p>Door installation, ceiling fans, TV mounting, cabinet hardware, tile repair, minor carpentry.</p>
+                    <div class="service-price">3-5 hours | $200-400</div>
+                </div>
+                <div class="service-card">
+                    <h3>🏠 Home Projects</h3>
+                    <p>Flooring repair, deck maintenance, bathroom refresh, kitchen backsplash, trim work.</p>
+                    <div class="service-price">6-8 hours | $500-800</div>
+                </div>
+                <div class="service-card">
+                    <h3>🚨 Emergency Repairs</h3>
+                    <p>Same-day service for urgent issues. Leaks, electrical problems, security concerns.</p>
+                    <div class="service-price">Call for quote</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="quote">
+        <div class="container">
+            <h2>Ready to Get It Fixed?</h2>
+            <p>Free estimates. No obligation. Show-up guarantee.</p>
+            <a href="#contact" class="btn-primary">Schedule Now</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 BE Repaired. All rights reserved.</p>
+            <p>Licensed handyman services | Bonded & Insured</p>
+        </div>
+    </footer>
+</body>
+</html>

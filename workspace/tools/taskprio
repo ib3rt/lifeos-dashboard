@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+#
+# taskprio - Task Prioritizer using Eisenhower Matrix
+# Manage tasks with importance/urgency quadrants
+
+set -euo pipefail
+
+TASK_DIR="${LIFE_OS_TASK_DIR:-$HOME/.openclaw/workspace}"
+TASK_FILE="$TASK_DIR/tasks.json"
+
+ensure_file() {
+    mkdir -p "$TASK_DIR"
+    [[ -f "$TASK_FILE" ]] || echo '{"tasks":[],"next_id":1}' > "$TASK_FILE"
+}
+
+add_task() {
+    local text="$1" imp="${2:-false}" urg="${3:-false}"
+    ensure_file
+    python3 << EOF
+import json, sys
+from datetime import datetime
+with open('$TASK_FILE') as f: d = json.load(f)
+tid = d['next_id']; d['next_id'] += 1
+d['tasks'].append({
+    'id': tid, 'text': '''$text''', 'important': $imp, 'urgent': $urg,
+    'created': datetime.utcnow().isoformat() + 'Z', 'completed': None
+})
+with open('$TASK_FILE', 'w') as f: json.dump(d, f, indent=2)
+print(tid)
+EOF
+}
+
+list_tasks() {
+    ensure_file
+    python3 << 'EOF'
+import json
+with open('$TASK_FILE') as f: d = json.load(f)
+tasks = [t for t in d['tasks'] if not t['completed']]
+if not tasks: print("No pending tasks."); exit()
+print("\n[!!] DO FIRST (Important + Urgent)")
+for t in tasks:
+    if t['important'] and t['urgent']: print(f"  #{t['id']}: {t['text']}")
+print("\n[! ] SCHEDULE (Important only)")
+for t in tasks:
+    if t['important'] and not t['urgent']: print(f"  #{t['id']}: {t['text']}")
+print("\n[ !] DELEGATE (Urgent only)")
+for t in tasks:
+    if not t['important'] and t['urgent']: print(f"  #{t['id']}: {t['text']}")
+print("\n[  ] ELIMINATE (Neither)")
+for t in tasks:
+    if not t['important'] and not t['urgent']: print(f"  #{t['id']}: {t['text']}")
+EOF
+}
+
+done_task() {
+    ensure_file
+    python3 << EOF
+import json
+from datetime import datetime
+with open('$TASK_FILE') as f: d = json.load(f)
+for t in d['tasks']:
+    if t['id'] == $1:
+        t['completed'] = datetime.utcnow().isoformat() + 'Z'
+        with open('$TASK_FILE', 'w') as f: json.dump(d, f, indent=2)
+        print(f"Task #$1 completed")
+        exit()
+print(f"Task #$1 not found")
+EOF
+}
+
+case "${1:-}" in
+    add|a)
+        shift
+        IMP="false"; URG="false"
+        while [[ ${1:-} == -* ]]; do
+            case $1 in -i|--important) IMP="true";; -u|--urgent) URG="true";; esac
+            shift
+        done
+        [[ $# -gt 0 ]] && add_task "$*" "$IMP" "$URG"
+        ;;
+    list|ls) list_tasks ;;
+    done|d) done_task "$2" ;;
+    *) echo "Usage: taskprio add 'task' [-i] [-u] | list | done ID" ;;
+esac

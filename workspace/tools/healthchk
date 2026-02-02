@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#
+# healthchk - System Health Checker
+# Quick system status for Life OS
+
+set -euo pipefail
+
+DISK_WARN=80
+MEM_WARN=80
+LOAD_WARN=2.0
+
+check_disk() {
+    df -h / | awk 'NR==2 {
+        gsub(/%/,""); used=$5
+        if (used > 90) print "CRIT: Disk " used "%"
+        else if (used > 80) print "WARN: Disk " used "%"
+        else print "OK: Disk " used "%"
+    }'
+}
+
+check_mem() {
+    free | awk 'NR==2 {
+        used = $3/$2 * 100
+        if (used > 90) printf "CRIT: Memory %.0f%%\n", used
+        else if (used > 80) printf "WARN: Memory %.0f%%\n", used
+        else printf "OK: Memory %.0f%%\n", used
+    }'
+}
+
+check_load() {
+    local load=$(uptime | awk -F'load average:' '{print $2}' | awk '{print $1}' | tr -d ',')
+    if (( $(echo "$load > 4.0" | bc -l) )); then echo "CRIT: Load $load"
+    elif (( $(echo "$load > 2.0" | bc -l) )); then echo "WARN: Load $load"
+    else echo "OK: Load $load"
+    fi
+}
+
+check_services() {
+    systemctl is-active openclaw-gateway.service >/dev/null 2>&1 && echo "OK: OpenClaw gateway" || echo "WARN: OpenClaw gateway down"
+}
+
+echo "=== Life OS Health Check ==="
+echo "Time: $(date)"
+echo ""
+check_disk
+check_mem
+check_load
+check_services

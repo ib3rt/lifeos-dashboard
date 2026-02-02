@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# quicknote - Fast note taker
+# Append notes to inbox file
+
+set -euo pipefail
+
+NOTES_DIR="${LIFE_OS_NOTES_DIR:-$HOME/.openclaw/workspace/memory}"
+INBOX_FILE="$NOTES_DIR/inbox.md"
+
+ensure_dir() { mkdir -p "$NOTES_DIR"; }
+
+add_note() {
+    local msg="$*"
+    ensure_dir
+    echo "- $(date '+%H:%M') $msg" >> "$INBOX_FILE"
+    echo "✓ Noted"
+}
+
+show_notes() {
+    [[ -f "$INBOX_FILE" ]] || { echo "Inbox empty"; exit 0; }
+    echo "# Quick Notes Inbox"
+    echo ""
+    cat "$INBOX_FILE"
+}
+
+[[ $# -eq 0 ]] && show_notes || add_note "$*"
