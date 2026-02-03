@@ -206,6 +206,87 @@
         }
         .report-link:hover { text-decoration: underline; }
         
+        /* Report Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .modal.active {
+            display: block;
+        }
+        .modal-content {
+            background: #15151a;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #252530;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .modal-close:hover {
+            color: #fff;
+        }
+        .modal-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #252530;
+        }
+        .modal-title {
+            font-size: 1.5rem;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+        .modal-meta {
+            color: #666;
+            font-size: 0.875rem;
+        }
+        .modal-body {
+            line-height: 1.6;
+            color: #ccc;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 0.875rem;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+        .modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+        .modal-body::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+        .modal-body::-webkit-scrollbar-thumb {
+            background: #252530;
+            border-radius: 4px;
+        }
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: #353545;
+        }
+        .report-item.clickable {
+            cursor: pointer;
+        }
+        .report-item.clickable:hover {
+            background: #1f1f2a;
+        }
+        
         .footer {
             text-align: center;
             margin-top: 3rem;
@@ -565,29 +646,129 @@
         </div>
     </div>
 
+    <!-- Report Modal -->
+    <div id="report-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <div class="modal-title" id="modal-title">Report Title</div>
+                <div class="modal-meta" id="modal-meta">Author • Size • Date</div>
+            </div>
+            <div class="modal-body" id="modal-body">Loading...</div>
+        </div>
+    </div>
+
     <div class="footer">
         <p>Last updated: <span class="last-updated" id="last-updated">2026-02-03 00:00 UTC</span></p>
         <p style="margin-top: 0.5rem; font-size: 0.875rem;">
             <a href="https://github.com/ib3rt/lifeos-dashboard" style="color: #00d4ff; text-decoration: none;">GitHub</a> • 
-            <span style="color: #666;">Life OS Command Center v1.1</span>
+            <span style="color: #666;">Life OS Command Center v1.2</span>
         </p>
     </div>
 
     <script>
+        // Report data
+        const reports = {
+            'ai-briefing': {
+                title: 'AI Industry Briefing',
+                meta: 'The Oracle • 20KB • Feb 2, 2026',
+                path: 'research/ai-industry-briefing.md'
+            },
+            'kool-tools': {
+                title: 'Kool Tools Tracker',
+                meta: 'The Oracle • 12KB • Feb 2, 2026',
+                path: 'research/kool-tools-tracker.md'
+            },
+            'clawbot-usecases': {
+                title: 'Clawbot Use Cases',
+                meta: 'Neural Net Ned • 21KB • Feb 2, 2026',
+                path: 'research/clawbot-use-cases.md'
+            },
+            'podcast-plan': {
+                title: 'Podcast Plan',
+                meta: 'Podcast Pablo • 16KB • Feb 2, 2026',
+                path: 'research/podcast-plan.md'
+            },
+            'personal-voice': {
+                title: 'Personal Voice Setup',
+                meta: 'Podcast Pablo • 17KB • Feb 2, 2026',
+                path: 'research/personal-voice-setup.md'
+            },
+            'umbrella-corp': {
+                title: 'Umbrella Corp Structure',
+                meta: 'Legal Eagle • 40KB • Feb 2, 2026',
+                path: 'agents/legal_compliance_advisor/umbrella-corp-research.md'
+            },
+            'security-audit': {
+                title: 'Security Audit',
+                meta: 'Sentinel • 18KB • Feb 2, 2026',
+                path: 'agents/cybersecurity_guardian/security-audit.md'
+            },
+            'local-node': {
+                title: 'Local Node Architecture',
+                meta: 'The Bridge • 30KB • Feb 2, 2026',
+                path: 'agents/it_tech_specialist/local-node-architecture.md'
+            },
+            'notion-kanban': {
+                title: 'Notion Kanban Setup',
+                meta: 'The Mechanic • 22KB • Feb 2, 2026',
+                path: 'agents/operations_coordinator/notion-kanban-setup.md'
+            },
+            'phantom-integration': {
+                title: 'Phantom Integration',
+                meta: 'Diamond Hands • 22KB • Feb 2, 2026',
+                path: 'agents/finance_director/phantom-integration-plan.md'
+            },
+            'x-integration': {
+                title: 'X/Twitter Integration',
+                meta: 'Hype Man • 13KB • Feb 2, 2026',
+                path: 'agents/marketing_sales_lead/x-integration-plan.md'
+            }
+        };
+
         function showSection(section) {
-            // Hide all sections
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            
-            // Show selected section
             document.getElementById(section + '-section').classList.add('active');
             event.target.classList.add('active');
         }
 
-        function openReport(reportName) {
-            // Open report in new tab
-            window.open('reports/' + reportName + '.html', '_blank');
+        function openReport(reportId) {
+            const report = reports[reportId];
+            if (!report) return;
+            
+            document.getElementById('modal-title').textContent = report.title;
+            document.getElementById('modal-meta').textContent = report.meta;
+            document.getElementById('modal-body').textContent = 'Loading...';
+            document.getElementById('report-modal').classList.add('active');
+            
+            // Try to fetch from GitHub raw URL
+            const githubRaw = `https://raw.githubusercontent.com/ib3rt/lifeos-dashboard/main/${report.path}`;
+            
+            fetch(githubRaw)
+                .then(response => response.text())
+                .then(content => {
+                    document.getElementById('modal-body').textContent = content;
+                })
+                .catch(error => {
+                    document.getElementById('modal-body').textContent = 
+                        `Error loading report.\n\nFile: ${report.path}\n\nYou can view it directly at:\nhttps://github.com/ib3rt/lifeos-dashboard/blob/main/${report.path}`;
+                });
         }
+
+        function closeModal() {
+            document.getElementById('report-modal').classList.remove('active');
+        }
+
+        // Close modal on click outside
+        document.getElementById('report-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
 
         // Update timestamp
         document.getElementById('last-updated').textContent = new Date().toISOString().slice(0, 16).replace('T', ' ') + ' UTC';
