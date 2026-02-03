@@ -1525,6 +1525,162 @@ Let's crush it! 📈🔥`
             if (e.target === this) closeAgentModal();
         });
 
+        // Tools data
+        const tools = {
+            'openclaw-cli': {
+                title: 'openclaw-cli.sh',
+                meta: '11KB • Main entry point',
+                content: `## openclaw-cli.sh
+
+Main CLI interface for Life OS.
+
+### Commands:
+• status - Check gateway and agent status
+• logs [agent] - View logs for agent
+• restart - Restart gateway service
+• agents - List all agents
+• memory <query> - Search memory files
+• sessions - List active sessions
+
+### Location:
+~/workspace/tools/openclaw-cli.sh`
+            },
+            'agent-manager': {
+                title: 'agent-manager.sh',
+                meta: '11.5KB • Agent lifecycle',
+                content: `## agent-manager.sh
+
+Manage agent lifecycle operations.
+
+### Commands:
+• list - Show all agents and status
+• create <name> - Create new agent
+• deploy <name> - Deploy agent to production
+• status <name> - Check agent status
+• logs <name> - View agent logs
+
+### Location:
+~/workspace/tools/agent-manager.sh`
+            },
+            'system-health': {
+                title: 'system-health.sh',
+                meta: '13.5KB • Health monitoring',
+                content: `## system-health.sh
+
+System health monitoring and alerts.
+
+### Checks:
+• Disk usage - Alert at >80%
+• Memory usage - Alert at >90%
+• Gateway status - Check if running
+• Cron jobs - Verify schedules
+
+### Location:
+~/workspace/tools/system-health.sh`
+            },
+            'daily-standup': {
+                title: 'daily-standup.sh',
+                meta: 'New • Daily summary',
+                content: `## daily-standup.sh
+
+Generate daily activity summary.
+
+### Features:
+• Agent activity report
+• Recent deliverables
+• Tasks completed
+• Blockers identified
+
+### Location:
+~/workspace/tools/daily-standup.sh`
+            },
+            'agent-status': {
+                title: 'agent-status.sh',
+                meta: 'New • Status checker',
+                content: `## agent-status.sh
+
+Quick status check for any agent.
+
+### Usage:
+agent-status.sh <agent-name>
+
+### Output:
+• Current status (active/idle/offline)
+• Last activity
+• Current task
+• Recent deliverables
+
+### Location:
+~/workspace/tools/agent-status.sh`
+            },
+            'stats-research': {
+                title: 'Research Reports',
+                meta: '86KB • 5 reports',
+                content: `## Research Collection
+
+Total research output: 86KB
+
+### Reports:
+1. AI Industry Briefing (20KB)
+2. Kool Tools Tracker (12KB)
+3. Clawbot Use Cases (21KB)
+4. Podcast Plan (16KB)
+5. Personal Voice Setup (17KB)
+
+### Topics:
+• AI industry trends
+• Tool evaluations
+• Use case analysis
+• Content strategy
+• Voice cloning`
+            },
+            'stats-deliverables': {
+                title: 'Agent Deliverables',
+                meta: '147KB • 8 agents',
+                content: `## Agent Deliverables
+
+Total agent output: 147KB
+
+### By Agent:
+• Legal Eagle: Umbrella Corp (40KB)
+• The Bridge: Local Node (30KB)
+• Diamond Hands: Phantom (22KB)
+• The Mechanic: Notion Kanban (22KB)
+• Sentinel: Security Audit (18KB)
+• Hype Man: X Integration (13KB)
+• Neural Net Ned: CLI Toolkit (38KB)
+• Podcast Pablo: Production Guide (33KB)`
+            },
+            'stats-docs': {
+                title: 'Documentation',
+                meta: '15+ files • Agent personas',
+                content: `## Documentation Library
+
+### Agent Personas:
+• 15 agent role definitions
+• Personality profiles
+• Capability matrices
+
+### Technical:
+• Deployment guides
+• Architecture docs
+• Integration manuals
+
+### Location:
+~/workspace/agents/`
+            }
+        };
+
+        function openTool(toolId) {
+            const tool = tools[toolId];
+            if (!tool) return;
+            
+            document.getElementById('modal-title').textContent = tool.title;
+            document.getElementById('modal-meta').textContent = tool.meta;
+            document.getElementById('modal-body').innerHTML = tool.content;
+            document.getElementById('report-modal').classList.add('active');
+        }
+
         function showSection(section, btn) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
