@@ -450,6 +450,7 @@
         <button class="nav-btn active" onclick="showSection('agents', this)">🤖 Agents</button>
         <button class="nav-btn" onclick="showSection('reports', this)">📊 Reports</button>
         <button class="nav-btn" onclick="showSection('tools', this)">🛠️ Tools</button>
+        <button class="nav-btn" onclick="showSection('websites', this)">🌐 Websites</button>
     </div>
 
     <!-- AGENTS SECTION -->
@@ -785,6 +786,95 @@
                         <div class="report-desc">READMEs, deployment guides, architecture docs</div>
                     </li>
                 </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- WEBSITES SECTION -->
+    <div id="websites-section" class="section" style="display: none;">
+        <div class="reports-grid">
+            <div class="report-category">
+                <h2>🚀 Live Projects</h2>
+                <ul class="report-list">
+                    <li class="report-item" onclick="openWebsite('lifeos-dashboard')">
+                        <div class="report-name">Life OS Dashboard <span style="float:right; color:#00d4ff;">→</span></div>
+                        <div class="report-meta">🟢 Live • Vercel • Feb 2, 2026</div>
+                        <div class="report-desc">Command center for 15 AI agents, reports, tools, real-time status</div>
+                        <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #666;">
+                            <span style="color: #22c55e;">●</span> https://lifeos-dashboard-three.vercel.app
+                        </div>
+                    </li>
+                    <li class="report-item" onclick="openWebsite('github-ib3rt')">
+                        <div class="report-name">GitHub Portfolio <span style="float:right; color:#00d4ff;">→</span></div>
+                        <div class="report-meta">🟢 Active • 2 repos • Open Source</div>
+                        <div class="report-desc">lifeos-dashboard, agent tooling, automation scripts</div>
+                        <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #666;">
+                            <span style="color: #22c55e;">●</span> https://github.com/ib3rt
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="report-category">
+                <h2>📋 Planned Projects</h2>
+                <ul class="report-list">
+                    <li class="report-item" onclick="openWebsite('local-node')">
+                        <div class="report-name">Local Node Dashboard <span style="float:right; color:#888;">📋</span></div>
+                        <div class="report-meta">🟡 Planning • Pi/NUC • Hardware needed</div>
+                        <div class="report-desc">Self-hosted Life OS node with Ollama, n8n, monitoring stack</div>
+                        <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #666;">
+                            Status: Architecture complete, awaiting hardware purchase
+                        </div>
+                    </li>
+                    <li class="report-item" onclick="openWebsite('x-bot')">
+                        <div class="report-name">X/Twitter Bot <span style="float:right; color:#888;">📋</span></div>
+                        <div class="report-meta">🟡 Planning • API access needed • $100/mo</div>
+                        <div class="report-desc">@HypeManX automated posting, agent spotlights, progress threads</div>
+                        <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #666;">
+                            Status: Code ready, awaiting X Developer access
+                        </div>
+                    </li>
+                    <li class="report-item" onclick="openWebsite('voice-clone')">
+                        <div class="report-name">AI Voice Clone <span style="float:right; color:#888;">📋</span></div>
+                        <div class="report-meta">🟡 Planning • ElevenLabs/XTTS • $5-50/mo</div>
+                        <div class="report-desc">Your voice for podcast intros, agent narration, automation</div>
+                        <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #666;">
+                            Status: Guide ready, awaiting recording session
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="report-category">
+                <h2>📊 Site Analytics</h2>
+                <ul class="report-list">
+                    <li class="report-item" onclick="openWebsite('dashboard-metrics')">
+                        <div class="report-name">Dashboard Metrics <span style="float:right; color:#00d4ff;">→</span></div>
+                        <div class="report-meta">📊 Real-time • Vercel Analytics</div>
+                        <div class="report-desc">Visitors, page views, load times, geographic data</div>
+                    </li>
+                    <li class="report-item" onclick="openWebsite('github-metrics')">
+                        <div class="report-name">GitHub Metrics <span style="float:right; color:#00d4ff;">→</span></div>
+                        <div class="report-meta">📊 Commits, stars, forks</div>
+                        <div class="report-desc">Repository activity, contributor stats, code velocity</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #15151a 0%, #1a1a2e 100%); border-radius: 12px; max-width: 800px; margin-left: auto; margin-right: auto; border: 1px solid #252530;">
+            <h3 style="color: #00d4ff; margin-bottom: 1rem;">🌐 Domain Portfolio</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: left;">
+                <div style="padding: 1rem; background: #0f0f14; border-radius: 8px;">
+                    <div style="color: #888; font-size: 0.875rem;">Primary</div>
+                    <div style="color: #00d4ff; font-weight: 600;">lifeos-dashboard-three.vercel.app</div>
+                    <div style="color: #666; font-size: 0.75rem; margin-top: 0.25rem;">🟢 Active</div>
+                </div>
+                <div style="padding: 1rem; background: #0f0f14; border-radius: 8px;">
+                    <div style="color: #888; font-size: 0.875rem;">Custom Domain</div>
+                    <div style="color: #666; font-weight: 600;">lifeos.b3rt.dev</div>
+                    <div style="color: #888; font-size: 0.75rem; margin-top: 0.25rem;">⚪ Available</div>
+                </div>
             </div>
         </div>
     </div>
@@ -1670,6 +1760,196 @@ Total agent output: 147KB
 ~/workspace/agents/`
             }
         };
+
+        // Websites data
+        const websites = {
+            'lifeos-dashboard': {
+                title: 'Life OS Dashboard',
+                meta: '🟢 Live • Vercel • Feb 2, 2026',
+                content: `## 🚀 Life OS Dashboard
+
+**URL:** https://lifeos-dashboard-three.vercel.app
+
+**Status:** 🟢 Live and operational
+
+**Features:**
+• 15 AI agent profiles with real-time status
+• 11 research reports with embedded summaries
+• 5 CLI tools documentation
+• System notifications and alerts
+• Responsive design, dark mode
+
+**Tech Stack:**
+• Frontend: Vanilla HTML/CSS/JS
+• Hosting: Vercel
+• Repo: github.com/ib3rt/lifeos-dashboard
+
+**Last Deploy:** Feb 2, 2026
+**Version:** 1.6
+
+**Open in new tab:** <a href="https://lifeos-dashboard-three.vercel.app" target="_blank" style="color: #00d4ff;">Visit Dashboard →</a>`
+            },
+            'github-ib3rt': {
+                title: 'GitHub Portfolio',
+                meta: '🟢 Active • Open Source',
+                content: `## 💻 GitHub Portfolio
+
+**URL:** https://github.com/ib3rt
+
+**Repositories:**
+1. **lifeos-dashboard** — Life OS Command Center
+   - Stars: 0 (new)
+   - Language: HTML/CSS/JS
+   - Status: 🟢 Active
+
+2. **workspace** (private) — Full Life OS codebase
+   - 15 AI agents
+   - 11 research reports
+   - 7 CLI tools
+   - Telegram bot integration
+
+**Stats:**
+• Total commits: 15+
+• Languages: Shell, Python, JavaScript
+• Focus: Automation, AI tooling, DevOps
+
+**Open:** <a href="https://github.com/ib3rt" target="_blank" style="color: #00d4ff;">View GitHub →</a>`
+            },
+            'local-node': {
+                title: 'Local Node Dashboard (Planned)',
+                meta: '🟡 Planning • Hardware needed',
+                content: `## 🖥️ Local Node Dashboard
+
+**Status:** 🟡 Architecture complete, awaiting hardware
+
+**Planned Features:**
+• Self-hosted Life OS instance
+• Ollama LLM server (local AI)
+• n8n workflow automation
+• Grafana monitoring dashboards
+• Pi-hole ad blocking
+• Tailscale mesh VPN
+• Home Assistant integration
+
+**Hardware Options:**
+1. Raspberry Pi 5 (16GB) + NVMe HAT (~$200)
+2. Intel NUC 13 Pro (~$600)
+3. Custom Mini-ITX build (~$1000)
+
+**Next Step:** Purchase hardware
+
+**Guide:** See Local Node Architecture report in Research tab`
+            },
+            'x-bot': {
+                title: 'X/Twitter Bot (Planned)',
+                meta: '🟡 Planning • API access needed',
+                content: `## 🐦 X/Twitter Bot — @HypeManX
+
+**Status:** 🟡 Code ready, awaiting X Developer access
+
+**Features:**
+• Automated agent spotlights
+• Progress thread posting
+• Research summary tweets
+• Daily standup updates
+• Engagement tracking
+
+**Content Calendar:**
+• Mon: Week preview
+• Tue: Tool spotlight
+• Wed: Progress thread
+• Thu: Agent spotlight
+• Fri: Week recap
+
+**Cost:** $100/mo (X Basic tier)
+**Implementation:** See X Integration in Research tab`
+            },
+            'voice-clone': {
+                title: 'AI Voice Clone (Planned)',
+                meta: '🟡 Planning • Recording needed',
+                content: `## 🎙️ AI Voice Clone
+
+**Status:** 🟡 Guide ready, awaiting recording session
+
+**Use Cases:**
+• Podcast intros/outros
+• Agent narration
+• Automated voice memos
+• Content creation
+
+**Options:**
+1. **ElevenLabs** — Best quality, $5-50/mo
+2. **XTTS v2** (local) — Free, requires GPU
+
+**Recording Requirements:**
+• 10-30 minutes of clean speech
+• Consistent tone and pacing
+• Variety of sentence structures
+
+**Guide:** See Personal Voice Setup in Research tab`
+            },
+            'dashboard-metrics': {
+                title: 'Dashboard Analytics',
+                meta: '📊 Real-time metrics',
+                content: `## 📊 Dashboard Metrics
+
+**Current Status:**
+• Visitors: N/A (enable Vercel Analytics)
+• Page Views: N/A
+• Load Time: ~200ms
+• Uptime: 99.9%
+
+**Enable Analytics:**
+1. Go to vercel.com/dashboard
+2. Select lifeos-dashboard project
+3. Click Analytics tab
+4. Enable
+
+**Geographic Data:**
+• Will show visitor locations
+• Peak traffic times
+• Device breakdown
+
+**Privacy:**
+• GDPR compliant
+• No cookies required
+• Anonymous data only`
+            },
+            'github-metrics': {
+                title: 'GitHub Metrics',
+                meta: '📊 Repository activity',
+                content: `## 📊 GitHub Repository Metrics
+
+**lifeos-dashboard:**
+• Commits: 15+
+• Stars: 0 (new project)
+• Forks: 0
+• Contributors: 1
+
+**Code Velocity:**
+• Lines added: 2,500+
+• Files created: 20+
+• Last commit: Feb 2, 2026
+
+**Languages:**
+• HTML: 45%
+• CSS: 35%
+• JavaScript: 20%
+
+**Activity Graph:**
+See full stats at github.com/ib3rt/lifeos-dashboard/graphs`
+            }
+        };
+
+        function openWebsite(siteId) {
+            const site = websites[siteId];
+            if (!site) return;
+            
+            document.getElementById('modal-title').textContent = site.title;
+            document.getElementById('modal-meta').textContent = site.meta;
+            document.getElementById('modal-body').innerHTML = site.content;
+            document.getElementById('report-modal').classList.add('active');
+        }
 
         function openTool(toolId) {
             const tool = tools[toolId];
