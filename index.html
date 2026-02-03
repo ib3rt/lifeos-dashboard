@@ -187,7 +187,8 @@
             font-size: 0.875rem;
             font-weight: 500;
         }
-        .agent-status.working { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .agent-status.complete { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .agent-status.active { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
         .agent-status.idle { background: rgba(234, 179, 8, 0.2); color: #eab308; }
         .agent-status.offline { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
         .task-list {
@@ -477,7 +478,7 @@
                 <div class="agent-emoji">🔮</div>
                 <div class="agent-name">The Oracle</div>
                 <div class="agent-role">AI Research Specialist</div>
-                <span class="agent-status working">● Complete</span>
+                <span class="agent-status complete">✅ Complete</span>
                 <div class="task-list">
                     <div class="task">Kool Tools Tracker (12KB)</div>
                     <div class="task">AI Industry Briefing (20KB)</div>
@@ -489,7 +490,7 @@
                 <div class="agent-emoji">💻</div>
                 <div class="agent-name">Neural Net Ned</div>
                 <div class="agent-role">IT & Tech Specialist</div>
-                <span class="agent-status working">● Complete</span>
+                <span class="agent-status complete">✅ Complete</span>
                 <div class="task-list">
                     <div class="task">CLI Toolkit (4 tools)</div>
                     <div class="task">Local Node Architecture (30KB)</div>
@@ -502,7 +503,7 @@
                 <div class="agent-emoji">🎙️</div>
                 <div class="agent-name">Podcast Pablo</div>
                 <div class="agent-role">Content & Audio Production</div>
-                <span class="agent-status working">● Complete</span>
+                <span class="agent-status complete">✅ Complete</span>
                 <div class="task-list">
                     <div class="task">Podcast Plan (16KB)</div>
                     <div class="task">Voice Cloning Guide (17KB)</div>
@@ -510,134 +511,134 @@
             </div>
 
             <!-- Idle Agents -->
-            <div class="agent-card idle" onclick="openAgent('goldfinger')">
+            <div class="agent-card active" onclick="openAgent('goldfinger')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">💰</div>
                 <div class="agent-name">Goldfinger</div>
                 <div class="agent-role">Finance Director</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">Queued: Portfolio tracking</div>
                 </div>
             </div>
 
-            <div class="agent-card idle" onclick="openAgent('hype-man')">
+            <div class="agent-card active" onclick="openAgent('hype-man')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">📈</div>
                 <div class="agent-name">Hype Man</div>
                 <div class="agent-role">Marketing & Sales Lead</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">X Integration Plan (13KB)</div>
                 </div>
             </div>
 
-            <div class="agent-card idle" onclick="openAgent('legal-eagle')">
+            <div class="agent-card active" onclick="openAgent('legal-eagle')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">⚖️</div>
                 <div class="agent-name">Legal Eagle</div>
                 <div class="agent-role">Legal & Compliance Advisor</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">Umbrella Corp Research (40KB)</div>
                 </div>
             </div>
 
-            <div class="agent-card idle" onclick="openAgent('mechanic')">
+            <div class="agent-card active" onclick="openAgent('mechanic')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">⚙️</div>
                 <div class="agent-name">The Mechanic</div>
                 <div class="agent-role">Operations Coordinator</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">Notion Kanban Setup (22KB)</div>
                 </div>
             </div>
 
-            <div class="agent-card idle" onclick="openAgent('sentinel')">
+            <div class="agent-card active" onclick="openAgent('sentinel')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🛡️</div>
                 <div class="agent-name">Sentinel</div>
                 <div class="agent-role">Cybersecurity Guardian</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">Security Audit (18KB)</div>
                     <div class="task">⚠️ Action Required</div>
                 </div>
             </div>
 
-            <div class="agent-card idle" onclick="openAgent('diamond-hands')">
+            <div class="agent-card active" onclick="openAgent('diamond-hands')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">💎</div>
                 <div class="agent-name">Diamond Hands</div>
                 <div class="agent-role">Crypto & Web3 Specialist</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">Phantom Integration Plan (22KB)</div>
                 </div>
             </div>
 
-            <div class="agent-card idle" onclick="openAgent('bridge')">
+            <div class="agent-card active" onclick="openAgent('bridge')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🌐</div>
                 <div class="agent-name">The Bridge</div>
                 <div class="agent-role">Remote Local Node</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">Local Hardware Architecture (30KB)</div>
                 </div>
             </div>
 
-            <div class="agent-card idle" onclick="openAgent('zen-master')">
+            <div class="agent-card active" onclick="openAgent('zen-master')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🧘</div>
                 <div class="agent-name">Zen Master</div>
                 <div class="agent-role">Health & Wellness Coach</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">Available for health tracking</div>
                 </div>
             </div>
 
-            <div class="agent-card idle" onclick="openAgent('strategist')">
+            <div class="agent-card active" onclick="openAgent('strategist')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🎯</div>
                 <div class="agent-name">The Strategist</div>
                 <div class="agent-role">Strategy & Innovation Consultant</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">Available for planning</div>
                 </div>
             </div>
 
-            <div class="agent-card idle" onclick="openAgent('butler')">
+            <div class="agent-card active" onclick="openAgent('butler')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">📋</div>
                 <div class="agent-name">The Butler</div>
                 <div class="agent-role">Executive Support Assistant</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">Available for scheduling</div>
                 </div>
             </div>
 
-            <div class="agent-card idle" onclick="openAgent('fix-it-felix')">
+            <div class="agent-card active" onclick="openAgent('fix-it-felix')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🔧</div>
                 <div class="agent-name">Fix-It Felix</div>
                 <div class="agent-role">Maintenance & Mechanics Expert</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">Available for repairs</div>
                 </div>
             </div>
 
-            <div class="agent-card idle" onclick="openAgent('landlord')">
+            <div class="agent-card active" onclick="openAgent('landlord')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🏢</div>
                 <div class="agent-name">The Landlord</div>
                 <div class="agent-role">Asset & Risk Manager</div>
-                <span class="agent-status idle">⏳ Idle</span>
+                <span class="agent-status active">🔵 Active</span>
                 <div class="task-list">
                     <div class="task">Available for asset tracking</div>
                 </div>
@@ -2116,6 +2117,53 @@ Central hub connecting all your tech projects and business ventures.`
             document.getElementById(section + '-section').classList.add('active');
             btn.classList.add('active');
         }
+        
+        // Real-time agent status updater
+        function updateAgentStatus() {
+            const agentStatuses = {
+                'oracle': 'complete',      // Report completed
+                'diamond-hands': 'complete', // Report completed
+                'mechanic': 'complete',    // Report completed
+                'goldfinger': 'complete',  // Report completed
+                'hype-man': 'active',
+                'sentinel': 'active',
+                'neural-net-ned': 'active',
+                'podcast-pablo': 'active',
+                'legal-eagle': 'active',
+                'the-bridge': 'active',
+                'zen-master': 'active',
+                'strategist': 'active',
+                'the-butler': 'active',
+                'fix-it-felix': 'active',
+                'the-landlord': 'active'
+            };
+            
+            // Update status badges
+            Object.keys(agentStatuses).forEach(agentId => {
+                const status = agentStatuses[agentId];
+                const cards = document.querySelectorAll(`[onclick="openAgent('${agentId}')"]`);
+                cards.forEach(card => {
+                    const statusBadge = card.querySelector('.agent-status');
+                    if (statusBadge) {
+                        statusBadge.className = `agent-status ${status}`;
+                        const labels = {
+                            'complete': '✅ Complete',
+                            'active': '🔵 Active',
+                            'idle': '⏳ Idle',
+                            'offline': '🔴 Offline'
+                        };
+                        statusBadge.textContent = labels[status] || status;
+                    }
+                    
+                    // Update card class
+                    card.className = `agent-card ${status}`;
+                });
+            });
+        }
+        
+        // Update status on load and every 30 seconds
+        document.addEventListener('DOMContentLoaded', updateAgentStatus);
+        setInterval(updateAgentStatus, 30000);
 
         function openReport(reportId) {
             const report = reports[reportId];
