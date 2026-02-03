@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>personal-voice-setup | Life OS Report</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0f; color: #e0e0e0; padding: 2rem; max-width: 900px; margin: 0 auto; line-height: 1.6; }
+        h1, h2, h3 { color: #00d4ff; }
+        code { background: #15151a; padding: 0.2rem 0.4rem; border-radius: 4px; }
+        pre { background: #15151a; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+        a { color: #7b2cbf; }
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+        th, td { border: 1px solid #252530; padding: 0.5rem; text-align: left; }
+        th { background: #15151a; }
+        .back { display: inline-block; margin-bottom: 1rem; color: #00d4ff; text-decoration: none; }
+        .back:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back">← Back to Dashboard</a>
+    <div id="content">
+        <p>Loading report...</p>
+    </div>
+    <script>
+        // Fetch and display markdown content
+        fetch('https://raw.githubusercontent.com/ib3rt/lifeos-dashboard/main/research/personal-voice-setup.md')
+            .then(r => r.text())
+            .then(text => {
+                document.getElementById('content').innerHTML = '<pre style="white-space: pre-wrap;">' + text.replace(/</g, '&lt;') + '</pre>';
+            })
+            .catch(() => {
+                document.getElementById('content').innerHTML = '<p>Report content available in workspace at:<br><code>workspace/research/personal-voice-setup.md</code></p>';
+            });
+    </script>
+</body>
+</html>

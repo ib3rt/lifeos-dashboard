@@ -181,6 +181,7 @@
         .report-item:hover {
             background: #1a1a24;
             border-left-color: #00d4ff;
+            cursor: pointer;
         }
         .report-name {
             font-weight: 600;
@@ -426,28 +427,28 @@
             <div class="report-category">
                 <h2>🔬 Research Reports</h2>
                 <ul class="report-list">
-                    <li class="report-item">
-                        <div class="report-name">AI Industry Briefing</div>
+                    <li class="report-item" onclick="openReport('ai-industry-briefing')">
+                        <div class="report-name">AI Industry Briefing <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">The Oracle • 20KB • Feb 2, 2026</div>
                         <div class="report-desc">GPT-5, Claude 4.5, Agentic AI landscape, competitive analysis</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">Kool Tools Tracker</div>
+                    <li class="report-item" onclick="openReport('kool-tools-tracker')">
+                        <div class="report-name">Kool Tools Tracker <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">The Oracle • 12KB • Feb 2, 2026</div>
                         <div class="report-desc">Best new AI tools: Claude Code, DeepSeek R1, Perplexity Comet</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">Clawbot Use Cases</div>
+                    <li class="report-item" onclick="openReport('clawbot-use-cases')">
+                        <div class="report-name">Clawbot Use Cases <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">Neural Net Ned • 21KB • Feb 2, 2026</div>
                         <div class="report-desc">OpenClaw integrations, 50+ services, user personas</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">Podcast Plan</div>
+                    <li class="report-item" onclick="openReport('podcast-plan')">
+                        <div class="report-name">Podcast Plan <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">Podcast Pablo • 16KB • Feb 2, 2026</div>
                         <div class="report-desc">"Life OS" podcast strategy, episodes 1-3, tech stack</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">Personal Voice Setup</div>
+                    <li class="report-item" onclick="openReport('personal-voice-setup')">
+                        <div class="report-name">Personal Voice Setup <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">Podcast Pablo • 17KB • Feb 2, 2026</div>
                         <div class="report-desc">Voice cloning: ElevenLabs vs XTTS v2 vs StyleTTS 2</div>
                     </li>
@@ -581,6 +582,11 @@
             // Show selected section
             document.getElementById(section + '-section').classList.add('active');
             event.target.classList.add('active');
+        }
+
+        function openReport(reportName) {
+            // Open report in new tab
+            window.open('reports/' + reportName + '.html', '_blank');
         }
 
         // Update timestamp
