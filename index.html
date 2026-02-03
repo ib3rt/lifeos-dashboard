@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life OS — Agent Status Dashboard</title>
+    <title>Life OS — Command Center</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -15,7 +15,7 @@
         }
         .header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
         .header h1 {
             font-size: 2.5rem;
@@ -25,6 +25,34 @@
             margin-bottom: 0.5rem;
         }
         .header p { color: #888; }
+        
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .nav-btn {
+            padding: 0.75rem 2rem;
+            background: #15151a;
+            border: 1px solid #252530;
+            border-radius: 8px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .nav-btn:hover {
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+        .nav-btn.active {
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            color: #fff;
+            border-color: transparent;
+        }
+        
         .stats-bar {
             display: flex;
             justify-content: center;
@@ -45,6 +73,12 @@
             color: #00d4ff;
         }
         .stat-label { color: #888; font-size: 0.875rem; }
+        
+        /* Section visibility */
+        .section { display: none; }
+        .section.active { display: block; }
+        
+        /* Agent Grid */
         .agent-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -65,17 +99,9 @@
             transform: translateY(-2px);
             border-color: #353545;
         }
-        .agent-card.active {
-            border-color: #22c55e;
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
-        }
-        .agent-card.idle {
-            border-color: #eab308;
-        }
-        .agent-card.offline {
-            border-color: #ef4444;
-            opacity: 0.7;
-        }
+        .agent-card.active { border-color: #22c55e; box-shadow: 0 0 20px rgba(34, 197, 94, 0.2); }
+        .agent-card.idle { border-color: #eab308; }
+        .agent-card.offline { border-color: #ef4444; opacity: 0.7; }
         .status-indicator {
             position: absolute;
             top: 1rem;
@@ -85,36 +111,13 @@
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
-        .status-indicator.active {
-            background: #22c55e;
-            box-shadow: 0 0 10px #22c55e;
-        }
-        .status-indicator.idle {
-            background: #eab308;
-            animation: none;
-        }
-        .status-indicator.offline {
-            background: #ef4444;
-            animation: none;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .agent-emoji {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-        .agent-name {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 0.25rem;
-        }
-        .agent-role {
-            color: #888;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-        }
+        .status-indicator.active { background: #22c55e; box-shadow: 0 0 10px #22c55e; }
+        .status-indicator.idle { background: #eab308; animation: none; }
+        .status-indicator.offline { background: #ef4444; animation: none; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .agent-emoji { font-size: 3rem; margin-bottom: 0.5rem; }
+        .agent-name { font-size: 1.25rem; font-weight: bold; margin-bottom: 0.25rem; }
+        .agent-role { color: #888; font-size: 0.875rem; margin-bottom: 1rem; }
         .agent-status {
             display: inline-flex;
             align-items: center;
@@ -124,18 +127,9 @@
             font-size: 0.875rem;
             font-weight: 500;
         }
-        .agent-status.working {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
-        }
-        .agent-status.idle {
-            background: rgba(234, 179, 8, 0.2);
-            color: #eab308;
-        }
-        .agent-status.offline {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-        }
+        .agent-status.working { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .agent-status.idle { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+        .agent-status.offline { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
         .task-list {
             margin-top: 1rem;
             padding-top: 1rem;
@@ -149,10 +143,68 @@
             color: #aaa;
             padding: 0.25rem 0;
         }
-        .task::before {
-            content: "›";
-            color: #00d4ff;
+        .task::before { content: "›"; color: #00d4ff; }
+        
+        /* Reports Section */
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
+        .report-category {
+            background: #15151a;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #252530;
+        }
+        .report-category h2 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .report-list {
+            list-style: none;
+        }
+        .report-item {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: #0f0f14;
+            border-radius: 8px;
+            border-left: 3px solid #7b2cbf;
+            transition: all 0.2s ease;
+        }
+        .report-item:hover {
+            background: #1a1a24;
+            border-left-color: #00d4ff;
+        }
+        .report-name {
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 0.25rem;
+        }
+        .report-meta {
+            font-size: 0.8rem;
+            color: #666;
+            display: flex;
+            gap: 1rem;
+        }
+        .report-desc {
+            font-size: 0.875rem;
+            color: #888;
+            margin-top: 0.25rem;
+        }
+        .report-link {
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        .report-link:hover { text-decoration: underline; }
+        
         .footer {
             text-align: center;
             margin-top: 3rem;
@@ -160,203 +212,376 @@
             border-top: 1px solid #252530;
             color: #666;
         }
-        .last-updated {
-            color: #00d4ff;
-        }
+        .last-updated { color: #00d4ff; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>🦾 Life OS Command Center</h1>
-        <p>Real-time Agent Status Dashboard</p>
+        <p>Agent Status & Intelligence Dashboard</p>
     </div>
 
-    <div class="stats-bar">
-        <div class="stat">
-            <div class="stat-value" id="active-count">3</div>
-            <div class="stat-label">Active</div>
+    <div class="nav">
+        <button class="nav-btn active" onclick="showSection('agents')">🤖 Agents</button>
+        <button class="nav-btn" onclick="showSection('reports')">📊 Reports</button>
+        <button class="nav-btn" onclick="showSection('tools')">🛠️ Tools</button>
+    </div>
+
+    <!-- AGENTS SECTION -->
+    <div id="agents-section" class="section active">
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Active</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Idle</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">15</div>
+                <div class="stat-label">Total Agents</div>
+            </div>
         </div>
-        <div class="stat">
-            <div class="stat-value" id="idle-count">12</div>
-            <div class="stat-label">Idle</div>
-        </div>
-        <div class="stat">
-            <div class="stat-value" id="total-count">15</div>
-            <div class="stat-label">Total Agents</div>
+
+        <div class="agent-grid">
+            <!-- Active Agents -->
+            <div class="agent-card active">
+                <div class="status-indicator active"></div>
+                <div class="agent-emoji">🔮</div>
+                <div class="agent-name">The Oracle</div>
+                <div class="agent-role">AI Research Specialist</div>
+                <span class="agent-status working">● Complete</span>
+                <div class="task-list">
+                    <div class="task">Kool Tools Tracker (12KB)</div>
+                    <div class="task">AI Industry Briefing (20KB)</div>
+                </div>
+            </div>
+
+            <div class="agent-card active">
+                <div class="status-indicator active"></div>
+                <div class="agent-emoji">💻</div>
+                <div class="agent-name">Neural Net Ned</div>
+                <div class="agent-role">IT & Tech Specialist</div>
+                <span class="agent-status working">● Complete</span>
+                <div class="task-list">
+                    <div class="task">CLI Toolkit (4 tools)</div>
+                    <div class="task">Local Node Architecture (30KB)</div>
+                    <div class="task">Deployment Guide</div>
+                </div>
+            </div>
+
+            <div class="agent-card active">
+                <div class="status-indicator active"></div>
+                <div class="agent-emoji">🎙️</div>
+                <div class="agent-name">Podcast Pablo</div>
+                <div class="agent-role">Content & Audio Production</div>
+                <span class="agent-status working">● Complete</span>
+                <div class="task-list">
+                    <div class="task">Podcast Plan (16KB)</div>
+                    <div class="task">Voice Cloning Guide (17KB)</div>
+                </div>
+            </div>
+
+            <!-- Idle Agents -->
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">💰</div>
+                <div class="agent-name">Goldfinger</div>
+                <div class="agent-role">Finance Director</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">Queued: Portfolio tracking</div>
+                </div>
+            </div>
+
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">📈</div>
+                <div class="agent-name">Hype Man</div>
+                <div class="agent-role">Marketing & Sales Lead</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">X Integration Plan (13KB)</div>
+                </div>
+            </div>
+
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">⚖️</div>
+                <div class="agent-name">Legal Eagle</div>
+                <div class="agent-role">Legal & Compliance Advisor</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">Umbrella Corp Research (40KB)</div>
+                </div>
+            </div>
+
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">⚙️</div>
+                <div class="agent-name">The Mechanic</div>
+                <div class="agent-role">Operations Coordinator</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">Notion Kanban Setup (22KB)</div>
+                </div>
+            </div>
+
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">🛡️</div>
+                <div class="agent-name">Sentinel</div>
+                <div class="agent-role">Cybersecurity Guardian</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">Security Audit (18KB)</div>
+                    <div class="task">⚠️ Action Required</div>
+                </div>
+            </div>
+
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">💎</div>
+                <div class="agent-name">Diamond Hands</div>
+                <div class="agent-role">Crypto & Web3 Specialist</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">Phantom Integration Plan (22KB)</div>
+                </div>
+            </div>
+
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">🌐</div>
+                <div class="agent-name">The Bridge</div>
+                <div class="agent-role">Remote Local Node</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">Local Hardware Architecture (30KB)</div>
+                </div>
+            </div>
+
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">🧘</div>
+                <div class="agent-name">Zen Master</div>
+                <div class="agent-role">Health & Wellness Coach</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">Available for health tracking</div>
+                </div>
+            </div>
+
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">🎯</div>
+                <div class="agent-name">The Strategist</div>
+                <div class="agent-role">Strategy & Innovation Consultant</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">Available for planning</div>
+                </div>
+            </div>
+
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">📋</div>
+                <div class="agent-name">The Butler</div>
+                <div class="agent-role">Executive Support Assistant</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">Available for scheduling</div>
+                </div>
+            </div>
+
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">🔧</div>
+                <div class="agent-name">Fix-It Felix</div>
+                <div class="agent-role">Maintenance & Mechanics Expert</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">Available for repairs</div>
+                </div>
+            </div>
+
+            <div class="agent-card idle">
+                <div class="status-indicator idle"></div>
+                <div class="agent-emoji">🏢</div>
+                <div class="agent-name">The Landlord</div>
+                <div class="agent-role">Asset & Risk Manager</div>
+                <span class="agent-status idle">⏳ Idle</span>
+                <div class="task-list">
+                    <div class="task">Available for asset tracking</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="agent-grid">
-        <!-- Active Agents -->
-        <div class="agent-card active">
-            <div class="status-indicator active"></div>
-            <div class="agent-emoji">🔮</div>
-            <div class="agent-name">The Oracle</div>
-            <div class="agent-role">AI Research Specialist</div>
-            <span class="agent-status working">● Working</span>
-            <div class="task-list">
-                <div class="task">Completed: Kool Tools Tracker</div>
-                <div class="task">File: research/kool-tools-tracker.md</div>
+    <!-- REPORTS SECTION -->
+    <div id="reports-section" class="section">
+        <div class="reports-grid">
+            <!-- Research Reports -->
+            <div class="report-category">
+                <h2>🔬 Research Reports</h2>
+                <ul class="report-list">
+                    <li class="report-item">
+                        <div class="report-name">AI Industry Briefing</div>
+                        <div class="report-meta">The Oracle • 20KB • Feb 2, 2026</div>
+                        <div class="report-desc">GPT-5, Claude 4.5, Agentic AI landscape, competitive analysis</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">Kool Tools Tracker</div>
+                        <div class="report-meta">The Oracle • 12KB • Feb 2, 2026</div>
+                        <div class="report-desc">Best new AI tools: Claude Code, DeepSeek R1, Perplexity Comet</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">Clawbot Use Cases</div>
+                        <div class="report-meta">Neural Net Ned • 21KB • Feb 2, 2026</div>
+                        <div class="report-desc">OpenClaw integrations, 50+ services, user personas</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">Podcast Plan</div>
+                        <div class="report-meta">Podcast Pablo • 16KB • Feb 2, 2026</div>
+                        <div class="report-desc">"Life OS" podcast strategy, episodes 1-3, tech stack</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">Personal Voice Setup</div>
+                        <div class="report-meta">Podcast Pablo • 17KB • Feb 2, 2026</div>
+                        <div class="report-desc">Voice cloning: ElevenLabs vs XTTS v2 vs StyleTTS 2</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Business & Legal -->
+            <div class="report-category">
+                <h2>⚖️ Business & Legal</h2>
+                <ul class="report-list">
+                    <li class="report-item">
+                        <div class="report-name">Umbrella Corp Structure (4 parts)</div>
+                        <div class="report-meta">Legal Eagle • 40KB total • Feb 2, 2026</div>
+                        <div class="report-desc">LLC vs S-Corp vs C-Corp, holding companies, tax strategies</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">Security Audit</div>
+                        <div class="report-meta">Sentinel • 18KB • Feb 2, 2026</div>
+                        <div class="report-desc">⚠️ HIGH RISK - Exposed secrets, remediation steps required</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Technical Guides -->
+            <div class="report-category">
+                <h2>💻 Technical Guides</h2>
+                <ul class="report-list">
+                    <li class="report-item">
+                        <div class="report-name">Local Node Architecture</div>
+                        <div class="report-meta">The Bridge • 30KB • Feb 2, 2026</div>
+                        <div class="report-desc">Pi/NUC/NAS setup, Tailscale, Docker, Ollama stack</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">Notion Kanban Setup</div>
+                        <div class="report-meta">The Mechanic • 22KB • Feb 2, 2026</div>
+                        <div class="report-desc">API schemas, webhook config, automation ideas</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">Phantom Integration</div>
+                        <div class="report-meta">Diamond Hands • 22KB • Feb 2, 2026</div>
+                        <div class="report-desc">Wallet setup, Web3.js, DeFi automation</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">X/Twitter Integration</div>
+                        <div class="report-meta">Hype Man • 13KB • Feb 2, 2026</div>
+                        <div class="report-desc">API tiers, OAuth, automation, rate limits</div>
+                    </li>
+                </ul>
             </div>
         </div>
 
-        <div class="agent-card active">
-            <div class="status-indicator active"></div>
-            <div class="agent-emoji">💻</div>
-            <div class="agent-name">Neural Net Ned</div>
-            <div class="agent-role">IT & Tech Specialist</div>
-            <span class="agent-status working">● Researching</span>
-            <div class="task-list">
-                <div class="task">Clawbot use case analysis</div>
-                <div class="task">Web search in progress</div>
-            </div>
+        <div style="text-align: center; margin-top: 2rem; padding: 1rem; background: #15151a; border-radius: 12px; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <p style="color: #888; margin-bottom: 0.5rem;">📁 All reports located in:</p>
+            <code style="background: #0f0f14; padding: 0.5rem 1rem; border-radius: 6px; color: #00d4ff;">~/workspace/research/</code>
+            <p style="color: #666; margin-top: 0.5rem; font-size: 0.875rem;">and</p>
+            <code style="background: #0f0f14; padding: 0.5rem 1rem; border-radius: 6px; color: #00d4ff;">~/workspace/agents/</code>
         </div>
+    </div>
 
-        <div class="agent-card active">
-            <div class="status-indicator active"></div>
-            <div class="agent-emoji">🎙️</div>
-            <div class="agent-name">Podcast Pablo</div>
-            <div class="agent-role">Content & Audio Production</div>
-            <span class="agent-status working">● Planning</span>
-            <div class="task-list">
-                <div class="task">Podcast hosting research</div>
-                <div class="task">Episode planning</div>
+    <!-- TOOLS SECTION -->
+    <div id="tools-section" class="section">
+        <div class="reports-grid">
+            <div class="report-category">
+                <h2>🛠️ CLI Tools</h2>
+                <ul class="report-list">
+                    <li class="report-item">
+                        <div class="report-name">openclaw-cli.sh</div>
+                        <div class="report-meta">11KB • Main entry point</div>
+                        <div class="report-desc">status, logs, restart, agents, memory search, session list</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">agent-manager.sh</div>
+                        <div class="report-meta">11.5KB • Agent lifecycle</div>
+                        <div class="report-desc">list, create, deploy, status for all agents</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">system-health.sh</div>
+                        <div class="report-meta">13.5KB • Health monitoring</div>
+                        <div class="report-desc">disk, memory, gateway, cron checks</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">daily-standup.sh</div>
+                        <div class="report-meta">New • Daily summary</div>
+                        <div class="report-desc">Agent activity summary, recent deliverables</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">agent-status.sh</div>
+                        <div class="report-meta">New • Status checker</div>
+                        <div class="report-desc">Quick status check for any agent</div>
+                    </li>
+                </ul>
             </div>
-        </div>
 
-        <!-- Idle Agents -->
-        <div class="agent-card idle">
-            <div class="status-indicator idle"></div>
-            <div class="agent-emoji">💰</div>
-            <div class="agent-name">Goldfinger</div>
-            <div class="agent-role">Finance Director</div>
-            <span class="agent-status idle">⏳ Idle</span>
-            <div class="task-list">
-                <div class="task">Queued: Crypto + Phantom</div>
-            </div>
-        </div>
-
-        <div class="agent-card idle">
-            <div class="status-indicator idle"></div>
-            <div class="agent-emoji">📈</div>
-            <div class="agent-name">Hype Man</div>
-            <div class="agent-role">Marketing & Sales Lead</div>
-            <span class="agent-status idle">⏳ Idle</span>
-            <div class="task-list">
-                <div class="task">Queued: X integration</div>
-            </div>
-        </div>
-
-        <div class="agent-card idle">
-            <div class="status-indicator idle"></div>
-            <div class="agent-emoji">⚖️</div>
-            <div class="agent-name">Legal Eagle</div>
-            <div class="agent-role">Legal & Compliance Advisor</div>
-            <span class="agent-status idle">⏳ Idle</span>
-            <div class="task-list">
-                <div class="task">Queued: Umbrella corp structure</div>
-            </div>
-        </div>
-
-        <div class="agent-card idle">
-            <div class="status-indicator idle"></div>
-            <div class="agent-emoji">⚙️</div>
-            <div class="agent-name">The Mechanic</div>
-            <div class="agent-role">Operations Coordinator</div>
-            <span class="agent-status idle">⏳ Idle</span>
-            <div class="task-list">
-                <div class="task">Queued: Notion kanban</div>
-            </div>
-        </div>
-
-        <div class="agent-card idle">
-            <div class="status-indicator idle"></div>
-            <div class="agent-emoji">🛡️</div>
-            <div class="agent-name">Sentinel</div>
-            <div class="agent-role">Cybersecurity Guardian</div>
-            <span class="agent-status idle">⏳ Idle</span>
-            <div class="task-list">
-                <div class="task">Queued: Security hardening</div>
-            </div>
-        </div>
-
-        <div class="agent-card idle">
-            <div class="status-indicator idle"></div>
-            <div class="agent-emoji">🧘</div>
-            <div class="agent-name">Zen Master</div>
-            <div class="agent-role">Health & Wellness Coach</div>
-            <span class="agent-status idle">⏳ Idle</span>
-            <div class="task-list">
-                <div class="task">Available for health tracking</div>
-            </div>
-        </div>
-
-        <div class="agent-card idle">
-            <div class="status-indicator idle"></div>
-            <div class="agent-emoji">🎯</div>
-            <div class="agent-name">The Strategist</div>
-            <div class="agent-role">Strategy & Innovation Consultant</div>
-            <span class="agent-status idle">⏳ Idle</span>
-            <div class="task-list">
-                <div class="task">Available for planning</div>
-            </div>
-        </div>
-
-        <div class="agent-card idle">
-            <div class="status-indicator idle"></div>
-            <div class="agent-emoji">📋</div>
-            <div class="agent-name">The Butler</div>
-            <div class="agent-role">Executive Support Assistant</div>
-            <span class="agent-status idle">⏳ Idle</span>
-            <div class="task-list">
-                <div class="task">Available for scheduling</div>
-            </div>
-        </div>
-
-        <div class="agent-card idle">
-            <div class="status-indicator idle"></div>
-            <div class="agent-emoji">🔧</div>
-            <div class="agent-name">Fix-It Felix</div>
-            <div class="agent-role">Maintenance & Mechanics Expert</div>
-            <span class="agent-status idle">⏳ Idle</span>
-            <div class="task-list">
-                <div class="task">Available for repairs</div>
-            </div>
-        </div>
-
-        <div class="agent-card idle">
-            <div class="status-indicator idle"></div>
-            <div class="agent-emoji">🏢</div>
-            <div class="agent-name">The Landlord</div>
-            <div class="agent-role">Asset & Risk Manager</div>
-            <span class="agent-status idle">⏳ Idle</span>
-            <div class="task-list">
-                <div class="task">Available for asset tracking</div>
-            </div>
-        </div>
-
-        <div class="agent-card idle">
-            <div class="status-indicator idle"></div>
-            <div class="agent-emoji">✈️</div>
-            <div class="agent-name">The Navigator</div>
-            <div class="agent-role">Travel & Logistics Planner</div>
-            <span class="agent-status idle">⏳ Idle</span>
-            <div class="task-list">
-                <div class="task">Queued: Remote local query</div>
+            <div class="report-category">
+                <h2>📊 Quick Stats</h2>
+                <ul class="report-list">
+                    <li class="report-item">
+                        <div class="report-name">Total Research</div>
+                        <div class="report-meta">86KB • 5 reports</div>
+                        <div class="report-desc">AI tools, use cases, podcast, voice, industry intel</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">Agent Deliverables</div>
+                        <div class="report-meta">147KB • 8 agents</div>
+                        <div class="report-desc">Legal, security, crypto, tech, marketing guides</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-name">Documentation</div>
+                        <div class="report-meta">15+ files • Agent personas</div>
+                        <div class="report-desc">READMEs, deployment guides, architecture docs</div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 
     <div class="footer">
-        <p>Last updated: <span class="last-updated" id="last-updated">2026-02-02 14:32 UTC</span></p>
-        <p style="margin-top: 0.5rem; font-size: 0.875rem;">Open file: <code>workspace/dashboard/agent-status.html</code></p>
+        <p>Last updated: <span class="last-updated" id="last-updated">2026-02-03 00:00 UTC</span></p>
+        <p style="margin-top: 0.5rem; font-size: 0.875rem;">
+            <a href="https://github.com/ib3rt/lifeos-dashboard" style="color: #00d4ff; text-decoration: none;">GitHub</a> • 
+            <span style="color: #666;">Life OS Command Center v1.1</span>
+        </p>
     </div>
 
     <script>
-        // Auto-refresh every 30 seconds
-        setInterval(() => {
-            location.reload();
-        }, 30000);
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(section + '-section').classList.add('active');
+            event.target.classList.add('active');
+        }
 
         // Update timestamp
         document.getElementById('last-updated').textContent = new Date().toISOString().slice(0, 16).replace('T', ' ') + ' UTC';
