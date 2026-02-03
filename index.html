@@ -586,17 +586,17 @@
             <div class="report-category">
                 <h2>🔬 Research Reports</h2>
                 <ul class="report-list">
-                    <li class="report-item" onclick="openReport('ai-industry-briefing')">
+                    <li class="report-item" onclick="openReport('ai-briefing')">
                         <div class="report-name">AI Industry Briefing <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">The Oracle • 20KB • Feb 2, 2026</div>
                         <div class="report-desc">GPT-5, Claude 4.5, Agentic AI landscape, competitive analysis</div>
                     </li>
-                    <li class="report-item" onclick="openReport('kool-tools-tracker')">
+                    <li class="report-item" onclick="openReport('kool-tools')">
                         <div class="report-name">Kool Tools Tracker <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">The Oracle • 12KB • Feb 2, 2026</div>
                         <div class="report-desc">Best new AI tools: Claude Code, DeepSeek R1, Perplexity Comet</div>
                     </li>
-                    <li class="report-item" onclick="openReport('clawbot-use-cases')">
+                    <li class="report-item" onclick="openReport('clawbot-usecases')">
                         <div class="report-name">Clawbot Use Cases <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">Neural Net Ned • 21KB • Feb 2, 2026</div>
                         <div class="report-desc">OpenClaw integrations, 50+ services, user personas</div>
@@ -606,7 +606,7 @@
                         <div class="report-meta">Podcast Pablo • 16KB • Feb 2, 2026</div>
                         <div class="report-desc">"Life OS" podcast strategy, episodes 1-3, tech stack</div>
                     </li>
-                    <li class="report-item" onclick="openReport('personal-voice-setup')">
+                    <li class="report-item" onclick="openReport('personal-voice')">
                         <div class="report-name">Personal Voice Setup <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">Podcast Pablo • 17KB • Feb 2, 2026</div>
                         <div class="report-desc">Voice cloning: ElevenLabs vs XTTS v2 vs StyleTTS 2</div>
@@ -778,62 +778,361 @@
     </div>
 
     <script>
-        // Report data
+        // Report data with embedded summaries
         const reports = {
             'ai-briefing': {
                 title: 'AI Industry Briefing',
                 meta: 'The Oracle • 20KB • Feb 2, 2026',
-                path: 'research/ai-industry-briefing.md'
+                path: 'research/ai-industry-briefing.md',
+                summary: `## Executive Summary
+
+The AI landscape in early 2026 is at a historic inflection point:
+
+**Key Headlines:**
+• GPT-5.2 deploying, GPT-4o deprecated Feb 13, 2026
+• Claude 4.5 family leads coding with 1M token context
+• Chinese models (DeepSeek, Qwen) gaining traction
+• Agentic AI replacing "Copilots"
+• Browser automation now mainstream
+
+**Top Tools:**
+• Claude Code - Terminal-based coding agent
+• DeepSeek R1 - 1/20th cost of OpenAI
+• Perplexity Comet - AI browser
+• Manus AI - Fully autonomous agent
+
+**Life OS Actions:**
+1. Add MCP support (industry standard)
+2. Switch to Claude 4.5 for coding
+3. Level up browser automation`
             },
             'kool-tools': {
                 title: 'Kool Tools Tracker',
                 meta: 'The Oracle • 12KB • Feb 2, 2026',
-                path: 'research/kool-tools-tracker.md'
+                path: 'research/kool-tools-tracker.md',
+                summary: `## Hot Releases (Last 30 Days)
+
+| Tool | Cost | Integration |
+|------|------|-------------|
+| Claude Code | $20/mo | HIGH |
+| DeepSeek R1 | Free/$0.55M | HIGH |
+| Perplexity Comet | $20/mo | MEDIUM |
+| Browser-use | Free | HIGH |
+
+## Hidden Gems
+• Kokoro TTS - 82M params, SOTA, free
+• Mem0 - Semantic memory for agents
+• Qwen2.5-VL - Alibaba's vision model
+• Stagehand - AI web scraping
+
+## Recommended for Life OS (P0)
+• n8n - Workflow automation
+• Mem0 - Persistent memory
+• Aider - Code generation
+• Ollama - Local LLM`
             },
             'clawbot-usecases': {
                 title: 'Clawbot Use Cases',
                 meta: 'Neural Net Ned • 21KB • Feb 2, 2026',
-                path: 'research/clawbot-use-cases.md'
+                path: 'research/clawbot-use-cases.md',
+                summary: `## What is OpenClaw?
+
+24/7 local AI automation platform:
+• 68K+ GitHub stars
+• 12+ messaging channels
+• 100+ AgentSkills
+• Local-first, privacy-focused
+
+## Use Case Categories
+
+1. Personal Productivity
+   - Calendar management
+   - Email triage
+   - Task prioritization
+
+2. Development Workflows
+   - GitHub automation
+   - CI/CD triggers
+   - Code reviews
+
+3. Content Creation
+   - Social media scheduling
+   - Blog generation
+   - Newsletter curation
+
+4. Home Automation
+   - Smart device control
+   - IoT monitoring
+   - Voice wake commands
+
+## Competitive Advantage
+vs Zapier: Self-hosted, cheaper
+vs n8n: Native AI agent support
+vs Custom: Faster setup`
             },
             'podcast-plan': {
                 title: 'Podcast Plan',
                 meta: 'Podcast Pablo • 16KB • Feb 2, 2026',
-                path: 'research/podcast-plan.md'
+                path: 'research/podcast-plan.md',
+                summary: `## Show Concept
+
+**Title:** "Life OS: Building the Future, One System at a Time"
+**Tagline:** Documenting the construction of an AI-powered life
+**Differentiation:** Build-in-public, actual costs, actual failures
+
+## Format Options
+• Tool Reviews: 10-15 min
+• Build Logs: 30-35 min
+• Agent Spotlights: 45-60 min
+
+## First 3 Episodes
+1. "Genesis — Building the Foundation"
+2. "I Tested 5 AI Note-Taking Apps"
+3. "Building My Morning Agent: Week 1"
+
+## Tech Stack
+• Mic: Audio-Technica ATR2100 ($80)
+• Editing: Descript ($12/mo)
+• Hosting: Buzzsprout ($12/mo)
+• Distribution: Spotify, Apple, YouTube`
             },
             'personal-voice': {
                 title: 'Personal Voice Setup',
                 meta: 'Podcast Pablo • 17KB • Feb 2, 2026',
-                path: 'research/personal-voice-setup.md'
+                path: 'research/personal-voice-setup.md',
+                summary: `## Top 3 Voice Cloning Options
+
+| Option | Sample | Cost | Best For |
+|--------|--------|------|----------|
+| ElevenLabs | 30 min | $99/mo | Production quality |
+| XTTS v2 | 6 sec | FREE | Privacy + cost |
+| StyleTTS 2 | 10-30 sec | FREE | Research/human-level |
+
+## Recording Guidelines
+
+**Script:**
+"The quick brown fox jumps over the lazy dog.
+Hello, this is a voice sample for AI cloning.
+Today is February second, twenty twenty-six."
+
+**Equipment:**
+• $0: Phone voice memo
+• $80: Audio-Technica ATR2100
+• $500+: SM7B + Cloudlifter
+
+**Specs:**
+• Format: WAV or FLAC
+• Sample rate: 48kHz
+• Bit depth: 24-bit
+
+## Life OS Integration
+Use cloned voice for:
+• Daily standup summaries
+• Smart home announcements
+• Podcast intros`
             },
             'umbrella-corp': {
                 title: 'Umbrella Corp Structure',
                 meta: 'Legal Eagle • 40KB • Feb 2, 2026',
-                path: 'agents/legal_compliance_advisor/umbrella-corp-research.md'
+                path: 'agents/legal_compliance_advisor/umbrella-corp-research.md',
+                summary: `## Entity Structure Comparison
+
+| Type | Liability | Tax | Best For |
+|------|-----------|-----|----------|
+| LLC | Good | Pass-through | Small businesses |
+| S-Corp | Good | Pass-through | US owners |
+| C-Corp | Excellent | Double | VC/exit planning |
+| Series LLC | Good | Pass-through | Real estate |
+
+## Holding Company Structure
+Parent Co owns subsidiaries:
+• Asset protection (liability isolated)
+• Tax optimization
+• Estate planning
+• IP protection
+
+## Recommended Setup
+**Solo operator:** Single LLC (Wyoming)
+**Multiple businesses:** Holding LLC → Operating LLCs
+**VC/exit:** Delaware C-Corp
+
+## Costs
+• Wyoming LLC: $100 formation + $60/year
+• Delaware C-Corp: $300+ formation + $300+/year
+
+⚠️ Disclaimer: Not legal advice. Consult attorney.`
             },
             'security-audit': {
                 title: 'Security Audit',
                 meta: 'Sentinel • 18KB • Feb 2, 2026',
-                path: 'agents/cybersecurity_guardian/security-audit.md'
+                path: 'agents/cybersecurity_guardian/security-audit.md',
+                summary: `## ⚠️ THREAT ASSESSMENT: HIGH RISK
+
+## Exposed Secrets Found
+• Brave Search API Key
+• Telegram Bot Token
+• Gateway Auth Token
+• Discord Token (old backup)
+
+## Immediate Actions Required
+1. ROTATE ALL API KEYS (within 24h)
+2. PURGE backup files with shred
+3. REVOKE Discord token
+4. CLEAR env variable OPENCLAW_GATEWAY_TOKEN
+5. IMPLEMENT secrets management (Mozilla SOPS)
+
+## File Permissions
+• Workspace: chmod 700
+• Configs: chmod 600
+• Scripts: chmod 700
+
+## Next Steps
+See full security-remediation-todo.md
+
+⚠️ This is a LIVE system with ACTIVE exposed credentials.`
             },
             'local-node': {
                 title: 'Local Node Architecture',
                 meta: 'The Bridge • 30KB • Feb 2, 2026',
-                path: 'agents/it_tech_specialist/local-node-architecture.md'
+                path: 'agents/it_tech_specialist/local-node-architecture.md',
+                summary: `## Hardware Options
+
+| Use Case | Hardware | Cost |
+|----------|----------|------|
+| Budget | Pi 5 8GB | $150 |
+| Balanced | NUC + RTX 4060 Ti | $1,000 |
+| Power | Mini PC + RTX 4070 Ti | $1,800 |
+| Maximum | Custom + RTX 4090 | $3,500+ |
+
+## Software Stack
+• OS: Ubuntu Server LTS
+• VPN: Tailscale (mesh)
+• Containers: Docker
+• LLM: Ollama
+• Storage: ZFS
+
+## Network Topology
+Cloud VPS ↔ Tailscale VPN ↔ Local Node
+                    ↓
+            NAS / IoT / Smart Devices
+
+## What Runs Where
+**Cloud:** Public APIs, large models (70B+)
+**Local:** Private data, 7B-13B models
+**Hybrid:** Image analysis, transcription
+
+## Security
+• Full disk encryption (LUKS/ZFS)
+• No inbound ports (Tailscale only)
+• IoT on isolated VLAN`
             },
             'notion-kanban': {
                 title: 'Notion Kanban Setup',
                 meta: 'The Mechanic • 22KB • Feb 2, 2026',
-                path: 'agents/operations_coordinator/notion-kanban-setup.md'
+                path: 'agents/operations_coordinator/notion-kanban-setup.md',
+                summary: `## Notion API v1 (2025-09-03)
+
+✅ Supported:
+• Database creation
+• Page automation
+• Webhooks (real-time)
+• Relations & rollups
+
+❌ Not Supported:
+• Status properties (use Select)
+
+## Database Structure
+
+**Projects:**
+• Name, Status, Priority
+• Assigned Agent, Due Date
+• Progress %, Task relations
+
+**Tasks:**
+• Name, Status, Priority
+• Project relation, Complete checkbox
+• Time tracking
+
+## API Example
+POST /v1/databases
+POST /v1/pages
+PATCH /v1/pages/{id}
+
+## Automation Ideas
+• Auto-assign by tags
+• Status change notifications
+• Due date reminders
+• Progress calculation
+• Workload dashboard`
             },
             'phantom-integration': {
                 title: 'Phantom Integration',
                 meta: 'Diamond Hands • 22KB • Feb 2, 2026',
-                path: 'agents/finance_director/phantom-integration-plan.md'
+                path: 'agents/finance_director/phantom-integration-plan.md',
+                summary: `## Phantom Wallet Capabilities
+
+• Browser extension API
+• Mobile deep linking
+• Multi-chain: Solana, Ethereum, Polygon, Bitcoin
+
+## Integration Options
+• Web3.js / Ethers.js
+• Transaction automation
+• Balance monitoring
+• NFT tracking
+
+## Security Best Practices
+• Environment variables for keys
+• Transaction validation
+• Spending limits
+• Rate limiting
+
+## Automation Possibilities
+• DeFi yield harvesting
+• DCA (Dollar Cost Averaging)
+• Balance alerts
+• Staking rewards
+
+⚠️ Risk warnings and safeguards included
+
+To the moon! 🚀💎🙌`
             },
             'x-integration': {
                 title: 'X/Twitter Integration',
                 meta: 'Hype Man • 13KB • Feb 2, 2026',
-                path: 'agents/marketing_sales_lead/x-integration-plan.md'
+                path: 'agents/marketing_sales_lead/x-integration-plan.md',
+                summary: `## X API v2 Tiers
+
+| Tier | Posts/Month | Cost |
+|------|-------------|------|
+| Free | 500 | $0 |
+| Basic | 3,000 | $200/mo |
+| Pro | 50,000 | $5,000/mo |
+
+## Capabilities
+✅ Posting updates
+✅ Reading mentions
+✅ Direct messages
+✅ Thread creation
+✅ Media uploads
+✅ Analytics retrieval
+
+## Authentication
+OAuth 2.0 flow:
+1. Register app at developer.twitter.com
+2. Get API key & secret
+3. User authorization
+4. Access token for API calls
+
+## Rate Limits
+• Post: 200/day (Free), 3,000/day (Basic)
+• Read: 10,000/month (Free)
+• DM: 1,440/day
+
+## Cost
+Start FREE → Upgrade to Basic ($200/mo) when validated
+
+Let's crush it! 📈🔥`
             }
         };
 
@@ -854,8 +1153,8 @@
                     'Weekly intelligence briefings'
                 ],
                 deliverables: [
-                    { name: 'AI Industry Briefing', size: '20KB', reportId: 'ai-industry-briefing' },
-                    { name: 'Kool Tools Tracker', size: '12KB', reportId: 'kool-tools-tracker' }
+                    { name: 'AI Industry Briefing', size: '20KB', reportId: 'ai-briefing' },
+                    { name: 'Kool Tools Tracker', size: '12KB', reportId: 'kool-tools' }
                 ]
             },
             'neural-net-ned': {
@@ -874,8 +1173,7 @@
                 ],
                 deliverables: [
                     { name: 'CLI Toolkit (4 tools)', size: '38KB', path: 'tools/' },
-                    { name: 'Local Node Architecture', size: '30KB', reportId: 'local-node' },
-                    { name: 'Deployment Guide', size: '6KB', path: 'agents/it_tech_specialist/deployment-guide.md' }
+                    { name: 'Local Node Architecture', size: '30KB', reportId: 'local-node' }
                 ]
             },
             'podcast-pablo': {
@@ -894,7 +1192,7 @@
                 ],
                 deliverables: [
                     { name: 'Podcast Plan', size: '16KB', reportId: 'podcast-plan' },
-                    { name: 'Personal Voice Setup', size: '17KB', reportId: 'personal-voice-setup' }
+                    { name: 'Personal Voice Setup', size: '17KB', reportId: 'personal-voice' }
                 ]
             },
             'goldfinger': {
@@ -1085,19 +1383,16 @@
             
             document.getElementById('modal-title').textContent = report.title;
             document.getElementById('modal-meta').textContent = report.meta;
-            document.getElementById('modal-body').textContent = 'Loading...';
             document.getElementById('report-modal').classList.add('active');
             
-            // Try to fetch from GitHub raw URL
-            const githubRaw = `https://raw.githubusercontent.com/ib3rt/lifeos-dashboard/main/${report.path}`;
+            // Display embedded summary
+            const bodyContent = report.summary ? report.summary : 'Summary not available.';
+            const githubLink = `https://github.com/ib3rt/lifeos-dashboard/blob/main/${report.path}`;
             
-            fetch(githubRaw)
-                .then(response => response.text())
-                .then(content => {
-                    document.getElementById('modal-body').textContent = content;
-                })
-                .catch(error => {
-                    document.getElementById('modal-body').textContent = 
+            document.getElementById('modal-body').innerHTML = 
+                bodyContent + 
+                `\n\n---\n\n📄 View full report on GitHub:\n${githubLink}`;
+        } 
                         `Error loading report.\n\nFile: ${report.path}\n\nYou can view it directly at:\nhttps://github.com/ib3rt/lifeos-dashboard/blob/main/${report.path}`;
                 });
         }
