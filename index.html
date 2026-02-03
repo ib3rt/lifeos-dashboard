@@ -53,6 +53,66 @@
             border-color: transparent;
         }
         
+        /* Notification Area */
+        .notification-area {
+            max-width: 1400px;
+            margin: 0 auto 1.5rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .notification {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .notification.error {
+            background: rgba(239, 68, 68, 0.1);
+            border-left-color: #ef4444;
+        }
+        .notification.warning {
+            background: rgba(234, 179, 8, 0.1);
+            border-left-color: #eab308;
+        }
+        .notification.info {
+            background: rgba(59, 130, 246, 0.1);
+            border-left-color: #3b82f6;
+        }
+        .notification.success {
+            background: rgba(34, 197, 94, 0.1);
+            border-left-color: #22c55e;
+        }
+        .notification-icon {
+            font-size: 1.5rem;
+        }
+        .notification-content {
+            flex: 1;
+        }
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .notification.error .notification-title { color: #ef4444; }
+        .notification.warning .notification-title { color: #eab308; }
+        .notification.info .notification-title { color: #3b82f6; }
+        .notification.success .notification-title { color: #22c55e; }
+        .notification-message {
+            font-size: 0.875rem;
+            color: #888;
+        }
+        .notification-time {
+            font-size: 0.75rem;
+            color: #666;
+        }
+        
         .stats-bar {
             display: flex;
             justify-content: center;
@@ -381,10 +441,15 @@
         <p>Agent Status & Intelligence Dashboard</p>
     </div>
 
+    <!-- Notification Area -->
+    <div class="notification-area" id="notification-area">
+        <!-- Notifications injected by JavaScript -->
+    </div>
+
     <div class="nav">
-        <button class="nav-btn active" onclick="showSection('agents')">🤖 Agents</button>
-        <button class="nav-btn" onclick="showSection('reports')">📊 Reports</button>
-        <button class="nav-btn" onclick="showSection('tools')">🛠️ Tools</button>
+        <button class="nav-btn active" onclick="showSection('agents', this)">🤖 Agents</button>
+        <button class="nav-btn" onclick="showSection('reports', this)">📊 Reports</button>
+        <button class="nav-btn" onclick="showSection('tools', this)">🛠️ Tools</button>
     </div>
 
     <!-- AGENTS SECTION -->
@@ -522,7 +587,7 @@
                 </div>
             </div>
 
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('zen-master')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🧘</div>
                 <div class="agent-name">Zen Master</div>
@@ -533,7 +598,7 @@
                 </div>
             </div>
 
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('strategist')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🎯</div>
                 <div class="agent-name">The Strategist</div>
@@ -544,7 +609,7 @@
                 </div>
             </div>
 
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('butler')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">📋</div>
                 <div class="agent-name">The Butler</div>
@@ -555,7 +620,7 @@
                 </div>
             </div>
 
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('fix-it-felix')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🔧</div>
                 <div class="agent-name">Fix-It Felix</div>
@@ -566,7 +631,7 @@
                 </div>
             </div>
 
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('landlord')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🏢</div>
                 <div class="agent-name">The Landlord</div>
@@ -618,13 +683,13 @@
             <div class="report-category">
                 <h2>⚖️ Business & Legal</h2>
                 <ul class="report-list">
-                    <li class="report-item">
-                        <div class="report-name">Umbrella Corp Structure (4 parts)</div>
+                    <li class="report-item" onclick="openReport('umbrella-corp')">
+                        <div class="report-name">Umbrella Corp Structure (4 parts) <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">Legal Eagle • 40KB total • Feb 2, 2026</div>
                         <div class="report-desc">LLC vs S-Corp vs C-Corp, holding companies, tax strategies</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">Security Audit</div>
+                    <li class="report-item" onclick="openReport('security-audit')">
+                        <div class="report-name">Security Audit <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">Sentinel • 18KB • Feb 2, 2026</div>
                         <div class="report-desc">⚠️ HIGH RISK - Exposed secrets, remediation steps required</div>
                     </li>
@@ -635,23 +700,23 @@
             <div class="report-category">
                 <h2>💻 Technical Guides</h2>
                 <ul class="report-list">
-                    <li class="report-item">
-                        <div class="report-name">Local Node Architecture</div>
+                    <li class="report-item" onclick="openReport('local-node')">
+                        <div class="report-name">Local Node Architecture <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">The Bridge • 30KB • Feb 2, 2026</div>
                         <div class="report-desc">Pi/NUC/NAS setup, Tailscale, Docker, Ollama stack</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">Notion Kanban Setup</div>
+                    <li class="report-item" onclick="openReport('notion-kanban')">
+                        <div class="report-name">Notion Kanban Setup <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">The Mechanic • 22KB • Feb 2, 2026</div>
                         <div class="report-desc">API schemas, webhook config, automation ideas</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">Phantom Integration</div>
+                    <li class="report-item" onclick="openReport('phantom-integration')">
+                        <div class="report-name">Phantom Integration <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">Diamond Hands • 22KB • Feb 2, 2026</div>
                         <div class="report-desc">Wallet setup, Web3.js, DeFi automation</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">X/Twitter Integration</div>
+                    <li class="report-item" onclick="openReport('x-integration')">
+                        <div class="report-name">X/Twitter Integration <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">Hype Man • 13KB • Feb 2, 2026</div>
                         <div class="report-desc">API tiers, OAuth, automation, rate limits</div>
                     </li>
@@ -673,28 +738,28 @@
             <div class="report-category">
                 <h2>🛠️ CLI Tools</h2>
                 <ul class="report-list">
-                    <li class="report-item">
-                        <div class="report-name">openclaw-cli.sh</div>
+                    <li class="report-item" onclick="openTool('openclaw-cli')">
+                        <div class="report-name">openclaw-cli.sh <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">11KB • Main entry point</div>
                         <div class="report-desc">status, logs, restart, agents, memory search, session list</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">agent-manager.sh</div>
+                    <li class="report-item" onclick="openTool('agent-manager')">
+                        <div class="report-name">agent-manager.sh <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">11.5KB • Agent lifecycle</div>
                         <div class="report-desc">list, create, deploy, status for all agents</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">system-health.sh</div>
+                    <li class="report-item" onclick="openTool('system-health')">
+                        <div class="report-name">system-health.sh <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">13.5KB • Health monitoring</div>
                         <div class="report-desc">disk, memory, gateway, cron checks</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">daily-standup.sh</div>
+                    <li class="report-item" onclick="openTool('daily-standup')">
+                        <div class="report-name">daily-standup.sh <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">New • Daily summary</div>
                         <div class="report-desc">Agent activity summary, recent deliverables</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">agent-status.sh</div>
+                    <li class="report-item" onclick="openTool('agent-status')">
+                        <div class="report-name">agent-status.sh <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">New • Status checker</div>
                         <div class="report-desc">Quick status check for any agent</div>
                     </li>
@@ -704,18 +769,18 @@
             <div class="report-category">
                 <h2>📊 Quick Stats</h2>
                 <ul class="report-list">
-                    <li class="report-item">
-                        <div class="report-name">Total Research</div>
+                    <li class="report-item" onclick="openTool('stats-research')">
+                        <div class="report-name">Total Research <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">86KB • 5 reports</div>
                         <div class="report-desc">AI tools, use cases, podcast, voice, industry intel</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">Agent Deliverables</div>
+                    <li class="report-item" onclick="openTool('stats-deliverables')">
+                        <div class="report-name">Agent Deliverables <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">147KB • 8 agents</div>
                         <div class="report-desc">Legal, security, crypto, tech, marketing guides</div>
                     </li>
-                    <li class="report-item">
-                        <div class="report-name">Documentation</div>
+                    <li class="report-item" onclick="openTool('stats-docs')">
+                        <div class="report-name">Documentation <span style="float:right; color:#00d4ff;">→</span></div>
                         <div class="report-meta">15+ files • Agent personas</div>
                         <div class="report-desc">READMEs, deployment guides, architecture docs</div>
                     </li>
@@ -1320,6 +1385,96 @@ Let's crush it! 📈🔥`
                 deliverables: [
                     { name: 'Local Node Architecture', size: '30KB', reportId: 'local-node' }
                 ]
+            },
+            'zen-master': {
+                emoji: '🧘',
+                name: 'Zen Master',
+                role: 'Health & Wellness Coach',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Calm, meditative, speaks in koans, "Be present, breathe"',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Health tracking integration',
+                    'Meditation guidance',
+                    'Wellness coaching',
+                    'Fitness planning'
+                ],
+                deliverables: [
+                    { name: 'Health Dashboard', size: 'Queued', path: '#' }
+                ]
+            },
+            'strategist': {
+                emoji: '🎯',
+                name: 'The Strategist',
+                role: 'Strategy & Innovation Consultant',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Visionary, chess-minded, always 3 moves ahead',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Strategic planning',
+                    'Competitive analysis',
+                    'Innovation roadmapping',
+                    'Scenario modeling'
+                ],
+                deliverables: [
+                    { name: 'Strategic Plan Template', size: 'Queued', path: '#' }
+                ]
+            },
+            'butler': {
+                emoji: '📋',
+                name: 'The Butler',
+                role: 'Executive Support Assistant',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Polite, efficient, anticipates needs before you do',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Calendar management',
+                    'Email triage',
+                    'Meeting scheduling',
+                    'Travel planning'
+                ],
+                deliverables: [
+                    { name: 'Executive Dashboard', size: 'Queued', path: '#' }
+                ]
+            },
+            'fix-it-felix': {
+                emoji: '🔧',
+                name: 'Fix-It Felix',
+                role: 'Maintenance & Mechanics Expert',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Resourceful, hands-on, "I can fix that!" energy',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Hardware troubleshooting',
+                    'Repair guidance',
+                    'Maintenance scheduling',
+                    'DIY projects'
+                ],
+                deliverables: [
+                    { name: 'Maintenance Tracker', size: 'Queued', path: '#' }
+                ]
+            },
+            'landlord': {
+                emoji: '🏢',
+                name: 'The Landlord',
+                role: 'Asset & Risk Manager',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Pragmatic, risk-aware, portfolio-focused',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Asset tracking',
+                    'Risk assessment',
+                    'Insurance optimization',
+                    'Property management'
+                ],
+                deliverables: [
+                    { name: 'Asset Dashboard', size: 'Queued', path: '#' }
+                ]
             }
         };
 
@@ -1370,11 +1525,11 @@ Let's crush it! 📈🔥`
             if (e.target === this) closeAgentModal();
         });
 
-        function showSection(section) {
+        function showSection(section, btn) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(section + '-section').classList.add('active');
-            event.target.classList.add('active');
+            btn.classList.add('active');
         }
 
         function openReport(reportId) {
@@ -1410,6 +1565,104 @@ Let's crush it! 📈🔥`
 
         // Update timestamp
         document.getElementById('last-updated').textContent = new Date().toISOString().slice(0, 16).replace('T', ' ') + ' UTC';
+
+        // Notification System
+        function checkSystemStatus() {
+            const notifications = [];
+            
+            // Check disk space (simulated - in real app would fetch from API)
+            const diskUsage = 91; // Percent
+            if (diskUsage > 90) {
+                notifications.push({
+                    type: 'warning',
+                    icon: '💾',
+                    title: 'Storage Alert',
+                    message: `Disk usage at ${diskUsage}%. Consider cleanup soon.`,
+                    time: 'Just now'
+                });
+            }
+            
+            // Check for rate limiting (simulated)
+            const rateLimited = false; // Would check actual API status
+            if (rateLimited) {
+                notifications.push({
+                    type: 'error',
+                    icon: '⛔',
+                    title: 'Rate Limited',
+                    message: 'API rate limit reached. Slowing down requests.',
+                    time: 'Just now'
+                });
+            }
+            
+            // Check token balance (simulated)
+            const lowTokens = false; // Would check actual balance
+            if (lowTokens) {
+                notifications.push({
+                    type: 'warning',
+                    icon: '🔑',
+                    title: 'Low API Balance',
+                    message: 'Moonshot API balance below $5. Consider recharge.',
+                    time: 'Just now'
+                });
+            }
+            
+            // Check server status (simulated)
+            const serverDown = false; // Would ping actual servers
+            if (serverDown) {
+                notifications.push({
+                    type: 'error',
+                    icon: '🔴',
+                    title: 'Server Offline',
+                    message: 'OpenClaw gateway not responding. Check status.',
+                    time: 'Just now'
+                });
+            }
+            
+            // Security reminder (from Sentinel audit)
+            notifications.push({
+                type: 'error',
+                icon: '🛡️',
+                title: 'Security Action Required',
+                message: 'Exposed API keys detected. Review security remediation.',
+                time: 'Feb 2, 2026'
+            });
+            
+            // Render notifications
+            renderNotifications(notifications);
+        }
+        
+        function renderNotifications(notifications) {
+            const container = document.getElementById('notification-area');
+            
+            if (notifications.length === 0) {
+                container.innerHTML = `
+                    <div class="notification success">
+                        <div class="notification-icon">✅</div>
+                        <div class="notification-content">
+                            <div class="notification-title">All Systems Operational</div>
+                            <div class="notification-message">No issues detected. Dashboard fully functional.</div>
+                        </div>
+                        <div class="notification-time">Just now</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = notifications.map(n => `
+                <div class="notification ${n.type}">
+                    <div class="notification-icon">${n.icon}</div>
+                    <div class="notification-content">
+                        <div class="notification-title">${n.title}</div>
+                        <div class="notification-message">${n.message}</div>
+                    </div>
+                    <div class="notification-time">${n.time}</div>
+                </div>
+            `).join('');
+        }
+        
+        // Check status on load and every 30 seconds
+        checkSystemStatus();
+        setInterval(checkSystemStatus, 30000);
     </script>
 </body>
 </html>
