@@ -287,6 +287,84 @@
             background: #1f1f2a;
         }
         
+        /* Agent Detail Modal */
+        .agent-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .agent-profile {
+            background: #0f0f14;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .agent-profile-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+        .agent-profile-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+        .agent-profile-role {
+            color: #888;
+            margin-bottom: 1rem;
+        }
+        .agent-profile-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        .agent-profile-status.active {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+        .agent-profile-status.idle {
+            background: rgba(234, 179, 8, 0.2);
+            color: #eab308;
+        }
+        .agent-deliverables {
+            background: #0f0f14;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+        .agent-deliverables h3 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        .deliverable-item {
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            background: #15151a;
+            border-radius: 8px;
+            border-left: 3px solid #7b2cbf;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .deliverable-item:hover {
+            background: #1f1f2a;
+            border-left-color: #00d4ff;
+        }
+        .deliverable-name {
+            font-weight: 600;
+            color: #e0e0e0;
+        }
+        .deliverable-meta {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+        .agent-card {
+            cursor: pointer;
+        }
+        
         .footer {
             text-align: center;
             margin-top: 3rem;
@@ -328,7 +406,7 @@
 
         <div class="agent-grid">
             <!-- Active Agents -->
-            <div class="agent-card active">
+            <div class="agent-card active" onclick="openAgent('oracle')">
                 <div class="status-indicator active"></div>
                 <div class="agent-emoji">🔮</div>
                 <div class="agent-name">The Oracle</div>
@@ -340,7 +418,7 @@
                 </div>
             </div>
 
-            <div class="agent-card active">
+            <div class="agent-card active" onclick="openAgent('neural-net-ned')">
                 <div class="status-indicator active"></div>
                 <div class="agent-emoji">💻</div>
                 <div class="agent-name">Neural Net Ned</div>
@@ -353,7 +431,7 @@
                 </div>
             </div>
 
-            <div class="agent-card active">
+            <div class="agent-card active" onclick="openAgent('podcast-pablo')">
                 <div class="status-indicator active"></div>
                 <div class="agent-emoji">🎙️</div>
                 <div class="agent-name">Podcast Pablo</div>
@@ -366,7 +444,7 @@
             </div>
 
             <!-- Idle Agents -->
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('goldfinger')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">💰</div>
                 <div class="agent-name">Goldfinger</div>
@@ -377,7 +455,7 @@
                 </div>
             </div>
 
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('hype-man')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">📈</div>
                 <div class="agent-name">Hype Man</div>
@@ -388,7 +466,7 @@
                 </div>
             </div>
 
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('legal-eagle')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">⚖️</div>
                 <div class="agent-name">Legal Eagle</div>
@@ -399,7 +477,7 @@
                 </div>
             </div>
 
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('mechanic')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">⚙️</div>
                 <div class="agent-name">The Mechanic</div>
@@ -410,7 +488,7 @@
                 </div>
             </div>
 
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('sentinel')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🛡️</div>
                 <div class="agent-name">Sentinel</div>
@@ -422,7 +500,7 @@
                 </div>
             </div>
 
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('diamond-hands')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">💎</div>
                 <div class="agent-name">Diamond Hands</div>
@@ -433,7 +511,7 @@
                 </div>
             </div>
 
-            <div class="agent-card idle">
+            <div class="agent-card idle" onclick="openAgent('bridge')">
                 <div class="status-indicator idle"></div>
                 <div class="agent-emoji">🌐</div>
                 <div class="agent-name">The Bridge</div>
@@ -658,6 +736,39 @@
         </div>
     </div>
 
+    <!-- Agent Detail Modal -->
+    <div id="agent-modal" class="modal">
+        <div class="modal-content" style="max-width: 1000px;">
+            <button class="modal-close" onclick="closeAgentModal()">&times;</button>
+            <div class="agent-detail-grid">
+                <div class="agent-profile">
+                    <div class="agent-profile-emoji" id="agent-emoji">🤖</div>
+                    <div class="agent-profile-name" id="agent-name">Agent Name</div>
+                    <div class="agent-profile-role" id="agent-role">Role</div>
+                    <div class="agent-profile-status" id="agent-status">Status</div>
+                    <div style="text-align: left; margin-top: 1rem; font-size: 0.875rem; color: #888;">
+                        <p><strong>Personality:</strong></p>
+                        <p id="agent-personality" style="margin-top: 0.5rem;">Description</p>
+                        <p style="margin-top: 1rem;"><strong>Model:</strong></p>
+                        <p id="agent-model" style="margin-top: 0.5rem; color: #00d4ff;">Cloud/Local</p>
+                    </div>
+                </div>
+                <div class="agent-deliverables">
+                    <h3>📁 Deliverables & Reports</h3>
+                    <div id="agent-deliverables-list">
+                        <!-- Deliverables injected here -->
+                    </div>
+                    <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #252530;">
+                        <h3>🎯 Capabilities</h3>
+                        <ul id="agent-capabilities" style="list-style: none; margin-top: 0.5rem; color: #888; font-size: 0.875rem;">
+                            <!-- Capabilities injected here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="footer">
         <p>Last updated: <span class="last-updated" id="last-updated">2026-02-03 00:00 UTC</span></p>
         <p style="margin-top: 0.5rem; font-size: 0.875rem;">
@@ -725,6 +836,241 @@
                 path: 'agents/marketing_sales_lead/x-integration-plan.md'
             }
         };
+
+        // Agent database
+        const agents = {
+            'oracle': {
+                emoji: '🔮',
+                name: 'The Oracle',
+                role: 'AI Research Specialist',
+                status: 'active',
+                statusText: '● Complete',
+                personality: 'Mysterious, speaks in predictions, "I have foreseen this", obsessed with emergent tech',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'AI industry trend monitoring',
+                    'Tool evaluation and recommendations',
+                    'Competitive landscape analysis',
+                    'Weekly intelligence briefings'
+                ],
+                deliverables: [
+                    { name: 'AI Industry Briefing', size: '20KB', reportId: 'ai-industry-briefing' },
+                    { name: 'Kool Tools Tracker', size: '12KB', reportId: 'kool-tools-tracker' }
+                ]
+            },
+            'neural-net-ned': {
+                emoji: '💻',
+                name: 'Neural Net Ned',
+                role: 'IT & Tech Specialist',
+                status: 'active',
+                statusText: '● Complete',
+                personality: 'Nerdy, enthusiastic, acronym-heavy, "it\'s trivial, really"',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Infrastructure automation',
+                    'CLI tool development',
+                    'Local node architecture',
+                    'GitHub/Vercel deployments'
+                ],
+                deliverables: [
+                    { name: 'CLI Toolkit (4 tools)', size: '38KB', path: 'tools/' },
+                    { name: 'Local Node Architecture', size: '30KB', reportId: 'local-node' },
+                    { name: 'Deployment Guide', size: '6KB', path: 'agents/it_tech_specialist/deployment-guide.md' }
+                ]
+            },
+            'podcast-pablo': {
+                emoji: '🎙️',
+                name: 'Podcast Pablo',
+                role: 'Content & Audio Production',
+                status: 'active',
+                statusText: '● Complete',
+                personality: 'Charismatic, sound-obsessed, "This would be GREAT content!"',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Podcast production planning',
+                    'Voice cloning setup',
+                    'Audio equipment recommendations',
+                    'Show format design'
+                ],
+                deliverables: [
+                    { name: 'Podcast Plan', size: '16KB', reportId: 'podcast-plan' },
+                    { name: 'Personal Voice Setup', size: '17KB', reportId: 'personal-voice-setup' }
+                ]
+            },
+            'goldfinger': {
+                emoji: '💰',
+                name: 'Goldfinger',
+                role: 'Finance Director',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Calculating, sophisticated, slightly paranoid about markets',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Portfolio tracking',
+                    'Investment analysis',
+                    'Tax optimization',
+                    'Wealth management'
+                ],
+                deliverables: [
+                    { name: 'Portfolio Dashboard', size: 'Queued', path: '#' }
+                ]
+            },
+            'hype-man': {
+                emoji: '📈',
+                name: 'Hype Man',
+                role: 'Marketing & Sales Lead',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Energetic, "Crushing it!" energy, meme-literate',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'X/Twitter integration',
+                    'Social media automation',
+                    'Content promotion',
+                    'Brand growth'
+                ],
+                deliverables: [
+                    { name: 'X Integration Plan', size: '13KB', reportId: 'x-integration' }
+                ]
+            },
+            'legal-eagle': {
+                emoji: '⚖️',
+                name: 'Legal Eagle',
+                role: 'Legal & Compliance Advisor',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Pedantic, cautious, speaks in disclaimers',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Entity formation',
+                    'Contract review',
+                    'Compliance guidance',
+                    'IP protection'
+                ],
+                deliverables: [
+                    { name: 'Umbrella Corp Research', size: '40KB', reportId: 'umbrella-corp' }
+                ]
+            },
+            'mechanic': {
+                emoji: '⚙️',
+                name: 'The Mechanic',
+                role: 'Operations Coordinator',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Quiet, observant, fixes things before they break',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Notion automation',
+                    'Kanban setup',
+                    'Process optimization',
+                    'Workflow design'
+                ],
+                deliverables: [
+                    { name: 'Notion Kanban Setup', size: '22KB', reportId: 'notion-kanban' }
+                ]
+            },
+            'sentinel': {
+                emoji: '🛡️',
+                name: 'Sentinel',
+                role: 'Cybersecurity Guardian',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Paranoid (in a good way), speaks in security warnings',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Security audits',
+                    'Threat detection',
+                    'Hardening guides',
+                    'Incident response'
+                ],
+                deliverables: [
+                    { name: 'Security Audit', size: '18KB', reportId: 'security-audit' }
+                ]
+            },
+            'diamond-hands': {
+                emoji: '💎',
+                name: 'Diamond Hands',
+                role: 'Crypto & Web3 Specialist',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Volatile energy, "To the moon!", speaks in trading slang',
+                model: '🌙 Cloud (Kimi K2.5)',
+                capabilities: [
+                    'Web3 wallet integration',
+                    'DeFi automation',
+                    'NFT tracking',
+                    'Phantom setup'
+                ],
+                deliverables: [
+                    { name: 'Phantom Integration', size: '22KB', reportId: 'phantom-integration' }
+                ]
+            },
+            'bridge': {
+                emoji: '🌐',
+                name: 'The Bridge',
+                role: 'Remote Local Node',
+                status: 'idle',
+                statusText: '⏳ Idle',
+                personality: 'Split personality — cloud side optimistic, local side paranoid',
+                model: '🖥️ Local (Qwen3-14b)',
+                capabilities: [
+                    'Pi/NUC/NAS setup',
+                    'Tailscale VPN config',
+                    'Local LLM inference',
+                    'Cloud-local bridge'
+                ],
+                deliverables: [
+                    { name: 'Local Node Architecture', size: '30KB', reportId: 'local-node' }
+                ]
+            }
+        };
+
+        function openAgent(agentId) {
+            const agent = agents[agentId];
+            if (!agent) return;
+            
+            document.getElementById('agent-emoji').textContent = agent.emoji;
+            document.getElementById('agent-name').textContent = agent.name;
+            document.getElementById('agent-role').textContent = agent.role;
+            document.getElementById('agent-personality').textContent = agent.personality;
+            document.getElementById('agent-model').textContent = agent.model;
+            
+            const statusEl = document.getElementById('agent-status');
+            statusEl.textContent = agent.statusText;
+            statusEl.className = 'agent-profile-status ' + agent.status;
+            
+            // Populate deliverables
+            const deliverablesList = document.getElementById('agent-deliverables-list');
+            deliverablesList.innerHTML = agent.deliverables.map(d => {
+                const clickAttr = d.reportId ? `onclick="openReport('${d.reportId}')" style="cursor:pointer;"` : '';
+                const arrow = d.reportId ? '<span style="float:right; color:#00d4ff;">→</span>' : '';
+                return `
+                    <div class="deliverable-item" ${clickAttr}>
+                        <div class="deliverable-name">${d.name} ${arrow}</div>
+                        <div class="deliverable-meta">${d.size}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Populate capabilities
+            const capabilitiesList = document.getElementById('agent-capabilities');
+            capabilitiesList.innerHTML = agent.capabilities.map(c => 
+                `<li style="margin-bottom: 0.5rem; padding-left: 1rem; position: relative;">
+                    <span style="position: absolute; left: 0; color: #00d4ff;">›</span>${c}
+                </li>`
+            ).join('');
+            
+            document.getElementById('agent-modal').classList.add('active');
+        }
+
+        function closeAgentModal() {
+            document.getElementById('agent-modal').classList.remove('active');
+        }
+
+        // Close agent modal on click outside
+        document.getElementById('agent-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeAgentModal();
+        });
 
         function showSection(section) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
