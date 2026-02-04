@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life OS Documentation</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 300px;
+            background: #15151a;
+            border-right: 1px solid #252530;
+            padding: 1.5rem;
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+        }
+        .sidebar h1 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #252530;
+        }
+        .nav-section {
+            margin-bottom: 1.5rem;
+        }
+        .nav-section h3 {
+            color: #888;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+        .nav-item {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: #b0b0b0;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 0.25rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .nav-item:hover {
+            background: #1f1f2a;
+            color: #00d4ff;
+        }
+        .nav-item.active {
+            background: #00d4ff20;
+            color: #00d4ff;
+            border-left: 2px solid #00d4ff;
+        }
+        .content {
+            flex: 1;
+            margin-left: 300px;
+            padding: 2rem 3rem;
+            max-width: 900px;
+        }
+        .content h1 {
+            color: #00d4ff;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #252530;
+        }
+        .content h2 {
+            color: #00d4ff;
+            font-size: 1.75rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #252530;
+        }
+        .content h3 {
+            color: #00d4ff;
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+        .content p {
+            margin-bottom: 1rem;
+            color: #c0c0c0;
+        }
+        .content ul, .content ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+        .content li {
+            margin-bottom: 0.5rem;
+            color: #c0c0c0;
+        }
+        .content code {
+            background: #1a1a24;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.875rem;
+            color: #ff6b6b;
+        }
+        .content pre {
+            background: #0f0f14;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid #252530;
+        }
+        .content pre code {
+            background: transparent;
+            padding: 0;
+            color: #a0a0a0;
+        }
+        .content blockquote {
+            border-left: 3px solid #00d4ff;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #888;
+            font-style: italic;
+        }
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        .content th, .content td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #252530;
+        }
+        .content th {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+        .content a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        .content a:hover {
+            text-decoration: underline;
+        }
+        .warning {
+            background: #ff6b6b20;
+            border: 1px solid #ff6b6b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .warning h4 {
+            color: #ff6b6b;
+            margin-bottom: 0.5rem;
+        }
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        .error {
+            background: #ff6b6b20;
+            border: 1px solid #ff6b6b;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .error h3 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            .content {
+                margin-left: 0;
+            }
+            .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h1>📚 Life OS Docs</h1>
+            
+            <div class="nav-section">
+                <h3>Core Documentation</h3>
+                <a class="nav-item active" onclick="loadDoc('LIFE_OS_COMPLETE_DOCUMENTATION', event)">Life OS Complete Doc</a>
+                <a class="nav-item" onclick="loadDoc('SYSTEM_OVERVIEW', event)">System Overview</a>
+                <a class="nav-item" onclick="loadDoc('AGENT_CAPABILITIES', event)">Agent Capabilities</a>
+                <a class="nav-item" onclick="loadDoc('QUICKSTART', event)">Quick Start</a>
+                <a class="nav-item" onclick="loadDoc('MEMORY_SYSTEM_v2', event)">Memory System v2</a>
+            </div>
+            
+            <div class="nav-section">
+                <h3>Operations</h3>
+                <a class="nav-item" onclick="loadDoc('LIFE_OS_COMMAND_SOP', event)">Command SOPs</a>
+                <a class="nav-item" onclick="loadDoc('COMMAND_REQUIREMENTS', event)">Command Requirements</a>
+                <a class="nav-item" onclick="loadDoc('MASTER_TODO', event)">Master Todo</a>
+                <a class="nav-item" onclick="loadDoc('AGENTS_ROSTER_V2', event)">Agent Roster v2</a>
+            </div>
+            
+            <div class="nav-section">
+                <h3>Research</h3>
+                <a class="nav-item" onclick="loadDoc('defi-yield-opportunities', event)">DeFi Yield Report</a>
+                <a class="nav-item" onclick="loadDoc('ai-tools-analysis', event)">AI Tools Analysis</a>
+            </div>
+            
+            <div class="nav-section">
+                <h3>Strategy</h3>
+                <a class="nav-item" onclick="loadDoc('90-day-roadmap', event)">90-Day Roadmap</a>
+                <a class="nav-item" onclick="loadDoc('ai-capability-roadmap', event)">AI Capability Roadmap</a>
+            </div>
+        </nav>
+        
+        <main class="content" id="content">
+            <div class="loading">Loading documentation...</div>
+        </main>
+    </div>
+
+    <script>
+        // Documentation content embedded directly
+        const docs = {
+            'LIFE_OS_COMPLETE_DOCUMENTATION': `# Life OS Complete Documentation
+
+## System Overview
+
+Life OS is an autonomous AI-powered personal operating system featuring 15 specialized agents with distinct personas, full Discord integration as Command Center, business websites, perpetual task automation, n8n workflows, and a visual dashboard.
+
+## The 15 Agents
+
+1. **🔮 The Oracle** - AI/Research specialist
+2. **💎 Diamond Hands** - Crypto/Finance expert  
+3. **⚙️ The Mechanic** - Operations/Infrastructure
+4. **🛡️ Sentinel** - Security guardian
+5. **📈 Hype Man** - Marketing/Growth
+6. **💻 Neural Net Ned** - Engineering/Development
+7. **🎙️ Podcast Pablo** - Content/Audio production
+8. **🏦 Goldfinger** - Accounting/Finance
+9. **⚖️ Legal Eagle** - Compliance/Legal
+10. **🌐 The Bridge** - Infrastructure/Local nodes
+11. **☯️ Zen Master** - Wellness/Productivity
+12. **♟️ The Strategist** - Planning/Strategy
+13. **🤵 The Butler** - Executive assistance
+14. **🔨 Fix-It Felix** - Maintenance/Troubleshooting
+15. **🏠 The Landlord** - Property management
+
+## Command Structure
+
+- **General (You)**: Strategic oversight, approve spending >\$50, remove blockers
+- **Claw (AI)**: Tactical command, delegates to agents, monitors operations  
+- **Agents**: Execute tasks, maintain perpetual motion (3 tasks each)
+
+## Key Features
+
+- **Perpetual Task System**: 90+ missions, always 3 active per agent
+- **Discord Command Center**: 15 dedicated channels
+- **Live Dashboard**: Real-time agent status
+- **n8n Automation**: Workflow engine
+- **Business Websites**: Multiple deployed sites
+
+## Dashboard Access
+
+- **Main Dashboard**: https://lifeos-dashboard-three.vercel.app
+- **Reports**: https://workspace-iota-rosy.vercel.app
+- **n8n**: http://54.147.20.162:5678 (admin/lifeos2026)
+
+## Quick Commands
+
+\`\`\`bash
+lifeos status      # View system status
+lifeos agents      # List all agents
+lifeos health      # Health check
+\`\`\`
+
+---
+*Life OS - Autonomous Operating System*`,
+
+            'SYSTEM_OVERVIEW': `# System Overview
+
+## Architecture
+
+Life OS operates on three layers:
+
+### Layer 1: Command (General)
+- Strategic decisions
+- Budget approval (>$50)
+- Blocker removal
+- Direction setting
+
+### Layer 2: Operations (Claw)
+- Task delegation
+- Agent coordination
+- Progress monitoring
+- Status reporting
+
+### Layer 3: Execution (Agents)
+- Perpetual task execution
+- Report generation
+- System maintenance
+- Content creation
+
+## Technology Stack
+
+- **Core**: OpenClaw / Moonshot AI
+- **Integration**: Discord, Telegram, n8n
+- **Hosting**: AWS EC2, Vercel
+- **Automation**: Custom CLI tools, cron jobs
+
+## Security
+
+- API keys in secure storage
+- No hardcoded credentials
+- Regular security audits
+- Token rotation protocols
+
+---
+*System Overview v1.0*`,
+
+            'AGENT_CAPABILITIES': `# Agent Capabilities
+
+## What Agents Can Do
+
+### Autonomous Execution
+- Research and analysis
+- Code generation
+- Content creation
+- Report writing
+- System monitoring
+
+### Tool Access
+- Discord integration
+- Web search (Brave API)
+- File operations
+- Git operations
+- API calls
+
+### Decision Making
+- Tasks <$50: Autonomous
+- Tasks >$50: General approval
+- Strategic: General guidance
+- Technical: Claw discretion
+
+### Output Formats
+- Markdown reports
+- Discord embeds
+- Shell scripts
+- Documentation
+- Dashboard updates
+
+## Agent Specializations
+
+| Agent | Primary Skills |
+|-------|---------------|
+| Oracle | AI research, trend analysis |
+| Diamond Hands | DeFi, portfolio tracking |
+| Mechanic | Infrastructure, automation |
+| Sentinel | Security audits, monitoring |
+| Hype Man | Social media, viral content |
+| Ned | Engineering, coding |
+| Pablo | Audio, voice cloning |
+| Goldfinger | Accounting, budgeting |
+| Legal Eagle | Compliance, contracts |
+| Bridge | Local nodes, hardware |
+| Zen Master | Wellness, productivity |
+| Strategist | Planning, roadmaps |
+| Butler | Scheduling, briefings |
+| Felix | Troubleshooting, repairs |
+| Landlord | Property management |
+
+---
+*Agent Capabilities Reference*`,
+
+            'QUICKSTART': `# Quick Start Guide
+
+## Getting Started with Life OS
+
+### 1. Dashboard Access
+
+Visit the main dashboard:
+- **URL**: https://lifeos-dashboard-three.vercel.app
+- **Features**: Agent status, reports, documentation
+
+### 2. Discord Command Center
+
+Join the Life-OS server:
+- 15 agent channels (one per agent)
+- #master-todo for task tracking
+- #announcements for updates
+- #documentation for resources
+
+### 3. Basic Commands
+
+Use the \`lifeos\` CLI:
+\`\`\`bash
+lifeos status      # View status
+lifeos agents      # List agents
+lifeos health      # Health check
+lifeos quick       # Quick overview
+\`\`\`
+
+### 4. Agent Interaction
+
+- Go to agent's Discord channel
+- View their perpetual tasks
+- Check dashboard status
+- Assign new missions via Claw
+
+### 5. Documentation
+
+All docs available:
+- Dashboard 📚 Docs tab
+- Discord #documentation
+- Server: ~/workspace/docs/
+
+---
+*Quick Start v1.0*`,
+
+            'MEMORY_SYSTEM_v2': `# Memory System v2.0
+
+## Recursive Learning Architecture
+
+### Daily Notes (memory/YYYY-MM-DD.md)
+- Raw logs of daily activities
+- Agent outputs and decisions
+- System events and alerts
+
+### Long-term Memory (MEMORY.md)
+- Distilled wisdom
+- Key decisions and preferences
+- Active project context
+- Important learnings
+
+### Auto-Consolidation
+- Periodic review of daily files
+- Extraction of significant insights
+- Updates to long-term memory
+- Pruning of outdated info
+
+### While User Sleeps
+- Memory maintenance runs
+- Pattern recognition
+- Context preparation
+- Proactive alerts queued
+
+## Memory Hierarchy
+
+1. **Session Memory** - Current context
+2. **Daily Files** - Raw logs
+3. **MEMORY.md** - Curated knowledge
+4. **Agent Memory** - Agent-specific context
+
+---
+*Memory System v2.0*`,
+
+            'LIFE_OS_COMMAND_SOP': `# Life OS Command SOP
+
+## SOP-001: Perpetual Task Protocol
+
+1. Each agent maintains exactly 3 concurrent tasks
+2. Upon completion, new task assigned immediately
+3. Zero-idle tolerance enforced
+
+## SOP-002: Delegation Chain
+
+General → Claw → Agent → Execution
+
+Claw never executes directly
+
+## SOP-003: Documentation Mandate
+
+"If it's not documented, it doesn't exist"
+All work logged in Discord + Dashboard
+
+## SOP-004: Build Verification
+
+Triple-check protocol:
+1. Test locally
+2. Verify functionality
+3. Deploy to production
+
+## SOP-005: Token Economy
+
+- Estimate costs before operations
+- Ask permission for >\$0.50 spend
+- Batch operations when possible
+
+---
+*Standard Operating Procedures*`,
+
+            'COMMAND_REQUIREMENTS': `# Command Requirements
+
+## What Claw Needs From General:
+
+### Financial Decisions
+- Approve spending >\$50
+- Budget allocation guidance
+- ROI expectations
+
+### Blocker Removal
+- API access approvals
+- Domain purchases
+- Hardware decisions
+
+### Strategic Direction
+- Priority focus areas
+- Public launch timeline
+- Monetization strategy
+
+### Operational Support
+- 2FA setup assistance
+- AWS alert configuration
+- Security reviews
+
+## Claw Provides:
+
+- Autonomous execution
+- Agent coordination
+- Status monitoring
+- Proactive alerts
+
+---
+*Command Structure Documentation*`,
+
+            'MASTER_TODO': `# Master Todo List
+
+## Active Projects
+
+### High Priority
+- [ ] X API integration (awaiting credentials)
+- [ ] Custom domain setup
+- [ ] Local node hardware decision
+
+### In Progress
+- [x] 15 agents deployed
+- [x] Dashboard v3.0 complete
+- [x] Discord server operational
+- [x] Perpetual task system active
+- [x] Business websites deployed
+
+### Pending Decisions
+- [ ] X Developer API (\$100/mo)
+- [ ] Domain purchase (\$12/yr)
+- [ ] Pi 5 vs NUC hardware (\$200-600)
+
+## Completed
+- [x] Genesis Protocol 100%
+- [x] 30 agents operational
+- [x] Documentation system
+- [x] n8n automation
+
+---
+*Master Todo - Last Updated: 2026-02-03*`,
+
+            'AGENTS_ROSTER_V2': `# Agent Roster v2
+
+## The 15 Life OS Agents
+
+### Research & Intelligence
+- 🔮 **Oracle** - AI trends, research
+- 💎 **Diamond Hands** - Crypto, DeFi
+
+### Operations & Security  
+- ⚙️ **Mechanic** - Infrastructure
+- 🛡️ **Sentinel** - Security
+- 🌐 **The Bridge** - Local nodes
+
+### Growth & Marketing
+- 📈 **Hype Man** - Social media
+- 💻 **Neural Net Ned** - Engineering
+- 🎙️ **Podcast Pablo** - Audio content
+
+### Business & Compliance
+- 🏦 **Goldfinger** - Accounting
+- ⚖️ **Legal Eagle** - Compliance
+
+### Support & Wellness
+- ☯️ **Zen Master** - Wellness
+- 🤵 **The Butler** - Scheduling
+- 🔨 **Fix-It Felix** - Repairs
+- 🏠 **The Landlord** - Property
+
+### Strategy
+- ♟️ **The Strategist** - Planning
+
+## Status
+All 15 agents: **ACTIVE**
+
+---
+*Agent Roster v2.0*`,
+
+            'defi-yield-opportunities': `# DeFi Yield Opportunities Report
+
+## Executive Summary
+
+Research on DeFi protocols for passive income generation.
+
+## Top Recommendations
+
+| Protocol | Best For | Yield Range | Risk Level |
+|----------|----------|-------------|------------|
+| **Aave** | Stablecoin Lending | 4-6.5% APY | Low |
+| **Compound** | Conservative Lending | 3.5-5.5% APY | Low |
+| **Lido** | ETH Staking | 3-5.5% APY | Low-Medium |
+| **Rocket Pool** | Decentralized ETH Staking | 3-7%+ APY | Low |
+
+## Key Findings
+
+1. **Aave** - Best overall stablecoin yields (up to 6.50% APY)
+2. **Lido** - Best for liquid ETH staking
+3. **Rocket Pool** - Best for maximum decentralization
+
+## Report Includes
+- Detailed APY comparisons
+- Risk assessment matrices
+- Portfolio allocation strategies
+- Security analysis
+
+---
+*Research by Diamond Hands*`,
+
+            'ai-tools-analysis': `# AI Tools Analysis Report
+
+## Tools Analyzed
+
+| Tool | Category | Key Value |
+|------|----------|-----------|
+| **MCP** | Open Standard | Universal AI integration |
+| **OpenAI Agents SDK** | Multi-Agent | Fast agent orchestration |
+| **CrewAI** | Enterprise | Visual workflow builder |
+| **LangGraph** | Workflows | Complex stateful control |
+| **DSPy** | LM Programming | Stanford's declarative approach |
+
+## Recommendation
+
+**Phase 1**: MCP + OpenAI Agents SDK for quick wins
+**Phase 2**: CrewAI/LangGraph for complex orchestration  
+**Phase 3**: DSPy for optimization
+
+## Report Contents
+- Executive Summary
+- Detailed analysis (5 tools)
+- Comparative benchmarks
+- Integration recommendations
+- 6-month implementation roadmap
+
+---
+*Research by The Oracle*`,
+
+            '90-day-roadmap': `# 90-Day Roadmap
+
+## Current Status
+
+✅ **Phase 0: COMPLETE**
+- 15 agents deployed
+- 4 sites live
+- Discord operational
+- Dashboard v3.0
+
+## Roadmap
+
+### Phase 1 (Days 1-30): Acceleration
+- API access activation
+- Content machine launch
+- Revenue activation
+
+### Phase 2 (Days 31-60): Scale
+- Audience building
+- Automation layer
+- Local node deployment
+
+### Phase 3 (Days 61-90): Optimization
+- Monetization expansion
+- Documentation
+- Q2 planning
+
+## 90-Day Targets
+
+- **Revenue**: \$5,000/mo by May 3
+- **Audience**: 5,000+ total reach
+- **Automation**: 50+ active workflows
+- **Content**: 24+ pieces published
+
+---
+*Strategy by The Strategist*`,
+
+            'ai-capability-roadmap': `# AI Capability Roadmap
+
+## 6-Month Roadmap
+
+### Phase 1 (Months 1-2): Foundation
+**Tools**: MCP + OpenAI Agents SDK
+**Deliverables**:
+- 5 MCP servers
+- 4 specialized agents
+- 2+ end-to-end workflows
+
+### Phase 2 (Months 3-4): Scale
+**Tools**: CrewAI + LangGraph
+**Deliverables**:
+- CrewAI platform
+- Visual workflow designer
+- <1.5s response time
+
+### Phase 3 (Months 5-6): Optimization
+**Tools**: DSPy
+**Deliverables**:
+- 15-30% accuracy improvement
+- Self-improving pipeline
+- Unified architecture
+
+## Resource Estimates
+- Development: ~1,080 hours
+- Infrastructure: ~\$293/mo average
+- Team: 2-3 developers
+
+---
+*Roadmap by The Oracle*`
+        };
+
+        function loadDoc(docName, evt) {
+            const content = docs[docName];
+            const contentDiv = document.getElementById('content');
+            
+            if (content) {
+                contentDiv.innerHTML = marked.parse(content);
+            } else {
+                contentDiv.innerHTML = '<div class="error"><h3>Document Not Found</h3><p>The requested document is not available.</p></div>';
+            }
+            
+            // Update active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            if (evt && evt.target) {
+                evt.target.classList.add('active');
+            }
+        }
+
+        // Load first document on page load
+        window.onload = function() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = marked.parse(docs['LIFE_OS_COMPLETE_DOCUMENTATION']);
+        };
+    </script>
+</body>
+</html>
