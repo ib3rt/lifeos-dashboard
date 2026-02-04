@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Life OS Docs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #1a1b1e;
+            --bg-secondary: #2b2d31;
+            --bg-tertiary: #313338;
+            --text-primary: #f2f3f5;
+            --text-secondary: #949ba4;
+            --accent-color: #5c7cfa;
+            --accent-hover: #748ffc;
+            --danger-color: #f04f54;
+            --success-color: #23a559;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .offline-container {
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .offline-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .offline-icon svg {
+            width: 60px;
+            height: 60px;
+            stroke: var(--text-secondary);
+        }
+        
+        .offline-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 36px;
+            height: 36px;
+            background: var(--danger-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--bg-primary);
+        }
+        
+        .offline-badge svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+        }
+        
+        .offline-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        
+        .offline-message {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .cached-section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .cached-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--success-color);
+            margin-bottom: 12px;
+        }
+        
+        .cached-title svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .cached-files {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .cached-file {
+            background: var(--bg-tertiary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--bg-tertiary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-dot.offline {
+            background: var(--danger-color);
+        }
+        
+        .status-dot.connecting {
+            background: var(--warning-color, #fab005);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .tips-section {
+            margin-top: 30px;
+            padding-top: 24px;
+            border-top: 1px solid var(--bg-tertiary);
+        }
+        
+        .tips-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        
+        .tips-list {
+            list-style: none;
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .tips-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .tips-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 27, 30, 0.9);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .loading-overlay.active {
+            display: flex;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--bg-tertiary);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--success-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <!-- Status Indicator -->
+        <div class="status-indicator">
+            <span class="status-dot offline"></span>
+            <span id="statusText">You're offline</span>
+        </div>
+        
+        <!-- Icon -->
+        <div class="offline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+                <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+            </svg>
+            <div class="offline-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </div>
+        </div>
+        
+        <!-- Message -->
+        <h1 class="offline-title">No Internet Connection</h1>
+        <p class="offline-message">
+            It looks like you've lost your internet connection. 
+            Don't worry—some of your recently viewed documents are still available offline.
+        </p>
+        
+        <!-- Cached Content Badge -->
+        <div class="cached-section" id="cachedSection" style="display: none;">
+            <div class="cached-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <span>Available Offline</span>
+            </div>
+            <div class="cached-files" id="cachedFiles"></div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn btn-secondary" id="retryBtn" onclick="retryConnection()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 4v6h-6"></path>
+                    <path d="M1 20v-6h6"></path>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+                Check Connection
+            </button>
+            <button class="btn btn-primary" id="browseCachedBtn" onclick="browseCachedDocs()" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                Browse Cached Docs
+            </button>
+        </div>
+        
+        <!-- Tips -->
+        <div class="tips-section">
+            <h3 class="tips-title">While you're offline, you can:</h3>
+            <ul class="tips-list">
+                <li>Browse documents you've recently opened</li>
+                <li>Search through cached files using the search bar</li>
+                <li>View your favorites and recent files list</li>
+                <li>Continue reading from where you left off</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <span>Reconnecting...</span>
+    </div>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // Cache management
+        const CACHE_NAME = 'lifeos-docs-v1';
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await checkCachedFiles();
+            startConnectionMonitor();
+        });
+        
+        // Check for cached files
+        async function checkCachedFiles() {
+            try {
+                const cache = await caches.open(CACHE_NAME);
+                const requests = await cache.keys();
+                
+                // Filter to get unique file paths
+                const files = requests
+                    .map(r => {
+                        const url = new URL(r.url);
+                        const path = url.pathname;
+                        if (path.includes('/docs-viewer/')) {
+                            return path.replace('/docs-viewer/', '');
+                        }
+                        return null;
+                    })
+                    .filter(f => f && f.endsWith('.md'))
+                    .reduce((unique, file) => {
+                        if (!unique.includes(file)) unique.push(file);
+                        return unique;
+                    }, [])
+                    .slice(0, 6);
+                
+                if (files.length > 0) {
+                    document.getElementById('cachedSection').style.display = 'block';
+                    document.getElementById('cachedFiles').innerHTML = files
+                        .map(f => `<span class="cached-file">${f}</span>`)
+                        .join('');
+                    document.getElementById('browseCachedBtn').disabled = false;
+                }
+            } catch (error) {
+                console.error('Error checking cache:', error);
+            }
+        }
+        
+        // Monitor connection status
+        function startConnectionMonitor() {
+            window.addEventListener('online', onOnline);
+            window.addEventListener('offline', onOffline);
+            updateStatusIndicator();
+        }
+        
+        function onOnline() {
+            updateStatusIndicator();
+            showToast('Back online! Redirecting to docs...');
+            setTimeout(() => {
+                window.location.href = '/docs-viewer/';
+            }, 1500);
+        }
+        
+        function onOffline() {
+            updateStatusIndicator();
+        }
+        
+        function updateStatusIndicator() {
+            const statusDot = document.querySelector('.status-dot');
+            const statusText = document.getElementById('statusText');
+            
+            if (navigator.onLine) {
+                statusDot.classList.remove('offline');
+                statusDot.classList.add('connecting');
+                statusText.textContent = 'Connecting...';
+            } else {
+                statusDot.classList.remove('connecting');
+                statusDot.classList.add('offline');
+                statusText.textContent = "You're offline";
+            }
+        }
+        
+        // Retry connection
+        async function retryConnection() {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.classList.add('active');
+            
+            try {
+                const response = await fetch('/docs-viewer/search-index.json', {
+                    method: 'HEAD',
+                    cache: 'no-store'
+                });
+                
+                if (response.ok) {
+                    showToast('Connection restored!');
+                    setTimeout(() => {
+                        window.location.href = '/docs-viewer/';
+                    }, 1000);
+                } else {
+                    throw new Error('Failed');
+                }
+            } catch (error) {
+                overlay.classList.remove('active');
+                showToast('Still offline. Try again later.');
+            }
+        }
+        
+        // Browse cached docs
+        function browseCachedDocs() {
+            window.location.href = '/docs-viewer/';
+        }
+        
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

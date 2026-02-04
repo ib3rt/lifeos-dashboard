@@ -291,13 +291,6 @@
         activeFile: null,
         searchQuery: '',
         searchResults: [],
-        // Filter and sort state
-        filters: {
-            fileTypes: ['.md'], // Default to markdown
-            folder: '',
-            dateRange: ''
-        },
-        sortBy: 'relevance', // relevance, name-asc, name-desc, date-newest, date-oldest, size
         isSidebarCollapsed: storage.get('docs-sidebar-collapsed', defaultState.sidebarCollapsed),
         theme: storage.get('docs-theme', defaultState.theme),
         recentFiles: storage.get('docs-recent-files', defaultState.recentFiles),
@@ -314,15 +307,6 @@
         mobileMenuBtn: document.getElementById('mobileMenuBtn'),
         searchInput: document.getElementById('searchInput'),
         searchResults: document.getElementById('searchResults'),
-        searchFilterBtn: document.getElementById('searchFilterBtn'),
-        searchFilterPanel: document.getElementById('searchFilterPanel'),
-        fileTypeFilters: document.getElementById('fileTypeFilters'),
-        folderFilter: document.getElementById('folderFilter'),
-        dateFilter: document.getElementById('dateFilter'),
-        clearFiltersBtn: document.getElementById('clearFiltersBtn'),
-        sortOptions: document.getElementById('sortOptions'),
-        activeFilters: document.getElementById('activeFilters'),
-        activeFiltersList: document.getElementById('activeFiltersList'),
         fileTree: document.getElementById('fileTree'),
         document: document.getElementById('document'),
         breadcrumbs: document.getElementById('breadcrumbs'),
@@ -330,12 +314,67 @@
         mobileOverlay: document.getElementById('mobileOverlay'),
         recentFilesSection: document.getElementById('recentFilesSection'),
         recentFilesList: document.getElementById('recentFilesList'),
-        clearRecentBtn: document.getElementById('clearRecentBtn'),
-        favoritesSection: document.getElementById('favoritesSection'),
-        favoritesList: document.getElementById('favoritesList'),
-        favoritesEmptyState: document.getElementById('favoritesEmptyState'),
-        tableOfContents: document.getElementById('tableOfContents')
+        clearRecentBtn: document.getElementById('clearRecentBtn')
     };
+
+    // ============================================
+    // Accessibility Helper Functions
+    // ============================================
+    
+    // Announce message to screen readers
+    function announce(message, priority = 'polite') {
+        const announcer = document.getElementById('aria-announcer');
+        if (announcer) {
+            announcer.textContent = message;
+            // Clear after announcement
+            setTimeout(() => {
+                announcer.textContent = '';
+            }, 1000);
+        }
+    }
+    
+    // Trap focus within an element (for modals/dialogs)
+    function trapFocus(element) {
+        const focusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        const focusableElements = element.querySelectorAll(focusableSelector);
+        const firstFocusable = focusableElements[0];
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+        
+        function handleKeydown(e) {
+            if (e.key !== 'Tab') return;
+            
+            if (e.shiftKey) {
+                if (document.activeElement === firstFocusable) {
+                    e.preventDefault();
+                    lastFocusable.focus();
+                }
+            } else {
+                if (document.activeElement === lastFocusable) {
+                    e.preventDefault();
+                    firstFocusable.focus();
+                }
+            }
+        }
+        
+        element.addEventListener('keydown', handleKeydown);
+        
+        // Return cleanup function
+        return () => element.removeEventListener('keydown', handleKeydown);
+    }
+    
+    // Update aria-expanded for collapsible elements
+    function updateAriaExpanded(element, isExpanded) {
+        if (element) {
+            element.setAttribute('aria-expanded', isExpanded.toString());
+        }
+    }
+    
+    // Update aria-pressed for toggle buttons
+    function updateAriaPressed(button, isPressed) {
+        if (button) {
+            button.setAttribute('aria-pressed', isPressed.toString());
+        }
+    }
 
     // ============================================
     // Initialization
@@ -366,9 +405,6 @@
         
         // Hide TOC initially
         elements.tableOfContents.classList.add('hidden');
-        
-        // Initialize active filters display
-        updateActiveFilters();
     }
 
     async function loadIndex() {

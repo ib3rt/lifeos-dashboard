@@ -238,7 +238,7 @@
         async function init() {
             try {
                 // Load index
-                const res = await fetch('search-index.json');
+                const res = await 'search-index.json');
                 const data = await res.json();
                 files = data.files || [];
                 
@@ -307,8 +307,8 @@
         }
         
         async function loadFile(path) {
-            document.getElementById('content').innerHTML = '<div class="loading">Loading ' + path + '...</div>';
-            document.getElementById('breadcrumbs').textContent = '📚 ' + path;
+            document.getElementById('content').innerHTML = '<div class="loading">Loading ' + 'markdown/' + path + '...</div>';
+            document.getElementById('breadcrumbs').textContent = '📚 ' + 'markdown/' + path;
             
             try {
                 const res = await fetch(path);
@@ -322,7 +322,7 @@
                 // Add to recent
                 addToRecent(path);
             } catch (e) {
-                document.getElementById('content').innerHTML = '<h2 style="color: #f55;">Error loading ' + path + '</h2><p style="color: #888;">' + e.message + '</p>';
+                document.getElementById('content').innerHTML = '<h2 style="color: #f55;">Error loading ' + 'markdown/' + path + '</h2><p style="color: #888;">' + e.message + '</p>';
             }
         }
         
@@ -428,7 +428,7 @@
                 const div = document.createElement('div');
                 div.className = 'tree-item file';
                 div.style.paddingLeft = '35px';
-                div.innerHTML = '📄 ' + path;
+                div.innerHTML = '📄 ' + 'markdown/' + path;
                 div.onclick = () => loadFile(path);
                 container.appendChild(div);
             });

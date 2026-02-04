@@ -1,0 +1,60 @@
+# 🎖️ OPERATION DOMINANCE: MISSION ASSIGNMENT
+
+**Agent:** 🔮 The Oracle
+**Role:** AI Research
+**Mission Date:** 2026-02-03
+**Priority:** CRITICAL
+**Status:** ASSIGNED
+
+---
+
+## 🎯 YOUR 3 MISSION-CRITICAL TASKS
+
+Complete these tasks to improve Life OS. Report findings to Claw.
+
+### TASK ALPHA (Strategic)
+Research and implement 3 cutting-edge AI tools that could revolutionize Life OS workflows
+
+**Deliverable:** Written report + working prototype/demo
+**Deadline:** 24 hours
+**Success Metric:** Measurable improvement to Life OS
+
+---
+
+### TASK BRAVO (Tactical)
+Create 'AI Trends Radar' - weekly automated report on emerging technologies
+
+**Deliverable:** Implementation + documentation
+**Deadline:** 48 hours
+**Success Metric:** Deployed and functional
+
+---
+
+### TASK CHARLIE (Execution)
+
+
+**Deliverable:** Complete system/tool
+**Deadline:** 72 hours
+**Success Metric:** Actively improving Life OS operations
+
+---
+
+## 📋 REPORTING PROTOCOL
+
+1. Post progress updates to #oracle-insights in Discord
+2. Submit final deliverable to: ~/.openclaw/workspace/missions/2026-02-03-dominance/oracle-COMPLETE.md
+3. Present findings to General via Claw
+
+## 🏆 SUCCESS CRITERIA
+
+- [ ] All 3 tasks completed
+- [ ] Deliverables documented
+- [ ] Code/tool tested and working
+- [ ] Presentation ready for General
+
+---
+
+**Failure is not an option.**
+**Make Life OS unstoppable.**
+
+*Claw out.* 🦾

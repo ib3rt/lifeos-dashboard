@@ -299,7 +299,7 @@
         
         async function init() {
             try {
-                const res = await fetch('search-index.json');
+                const res = await 'search-index.json');
                 const data = await res.json();
                 allFiles = data.files || [];
                 tree = buildTree(allFiles);
@@ -364,7 +364,7 @@
         }
         
         async function loadFile(path) {
-            document.getElementById('content').innerHTML = '<div class="loading">Loading ' + path + '...</div>';
+            document.getElementById('content').innerHTML = '<div class="loading">Loading ' + 'markdown/' + path + '...</div>';
             
             try {
                 const res = await fetch(path);
@@ -372,10 +372,10 @@
                 const text = await res.text();
                 const html = parseMarkdown(text);
                 document.getElementById('content').innerHTML = html;
-                document.getElementById('breadcrumbs').textContent = '📄 ' + path;
+                document.getElementById('breadcrumbs').textContent = '📄 ' + 'markdown/' + path;
                 addToRecent(path);
             } catch (e) {
-                document.getElementById('content').innerHTML = '<div class="error"><h3>Error loading ' + path + '</h3><p>' + e.message + '</p></div>';
+                document.getElementById('content').innerHTML = '<div class="error"><h3>Error loading ' + 'markdown/' + path + '</h3><p>' + e.message + '</p></div>';
             }
         }
         
@@ -444,7 +444,7 @@
                 const div = document.createElement('div');
                 div.className = 'tree-item file';
                 div.style.paddingLeft = '32px';
-                div.innerHTML = '<span class="icon">📄</span>' + path;
+                div.innerHTML = '<span class="icon">📄</span>' + 'markdown/' + path;
                 div.onclick = () => loadFile(path);
                 el.appendChild(div);
             });
