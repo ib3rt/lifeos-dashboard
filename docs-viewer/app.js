@@ -343,6 +343,9 @@
         
         // Render recent files
         renderRecentFiles();
+        
+        // Hide TOC initially
+        elements.tableOfContents.classList.add('hidden');
     }
 
     async function loadIndex() {
@@ -671,10 +674,142 @@
             // Apply syntax highlighting
             Prism.highlightAll();
             
+            // Generate Table of Contents for markdown files
+            if (ext === 'md' || ext === 'mdx') {
+                generateTableOfContents();
+                setupScrollSpy();
+            }
+            
             state.activeFile = path;
         } catch (error) {
             handleError(error, ERROR_TYPES.RENDER);
         }
+    }
+
+    // ============================================
+    // Table of Contents Generation
+    // ============================================
+    function generateTableOfContents() {
+        const headings = [];
+        
+        // Extract H2 and H3 headings from the rendered document
+        elements.document.querySelectorAll('.markdown-body h2, .markdown-body h3').forEach((heading, index) => {
+            // Ensure heading has an ID
+            if (!heading.id) {
+                const text = heading.textContent;
+                const id = text.toLowerCase()
+                    .replace(/[^\w\s-]/g, '')
+                    .replace(/\s+/g, '-');
+                heading.id = id || `heading-${index}`;
+            }
+            
+            headings.push({
+                level: parseInt(heading.tagName.charAt(1)),
+                id: heading.id,
+                text: heading.textContent
+            });
+        });
+        
+        // Render TOC or hide if no headings
+        if (headings.length === 0) {
+            elements.tableOfContents.classList.add('hidden');
+            return;
+        }
+        
+        let tocHtml = `
+            <div class="table-of-contents-title">Contents</div>
+            <ul>
+        `;
+        
+        headings.forEach(h => {
+            const indentClass = h.level === 3 ? 'toc-h3' : '';
+            tocHtml += `
+                <li>
+                    <a href="#${h.id}" class="${indentClass}" data-target="${h.id}">${h.text}</a>
+                </li>
+            `;
+        });
+        
+        tocHtml += '</ul>';
+        
+        elements.tableOfContents.innerHTML = tocHtml;
+        elements.tableOfContents.classList.remove('hidden');
+        
+        // Add click handlers for smooth scroll
+        elements.tableOfContents.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').slice(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    // Offset for fixed header/breadcrumbs
+                    const offset = 100;
+                    const targetPosition = targetElement.getBoundingClientRect().top + elements.document.scrollTop - offset;
+                    elements.document.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    }
+
+    // ============================================
+    // Scroll Spy for TOC
+    // ============================================
+    let scrollSpyTimeout = null;
+    
+    function setupScrollSpy() {
+        const headings = elements.document.querySelectorAll('.markdown-body h2, .markdown-body h3');
+        if (headings.length === 0) return;
+        
+        // Remove any existing scroll spy listeners
+        elements.document.removeEventListener('scroll', handleScrollSpy);
+        
+        // Add scroll listener with debouncing
+        elements.document.addEventListener('scroll', handleScrollSpy);
+        
+        // Trigger initial highlight
+        handleScrollSpy();
+    }
+
+    function handleScrollSpy() {
+        // Debounce scroll spy updates
+        if (scrollSpyTimeout) return;
+        
+        scrollSpyTimeout = requestAnimationFrame(() => {
+            const headings = Array.from(elements.document.querySelectorAll('.markdown-body h2, .markdown-body h3'));
+            if (headings.length === 0) {
+                scrollSpyTimeout = null;
+                return;
+            }
+            
+            const scrollTop = elements.document.scrollTop;
+            
+            // Find the currently visible heading
+            let activeHeading = headings[0];
+            
+            headings.forEach((heading) => {
+                const rect = heading.getBoundingClientRect();
+                const headingTop = rect.top + elements.document.scrollTop;
+                
+                // Heading is considered active if it's near the top of the viewport
+                if (headingTop <= scrollTop + 150) {
+                    activeHeading = heading;
+                }
+            });
+            
+            // Update active state in TOC
+            const tocLinks = elements.tableOfContents.querySelectorAll('a');
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${activeHeading.id}`) {
+                    link.classList.add('active');
+                }
+            });
+            
+            scrollSpyTimeout = null;
+        });
     }
 
     function updateBreadcrumbs(path) {
@@ -873,10 +1008,12 @@
             } catch (e) {
                 console.error('Invalid hash:', hash);
                 showFileTree();
+                loadRecentFile();
             }
         } else {
-            // No hash - show file tree (home view)
+            // No hash - show file tree and optionally load recent file
             showFileTree();
+            loadRecentFile();
         }
     }
     
@@ -1012,6 +1149,9 @@
         
         // Update breadcrumbs to show only Home
         elements.breadcrumbs.innerHTML = `<span class="breadcrumb-item current">🏠 Home</span>`;
+        
+        // Hide TOC when no document is loaded
+        elements.tableOfContents.classList.add('hidden');
         
         // Clear active state in tree
         document.querySelectorAll('.tree-node-content').forEach(el => {
@@ -1160,6 +1300,240 @@
     }
 
     // ============================================
+    // Additional Navigation Functions
+    // ============================================
+    function navigateUp() {
+        // Go up one level in the tree (navigate to parent folder)
+        const focused = document.activeElement;
+        if (focused && focused.classList.contains('tree-node-content')) {
+            const nodeEl = focused.parentElement;
+            const parentContent = nodeEl.closest('.tree-children')?.previousElementSibling;
+            if (parentContent) {
+                parentContent.focus();
+            } else if (allTreeNodes.length > 0) {
+                // If no parent, focus first node
+                allTreeNodes[0]?.focus();
+            }
+        } else {
+            updateTreeNodes();
+            if (allTreeNodes.length > 0) {
+                allTreeNodes[0].focus();
+            }
+        }
+    }
+
+    function navigateToRoot() {
+        // Focus the first tree node (root level)
+        updateTreeNodes();
+        if (allTreeNodes.length > 0) {
+            allTreeNodes[0].focus();
+        }
+    }
+
+    function navigateToEnd() {
+        // Focus the last tree node
+        updateTreeNodes();
+        if (allTreeNodes.length > 0) {
+            allTreeNodes[allTreeNodes.length - 1].focus();
+        }
+    }
+
+    // ============================================
+    // Print Document
+    // ============================================
+    function printDocument() {
+        if (state.activeFile) {
+            window.print();
+        }
+    }
+
+    // ============================================
+    // Save Position/Bookmark
+    // ============================================
+    function savePosition() {
+        if (state.activeFile) {
+            // Save current file as bookmark in localStorage
+            const bookmarks = storage.get('docs-bookmarks', []);
+            const existingIndex = bookmarks.findIndex(b => b.path === state.activeFile);
+            
+            if (existingIndex !== -1) {
+                // Update existing bookmark
+                bookmarks[existingIndex].name = prompt('Update bookmark name:', bookmarks[existingIndex].name) || bookmarks[existingIndex].name;
+                bookmarks[existingIndex].accessed = Date.now();
+            } else {
+                // Add new bookmark
+                const fileName = state.activeFile.split('/').pop();
+                bookmarks.unshift({
+                    path: state.activeFile,
+                    name: fileName,
+                    accessed: Date.now()
+                });
+            }
+            
+            // Keep only last 20 bookmarks
+            if (bookmarks.length > 20) {
+                bookmarks.splice(20);
+            }
+            
+            storage.set('docs-bookmarks', bookmarks);
+            console.log('Position/bookmark saved:', state.activeFile);
+        }
+    }
+
+    // ============================================
+    // Shortcuts Modal
+    // ============================================
+    let shortcutsModal = null;
+
+    function showShortcuts() {
+        // Close existing modal if any
+        closeModal();
+        
+        const shortcutsHTML = `
+            <div class="shortcuts-modal-overlay" id="shortcutsModalOverlay">
+                <div class="shortcuts-modal" role="dialog" aria-labelledby="shortcuts-title" aria-modal="true">
+                    <div class="shortcuts-modal-header">
+                        <h2 id="shortcuts-title">Keyboard Shortcuts</h2>
+                        <button class="shortcuts-close" id="shortcutsCloseBtn" aria-label="Close shortcuts">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="shortcuts-content">
+                        <div class="shortcuts-section">
+                            <h3>Navigation</h3>
+                            <table class="shortcuts-table">
+                                <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Navigate tree up/down</td></tr>
+                                <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Collapse/Expand folder</td></tr>
+                                <tr><td><kbd>Enter</kbd></td><td>Open file / Select item</td></tr>
+                                <tr><td><kbd>Backspace</kbd></td><td>Go up one level</td></tr>
+                                <tr><td><kbd>Home</kbd></td><td>Go to first item</td></tr>
+                                <tr><td><kbd>End</kbd></td><td>Go to last item</td></tr>
+                            </table>
+                        </div>
+                        <div class="shortcuts-section">
+                            <h3>Actions</h3>
+                            <table class="shortcuts-table">
+                                <tr><td><kbd>⌘K</kbd> / <kbd>Ctrl+K</kbd></td><td>Focus search</td></tr>
+                                <tr><td><kbd>⌘/</kbd> / <kbd>Ctrl+/</kbd></td><td>Show shortcuts</td></tr>
+                                <tr><td><kbd>⌘P</kbd> / <kbd>Ctrl+P</kbd></td><td>Print current document</td></tr>
+                                <tr><td><kbd>⌘S</kbd> / <kbd>Ctrl+S</kbd></td><td>Save position/bookmark</td></tr>
+                                <tr><td><kbd>⌘D</kbd> / <kbd>Ctrl+D</kbd></td><td>Toggle dark mode</td></tr>
+                                <tr><td><kbd>Esc</kbd></td><td>Clear search / Close modal</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="shortcuts-footer">
+                        <p>Press <kbd>Esc</kbd> to close this modal</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Create modal element
+        const modalContainer = document.createElement('div');
+        modalContainer.innerHTML = shortcutsHTML;
+        document.body.appendChild(modalContainer.firstElementChild);
+        
+        shortcutsModal = document.getElementById('shortcutsModalOverlay');
+        
+        // Add event listeners
+        document.getElementById('shortcutsCloseBtn').addEventListener('click', closeModal);
+        shortcutsModal.addEventListener('click', (e) => {
+            if (e.target === shortcutsModal) {
+                closeModal();
+            }
+        });
+        
+        // Focus close button
+        setTimeout(() => {
+            document.getElementById('shortcutsCloseBtn')?.focus();
+        }, 50);
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        if (shortcutsModal) {
+            shortcutsModal.remove();
+            shortcutsModal = null;
+            document.body.style.overflow = '';
+        }
+    }
+
+    // ============================================
+    // Comprehensive Keyboard Event Listener
+    // ============================================
+    function setupKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            // Ignore if typing in input or textarea
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                return;
+            }
+            
+            const key = e.key.toLowerCase();
+            const mod = e.ctrlKey || e.metaKey;
+            
+            // Navigation keys
+            if (key === 'arrowup') {
+                e.preventDefault();
+                navigateTree('ArrowUp');
+            } else if (key === 'arrowdown') {
+                e.preventDefault();
+                navigateTree('ArrowDown');
+            } else if (key === 'arrowleft') {
+                e.preventDefault();
+                navigateTree('ArrowLeft');
+            } else if (key === 'arrowright') {
+                e.preventDefault();
+                navigateTree('ArrowRight');
+            } else if (key === 'enter') {
+                e.preventDefault();
+                openSelectedFile();
+            } else if (key === 'backspace') {
+                e.preventDefault();
+                navigateUp();
+            } else if (key === 'home') {
+                e.preventDefault();
+                navigateToRoot();
+            } else if (key === 'end') {
+                e.preventDefault();
+                navigateToEnd();
+            }
+            
+            // Modifier keys
+            if (mod) {
+                if (key === 'k') {
+                    e.preventDefault();
+                    elements.searchInput.focus();
+                } else if (key === '/') {
+                    e.preventDefault();
+                    showShortcuts();
+                } else if (key === 'p') {
+                    e.preventDefault();
+                    printDocument();
+                } else if (key === 's') {
+                    e.preventDefault();
+                    savePosition();
+                } else if (key === 'd') {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+            }
+            
+            // Escape key
+            if (key === 'escape') {
+                e.preventDefault();
+                clearSearch();
+                closeModal();
+            }
+        });
+    }
+
+    // ============================================
     // Event Listeners
     // ============================================
     function setupEventListeners() {
@@ -1174,3 +1548,127 @@
             });
         }
         
+        // Mobile overlay click to close sidebar
+        if (elements.mobileOverlay) {
+            elements.mobileOverlay.addEventListener('click', () => {
+                elements.sidebar.classList.remove('mobile-open');
+                elements.mobileOverlay.classList.remove('active');
+            });
+        }
+        
+        // Theme toggle
+        elements.themeToggle.addEventListener('click', toggleTheme);
+        
+        // Search input
+        elements.searchInput.addEventListener('input', (e) => {
+            state.searchQuery = e.target.value;
+            setupSearch();
+        });
+        
+        // Clear recent files button
+        if (elements.clearRecentBtn) {
+            elements.clearRecentBtn.addEventListener('click', clearRecentFiles);
+        }
+        
+        // Handle URL hash changes
+        window.addEventListener('hashchange', handleHashChange);
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            // Adjust layout for mobile if needed
+        });
+        
+        // Keyboard shortcuts
+        setupKeyboardShortcuts();
+    }
+        
+        // Mobile overlay
+        if (elements.mobileOverlay) {
+            elements.mobileOverlay.addEventListener('click', () => {
+                elements.sidebar.classList.remove('mobile-open');
+                elements.mobileOverlay.classList.remove('active');
+            });
+        }
+        
+        // Theme toggle
+        elements.themeToggle.addEventListener('click', toggleTheme);
+        
+        // Search input
+        elements.searchInput.addEventListener('input', (e) => {
+            state.searchQuery = e.target.value;
+            setupSearch();
+        });
+        
+        // Clear search on escape
+        elements.searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                clearSearch();
+                elements.searchInput.blur();
+            }
+        });
+        
+        // Focus search on cmd+k / ctrl+k
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                elements.searchInput.focus();
+            }
+        });
+        
+        // Clear recent files
+        elements.clearRecentBtn.addEventListener('click', clearRecentFiles);
+        
+        // Handle hash changes
+        window.addEventListener('hashchange', handleHashChange);
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            // Don't interfere with input fields
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                return;
+            }
+            
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                navigateTree(e.key);
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                navigateTree('ArrowRight');
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                navigateTree('ArrowLeft');
+            } else if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openSelectedFile();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                resetToRoot();
+            } else if (e.key === 'Escape') {
+                if (elements.sidebar.classList.contains('mobile-open')) {
+                    elements.sidebar.classList.remove('mobile-open');
+                    elements.mobileOverlay.classList.remove('active');
+                }
+            }
+        });
+        
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                // Update layout on resize if needed
+            }, 250);
+        });
+    }
+
+    // ============================================
+    // Initialize Application
+    // ============================================
+    // Start the app when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+})();

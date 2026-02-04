@@ -3,6 +3,82 @@
    ============================================ */
 
 /* ============================================
+   Accessibility Styles
+   ============================================ */
+
+/* Skip link for keyboard users */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background: var(--accent-color);
+    color: white;
+    padding: 12px 20px;
+    z-index: 9999;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 0 0 var(--radius-md) 0;
+    transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* Screen reader only - visually hidden but accessible */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus visible - enhanced focus indicator */
+*:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000;
+        --text-primary: #000;
+        --text-secondary: #333;
+    }
+    
+    [data-theme="dark"] {
+        --border-color: #fff;
+        --text-primary: #fff;
+        --text-secondary: #ccc;
+    }
+}
+
+/* ============================================
    Typography System
    ============================================ */
 :root {
@@ -1835,3 +1911,138 @@ a {
    - tracking-normal: 0
    - tracking-wide: 0.02em
 */
+
+/* ============================================
+   File Type Specific Styles
+   ============================================ */
+
+/* JSON Viewer */
+.json-viewer {
+    margin: 1rem 0;
+}
+
+.json-body .json-viewer {
+    padding: 0;
+}
+
+.json-viewer pre {
+    margin: 0;
+    padding: 1.25rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+}
+
+/* JSON Syntax Colors */
+.token.json-key { color: #ff79c6; }
+.token.json-string { color: #50fa7b; }
+.token.json-number { color: #bd93f9; }
+.token.json-boolean { color: #8be9fd; }
+.token.json-null { color: #6272a4; }
+
+/* Plain Text Viewer */
+.text-viewer {
+    margin: 1rem 0;
+}
+
+.text-body .plain-text {
+    font-family: var(--font-mono);
+    white-space: pre-wrap;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+}
+
+/* Code Viewer (for YAML, Python, JS, TS, etc.) */
+.code-viewer {
+    margin: 1rem 0;
+}
+
+.code-body .code-viewer {
+    padding: 0;
+}
+
+.code-body pre[class*="language-"],
+.code-viewer pre {
+    margin: 0;
+    padding: 1.25rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+}
+
+/* Code blocks wrapper */
+pre[class*="language-"] {
+    margin: 1rem 0;
+    border-radius: var(--radius-md);
+}
+
+/* TOC Styles */
+.toc {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc li {
+    margin: 0.25rem 0;
+}
+
+.toc > ul > li > ul {
+    margin-left: 1rem;
+    border-left: 1px solid var(--border-color);
+    padding-left: 0.5rem;
+}
+
+.toc a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    padding: 0.25rem 0.5rem;
+    display: block;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.toc a:hover {
+    color: var(--accent-color);
+    background: var(--accent-light);
+}
+
+/* Document type label */
+.document-type-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.document-type-label svg {
+    width: 14px;
+    height: 14px;
+}
