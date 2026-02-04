@@ -145,7 +145,9 @@
             const response = await fetch('search-index.json');
             if (!response.ok) throw new Error('Failed to load index');
             state.index = await response.json();
-            state.fileTree = state.index.fileTree || [];
+            
+            // Convert flat files array to tree structure
+            state.fileTree = buildFileTree(state.index.files || []);
             
             // Load expanded folders from localStorage using storage helper
             const savedFolders = storage.get('docs-expanded-folders', []);
@@ -155,6 +157,39 @@
             console.error('Failed to load search index:', error);
             elements.fileTree.innerHTML = '<div class="tree-loading">Failed to load files</div>';
         }
+    }
+
+    // Convert flat file list to tree structure
+    function buildFileTree(files) {
+        const root = [];
+
+        files.forEach(file => {
+            const parts = file.path.split('/');
+            let currentPath = '';
+            let currentLevel = root;
+
+            parts.forEach((part, index) => {
+                currentPath = currentPath ? `${currentPath}/${part}` : part;
+                const isFile = index === parts.length - 1;
+
+                let existing = currentLevel.find(n => n.name === part && n.type === (isFile ? 'file' : 'folder'));
+                if (!existing) {
+                    existing = {
+                        name: part,
+                        path: currentPath,
+                        type: isFile ? 'file' : 'folder',
+                        children: isFile ? undefined : []
+                    };
+                    currentLevel.push(existing);
+                }
+
+                if (!isFile) {
+                    currentLevel = existing.children;
+                }
+            });
+        });
+
+        return root;
     }
 
     // ============================================
