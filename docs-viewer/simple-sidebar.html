@@ -21,7 +21,7 @@
             min-width: 300px;
             background: #16161e;
             border-right: 1px solid #2a2a3a;
-            display: flex !important;
+            display: flex;
             flex-direction: column;
             overflow: hidden;
         }
@@ -165,6 +165,29 @@
             text-align: center;
             color: #888;
         }
+        
+        /* Document styles */
+        .document {
+            line-height: 1.8;
+        }
+        
+        .document h1 { font-size: 28px; color: #00d4ff; margin: 24px 0 16px; }
+        .document h2 { font-size: 22px; color: #fff; margin: 20px 0 12px; }
+        .document h3 { font-size: 18px; color: #ccc; margin: 16px 0 10px; }
+        .document p { margin: 12px 0; color: #bbb; }
+        .document code { background: #1a1a24; padding: 2px 6px; border-radius: 4px; font-family: 'Monaco', monospace; font-size: 13px; }
+        .document pre { background: #1a1a24; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 16px 0; }
+        .document pre code { background: none; padding: 0; }
+        .document ul, .document ol { margin: 12px 0; padding-left: 24px; }
+        .document li { margin: 6px 0; color: #bbb; }
+        .document blockquote { border-left: 3px solid #00d4ff; padding-left: 16px; margin: 16px 0; color: #888; }
+        .document table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        .document th, .document td { border: 1px solid #2a2a3a; padding: 10px; text-align: left; }
+        .document th { background: #1a1a24; color: #00d4ff; }
+        .document a { color: #00d4ff; text-decoration: none; }
+        .document a:hover { text-decoration: underline; }
+        .document hr { border: none; border-top: 1px solid #2a2a3a; margin: 24px 0; }
+        .document img { max-width: 100%; border-radius: 8px; }
     </style>
 </head>
 <body>
@@ -210,7 +233,7 @@
 
     <script>
         let files = [];
-        let fileTree = [];
+        let fileTree = {};
         
         async function init() {
             try {
@@ -221,7 +244,7 @@
                 
                 // Build tree
                 fileTree = buildTree(files);
-                renderTree(fileTree);
+                renderTree(fileTree, '');
                 
                 console.log('✓ Loaded ' + files.length + ' files');
             } catch (e) {
@@ -231,63 +254,49 @@
         }
         
         function buildTree(fileList) {
-            const root = [];
-            const map = {};
+            const tree = {};
             
             fileList.forEach(file => {
                 const parts = file.path.split('/');
-                let path = '';
+                let current = tree;
                 
                 parts.forEach((part, i) => {
-                    path = path ? path + '/' + part : part;
-                    
-                    if (!map[path]) {
-                        const node = {
+                    if (!current[part]) {
+                        current[part] = {
                             name: part,
-                            path: path,
                             type: i === parts.length - 1 ? 'file' : 'folder',
-                            children: []
+                            path: file.path,
+                            children: {}
                         };
-                        map[path] = node;
-                        
-                        if (i === 0) root.push(node);
-                        else {
-                            const parentPath = path.substring(0, path.lastIndexOf('/'));
-                            map[parentPath].children.push(node);
-                        }
                     }
+                    current = current[part].children;
                 });
             });
             
-            function sortNode(node) {
-                if (node.children) {
-                    node.children.sort((a, b) => {
-                        if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
-                        return a.name.localeCompare(b.name);
-                    });
-                    node.children.forEach(sortNode);
-                }
-            }
-            
-            root.forEach(sortNode);
-            return root;
+            return tree;
         }
         
-        function renderTree(nodes, indent = 0) {
+        function renderTree(nodes, pathPrefix) {
             const container = document.getElementById('fileTree');
             container.innerHTML = '';
             
-            nodes.forEach(node => {
+            const keys = Object.keys(nodes).sort((a, b) => {
+                const aNode = nodes[a];
+                const bNode = nodes[b];
+                if (aNode.type !== bNode.type) return aNode.type === 'folder' ? -1 : 1;
+                return a.localeCompare(b);
+            });
+            
+            keys.forEach(key => {
+                const node = nodes[key];
                 const div = document.createElement('div');
                 div.className = 'tree-item ' + node.type;
-                div.style.paddingLeft = (20 + indent) + 'px';
                 div.innerHTML = '<span style="margin-right: 6px;">' + 
                     (node.type === 'folder' ? '📁' : '📄') + '</span>' + node.name;
                 
                 div.onclick = () => {
                     if (node.type === 'folder') {
-                        div.dataset.expanded = div.dataset.expanded === 'true' ? 'false' : 'true';
-                        renderTree(node.children, indent + 20);
+                        renderTree(node.children, node.path);
                     } else {
                         loadFile(node.path);
                     }
@@ -299,33 +308,137 @@
         
         async function loadFile(path) {
             document.getElementById('content').innerHTML = '<div class="loading">Loading ' + path + '...</div>';
+            document.getElementById('breadcrumbs').textContent = '📚 ' + path;
             
             try {
                 const res = await fetch(path);
                 if (!res.ok) throw new Error('File not found');
                 const content = await res.text();
                 
-                // Convert markdown to HTML (simple)
-                const html = content
-                    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-                    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-                    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-                    .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-                    .replace(/\*(.*)\*/gim, '<em>$1</em>')
-                    .replace(/\n/gim, '<br>');
-                
+                // Convert markdown to HTML
+                const html = convertMarkdown(content);
                 document.getElementById('content').innerHTML = html;
-                document.getElementById('breadcrumbs').textContent = '📚 ' + path;
+                
+                // Add to recent
+                addToRecent(path);
             } catch (e) {
-                document.getElementById('content').innerHTML = '<h2 style="color: #f55;">Error: ' + e.message + '</h2>';
+                document.getElementById('content').innerHTML = '<h2 style="color: #f55;">Error loading ' + path + '</h2><p style="color: #888;">' + e.message + '</p>';
             }
+        }
+        
+        function convertMarkdown(text) {
+            let html = '<div class="document">';
+            const lines = text.split('\n');
+            let inCodeBlock = false;
+            let codeContent = [];
+            
+            lines.forEach(line => {
+                // Code blocks
+                if (line.startsWith('```')) {
+                    if (inCodeBlock) {
+                        html += '<pre><code>' + codeContent.join('\n') + '</code></pre>';
+                        codeContent = [];
+                    }
+                    inCodeBlock = !inCodeBlock;
+                    return;
+                }
+                
+                if (inCodeBlock) {
+                    codeContent.push(escapeHtml(line));
+                    return;
+                }
+                
+                // Headers
+                if (line.startsWith('#### ')) {
+                    html += '<h4>' + escapeHtml(line.substring(6)) + '</h4>';
+                } else if (line.startsWith('### ')) {
+                    html += '<h3>' + escapeHtml(line.substring(4)) + '</h3>';
+                } else if (line.startsWith('## ')) {
+                    html += '<h2>' + escapeHtml(line.substring(3)) + '</h2>';
+                } else if (line.startsWith('# ')) {
+                    html += '<h1>' + escapeHtml(line.substring(2)) + '</h1>';
+                }
+                // Horizontal rule
+                else if (line.startsWith('---')) {
+                    html += '<hr>';
+                }
+                // Blockquote
+                else if (line.startsWith('> ')) {
+                    html += '<blockquote>' + escapeHtml(line.substring(2)) + '</blockquote>';
+                }
+                // Unordered list
+                else if (line.startsWith('- ') || line.startsWith('* ')) {
+                    html += '<ul><li>' + escapeHtml(line.substring(2)) + '</li></ul>';
+                }
+                // Ordered list
+                else if (/^\d+\.\s/.test(line)) {
+                    html += '<ol><li>' + escapeHtml(line.replace(/^\d+\.\s/, '')) + '</li></ol>';
+                }
+                // Tables
+                else if (line.startsWith('|')) {
+                    html += '<p style="color: #666; font-size: 12px;">[Table: ' + line.substring(1, 50) + '...]</p>';
+                }
+                // Links
+                else if (line.includes('[') && line.includes('](')) {
+                    const textMatch = line.match(/\[([^\]]+)\]\(([^)]+)\)/);
+                    if (textMatch) {
+                        html += '<p><a href="' + textMatch[2] + '" target="_blank">' + escapeHtml(textMatch[1]) + '</a></p>';
+                    }
+                }
+                // Regular paragraphs
+                else if (line.trim()) {
+                    // Bold, italic, inline code
+                    let processed = escapeHtml(line);
+                    processed = processed.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                    processed = processed.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+                    processed = processed.replace(/`([^`]+)`/g, '<code>$1</code>');
+                    html += '<p>' + processed + '</p>';
+                }
+            });
+            
+            html += '</div>';
+            return html;
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Recent files
+        let recent = [];
+        function addToRecent(path) {
+            recent = recent.filter(p => p !== path);
+            recent.unshift(path);
+            recent = recent.slice(0, 10);
+            localStorage.setItem('docs-recent', JSON.stringify(recent));
+            renderRecent();
+        }
+        
+        function renderRecent() {
+            const container = document.getElementById('recentList');
+            if (recent.length === 0) {
+                container.innerHTML = '<div style="color: #666; font-size: 13px;">No recent files</div>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            recent.forEach(path => {
+                const div = document.createElement('div');
+                div.className = 'tree-item file';
+                div.style.paddingLeft = '35px';
+                div.innerHTML = '📄 ' + path;
+                div.onclick = () => loadFile(path);
+                container.appendChild(div);
+            });
         }
         
         // Search
         document.getElementById('search').addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase();
             if (!query) {
-                renderTree(fileTree);
+                renderTree(fileTree, '');
                 return;
             }
             
@@ -360,6 +473,12 @@
             document.body.style.color = dark ? '#e0e0e0' : '#1a1a1a';
             document.getElementById('themeBtn').textContent = dark ? '🌙 Dark' : '☀️ Light';
         };
+        
+        // Load recent from storage
+        try {
+            recent = JSON.parse(localStorage.getItem('docs-recent') || '[]');
+            renderRecent();
+        } catch (e) {}
         
         init();
     </script>
