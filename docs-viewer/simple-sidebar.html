@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docs Viewer - Simple</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            display: flex; 
+            height: 100vh; 
+            background: #0a0a0f; 
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        /* LEFT SIDEBAR - MUST BE VISIBLE */
+        #sidebar {
+            width: 300px;
+            min-width: 300px;
+            background: #16161e;
+            border-right: 1px solid #2a2a3a;
+            display: flex !important;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #2a2a3a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sidebar-header h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #00d4ff;
+        }
+        
+        .search-box {
+            padding: 15px 20px;
+            border-bottom: 1px solid #2a2a3a;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px;
+            background: #1a1a24;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+        
+        .file-tree {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+        
+        .tree-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: background 0.15s;
+        }
+        
+        .tree-item:hover {
+            background: #1f1f2e;
+        }
+        
+        .tree-item.folder {
+            font-weight: 600;
+            color: #00d4ff;
+        }
+        
+        .tree-item.file {
+            color: #e0e0e0;
+            padding-left: 35px;
+        }
+        
+        .recent-section {
+            padding: 15px 20px;
+            border-top: 1px solid #2a2a3a;
+            background: #12121a;
+        }
+        
+        .recent-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #888;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        /* MAIN CONTENT */
+        #main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .toolbar {
+            padding: 15px 30px;
+            border-bottom: 1px solid #2a2a3a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0a0a0f;
+        }
+        
+        .breadcrumbs {
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .theme-btn {
+            padding: 8px 16px;
+            background: #1a1a24;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            color: #e0e0e0;
+            cursor: pointer;
+        }
+        
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .welcome {
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .welcome h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #00d4ff;
+        }
+        
+        .welcome p {
+            color: #888;
+            line-height: 1.6;
+        }
+        
+        /* Loading */
+        .loading {
+            padding: 40px;
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <!-- LEFT SIDEBAR -->
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <span style="font-size: 24px;">📚</span>
+            <h2>Life OS Docs</h2>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" id="search" placeholder="🔍 Search files... (⌘K)">
+        </div>
+        
+        <div class="file-tree" id="fileTree">
+            <div class="loading">Loading files...</div>
+        </div>
+        
+        <div class="recent-section">
+            <div class="recent-title">🕐 Recent Files</div>
+            <div id="recentList">
+                <div style="color: #666; font-size: 13px;">No recent files</div>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- MAIN CONTENT -->
+    <main id="main">
+        <div class="toolbar">
+            <div class="breadcrumbs" id="breadcrumbs">📚 Life OS Docs</div>
+            <button class="theme-btn" id="themeBtn">🌙 Dark</button>
+        </div>
+        
+        <div class="content" id="content">
+            <div class="welcome">
+                <h1>📚 Life OS Documentation</h1>
+                <p>Select a file from the sidebar to view its contents.<br>
+                All 196 markdown files organized in folders.</p>
+                <p style="margin-top: 30px; color: #666;">🔍 Type to search | ⌨️ Arrow keys to navigate | ↵ Enter to open</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let files = [];
+        let fileTree = [];
+        
+        async function init() {
+            try {
+                // Load index
+                const res = await fetch('search-index.json');
+                const data = await res.json();
+                files = data.files || [];
+                
+                // Build tree
+                fileTree = buildTree(files);
+                renderTree(fileTree);
+                
+                console.log('✓ Loaded ' + files.length + ' files');
+            } catch (e) {
+                document.getElementById('fileTree').innerHTML = 
+                    '<div class="loading" style="color: #f55;">Error: ' + e.message + '</div>';
+            }
+        }
+        
+        function buildTree(fileList) {
+            const root = [];
+            const map = {};
+            
+            fileList.forEach(file => {
+                const parts = file.path.split('/');
+                let path = '';
+                
+                parts.forEach((part, i) => {
+                    path = path ? path + '/' + part : part;
+                    
+                    if (!map[path]) {
+                        const node = {
+                            name: part,
+                            path: path,
+                            type: i === parts.length - 1 ? 'file' : 'folder',
+                            children: []
+                        };
+                        map[path] = node;
+                        
+                        if (i === 0) root.push(node);
+                        else {
+                            const parentPath = path.substring(0, path.lastIndexOf('/'));
+                            map[parentPath].children.push(node);
+                        }
+                    }
+                });
+            });
+            
+            function sortNode(node) {
+                if (node.children) {
+                    node.children.sort((a, b) => {
+                        if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
+                        return a.name.localeCompare(b.name);
+                    });
+                    node.children.forEach(sortNode);
+                }
+            }
+            
+            root.forEach(sortNode);
+            return root;
+        }
+        
+        function renderTree(nodes, indent = 0) {
+            const container = document.getElementById('fileTree');
+            container.innerHTML = '';
+            
+            nodes.forEach(node => {
+                const div = document.createElement('div');
+                div.className = 'tree-item ' + node.type;
+                div.style.paddingLeft = (20 + indent) + 'px';
+                div.innerHTML = '<span style="margin-right: 6px;">' + 
+                    (node.type === 'folder' ? '📁' : '📄') + '</span>' + node.name;
+                
+                div.onclick = () => {
+                    if (node.type === 'folder') {
+                        div.dataset.expanded = div.dataset.expanded === 'true' ? 'false' : 'true';
+                        renderTree(node.children, indent + 20);
+                    } else {
+                        loadFile(node.path);
+                    }
+                };
+                
+                container.appendChild(div);
+            });
+        }
+        
+        async function loadFile(path) {
+            document.getElementById('content').innerHTML = '<div class="loading">Loading ' + path + '...</div>';
+            
+            try {
+                const res = await fetch(path);
+                if (!res.ok) throw new Error('File not found');
+                const content = await res.text();
+                
+                // Convert markdown to HTML (simple)
+                const html = content
+                    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                    .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+                    .replace(/\*(.*)\*/gim, '<em>$1</em>')
+                    .replace(/\n/gim, '<br>');
+                
+                document.getElementById('content').innerHTML = html;
+                document.getElementById('breadcrumbs').textContent = '📚 ' + path;
+            } catch (e) {
+                document.getElementById('content').innerHTML = '<h2 style="color: #f55;">Error: ' + e.message + '</h2>';
+            }
+        }
+        
+        // Search
+        document.getElementById('search').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            if (!query) {
+                renderTree(fileTree);
+                return;
+            }
+            
+            const results = files.filter(f => 
+                f.title.toLowerCase().includes(query) || 
+                f.path.toLowerCase().includes(query)
+            );
+            
+            const container = document.getElementById('fileTree');
+            container.innerHTML = '';
+            
+            if (results.length === 0) {
+                container.innerHTML = '<div style="padding: 20px; color: #666;">No files found</div>';
+                return;
+            }
+            
+            results.forEach(file => {
+                const div = document.createElement('div');
+                div.className = 'tree-item file';
+                div.style.paddingLeft = '35px';
+                div.innerHTML = '📄 ' + file.path;
+                div.onclick = () => loadFile(file.path);
+                container.appendChild(div);
+            });
+        });
+        
+        // Theme toggle
+        let dark = true;
+        document.getElementById('themeBtn').onclick = () => {
+            dark = !dark;
+            document.body.style.background = dark ? '#0a0a0f' : '#ffffff';
+            document.body.style.color = dark ? '#e0e0e0' : '#1a1a1a';
+            document.getElementById('themeBtn').textContent = dark ? '🌙 Dark' : '☀️ Light';
+        };
+        
+        init();
+    </script>
+</body>
+</html>
