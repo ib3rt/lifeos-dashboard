@@ -6,6 +6,81 @@
     'use strict';
 
     // ============================================
+    // Configuration
+    // ============================================
+    // Base path for markdown files relative to docs-viewer location
+    const MARKDOWN_BASE_PATH = '../';
+
+    // ============================================
+    // localStorage Helper Functions
+    // ============================================
+    const storage = {
+        get: function(key, defaultValue = null) {
+            try {
+                const value = localStorage.getItem(key);
+                if (value === null) return defaultValue;
+                return JSON.parse(value);
+            } catch (e) {
+                console.warn(`localStorage get failed for "${key}":`, e);
+                return defaultValue;
+            }
+        },
+        
+        set: function(key, value) {
+            try {
+                localStorage.setItem(key, JSON.stringify(value));
+                return true;
+            } catch (e) {
+                console.warn(`localStorage set failed for "${key}":`, e);
+                if (e.name === 'QuotaExceededError') {
+                    // Try to clear old data
+                    this.clearExpired();
+                    try {
+                        localStorage.setItem(key, JSON.stringify(value));
+                        return true;
+                    } catch (e2) {
+                        console.error('localStorage quota exceeded, cannot save:', key);
+                    }
+                }
+                return false;
+            }
+        },
+        
+        remove: function(key) {
+            try {
+                localStorage.removeItem(key);
+                return true;
+            } catch (e) {
+                console.warn(`localStorage remove failed for "${key}":`, e);
+                return false;
+            }
+        },
+        
+        clearExpired: function() {
+            // Clear recent files if too many (keep last 10)
+            try {
+                const recentFiles = this.get('docs-recent-files', []);
+                if (recentFiles.length > 10) {
+                    this.set('docs-recent-files', recentFiles.slice(-10));
+                }
+            } catch (e) {
+                // Ignore errors during cleanup
+            }
+        }
+    };
+
+    // ============================================
+    // Default State for New Users
+    // ============================================
+    const defaultState = {
+        theme: 'light',
+        expandedFolders: [],
+        recentFiles: [],
+        sidebarCollapsed: false,
+        searchHistory: []
+    };
+
+    // ============================================
     // State Management
     // ============================================
     const state = {
@@ -16,7 +91,9 @@
         searchQuery: '',
         searchResults: [],
         isSidebarCollapsed: false,
-        theme: localStorage.getItem('docs-theme') || 'light'
+        theme: storage.get('docs-theme', defaultState.theme),
+        recentFiles: storage.get('docs-recent-files', defaultState.recentFiles),
+        searchHistory: storage.get('docs-search-history', defaultState.searchHistory)
     };
 
     // ============================================
@@ -41,6 +118,12 @@
         // Apply theme
         document.documentElement.setAttribute('data-theme', state.theme);
         
+        // Load sidebar state
+        state.isSidebarCollapsed = storage.get('docs-sidebar-collapsed', defaultState.sidebarCollapsed);
+        if (state.isSidebarCollapsed) {
+            elements.sidebar.classList.add('collapsed');
+        }
+        
         // Load index
         await loadIndex();
         
@@ -64,13 +147,10 @@
             state.index = await response.json();
             state.fileTree = state.index.fileTree || [];
             
-            // Load expanded folders from localStorage
-            const saved = localStorage.getItem('docs-expanded-folders');
-            if (saved) {
-                try {
-                    JSON.parse(saved).forEach(f => state.expandedFolders.add(f));
-                } catch(e) {}
-            }
+            // Load expanded folders from localStorage using storage helper
+            const savedFolders = storage.get('docs-expanded-folders', []);
+            savedFolders.forEach(f => state.expandedFolders.add(f));
+            
         } catch (error) {
             console.error('Failed to load search index:', error);
             elements.fileTree.innerHTML = '<div class="tree-loading">Failed to load files</div>';
@@ -101,12 +181,18 @@
         const nodeEl = document.createElement('div');
         nodeEl.className = `tree-node ${node.type}`;
         nodeEl.dataset.path = path + (path ? '/' : '') + node.name;
+        nodeEl.dataset.name = node.name;
         
         const content = document.createElement('div');
         content.className = 'tree-node-content';
+        content.setAttribute('role', 'button');
+        content.setAttribute('tabindex', '0');
         
         if (node.type === 'folder') {
             const isExpanded = state.expandedFolders.has(node.path);
+            if (isExpanded) {
+                nodeEl.classList.add('expanded');
+            }
             
             content.innerHTML = `
                 <span class="tree-toggle ${isExpanded ? 'expanded' : ''}">
@@ -124,20 +210,33 @@
             
             const children = document.createElement('div');
             children.className = `tree-children ${isExpanded ? 'expanded' : ''}`;
+            const childrenInner = document.createElement('div');
+            childrenInner.className = 'tree-children-inner';
             
-            if (node.children) {
+            if (node.children && node.children.length > 0) {
                 node.children.forEach(child => {
-                    children.appendChild(createTreeNode(child, node.path));
+                    childrenInner.appendChild(createTreeNode(child, node.path));
                 });
             }
             
+            children.appendChild(childrenInner);
             nodeEl.appendChild(content);
             nodeEl.appendChild(children);
             
             // Folder click handler
-            content.addEventListener('click', (e) => {
+            const toggleHandler = (e) => {
                 e.stopPropagation();
-                toggleFolder(node.path, children, content.querySelector('.tree-toggle'));
+                toggleFolder(node.path, children, content.querySelector('.tree-toggle'), nodeEl);
+            };
+            
+            content.addEventListener('click', toggleHandler);
+            
+            // Keyboard navigation
+            content.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleHandler(e);
+                }
             });
         } else {
             content.innerHTML = `
@@ -161,26 +260,40 @@
             content.addEventListener('click', () => {
                 loadDocument(node.path);
             });
+            
+            // Keyboard navigation for files
+            content.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    loadDocument(node.path);
+                }
+            });
         }
         
         return nodeEl;
     }
 
-    function toggleFolder(path, childrenEl, toggleEl) {
+    function toggleFolder(path, childrenEl, toggleEl, nodeEl) {
         const isExpanded = childrenEl.classList.contains('expanded');
         
         if (isExpanded) {
             childrenEl.classList.remove('expanded');
             toggleEl.classList.remove('expanded');
+            if (nodeEl) nodeEl.classList.remove('expanded');
             state.expandedFolders.delete(path);
         } else {
             childrenEl.classList.add('expanded');
             toggleEl.classList.add('expanded');
+            if (nodeEl) nodeEl.classList.add('expanded');
             state.expandedFolders.add(path);
         }
         
         // Save to localStorage
-        localStorage.setItem('docs-expanded-folders', JSON.stringify([...state.expandedFolders]));
+        saveExpandedState();
+    }
+    
+    function saveExpandedState() {
+        storage.set('docs-expanded-folders', [...state.expandedFolders]);
     }
 
     // ============================================
@@ -195,14 +308,17 @@
             }
         });
         
-        // Save as recent
-        localStorage.setItem('docs-recent-file', path);
+        // Save to recent files (limit to 10, most recent first)
+        addToRecentFiles(path);
         
         // Show loading
         elements.document.innerHTML = '<div class="loading-spinner"></div>';
         
+        // Resolve path using configured base path
+        const fetchPath = MARKDOWN_BASE_PATH + path;
+        
         try {
-            const response = await fetch(path);
+            const response = await fetch(fetchPath);
             if (!response.ok) throw new Error('Document not found');
             
             const content = await response.text();
@@ -229,32 +345,51 @@
         }
     }
 
+    function addToRecentFiles(path) {
+        // Remove if already exists
+        const index = state.recentFiles.indexOf(path);
+        if (index > -1) {
+            state.recentFiles.splice(index, 1);
+        }
+        // Add to beginning
+        state.recentFiles.unshift(path);
+        // Keep only last 10
+        if (state.recentFiles.length > 10) {
+            state.recentFiles = state.recentFiles.slice(0, 10);
+        }
+        // Save to localStorage
+        storage.set('docs-recent-files', state.recentFiles);
+    }
+
     function renderDocument(path, content) {
-        // Configure marked
-        marked.setOptions({
-            highlight: function(code, lang) {
-                if (Prism.languages[lang]) {
-                    return Prism.highlight(code, Prism.languages[lang], lang);
-                }
-                return code;
-            },
+        // Configure marked for GitHub Flavored Markdown
+        marked.use({
+            gfm: true,
             breaks: true,
-            gfm: true
+            headerIds: true,
+            mangle: false
         });
-        
+
+        // Custom renderer for code blocks with Prism.js
+        const renderer = new marked.Renderer();
+        const originalCode = renderer.code.bind(renderer);
+
+        renderer.code = function(code, language) {
+            const validLanguage = language && Prism.languages[language] ? language : 'plaintext';
+            const highlighted = Prism.highlight(code, Prism.languages[validLanguage], validLanguage);
+            return `<pre><code class="language-${validLanguage}">${highlighted}</code></pre>`;
+        };
+
+        marked.setOptions({ renderer });
+
         // Render markdown
         const html = marked.parse(content);
-        
+
         elements.document.innerHTML = `
             <div class="markdown-body fade-in">
                 ${html}
             </div>
         `;
-        
-        // Re-highlight code blocks
-        elements.document.querySelectorAll('pre code').forEach(block => {
-            Prism.highlightElement(block);
-        });
         
         // Handle internal links
         elements.document.querySelectorAll('a').forEach(link => {
@@ -272,8 +407,14 @@
     }
 
     function updateBreadcrumbs(path) {
+        // Handle root/home case - show single Home breadcrumb
+        if (!path || path === '') {
+            elements.breadcrumbs.innerHTML = `<span class="breadcrumb-item current">🏠 Home</span>`;
+            return;
+        }
+        
         const parts = path.split('/');
-        let html = `<a href="#" class="breadcrumb-item" data-path="">Home</a>`;
+        let html = `<a href="#" class="breadcrumb-item" data-path="">🏠 Home</a>`;
         
         let currentPath = '';
         parts.forEach((part, i) => {
@@ -281,21 +422,27 @@
             const isLast = i === parts.length - 1;
             
             if (isLast) {
-                html += `<span class="breadcrumb-separator">/</span><span class="breadcrumb-item">${part}</span>`;
+                // Last segment - show as current (non-clickable)
+                html += `<span class="breadcrumb-separator">/</span><span class="breadcrumb-item current">${part}</span>`;
             } else {
+                // Intermediate segment - clickable folder link
                 html += `<span class="breadcrumb-separator">/</span><a href="#" class="breadcrumb-item" data-path="${currentPath}">${part}</a>`;
             }
         });
         
         elements.breadcrumbs.innerHTML = html;
         
-        // Add click handlers
+        // Add click handlers for breadcrumb navigation
         elements.breadcrumbs.querySelectorAll('.breadcrumb-item[data-path]').forEach(el => {
             el.addEventListener('click', (e) => {
                 e.preventDefault();
-                const path = el.dataset.path;
-                if (path) {
-                    scrollToFolder(path);
+                const targetPath = el.dataset.path;
+                if (targetPath === '') {
+                    // Home clicked - reset to root view
+                    resetToRoot();
+                } else {
+                    // Folder clicked - expand and scroll to it
+                    scrollToFolder(targetPath);
                 }
             });
         });
@@ -317,6 +464,9 @@
                 }
                 parent = parent.parentElement;
             }
+            
+            // Save expanded state
+            saveExpandedState();
             
             // Scroll to node
             const content = node.querySelector('.tree-node-content');
@@ -391,6 +541,18 @@
     }
 
     function clearSearch() {
+        const query = state.searchQuery.trim();
+        
+        // Add to search history if not empty and not already in history
+        if (query && !state.searchHistory.includes(query)) {
+            state.searchHistory.unshift(query);
+            // Keep only last 10 searches
+            if (state.searchHistory.length > 10) {
+                state.searchHistory = state.searchHistory.slice(0, 10);
+            }
+            storage.set('docs-search-history', state.searchHistory);
+        }
+        
         elements.searchInput.value = '';
         state.searchQuery = '';
         elements.searchResults.classList.remove('active');
@@ -402,7 +564,7 @@
     function toggleTheme() {
         state.theme = state.theme === 'light' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', state.theme);
-        localStorage.setItem('docs-theme', state.theme);
+        storage.set('docs-theme', state.theme);
     }
 
     // ============================================
@@ -411,7 +573,7 @@
     function toggleSidebar() {
         state.isSidebarCollapsed = !state.isSidebarCollapsed;
         elements.sidebar.classList.toggle('collapsed', state.isSidebarCollapsed);
-        localStorage.setItem('docs-sidebar-collapsed', state.isSidebarCollapsed);
+        storage.set('docs-sidebar-collapsed', state.isSidebarCollapsed);
     }
 
     // ============================================
@@ -433,10 +595,51 @@
     // Recent File
     // ============================================
     function loadRecentFile() {
-        const recent = localStorage.getItem('docs-recent-file');
-        if (recent && !window.location.hash) {
-            loadDocument(recent);
+        // Use the new array format, get most recent
+        const recentFile = state.recentFiles.length > 0 ? state.recentFiles[0] : null;
+        if (recentFile && !window.location.hash) {
+            loadDocument(recentFile);
         }
+    }
+
+    function resetToRoot() {
+        // Collapse all expanded folders
+        state.expandedFolders.clear();
+        saveExpandedState();
+        
+        // Re-render file tree to show collapsed state
+        renderFileTree();
+        
+        // Reset URL hash
+        history.pushState({}, '', window.location.pathname);
+        
+        // Clear active file
+        state.activeFile = null;
+        
+        // Show placeholder
+        elements.document.innerHTML = `
+            <div class="document-placeholder">
+                <div class="placeholder-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                </div>
+                <h2>Select a document to view</h2>
+                <p>Choose a markdown file from the sidebar to read</p>
+            </div>
+        `;
+        
+        // Update breadcrumbs to show only Home
+        elements.breadcrumbs.innerHTML = `<span class="breadcrumb-item current">🏠 Home</span>`;
+        
+        // Clear active state in tree
+        document.querySelectorAll('.tree-node-content').forEach(el => {
+            el.classList.remove('active');
+        });
     }
 
     // ============================================
@@ -520,6 +723,70 @@
                 e.preventDefault();
                 loadDocument(current.dataset.path);
                 clearSearch();
+            }
+        });
+        
+        // Tree keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            // Only handle tree navigation when not in search input
+            if (e.target === elements.searchInput) return;
+            
+            const focused = document.activeElement;
+            if (!focused || !focused.classList.contains('tree-node-content')) return;
+            
+            const currentNode = focused.parentElement;
+            const allNodes = Array.from(elements.fileTree.querySelectorAll('.tree-node-content'));
+            const currentIndex = allNodes.indexOf(focused);
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const next = allNodes[currentIndex + 1];
+                if (next) next.focus();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prev = allNodes[currentIndex - 1];
+                if (prev) prev.focus();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                const nodeEl = currentNode;
+                if (nodeEl.classList.contains('folder')) {
+                    const isExpanded = nodeEl.querySelector('.tree-children')?.classList.contains('expanded');
+                    if (!isExpanded) {
+                        const path = nodeEl.dataset.path;
+                        const children = nodeEl.querySelector('.tree-children');
+                        const toggle = nodeEl.querySelector('.tree-toggle');
+                        if (children && toggle) {
+                            children.classList.add('expanded');
+                            toggle.classList.add('expanded');
+                            state.expandedFolders.add(path);
+                            saveExpandedState();
+                        }
+                    }
+                    // Focus first child
+                    const firstChild = nodeEl.querySelector('.tree-children .tree-node-content');
+                    if (firstChild) firstChild.focus();
+                }
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                const nodeEl = currentNode;
+                if (nodeEl.classList.contains('folder')) {
+                    const isExpanded = nodeEl.querySelector('.tree-children')?.classList.contains('expanded');
+                    if (isExpanded) {
+                        const path = nodeEl.dataset.path;
+                        const children = nodeEl.querySelector('.tree-children');
+                        const toggle = nodeEl.querySelector('.tree-toggle');
+                        if (children && toggle) {
+                            children.classList.remove('expanded');
+                            toggle.classList.remove('expanded');
+                            state.expandedFolders.delete(path);
+                            saveExpandedState();
+                        }
+                    } else {
+                        // Focus parent
+                        const parentContent = nodeEl.closest('.tree-children')?.previousElementSibling;
+                        if (parentContent) parentContent.focus();
+                    }
+                }
             }
         });
         

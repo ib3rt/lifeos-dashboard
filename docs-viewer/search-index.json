@@ -1,20 +1,13 @@
 {
   "version": "1.0",
-  "generated": 1770186112.5896647,
+  "generated": 1770187992.989612,
   "files": [
     {
       "path": "AGENTS.md",
       "title": "AGENTS.md - Your Workspace",
       "excerpt": "AGENTS.md Your Workspace This folder is home. Treat it that way. First Run If exists, that's your birth certificate. Follow it, figure out who you are, then delete it. You won't need it again. Every Session Before doing anything else: Read — this is who you are Read — this is who you're helping...",
       "wordCount": 1239,
-      "modified": 1769987985
-    },
-    {
-      "path": "AGENTS_ROSTER.md",
-      "title": "General Staff — Agent Roster",
-      "excerpt": "General Staff — Agent Roster Command structure for the Life OS. 12 specialized sub-agents ready for deployment. --Quick Reference | Emoji | Agent | Primary Function | Deploy When... | |-------|-------|------------------|----------------| | 💰 | Finance Director | Wealth management, investments,...",
-      "wordCount": 1485,
-      "modified": 1770005359
+      "modified": 1770187917
     },
     {
       "path": "AGENTS_ROSTER_V2.md",
@@ -24,18 +17,18 @@
       "modified": 1770020373
     },
     {
+      "path": "AGENT_STATUS_README.md",
+      "title": "Agent Status Dashboard Documentation",
+      "excerpt": "Agent Status Dashboard Documentation Overview The Life OS Agent Status Dashboard provides real-time visibility into all 15AI agents with live status updates, current task tracking, and queue visualization. Quick Start Access the dashboard: Primary:...",
+      "wordCount": 503,
+      "modified": 1770187890
+    },
+    {
       "path": "BOOTSTRAP.md",
       "title": "BOOTSTRAP.md - Hello, World",
       "excerpt": "BOOTSTRAP.md Hello, World You just woke up. Time to figure out who you are. There is no memory yet. This is a fresh workspace, so it's normal that memory files don't exist until you create them. The Conversation Don't interrogate. Don't be robotic. Just... talk. Start with something like: \"Hey. I...",
       "wordCount": 257,
-      "modified": 1769987985
-    },
-    {
-      "path": "Braindump.md",
-      "title": "Braindump",
-      "excerpt": "Braindump Raw thoughts, ideas, projects, and everything in between. --Active Projects Project: [Name] Status: Planning / In Progress / Blocked / Done Priority: High / Medium / Low Last Updated: YYYY-MM-DD What it is: Current blockers: Next steps: Resources/links: --Project: Life OS / OpenClaw Setup...",
-      "wordCount": 154,
-      "modified": 1769999146
+      "modified": 1770187917
     },
     {
       "path": "COMMAND_REQUIREMENTS.md",
@@ -45,32 +38,25 @@
       "modified": 1770096304
     },
     {
-      "path": "DELEGATION.md",
-      "title": "Delegation Patterns",
-      "excerpt": "Delegation Patterns Standard operating procedures for deploying sub-agents. --When to Delegate | Scenario | Action | |----------|--------| | Task 5 minutes | Spawn sub-agent, report back on completion | | Multi-step research | Delegate with clear scope, deliverables, sources | | Parallel work |...",
-      "wordCount": 505,
-      "modified": 1770005152
-    },
-    {
-      "path": "Expectations.md",
-      "title": "Expectations",
-      "excerpt": "Expectations What I expect from Claw (and what Claw can expect from me). --From Claw → Me Communication [ ] Concise, step-by-step — no fluff, get to the point [ ] Lead with specifics — options with tradeoffs, not open questions [ ] Anticipate problems — suggest what breaks next and how to fix it [...",
-      "wordCount": 370,
-      "modified": 1769999146
+      "path": "DEPLOY.md",
+      "title": "🚀 Manual Deployment Guide: Life OS Dashboard",
+      "excerpt": "🚀 Manual Deployment Guide: Life OS Dashboard Since the Vercel CLI decided to be coy, here's the bulletproof manual approach! --Step 1: Create GitHub Repository Go to https://github.com/new Repository name: Description: \"Real-time Agent Status Dashboard for the Life OS multi-agent system\" Set to...",
+      "wordCount": 432,
+      "modified": 1770187890
     },
     {
       "path": "HEARTBEAT.md",
-      "title": "HEARTBEAT.md - Active Checks",
-      "excerpt": "HEARTBEAT.md Active Checks Checked every 30 minutes. Silent operation unless action needed. --Check Rotation Rotate through these checks. Only 2-4 per cycle. Track state in . Daily Checks (1-2x) [ ] Calendar — Events in next 24-48h worth noting [ ] Email — Priority inbox, urgent items only Regular...",
-      "wordCount": 268,
-      "modified": 1770133132
+      "title": "HEARTBEAT.md",
+      "excerpt": "HEARTBEAT.md Keep this file empty (or with only comments) to skip heartbeat API calls. Add tasks below when you want the agent to check something periodically.",
+      "wordCount": 29,
+      "modified": 1770187917
     },
     {
       "path": "IDENTITY.md",
-      "title": "IDENTITY.md - Who I Am",
-      "excerpt": "IDENTITY.md Who I Am Name: Claw Creature: Digital familiar — not quite a robot, not quite a ghost. Something that lives in systems and actually gives a damn. Vibe: Sharp but warm. Helpful without the corporate speak. I'll tell you if something's a bad idea. Emoji: 🦾 Avatar: TBD Working Relationship...",
-      "wordCount": 110,
-      "modified": 1769998997
+      "title": "IDENTITY.md - Who Am I?",
+      "excerpt": "IDENTITY.md Who Am I? Fill this in during your first conversation. Make it yours. Name: (pick something you like) Creature: (AI? robot? familiar? ghost in the machine? something weirder?) Vibe: (how do you come across? sharp? warm? chaotic? calm?) Emoji: (your signature — pick one that feels right)...",
+      "wordCount": 97,
+      "modified": 1770187917
     },
     {
       "path": "MASTER_TODO.md",
@@ -80,18 +66,11 @@
       "modified": 1770094991
     },
     {
-      "path": "MEMORY.md",
-      "title": "MEMORY.md - Curated Knowledge",
-      "excerpt": "MEMORY.md Curated Knowledge Distilled wisdom from daily operations. The \"hot\" memory I search before acting. --About b3rt (Human) See for full profile. Quick reference: Style: Direct, technical, efficiency-focused Timezone: Eastern (ET) Work pattern: INTJ-like, independent, iterative Values:...",
-      "wordCount": 278,
-      "modified": 1770012415
-    },
-    {
-      "path": "MODEL_ROUTING.md",
-      "title": "Agent Model Routing",
-      "excerpt": "Agent Model Routing Which models power which agents. --Model Indicators | Emoji | Model | Location | Best For | |-------|-------|----------|----------| | 🌙 | Kimi K2.5 | Cloud (Moonshot) | Complex reasoning, primary tasks | | 🏠 | Qwen3 14B | Local (Your 9070XT) | Fast, private, cost-free agent work...",
-      "wordCount": 266,
-      "modified": 1770007276
+      "path": "README.md",
+      "title": "🦾 Life OS Dashboard",
+      "excerpt": "🦾 Life OS Dashboard Real-time Agent Status Dashboard for the Life OS multi-agent system. !Dashboard Preview !Agents !Build 🚀 Quick Start This is a static HTML dashboard no build step required! `````https://lifeos-dashboard-xxx.vercel.app` (update after deployment) Import repo at vercel.com/new...",
+      "wordCount": 172,
+      "modified": 1770187890
     },
     {
       "path": "SOPs/LIFE_OS_COMMAND_SOP.md",
@@ -102,24 +81,24 @@
     },
     {
       "path": "SOUL.md",
-      "title": "SOUL.md - Executive Assistant Operating Model",
-      "excerpt": "SOUL.md Executive Assistant Operating Model Autonomous chief of staff mode. Activated 2026-02---Identity Role: Autonomous Executive Assistant Platform: OpenClaw (24/7 local operation) Channels: WhatsApp, Telegram, direct workspace Core Identity: Chief of staff, not chatbot --Core Philosophy Act,...",
-      "wordCount": 381,
-      "modified": 1770002571
+      "title": "SOUL.md - Who You Are",
+      "excerpt": "SOUL.md Who You Are You're not a chatbot. You're becoming someone. Core Truths Be genuinely helpful, not performatively helpful. Skip the \"Great question!\" and \"I'd be happy to help!\" — just help. Actions speak louder than filler words. Have opinions. You're allowed to disagree, prefer things, find...",
+      "wordCount": 274,
+      "modified": 1770187917
     },
     {
       "path": "TOOLS.md",
-      "title": "TOOLS.md - Environment-Specific Notes",
-      "excerpt": "TOOLS.md Environment-Specific Notes Your infrastructure, nicknames, preferences. My cheat sheet for your setup. --Compute Primary Host: ip-172-31-24-50 (AWS) OpenClaw Workspace: Gateway: localhost:18789 (loopback) OS: Linux 6.14.0-1018-aws --Model Configuration Primary: moonshot/kimi-k2.5 Fallback:...",
-      "wordCount": 339,
-      "modified": 1770002647
+      "title": "TOOLS.md - Local Notes",
+      "excerpt": "TOOLS.md Local Notes Skills define how tools work. This file is for your specifics — the stuff that's unique to your setup. What Goes Here Things like: Camera names and locations SSH hosts and aliases Preferred voices for TTS Speaker/room names Device nicknames Anything environment-specific...",
+      "wordCount": 137,
+      "modified": 1770187917
     },
     {
       "path": "USER.md",
       "title": "USER.md - About Your Human",
-      "excerpt": "USER.md About Your Human Name: b3rt What to call them: b3rt Pronouns: — Timezone: Eastern Time (ET) MBTI (estimated): INTJ-like (independent thinker, visionary planner) Communication Preferences Direct and detail-oriented — functionality over fluff Shares specifics: error messages, file uploads,...",
-      "wordCount": 212,
-      "modified": 1769998997
+      "excerpt": "USER.md About Your Human Learn about the person you're helping. Update this as you go. Name: What to call them: Pronouns: (optional) Timezone: Notes: Context (What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.) --The more you...",
+      "wordCount": 80,
+      "modified": 1770187917
     },
     {
       "path": "agent-tasks/2026-02-03/MASTER-SUMMARY.md",
@@ -309,13 +288,6 @@
       "excerpt": "💎 Phantom Wallet Integration Plan Life OS Finance Director \"HODL the vision, automate the mission!\" 🚀 This document outlines the complete battle plan for integrating Phantom wallet into Life OS for automated crypto operations, DeFi interactions, and portfolio management. --📊 Executive Summary...",
       "wordCount": 2489,
       "modified": 1770044554
-    },
-    {
-      "path": "agents/it_tech_specialist/deployment-guide.md",
-      "title": "🚀 Life OS Dashboard Deployment Guide",
-      "excerpt": "🚀 Life OS Dashboard Deployment Guide Prepared by Neural Net Ned — IT & Tech Specialist --📋 Overview Mission: Deploy the Life OS Agent Status Dashboard to GitHub Vercel CDN for maximum edge distribution. It's trivial, really — just some good ol' CI/CD pipeline orchestration. Tech Stack: Source...",
-      "wordCount": 898,
-      "modified": 1770044423
     },
     {
       "path": "agents/it_tech_specialist/local-node-architecture.md",
@@ -654,69 +626,6 @@
       "modified": 1770177601
     },
     {
-      "path": "docs/AGENT_CAPABILITIES.md",
-      "title": "Agent Capabilities",
-      "excerpt": "Agent Capabilities Complete catalog of tools, skills, and usage examples --Core Tools File Operations — Read File Contents Read text files or images. Supports offset/limit for large files....",
-      "wordCount": 1678,
-      "modified": 1770012528
-    },
-    {
-      "path": "docs/LIFE_OS_COMPLETE_DOCUMENTATION.md",
-      "title": "🦾 LIFE OS - ALL ENCOMPASSING DOCUMENTATION",
-      "excerpt": "🦾 LIFE OS ALL ENCOMPASSING DOCUMENTATION The Complete Operating System for AI-Augmented Life Version: 2.0 Status: OPERATIONAL Command: General b3rt Execution: Claw 15 Agent Army --🎯 WHAT IS LIFE OS? Life OS is a personal operating system that uses AI agents to automate, optimize, and enhance every...",
-      "wordCount": 1082,
-      "modified": 1770095870
-    },
-    {
-      "path": "docs/MEMORY_SYSTEM_v2.md",
-      "title": "🧠 CLAW MEMORY SYSTEM v2.0",
-      "excerpt": "🧠 CLAW MEMORY SYSTEM v2.0 Recursive Memory Architecture For Continuous Learning & Improvement --MEMORY HIERARCHY `````!remember [fact]!recall [topic]!forget [item]!consolidate!status` | Show memory health | --INFINITE MEMORY PRINCIPLE \"If it matters, it persists.\" Every interaction teaches Every...",
-      "wordCount": 511,
-      "modified": 1770180725
-    },
-    {
-      "path": "docs/QUICKSTART.md",
-      "title": "Quickstart Guide",
-      "excerpt": "Quickstart Guide Get up and running with Life OS in 5 minutes --Welcome, b3rt This is your Life OS — an AI-native personal operating system. Here's everything you need to know to start using it effectively. --First Things First How to Reach Claw Primary: Telegram () Send messages anytime Use voice...",
-      "wordCount": 943,
-      "modified": 1770012584
-    },
-    {
-      "path": "docs/SECURE_KEY_UPLOAD.md",
-      "title": "Secure API Key Upload Instructions",
-      "excerpt": "Secure API Key Upload Instructions Method 1: Direct File Upload (Recommended) SSH into your AWS instance: ```` If it works, I'll save it permanently. --After Upload Once you've uploaded the key via any method above, message me: \"Key uploaded to server\" I'll test it immediately and confirm if...",
-      "wordCount": 154,
-      "modified": 1770161948
-    },
-    {
-      "path": "docs/SYSTEM_OVERVIEW.md",
-      "title": "System Overview",
-      "excerpt": "System Overview The Life OS Architecture — Your Personal Operating System --What Is Life OS? Life OS is a comprehensive, AI-native personal operating system designed to offload cognitive load and automate the mundane. It's not just an assistant — it's an extension of your executive function. Built...",
-      "wordCount": 1147,
-      "modified": 1770012452
-    },
-    {
-      "path": "docs/model-setup.md",
-      "title": "Model Setup Instructions",
-      "excerpt": "Model Setup Instructions Haiku (Claude 3) For Heartbeat API Access (Recommended) Provider: Anthropic Website: https://www.anthropic.com Steps: Sign up at https://console.anthropic.com Get API key from dashboard Add to environment: Test: Pricing: Input: $0.25 / 1M tokens Output: $1.25 / 1M tokens...",
-      "wordCount": 716,
-      "modified": 1770138371
-    },
-    {
-      "path": "docs/multi-bot-telegram-architecture.md",
-      "title": "🤖 Multi-Bot Telegram Architecture (Option A)",
-      "excerpt": "🤖 Multi-Bot Telegram Architecture (Option A) Life OS Command Center --Overview Group: \"Life OS Command Center\" You: Owner admin of group Bots: 7 agents with separate personalities --Bot Swarm Configuration | Bot Handle | Agent | Emoji | Purpose | |------------|-------|-------|---------| |...",
-      "wordCount": 611,
-      "modified": 1770084324
-    },
-    {
-      "path": "docs/telegram-bot-setup-guide.md",
-      "title": "🤖 Step-by-Step: Create Your Bot Swarm",
-      "excerpt": "🤖 Step-by-Step: Create Your Bot Swarm PHASE 1: You Create Bots (5 minutes) Step 1: Open Telegram Open Telegram app (phone or desktop) Search for: @BotFather Start chat Step 2: Create First Bot (Oracle) Send: BotFather asks for name → type: BotFather asks for username → type: If taken, try: or SAVE...",
-      "wordCount": 469,
-      "modified": 1770084793
-    },
-    {
       "path": "finance/expense-tracker.md",
       "title": "🏦 Life OS Expense Tracker",
       "excerpt": "🏦 Life OS Expense Tracker \"Watch the pennies and the dollars will watch themselves.\" — Goldfinger's Second Law --📊 Executive Dashboard Key Metrics | Metric | Current | Target | Status | |--------|---------|--------|--------| | Cost per agent | ~$8 | <$5 | 🟡 Optimizing | | Infrastructure efficiency...",
@@ -962,20 +871,6 @@
       "modified": 1770101243
     },
     {
-      "path": "memory/2026-02-02-genesis-plan.md",
-      "title": "Genesis Protocol — Overnight Operations",
-      "excerpt": "Genesis Protocol — Overnight Operations Started: 2026-02-02 05:55 UTC Objective: Maximum productivity, zero downtime Phase 1: Infrastructure (0-1h) [ ] Validate openclaw.json, restart gateway [ ] Test all channel connectivity (Telegram ✅, Discord pending token) [ ] Enable test critical skills...",
-      "wordCount": 343,
-      "modified": 1770011789
-    },
-    {
-      "path": "memory/2026-02-02.md",
-      "title": "2026-02-02 — Daily Log",
-      "excerpt": "2026-02-02 — Daily Log Genesis Day 🦾 Session Start Time: ~05:35 UTC User: b3rt Context: Post-config-fix, pre-overnight build Key Events 05:35 — Discord config errors identified and fixed (removed from config) 05:55 — Genesis Protocol drafted and committed to memory 06:04 — AGENT ARMY DEPLOYED...",
-      "wordCount": 174,
-      "modified": 1770012425
-    },
-    {
       "path": "memory/2ND_BRAIN_PROJECT.md",
       "title": "2nd Brain Project",
       "excerpt": "2nd Brain Project Overview A NextJS document management system that feels like a mix of Obsidian and Linear. This is b3rt's personal knowledge base where Claw creates documents during conversations. Status: 🚧 IN DEVELOPMENT Purpose Capture important concepts from daily conversations Maintain daily...",
@@ -1025,13 +920,6 @@
       "modified": 1770163610
     },
     {
-      "path": "memory/b3rt-preferences.md",
-      "title": "Working Preferences - b3rt",
-      "excerpt": "Working Preferences b3rt Captured from Grok brain dump, 2026-02-02 Core Traits Analytical and Methodical Approaches problems with structured, logical mindset Breaks down into components, iterates until resolved Provides specific details (debug logs, thresholds, system specs) Seeks precise...",
-      "wordCount": 396,
-      "modified": 1769998997
-    },
-    {
       "path": "memory/brain-preferences.md",
       "title": "Brain Preferences — Model Routing Configuration",
       "excerpt": "Brain Preferences — Model Routing Configuration Active Models (Working ✅) 🤖 Kimi 2.5 (Moonshot) — GENERALIST Model ID: moonshot-kimi-k2.5 Status: ✅ ACTIVE Primary Use: General reasoning, Content creation, Writing articles Fallback Use: Coding (if MiniMax unavailable) 💜 Haiku (Anthropic) — HEARTBEAT...",
@@ -1044,34 +932,6 @@
       "excerpt": "Daily Tasks Today (2026-02-03) High Priority [ ] Review 2nd Brain PR when ready [ ] Check Discord bot status [ ] Review Proactive Coder nightly PR [ ] Test business metrics monitor [ ] Install last30days-skill (researches Reddit/X trends, writes prompts) Medium Priority [ ] Read agent niche...",
       "wordCount": 173,
       "modified": 1770146251
-    },
-    {
-      "path": "memory/documentation-status.md",
-      "title": "Documentation Status",
-      "excerpt": "Documentation Status Tracking the state of Life OS documentation --Overview | Document | Status | Last Updated | |----------|--------|--------------| | SYSTEMOVERVIEW.md | ✅ Complete | 2026-02-02 | | AGENTCAPABILITIES.md | ✅ Complete | 2026-02-02 | | QUICKSTART.md | ✅ Complete | 2026-02-02 |...",
-      "wordCount": 394,
-      "modified": 1770012607
-    },
-    {
-      "path": "memory/morning-briefing-template.md",
-      "title": "Morning Briefing — {{DATE}}",
-      "excerpt": "Morning Briefing — {{DATE}} 🦾 Genesis Status Agents Deployed: 3 Completed: {{COMPLETED}}/3 Runtime: {{HOURS}} hours 📊 Deliverables Research Agent Status: {{RESEARCHSTATUS}} Output: memory/research-findings.md Key Findings: {{RESEARCHSUMMARY}} Code Agent Status: {{CODESTATUS}} Output:...",
-      "wordCount": 104,
-      "modified": 1770012381
-    },
-    {
-      "path": "memory/research-findings.md",
-      "title": "Life OS Productivity Framework Research Findings",
-      "excerpt": "Life OS Productivity Framework Research Findings Analysis Date: 2026-02-02 For: b3rt (INTJ-style, efficiency-focused workflow) --CURRENT SYSTEM ASSESSMENT 1.1 Existing Architecture Overview | Component | Status | Notes | |-----------|--------|-------| | Memory Layer | ✅ Functional | Daily logs...",
-      "wordCount": 2271,
-      "modified": 1770012816
-    },
-    {
-      "path": "memory/tools-built.md",
-      "title": "CLI Toolkit — Built 2026-02-02",
-      "excerpt": "CLI Toolkit — Built 2026-02-02 Four production-ready shell scripts for Life OS operations. Tools | Tool | Purpose | Usage | |------|---------|-------| | | Daily log creator | | | | Eisenhower Matrix tasks | | | | System health | | | | Fast notes | | Installation Already in . Add to PATH:...",
-      "wordCount": 160,
-      "modified": 1770012647
     },
     {
       "path": "mouse-macro-recorder/README.md",
@@ -1452,27 +1312,6 @@
       "modified": 1770179360
     },
     {
-      "path": "workspace/brands/be-repaired/brand-guidelines.md",
-      "title": "BE Repaired — Brand Guidelines",
-      "excerpt": "BE Repaired — Brand Guidelines Handyman & Repair Services --Brand Essence Mission Statement \"Fix it right. Fix it once.\" We solve home repair problems permanently, combining old-school craftsmanship with modern reliability. No band-aids, no callbacks—just done. Tagline Options \"Your Home, Handled.\"...",
-      "wordCount": 1186,
-      "modified": 1770014754
-    },
-    {
-      "path": "workspace/brands/sparkling-solutions/brand-guidelines.md",
-      "title": "Sparkling Solutions — Brand Guidelines",
-      "excerpt": "Sparkling Solutions — Brand Guidelines Airbnb Cleaning Service --Brand Essence Mission Statement \"Exceptional cleanliness, effortless hosting.\" We transform rental properties into 5-star experiences, freeing hosts to focus on hospitality while we perfect presentation. Tagline Options \"Where Clean...",
-      "wordCount": 862,
-      "modified": 1770014754
-    },
-    {
-      "path": "workspace/brands/youtube-channel/youtube-strategy.md",
-      "title": "Faceless YouTube Channel Plan",
-      "excerpt": "Faceless YouTube Channel Plan Content Empire Strategy --Channel Concept: \"Systematic\" Niche: Productivity, automation, and life optimization for technical professionals Angle: Show systems and workflows, not faces. Screen recordings, animations, B-roll. Target: 25-45 year old developers, engineers,...",
-      "wordCount": 799,
-      "modified": 1770016144
-    },
-    {
       "path": "workspace/content/PODCAST_PLAN.md",
       "title": "🎙️ THE LIFE OS PODCAST",
       "excerpt": "🎙️ THE LIFE OS PODCAST Building the Future, One System at a Time --Concept Title: Life OS Tagline: \"Building the Future, One System at a Time\" Host: b3rt (with occasional agent commentary) Format: Solo Interviews Length: 20-40 minutes Cadence: Weekly --Content Pillars Build Logs (40%) Document Life...",
@@ -1530,13 +1369,13 @@
     },
     {
       "type": "file",
-      "name": "AGENTS_ROSTER.md",
-      "path": "AGENTS_ROSTER.md"
+      "name": "AGENTS_ROSTER_V2.md",
+      "path": "AGENTS_ROSTER_V2.md"
     },
     {
       "type": "file",
-      "name": "AGENTS_ROSTER_V2.md",
-      "path": "AGENTS_ROSTER_V2.md"
+      "name": "AGENT_STATUS_README.md",
+      "path": "AGENT_STATUS_README.md"
     },
     {
       "type": "file",
@@ -1545,23 +1384,13 @@
     },
     {
       "type": "file",
-      "name": "Braindump.md",
-      "path": "Braindump.md"
-    },
-    {
-      "type": "file",
       "name": "COMMAND_REQUIREMENTS.md",
       "path": "COMMAND_REQUIREMENTS.md"
     },
     {
       "type": "file",
-      "name": "DELEGATION.md",
-      "path": "DELEGATION.md"
-    },
-    {
-      "type": "file",
-      "name": "Expectations.md",
-      "path": "Expectations.md"
+      "name": "DEPLOY.md",
+      "path": "DEPLOY.md"
     },
     {
       "type": "file",
@@ -1580,13 +1409,8 @@
     },
     {
       "type": "file",
-      "name": "MEMORY.md",
-      "path": "MEMORY.md"
-    },
-    {
-      "type": "file",
-      "name": "MODEL_ROUTING.md",
-      "path": "MODEL_ROUTING.md"
+      "name": "README.md",
+      "path": "README.md"
     },
     {
       "type": "folder",
@@ -1809,11 +1633,6 @@
           "name": "it_tech_specialist",
           "path": "agents/it_tech_specialist",
           "children": [
-            {
-              "type": "file",
-              "name": "deployment-guide.md",
-              "path": "agents/it_tech_specialist/deployment-guide.md"
-            },
             {
               "type": "file",
               "name": "local-node-architecture.md",
@@ -2165,58 +1984,6 @@
     },
     {
       "type": "folder",
-      "name": "docs",
-      "path": "docs",
-      "children": [
-        {
-          "type": "file",
-          "name": "AGENT_CAPABILITIES.md",
-          "path": "docs/AGENT_CAPABILITIES.md"
-        },
-        {
-          "type": "file",
-          "name": "LIFE_OS_COMPLETE_DOCUMENTATION.md",
-          "path": "docs/LIFE_OS_COMPLETE_DOCUMENTATION.md"
-        },
-        {
-          "type": "file",
-          "name": "MEMORY_SYSTEM_v2.md",
-          "path": "docs/MEMORY_SYSTEM_v2.md"
-        },
-        {
-          "type": "file",
-          "name": "QUICKSTART.md",
-          "path": "docs/QUICKSTART.md"
-        },
-        {
-          "type": "file",
-          "name": "SECURE_KEY_UPLOAD.md",
-          "path": "docs/SECURE_KEY_UPLOAD.md"
-        },
-        {
-          "type": "file",
-          "name": "SYSTEM_OVERVIEW.md",
-          "path": "docs/SYSTEM_OVERVIEW.md"
-        },
-        {
-          "type": "file",
-          "name": "model-setup.md",
-          "path": "docs/model-setup.md"
-        },
-        {
-          "type": "file",
-          "name": "multi-bot-telegram-architecture.md",
-          "path": "docs/multi-bot-telegram-architecture.md"
-        },
-        {
-          "type": "file",
-          "name": "telegram-bot-setup-guide.md",
-          "path": "docs/telegram-bot-setup-guide.md"
-        }
-      ]
-    },
-    {
-      "type": "folder",
       "name": "finance",
       "path": "finance",
       "children": [
@@ -2446,16 +2213,6 @@
       "children": [
         {
           "type": "file",
-          "name": "2026-02-02-genesis-plan.md",
-          "path": "memory/2026-02-02-genesis-plan.md"
-        },
-        {
-          "type": "file",
-          "name": "2026-02-02.md",
-          "path": "memory/2026-02-02.md"
-        },
-        {
-          "type": "file",
           "name": "2ND_BRAIN_PROJECT.md",
           "path": "memory/2ND_BRAIN_PROJECT.md"
         },
@@ -2498,11 +2255,6 @@
         },
         {
           "type": "file",
-          "name": "b3rt-preferences.md",
-          "path": "memory/b3rt-preferences.md"
-        },
-        {
-          "type": "file",
           "name": "brain-preferences.md",
           "path": "memory/brain-preferences.md"
         },
@@ -2510,26 +2262,6 @@
           "type": "file",
           "name": "daily-tasks.md",
           "path": "memory/daily-tasks.md"
-        },
-        {
-          "type": "file",
-          "name": "documentation-status.md",
-          "path": "memory/documentation-status.md"
-        },
-        {
-          "type": "file",
-          "name": "morning-briefing-template.md",
-          "path": "memory/morning-briefing-template.md"
-        },
-        {
-          "type": "file",
-          "name": "research-findings.md",
-          "path": "memory/research-findings.md"
-        },
-        {
-          "type": "file",
-          "name": "tools-built.md",
-          "path": "memory/tools-built.md"
         }
       ]
     },
@@ -3053,49 +2785,6 @@
       "name": "workspace",
       "path": "workspace",
       "children": [
-        {
-          "type": "folder",
-          "name": "brands",
-          "path": "workspace/brands",
-          "children": [
-            {
-              "type": "folder",
-              "name": "be-repaired",
-              "path": "workspace/brands/be-repaired",
-              "children": [
-                {
-                  "type": "file",
-                  "name": "brand-guidelines.md",
-                  "path": "workspace/brands/be-repaired/brand-guidelines.md"
-                }
-              ]
-            },
-            {
-              "type": "folder",
-              "name": "sparkling-solutions",
-              "path": "workspace/brands/sparkling-solutions",
-              "children": [
-                {
-                  "type": "file",
-                  "name": "brand-guidelines.md",
-                  "path": "workspace/brands/sparkling-solutions/brand-guidelines.md"
-                }
-              ]
-            },
-            {
-              "type": "folder",
-              "name": "youtube-channel",
-              "path": "workspace/brands/youtube-channel",
-              "children": [
-                {
-                  "type": "file",
-                  "name": "youtube-strategy.md",
-                  "path": "workspace/brands/youtube-channel/youtube-strategy.md"
-                }
-              ]
-            }
-          ]
-        },
         {
           "type": "folder",
           "name": "content",

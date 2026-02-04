@@ -283,6 +283,8 @@ body {
     color: var(--text-secondary);
     transition: all var(--transition-fast);
     font-size: 0.9rem;
+    border-radius: var(--radius-sm);
+    margin: 2px 8px;
 }
 
 .tree-node-content:hover {
@@ -293,6 +295,25 @@ body {
 .tree-node-content.active {
     background: var(--accent-light);
     color: var(--accent-color);
+}
+
+.tree-toggle {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+    border-radius: var(--radius-sm);
+}
+
+.tree-toggle:hover {
+    background: var(--bg-tertiary);
+}
+
+.tree-toggle.expanded {
+    transform: rotate(90deg);
 }
 
 .tree-toggle {
@@ -321,6 +342,16 @@ body {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+}
+
+.tree-node.folder > .tree-node-content:hover .tree-icon {
+    color: var(--text-primary);
+}
+
+.tree-node.folder.expanded > .tree-node-content .tree-icon {
+    color: var(--accent-color);
 }
 
 .tree-icon svg {
@@ -338,12 +369,17 @@ body {
 .tree-children {
     padding-left: 20px;
     overflow: hidden;
-    transition: max-height var(--transition-normal);
-    max-height: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--transition-normal);
 }
 
 .tree-children.expanded {
-    max-height: 9999px;
+    grid-template-rows: 1fr;
+}
+
+.tree-children-inner {
+    overflow: hidden;
 }
 
 .tree-node.folder > .tree-children {
@@ -399,7 +435,7 @@ body {
 .breadcrumbs {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0;
     padding: 16px 32px;
     border-bottom: 1px solid var(--border-color);
     background: var(--bg-primary);
@@ -413,21 +449,34 @@ body {
     color: var(--text-muted);
     text-decoration: none;
     font-size: 0.9rem;
-    transition: color var(--transition-fast);
+    transition: all var(--transition-fast);
     cursor: pointer;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.breadcrumb-item:hover {
+.breadcrumb-item:hover:not(.current) {
     color: var(--accent-color);
+    background: var(--accent-light);
 }
 
-.breadcrumb-item:last-child {
+.breadcrumb-item.current {
     color: var(--text-primary);
+    font-weight: 500;
     cursor: default;
+}
+
+.breadcrumb-item.current::before {
+    content: '';
 }
 
 .breadcrumb-separator {
     color: var(--text-muted);
+    margin: 0 2px;
+    user-select: none;
 }
 
 /* Document */
