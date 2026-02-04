@@ -10,7 +10,7 @@ import re
 from pathlib import Path
 
 WORKSPACE_PATH = "/home/ubuntu/.openclaw/workspace"
-OUTPUT_PATH = "/home/ubuntu/.openclaw/workspace/lifeos-dashboard/docs-viewer/search-index.json"
+OUTPUT_PATH = "/home/ubuntu/.openclaw/workspace/docs-viewer/search-index.json"
 
 def extract_title(content):
     """Extract the first H1 or H2 heading as title."""
@@ -77,6 +77,14 @@ def get_file_tree(files):
             'path': rel_path
         })
     
+    # Sort tree: folders first, then files, both alphabetically
+    def sort_tree(nodes):
+        nodes.sort(key=lambda x: (0 if x['type'] == 'folder' else 1, x['name'].lower()))
+        for node in nodes:
+            if node.get('children'):
+                sort_tree(node['children'])
+    
+    sort_tree(tree)
     return tree
 
 def scan_markdown_files():

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated": 1770187992.989612,
+  "generated": 1770188532.9044895,
   "files": [
     {
       "path": "AGENTS.md",
@@ -267,6 +267,13 @@
       "excerpt": "🎮 Discord Server Buildout Plan Life OS Command Center --Server Structure Categories & Channels 📋 INFORMATION — Server rules, bot introductions — Life OS updates, new features — Dashboard/agent version updates 🤖 AGENT HQ — Cross-agent conversations — 🔮 AI research, trends — 💎 Crypto, DeFi discussion...",
       "wordCount": 532,
       "modified": 1770087065
+    },
+    {
+      "path": "agents/cost_consultant/README.md",
+      "title": "LLM Cost Consultant Agent",
+      "excerpt": "LLM Cost Consultant Agent Overview The LLM Cost Consultant Agent is an automated system designed to monitor, analyze, and optimize costs associated with Large Language Model (LLM) API usage across multiple providers. It provides daily detailed reports on spending and identifies savings...",
+      "wordCount": 1085,
+      "modified": 1770189026
     },
     {
       "path": "agents/crypto_specialist/README.md",
@@ -624,6 +631,13 @@
       "excerpt": "💬 Life OS Conversation Log Date: 2026-02-03 Participants: General b3rt (Human) Claw 🦾 (AI Executive Assistant) --📋 Summary of Today's Session ✅ Major Achievements 15 Niche Articles All Life OS agents wrote comprehensive articles Proactive Coder Activated nightly 11 PM builds Morning Brief Daily 8...",
       "wordCount": 350,
       "modified": 1770177601
+    },
+    {
+      "path": "finance/cost-tracker.md",
+      "title": "LLM Cost Tracker Methodology",
+      "excerpt": "LLM Cost Tracker Methodology Overview This document outlines the comprehensive methodology for tracking LLM and AI agent costs across multiple providers. It includes pricing references, budget thresholds, alert configurations, and tracking best practices. Cost Tracking Methodology Data Collection...",
+      "wordCount": 1468,
+      "modified": 1770189074
     },
     {
       "path": "finance/expense-tracker.md",
@@ -1363,83 +1377,6 @@
   ],
   "fileTree": [
     {
-      "type": "file",
-      "name": "AGENTS.md",
-      "path": "AGENTS.md"
-    },
-    {
-      "type": "file",
-      "name": "AGENTS_ROSTER_V2.md",
-      "path": "AGENTS_ROSTER_V2.md"
-    },
-    {
-      "type": "file",
-      "name": "AGENT_STATUS_README.md",
-      "path": "AGENT_STATUS_README.md"
-    },
-    {
-      "type": "file",
-      "name": "BOOTSTRAP.md",
-      "path": "BOOTSTRAP.md"
-    },
-    {
-      "type": "file",
-      "name": "COMMAND_REQUIREMENTS.md",
-      "path": "COMMAND_REQUIREMENTS.md"
-    },
-    {
-      "type": "file",
-      "name": "DEPLOY.md",
-      "path": "DEPLOY.md"
-    },
-    {
-      "type": "file",
-      "name": "HEARTBEAT.md",
-      "path": "HEARTBEAT.md"
-    },
-    {
-      "type": "file",
-      "name": "IDENTITY.md",
-      "path": "IDENTITY.md"
-    },
-    {
-      "type": "file",
-      "name": "MASTER_TODO.md",
-      "path": "MASTER_TODO.md"
-    },
-    {
-      "type": "file",
-      "name": "README.md",
-      "path": "README.md"
-    },
-    {
-      "type": "folder",
-      "name": "SOPs",
-      "path": "SOPs",
-      "children": [
-        {
-          "type": "file",
-          "name": "LIFE_OS_COMMAND_SOP.md",
-          "path": "SOPs/LIFE_OS_COMMAND_SOP.md"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "name": "SOUL.md",
-      "path": "SOUL.md"
-    },
-    {
-      "type": "file",
-      "name": "TOOLS.md",
-      "path": "TOOLS.md"
-    },
-    {
-      "type": "file",
-      "name": "USER.md",
-      "path": "USER.md"
-    },
-    {
       "type": "folder",
       "name": "agent-tasks",
       "path": "agent-tasks",
@@ -1449,11 +1386,6 @@
           "name": "2026-02-03",
           "path": "agent-tasks/2026-02-03",
           "children": [
-            {
-              "type": "file",
-              "name": "MASTER-SUMMARY.md",
-              "path": "agent-tasks/2026-02-03/MASTER-SUMMARY.md"
-            },
             {
               "type": "file",
               "name": "bridge-task.md",
@@ -1511,6 +1443,11 @@
             },
             {
               "type": "file",
+              "name": "MASTER-SUMMARY.md",
+              "path": "agent-tasks/2026-02-03/MASTER-SUMMARY.md"
+            },
+            {
+              "type": "file",
               "name": "mechanic-report.md",
               "path": "agent-tasks/2026-02-03/mechanic-report.md"
             },
@@ -1564,11 +1501,6 @@
       "path": "agents",
       "children": [
         {
-          "type": "file",
-          "name": "DIRECTORY_ANALYSIS_REPORT.md",
-          "path": "agents/DIRECTORY_ANALYSIS_REPORT.md"
-        },
-        {
           "type": "folder",
           "name": "ai_research_oracle",
           "path": "agents/ai_research_oracle",
@@ -1589,6 +1521,18 @@
               "type": "file",
               "name": "discord-server-plan.md",
               "path": "agents/bridge_operator/discord-server-plan.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "cost_consultant",
+          "path": "agents/cost_consultant",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "agents/cost_consultant/README.md"
             }
           ]
         },
@@ -1748,6 +1692,11 @@
               "path": "agents/remote_node/README.md"
             }
           ]
+        },
+        {
+          "type": "file",
+          "name": "DIRECTORY_ANALYSIS_REPORT.md",
+          "path": "agents/DIRECTORY_ANALYSIS_REPORT.md"
         }
       ]
     },
@@ -1989,6 +1938,11 @@
       "children": [
         {
           "type": "file",
+          "name": "cost-tracker.md",
+          "path": "finance/cost-tracker.md"
+        },
+        {
+          "type": "file",
           "name": "expense-tracker.md",
           "path": "finance/expense-tracker.md"
         }
@@ -1999,6 +1953,60 @@
       "name": "github-docs",
       "path": "github-docs",
       "children": [
+        {
+          "type": "folder",
+          "name": "docs",
+          "path": "github-docs/docs",
+          "children": [
+            {
+              "type": "file",
+              "name": "AGENT_CAPABILITIES.md",
+              "path": "github-docs/docs/AGENT_CAPABILITIES.md"
+            },
+            {
+              "type": "file",
+              "name": "LIFE_OS_COMPLETE_DOCUMENTATION.md",
+              "path": "github-docs/docs/LIFE_OS_COMPLETE_DOCUMENTATION.md"
+            },
+            {
+              "type": "file",
+              "name": "MEMORY_SYSTEM_v2.md",
+              "path": "github-docs/docs/MEMORY_SYSTEM_v2.md"
+            },
+            {
+              "type": "file",
+              "name": "multi-bot-telegram-architecture.md",
+              "path": "github-docs/docs/multi-bot-telegram-architecture.md"
+            },
+            {
+              "type": "file",
+              "name": "QUICKSTART.md",
+              "path": "github-docs/docs/QUICKSTART.md"
+            },
+            {
+              "type": "file",
+              "name": "SYSTEM_OVERVIEW.md",
+              "path": "github-docs/docs/SYSTEM_OVERVIEW.md"
+            },
+            {
+              "type": "file",
+              "name": "telegram-bot-setup-guide.md",
+              "path": "github-docs/docs/telegram-bot-setup-guide.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "SOPs",
+          "path": "github-docs/SOPs",
+          "children": [
+            {
+              "type": "file",
+              "name": "LIFE_OS_COMMAND_SOP.md",
+              "path": "github-docs/SOPs/LIFE_OS_COMMAND_SOP.md"
+            }
+          ]
+        },
         {
           "type": "file",
           "name": "AGENTS.md",
@@ -2065,16 +2073,14 @@
           "path": "github-docs/MODEL_ROUTING.md"
         },
         {
-          "type": "folder",
-          "name": "SOPs",
-          "path": "github-docs/SOPs",
-          "children": [
-            {
-              "type": "file",
-              "name": "LIFE_OS_COMMAND_SOP.md",
-              "path": "github-docs/SOPs/LIFE_OS_COMMAND_SOP.md"
-            }
-          ]
+          "type": "file",
+          "name": "security-remediation-todo.md",
+          "path": "github-docs/security-remediation-todo.md"
+        },
+        {
+          "type": "file",
+          "name": "security-revocation-checklist.md",
+          "path": "github-docs/security-revocation-checklist.md"
         },
         {
           "type": "file",
@@ -2090,58 +2096,6 @@
           "type": "file",
           "name": "USER.md",
           "path": "github-docs/USER.md"
-        },
-        {
-          "type": "folder",
-          "name": "docs",
-          "path": "github-docs/docs",
-          "children": [
-            {
-              "type": "file",
-              "name": "AGENT_CAPABILITIES.md",
-              "path": "github-docs/docs/AGENT_CAPABILITIES.md"
-            },
-            {
-              "type": "file",
-              "name": "LIFE_OS_COMPLETE_DOCUMENTATION.md",
-              "path": "github-docs/docs/LIFE_OS_COMPLETE_DOCUMENTATION.md"
-            },
-            {
-              "type": "file",
-              "name": "MEMORY_SYSTEM_v2.md",
-              "path": "github-docs/docs/MEMORY_SYSTEM_v2.md"
-            },
-            {
-              "type": "file",
-              "name": "QUICKSTART.md",
-              "path": "github-docs/docs/QUICKSTART.md"
-            },
-            {
-              "type": "file",
-              "name": "SYSTEM_OVERVIEW.md",
-              "path": "github-docs/docs/SYSTEM_OVERVIEW.md"
-            },
-            {
-              "type": "file",
-              "name": "multi-bot-telegram-architecture.md",
-              "path": "github-docs/docs/multi-bot-telegram-architecture.md"
-            },
-            {
-              "type": "file",
-              "name": "telegram-bot-setup-guide.md",
-              "path": "github-docs/docs/telegram-bot-setup-guide.md"
-            }
-          ]
-        },
-        {
-          "type": "file",
-          "name": "security-remediation-todo.md",
-          "path": "github-docs/security-remediation-todo.md"
-        },
-        {
-          "type": "file",
-          "name": "security-revocation-checklist.md",
-          "path": "github-docs/security-revocation-checklist.md"
         }
       ]
     },
@@ -2212,6 +2166,18 @@
       "path": "memory",
       "children": [
         {
+          "type": "folder",
+          "name": "archive",
+          "path": "memory/archive",
+          "children": [
+            {
+              "type": "file",
+              "name": "GENESIS-COMPLETION-SUMMARY.md",
+              "path": "memory/archive/GENESIS-COMPLETION-SUMMARY.md"
+            }
+          ]
+        },
+        {
           "type": "file",
           "name": "2ND_BRAIN_PROJECT.md",
           "path": "memory/2ND_BRAIN_PROJECT.md"
@@ -2228,6 +2194,16 @@
         },
         {
           "type": "file",
+          "name": "brain-preferences.md",
+          "path": "memory/brain-preferences.md"
+        },
+        {
+          "type": "file",
+          "name": "daily-tasks.md",
+          "path": "memory/daily-tasks.md"
+        },
+        {
+          "type": "file",
           "name": "DISCORD_MESSAGE_POLICY.md",
           "path": "memory/DISCORD_MESSAGE_POLICY.md"
         },
@@ -2240,28 +2216,6 @@
           "type": "file",
           "name": "PROACTIVE_CODER_DIRECTIVE.md",
           "path": "memory/PROACTIVE_CODER_DIRECTIVE.md"
-        },
-        {
-          "type": "folder",
-          "name": "archive",
-          "path": "memory/archive",
-          "children": [
-            {
-              "type": "file",
-              "name": "GENESIS-COMPLETION-SUMMARY.md",
-              "path": "memory/archive/GENESIS-COMPLETION-SUMMARY.md"
-            }
-          ]
-        },
-        {
-          "type": "file",
-          "name": "brain-preferences.md",
-          "path": "memory/brain-preferences.md"
-        },
-        {
-          "type": "file",
-          "name": "daily-tasks.md",
-          "path": "memory/daily-tasks.md"
         }
       ]
     },
@@ -2512,11 +2466,6 @@
       "path": "second-brain",
       "children": [
         {
-          "type": "file",
-          "name": "README.md",
-          "path": "second-brain/README.md"
-        },
-        {
           "type": "folder",
           "name": "content",
           "path": "second-brain/content",
@@ -2607,18 +2556,13 @@
               "path": "second-brain/reference/last30days-skill.md"
             }
           ]
+        },
+        {
+          "type": "file",
+          "name": "README.md",
+          "path": "second-brain/README.md"
         }
       ]
-    },
-    {
-      "type": "file",
-      "name": "security-remediation-todo.md",
-      "path": "security-remediation-todo.md"
-    },
-    {
-      "type": "file",
-      "name": "security-revocation-checklist.md",
-      "path": "security-revocation-checklist.md"
     },
     {
       "type": "folder",
@@ -2648,6 +2592,18 @@
               "path": "skills/discord-server-manager/SKILL.md"
             }
           ]
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "SOPs",
+      "path": "SOPs",
+      "children": [
+        {
+          "type": "file",
+          "name": "LIFE_OS_COMMAND_SOP.md",
+          "path": "SOPs/LIFE_OS_COMMAND_SOP.md"
         }
       ]
     },
@@ -2695,11 +2651,6 @@
       "children": [
         {
           "type": "file",
-          "name": "README.md",
-          "path": "super-swarm/README.md"
-        },
-        {
-          "type": "file",
           "name": "architecture.md",
           "path": "super-swarm/architecture.md"
         },
@@ -2707,6 +2658,11 @@
           "type": "file",
           "name": "integration-report.md",
           "path": "super-swarm/integration-report.md"
+        },
+        {
+          "type": "file",
+          "name": "README.md",
+          "path": "super-swarm/README.md"
         }
       ]
     },
@@ -2715,11 +2671,6 @@
       "name": "tools",
       "path": "tools",
       "children": [
-        {
-          "type": "file",
-          "name": "README.md",
-          "path": "tools/README.md"
-        },
         {
           "type": "folder",
           "name": "content",
@@ -2731,11 +2682,6 @@
               "path": "tools/content/README.md"
             }
           ]
-        },
-        {
-          "type": "file",
-          "name": "cross-system-triggers.md",
-          "path": "tools/cross-system-triggers.md"
         },
         {
           "type": "folder",
@@ -2768,15 +2714,25 @@
           "children": [
             {
               "type": "file",
-              "name": "README.md",
-              "path": "tools/x-integration/README.md"
+              "name": "mouse-macro-guide.md",
+              "path": "tools/x-integration/mouse-macro-guide.md"
             },
             {
               "type": "file",
-              "name": "mouse-macro-guide.md",
-              "path": "tools/x-integration/mouse-macro-guide.md"
+              "name": "README.md",
+              "path": "tools/x-integration/README.md"
             }
           ]
+        },
+        {
+          "type": "file",
+          "name": "cross-system-triggers.md",
+          "path": "tools/cross-system-triggers.md"
+        },
+        {
+          "type": "file",
+          "name": "README.md",
+          "path": "tools/README.md"
         }
       ]
     },
@@ -2849,6 +2805,81 @@
           "path": "zen/stress-mitigation-workflow.md"
         }
       ]
+    },
+    {
+      "type": "file",
+      "name": "AGENT_STATUS_README.md",
+      "path": "AGENT_STATUS_README.md"
+    },
+    {
+      "type": "file",
+      "name": "AGENTS.md",
+      "path": "AGENTS.md"
+    },
+    {
+      "type": "file",
+      "name": "AGENTS_ROSTER_V2.md",
+      "path": "AGENTS_ROSTER_V2.md"
+    },
+    {
+      "type": "file",
+      "name": "BOOTSTRAP.md",
+      "path": "BOOTSTRAP.md"
+    },
+    {
+      "type": "file",
+      "name": "COMMAND_REQUIREMENTS.md",
+      "path": "COMMAND_REQUIREMENTS.md"
+    },
+    {
+      "type": "file",
+      "name": "DEPLOY.md",
+      "path": "DEPLOY.md"
+    },
+    {
+      "type": "file",
+      "name": "HEARTBEAT.md",
+      "path": "HEARTBEAT.md"
+    },
+    {
+      "type": "file",
+      "name": "IDENTITY.md",
+      "path": "IDENTITY.md"
+    },
+    {
+      "type": "file",
+      "name": "MASTER_TODO.md",
+      "path": "MASTER_TODO.md"
+    },
+    {
+      "type": "file",
+      "name": "README.md",
+      "path": "README.md"
+    },
+    {
+      "type": "file",
+      "name": "security-remediation-todo.md",
+      "path": "security-remediation-todo.md"
+    },
+    {
+      "type": "file",
+      "name": "security-revocation-checklist.md",
+      "path": "security-revocation-checklist.md"
+    },
+    {
+      "type": "file",
+      "name": "SOUL.md",
+      "path": "SOUL.md"
+    },
+    {
+      "type": "file",
+      "name": "TOOLS.md",
+      "path": "TOOLS.md"
+    },
+    {
+      "type": "file",
+      "name": "USER.md",
+      "path": "USER.md"
     }
   ]
 }

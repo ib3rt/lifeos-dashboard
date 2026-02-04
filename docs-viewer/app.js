@@ -12,6 +12,201 @@
     const MARKDOWN_BASE_PATH = '../';
 
     // ============================================
+    // Error Handling
+    // ============================================
+    const ERROR_TYPES = {
+        NETWORK: 'network',
+        NOT_FOUND: 'not_found',
+        PARSE: 'parse',
+        STORAGE: 'storage',
+        RENDER: 'render',
+        CORS: 'cors',
+        UNKNOWN: 'unknown'
+    };
+
+    // Error messages mapping
+    const ERROR_MESSAGES = {
+        [ERROR_TYPES.NETWORK]: 'Unable to connect. Please check your internet connection.',
+        [ERROR_TYPES.NOT_FOUND]: 'File not found. It may have been moved or deleted.',
+        [ERROR_TYPES.PARSE]: 'Unable to load content. Please try again.',
+        [ERROR_TYPES.STORAGE]: 'Storage full. Please clear some data.',
+        [ERROR_TYPES.RENDER]: 'Unable to display content. The file format may be invalid.',
+        [ERROR_TYPES.CORS]: 'Cross-origin access denied. Please check server permissions.',
+        [ERROR_TYPES.UNKNOWN]: 'An unexpected error occurred. Please try again.'
+    };
+
+    // Track last action for retry
+    let lastAction = null;
+    let lastActionArgs = null;
+    let lastActionContext = null;
+
+    // Set the last action for retry functionality
+    function setLastAction(action, args, context) {
+        lastAction = action;
+        lastActionArgs = args || [];
+        lastActionContext = context || null;
+    }
+
+    // Retry the last failed action
+    function retryLastAction() {
+        if (lastAction && typeof lastAction === 'function') {
+            console.log('Retrying last action...');
+            try {
+                if (lastActionContext) {
+                    lastAction.apply(lastActionContext, lastActionArgs);
+                } else {
+                    lastAction(...lastActionArgs);
+                }
+            } catch (error) {
+                console.error('Retry failed:', error);
+                handleError(error, ERROR_TYPES.UNKNOWN);
+            }
+        }
+    }
+
+    // Report error to console for logging
+    function reportError(type) {
+        const errorReport = {
+            type: type,
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent,
+            url: window.location.href
+        };
+        console.group('Error Report');
+        console.log('Type:', type);
+        console.log('Report:', errorReport);
+        console.groupEnd();
+        
+        // Could be extended to send to error tracking service
+        alert(`Error reported: ${type}\nThank you for your feedback!`);
+    }
+
+    // Main error handler
+    function handleError(error, type = ERROR_TYPES.UNKNOWN) {
+        console.error(`Error [${type}]:`, error);
+        
+        const errorMessage = ERROR_MESSAGES[type] || ERROR_MESSAGES[ERROR_TYPES.UNKNOWN];
+        
+        const html = `
+            <div class="error-state fade-in">
+                <div class="error-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="error-message">${errorMessage}</div>
+                <div class="error-actions">
+                    <button class="retry-btn" onclick="retryLastAction()">Retry</button>
+                    <button class="report-btn" onclick="reportError('${type}')">Report Issue</button>
+                </div>
+            </div>
+        `;
+        
+        if (elements.document) {
+            elements.document.innerHTML = html;
+        }
+        
+        return { type, message: errorMessage, originalError: error };
+    }
+
+    // Detect error type from error object
+    function detectErrorType(error) {
+        if (!error) return ERROR_TYPES.UNKNOWN;
+        
+        const message = (error.message || '').toLowerCase();
+        const name = error.name || '';
+        
+        if (name === 'QuotaExceededError' || message.includes('quota') || message.includes('storage')) {
+            return ERROR_TYPES.STORAGE;
+        }
+        
+        if (message.includes('network') || message.includes('fetch') || message.includes('Failed to fetch')) {
+            return ERROR_TYPES.NETWORK;
+        }
+        
+        if (error.status === 404 || message.includes('404') || message.includes('not found')) {
+            return ERROR_TYPES.NOT_FOUND;
+        }
+        
+        if (message.includes('cors') || message.includes('cross-origin') || message.includes('access-control')) {
+            return ERROR_TYPES.CORS;
+        }
+        
+        if (message.includes('json') || message.includes('parse') || message.includes('syntaxerror')) {
+            return ERROR_TYPES.PARSE;
+        }
+        
+        if (message.includes('render') || message.includes('markdown') || message.includes('parse')) {
+            return ERROR_TYPES.RENDER;
+        }
+        
+        return ERROR_TYPES.UNKNOWN;
+    }
+
+    // Safe fetch wrapper with error handling
+    async function safeFetch(url, options = {}) {
+        try {
+            const response = await fetch(url, options);
+            
+            if (!response.ok) {
+                if (response.status === 404) {
+                    throw new Error(`File not found: ${url}`);
+                } else if (response.status === 403) {
+                    throw new Error(`Access denied: ${url}`);
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+            }
+            
+            return response;
+        } catch (error) {
+            const type = detectErrorType(error);
+            handleError(error, type);
+            throw error;
+        }
+    }
+
+    // Safe JSON parse wrapper
+    function safeParse(jsonString, fallback = null) {
+        try {
+            return JSON.parse(jsonString);
+        } catch (error) {
+            handleError(error, ERROR_TYPES.PARSE);
+            return fallback;
+        }
+    }
+
+    // Safe markdown render wrapper
+    function safeRenderMarkdown(content) {
+        try {
+            marked.use({
+                gfm: true,
+                breaks: true,
+                headerIds: true,
+                mangle: false
+            });
+
+            const renderer = new marked.Renderer();
+            const originalCode = renderer.code.bind(renderer);
+
+            renderer.code = function(code, language) {
+                const validLanguage = language && Prism.languages[language] ? language : 'plaintext';
+                const highlighted = Prism.highlight(code, Prism.languages[validLanguage], validLanguage);
+                return `<pre><code class="language-${validLanguage}">${highlighted}</code></pre>`;
+            };
+
+            marked.setOptions({ renderer });
+
+            return marked.parse(content);
+        } catch (error) {
+            handleError(error, ERROR_TYPES.RENDER);
+            throw error;
+        }
+    }
+
+    // ============================================
     // localStorage Helper Functions
     // ============================================
     const storage = {
@@ -19,9 +214,10 @@
             try {
                 const value = localStorage.getItem(key);
                 if (value === null) return defaultValue;
-                return JSON.parse(value);
+                return safeParse(value, defaultValue);
             } catch (e) {
                 console.warn(`localStorage get failed for "${key}":`, e);
+                handleError(e, detectErrorType(e));
                 return defaultValue;
             }
         },
@@ -32,14 +228,17 @@
                 return true;
             } catch (e) {
                 console.warn(`localStorage set failed for "${key}":`, e);
-                if (e.name === 'QuotaExceededError') {
-                    // Try to clear old data
+                const type = detectErrorType(e);
+                handleError(e, type);
+                if (type === ERROR_TYPES.STORAGE) {
+                    // Try to clear old data and retry
                     this.clearExpired();
                     try {
                         localStorage.setItem(key, JSON.stringify(value));
                         return true;
                     } catch (e2) {
                         console.error('localStorage quota exceeded, cannot save:', key);
+                        handleError(e2, ERROR_TYPES.STORAGE);
                     }
                 }
                 return false;
@@ -73,11 +272,13 @@
     // Default State for New Users
     // ============================================
     const defaultState = {
-        theme: 'light',
+        theme: 'dark',
         expandedFolders: [],
         recentFiles: [],
         sidebarCollapsed: false,
-        searchHistory: []
+        searchHistory: [],
+        lastFile: null,
+        scrollPosition: { x: 0, y: 0 }
     };
 
     // ============================================
@@ -90,10 +291,11 @@
         activeFile: null,
         searchQuery: '',
         searchResults: [],
-        isSidebarCollapsed: false,
+        isSidebarCollapsed: storage.get('docs-sidebar-collapsed', defaultState.sidebarCollapsed),
         theme: storage.get('docs-theme', defaultState.theme),
         recentFiles: storage.get('docs-recent-files', defaultState.recentFiles),
-        searchHistory: storage.get('docs-search-history', defaultState.searchHistory)
+        searchHistory: storage.get('docs-search-history', defaultState.searchHistory),
+        lastFile: storage.get('docs-last-file', defaultState.lastFile)
     };
 
     // ============================================
@@ -102,13 +304,17 @@
     const elements = {
         sidebar: document.getElementById('sidebar'),
         toggleSidebar: document.getElementById('toggleSidebar'),
+        mobileMenuBtn: document.getElementById('mobileMenuBtn'),
         searchInput: document.getElementById('searchInput'),
         searchResults: document.getElementById('searchResults'),
         fileTree: document.getElementById('fileTree'),
         document: document.getElementById('document'),
         breadcrumbs: document.getElementById('breadcrumbs'),
         themeToggle: document.getElementById('themeToggle'),
-        mobileOverlay: document.getElementById('mobileOverlay')
+        mobileOverlay: document.getElementById('mobileOverlay'),
+        recentFilesSection: document.getElementById('recentFilesSection'),
+        recentFilesList: document.getElementById('recentFilesList'),
+        clearRecentBtn: document.getElementById('clearRecentBtn')
     };
 
     // ============================================
@@ -119,7 +325,6 @@
         document.documentElement.setAttribute('data-theme', state.theme);
         
         // Load sidebar state
-        state.isSidebarCollapsed = storage.get('docs-sidebar-collapsed', defaultState.sidebarCollapsed);
         if (state.isSidebarCollapsed) {
             elements.sidebar.classList.add('collapsed');
         }
@@ -133,29 +338,37 @@
         // Setup event listeners
         setupEventListeners();
         
-        // Check for hash in URL
-        handleHashChange();
+        // Setup hash routing and browser history
+        setupHashRouting();
         
-        // Load recent file if available
-        loadRecentFile();
+        // Render recent files
+        renderRecentFiles();
     }
 
     async function loadIndex() {
+        // Set up retry for index loading
+        setLastAction(loadIndex, [], null);
+        
         try {
-            const response = await fetch('search-index.json');
-            if (!response.ok) throw new Error('Failed to load index');
-            state.index = await response.json();
+            const response = await safeFetch('search-index.json');
+            if (!response.ok) {
+                throw new Error('Failed to load index');
+            }
+            
+            const indexData = await response.json();
+            state.index = indexData;
             
             // Convert flat files array to tree structure
             state.fileTree = buildFileTree(state.index.files || []);
             
             // Load expanded folders from localStorage using storage helper
-            const savedFolders = storage.get('docs-expanded-folders', []);
+            const savedFolders = storage.get('docs-expanded', []);
             savedFolders.forEach(f => state.expandedFolders.add(f));
             
         } catch (error) {
             console.error('Failed to load search index:', error);
             elements.fileTree.innerHTML = '<div class="tree-loading">Failed to load files</div>';
+            handleError(error, detectErrorType(error));
         }
     }
 
@@ -328,7 +541,7 @@
     }
     
     function saveExpandedState() {
-        storage.set('docs-expanded-folders', [...state.expandedFolders]);
+        storage.set('docs-expanded', [...state.expandedFolders]);
     }
 
     // ============================================
@@ -352,93 +565,116 @@
         // Resolve path using configured base path
         const fetchPath = MARKDOWN_BASE_PATH + path;
         
+        // Set up retry for document loading
+        setLastAction(loadDocument, [path], null);
+        
         try {
-            const response = await fetch(fetchPath);
-            if (!response.ok) throw new Error('Document not found');
+            const response = await safeFetch(fetchPath);
+            if (!response.ok) {
+                throw new Error(`Document not found: ${path}`);
+            }
             
             const content = await response.text();
-            renderDocument(path, content);
+            await renderDocument(path, content);
             updateBreadcrumbs(path);
             
             // Update URL hash
             history.pushState({ path }, '', `#${encodeURIComponent(path)}`);
             
         } catch (error) {
-            elements.document.innerHTML = `
-                <div class="document-placeholder">
-                    <div class="placeholder-icon">
-                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="12"></line>
-                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
-                    </div>
-                    <h2>Document not found</h2>
-                    <p>${error.message}</p>
-                </div>
-            `;
+            elements.document.innerHTML = '';
+            handleError(error, detectErrorType(error));
         }
     }
 
     function addToRecentFiles(path) {
+        // Get file title from path
+        const title = path.split('/').pop();
+        
+        // Load existing recent files with full info
+        let recentFiles = storage.get('docs-recent-files', []);
+        
         // Remove if already exists
-        const index = state.recentFiles.indexOf(path);
-        if (index > -1) {
-            state.recentFiles.splice(index, 1);
-        }
-        // Add to beginning
-        state.recentFiles.unshift(path);
+        recentFiles = recentFiles.filter(f => f.path !== path);
+        
+        // Add to beginning with title and timestamp
+        recentFiles.unshift({
+            path: path,
+            title: title,
+            accessed: Date.now()
+        });
+        
         // Keep only last 10
-        if (state.recentFiles.length > 10) {
-            state.recentFiles = state.recentFiles.slice(0, 10);
+        if (recentFiles.length > 10) {
+            recentFiles = recentFiles.slice(0, 10);
         }
+        
         // Save to localStorage
-        storage.set('docs-recent-files', state.recentFiles);
+        storage.set('docs-recent-files', recentFiles);
+        state.recentFiles = recentFiles;
+        
+        // Update UI
+        renderRecentFiles();
     }
 
-    function renderDocument(path, content) {
-        // Configure marked for GitHub Flavored Markdown
-        marked.use({
-            gfm: true,
-            breaks: true,
-            headerIds: true,
-            mangle: false
-        });
+    async function renderDocument(path, content) {
+        try {
+            // Get file extension
+            const ext = path.split('.').pop().toLowerCase();
+            
+            // Get appropriate handler based on extension
+            const handler = getFileTypeHandler(ext);
+            
+            // Render content using handler
+            const html = await handler(path, content);
+            
+            // Determine wrapper class based on file type
+            let wrapperClass = 'markdown-body';
+            if (ext === 'json') wrapperClass = 'json-body';
+            else if (ext === 'txt') wrapperClass = 'text-body';
+            else if (['yml', 'yaml', 'py', 'js', 'ts', 'jsx', 'tsx', 'css', 'html', 'sh', 'bash', 'sql', 'java', 'c', 'cpp', 'cs', 'go', 'rs', 'rb', 'php', 'swift', 'kt', 'lua', 'r', 'rust', 'dockerfile', 'ini', 'cfg', 'conf', 'env', 'gitignore', 'gitattributes']) {
+                wrapperClass = 'code-body';
+            } else if (ext === 'mdx') wrapperClass = 'markdown-body';
 
-        // Custom renderer for code blocks with Prism.js
-        const renderer = new marked.Renderer();
-        const originalCode = renderer.code.bind(renderer);
-
-        renderer.code = function(code, language) {
-            const validLanguage = language && Prism.languages[language] ? language : 'plaintext';
-            const highlighted = Prism.highlight(code, Prism.languages[validLanguage], validLanguage);
-            return `<pre><code class="language-${validLanguage}">${highlighted}</code></pre>`;
-        };
-
-        marked.setOptions({ renderer });
-
-        // Render markdown
-        const html = marked.parse(content);
-
-        elements.document.innerHTML = `
-            <div class="markdown-body fade-in">
-                ${html}
-            </div>
-        `;
-        
-        // Handle internal links
-        elements.document.querySelectorAll('a').forEach(link => {
-            const href = link.getAttribute('href');
-            if (href && href.endsWith('.md')) {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const relPath = resolvePath(path, href);
-                    loadDocument(relPath);
+            elements.document.innerHTML = `
+                <div class="${wrapperClass} fade-in">
+                    ${html}
+                </div>
+            `;
+            
+            // Handle internal links for markdown files
+            if (ext === 'md' || ext === 'mdx') {
+                elements.document.querySelectorAll('a').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href && href.endsWith('.md')) {
+                        link.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const relPath = resolvePath(path, href);
+                            loadDocument(relPath);
+                        });
+                    }
+                });
+                
+                // Handle TOC links
+                elements.document.querySelectorAll('.toc a').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetId = link.getAttribute('href').replace('#', '');
+                        const targetEl = document.getElementById(targetId);
+                        if (targetEl) {
+                            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
                 });
             }
-        });
-        
-        state.activeFile = path;
+            
+            // Apply syntax highlighting
+            Prism.highlightAll();
+            
+            state.activeFile = path;
+        } catch (error) {
+            handleError(error, ERROR_TYPES.RENDER);
+        }
     }
 
     function updateBreadcrumbs(path) {
@@ -542,14 +778,14 @@
         // Render results
         elements.searchResults.innerHTML = results.map((file, i) => {
             const highlightedTitle = highlightMatch(file.title, query);
-            const path = file.path;
+            const filePath = file.path;
             const excerpt = file.excerpt || '';
             const highlightedExcerpt = excerpt ? highlightMatch(excerpt, query) : '';
             
             return `
-                <div class="search-result-item ${i === 0 ? 'highlighted' : ''}" data-path="${file.path}">
+                <div class="search-result-item ${i === 0 ? 'highlighted' : ''}" data-path="${filePath}">
                     <div class="search-result-title">${highlightedTitle}</div>
-                    <div class="search-result-path">${path}</div>
+                    <div class="search-result-path">${filePath}</div>
                     ${highlightedExcerpt ? `<div class="search-result-excerpt">${highlightedExcerpt}</div>` : ''}
                 </div>
             `;
@@ -612,8 +848,22 @@
     }
 
     // ============================================
-    // URL Hash Handling
+    // Hash Routing & Deep Linking
     // ============================================
+    function setupHashRouting() {
+        // Listen for hash changes (when user clicks links or manually changes hash)
+        window.addEventListener('hashchange', handleHashChange);
+        
+        // Listen for browser back/forward navigation
+        window.addEventListener('popstate', handlePopState);
+        
+        // Check for hash in URL and load document if present
+        // This handles direct links and page reloads with hash
+        if (window.location.hash) {
+            handleHashChange();
+        }
+    }
+    
     function handleHashChange() {
         const hash = window.location.hash.slice(1);
         if (hash) {
@@ -622,8 +872,58 @@
                 loadDocument(path);
             } catch (e) {
                 console.error('Invalid hash:', hash);
+                showFileTree();
+            }
+        } else {
+            // No hash - show file tree (home view)
+            showFileTree();
+        }
+    }
+    
+    function handlePopState(event) {
+        // Handle browser back/forward button navigation
+        if (event.state && event.state.path) {
+            loadDocument(event.state.path);
+        } else {
+            // No state - check for hash or show home
+            if (window.location.hash) {
+                handleHashChange();
+            } else {
+                showFileTree();
             }
         }
+    }
+    
+    function showFileTree() {
+        // Reset to file tree view without loading a document
+        state.activeFile = null;
+        
+        // Clear active state in tree
+        document.querySelectorAll('.tree-node-content').forEach(el => {
+            el.classList.remove('active');
+        });
+        
+        // Update breadcrumbs to show only Home
+        elements.breadcrumbs.innerHTML = `<span class="breadcrumb-item current">🏠 Home</span>`;
+        
+        // Show placeholder
+        elements.document.innerHTML = `
+            <div class="document-placeholder">
+                <div class="empty-state">
+                    <div class="icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="title">Select a document to view</div>
+                    <div class="description">Choose a markdown file from the sidebar to read</div>
+                </div>
+            </div>
+        `;
     }
 
     // ============================================
@@ -633,8 +933,50 @@
         // Use the new array format, get most recent
         const recentFile = state.recentFiles.length > 0 ? state.recentFiles[0] : null;
         if (recentFile && !window.location.hash) {
-            loadDocument(recentFile);
+            loadDocument(recentFile.path);
         }
+    }
+
+    // ============================================
+    // Recent Files UI
+    // ============================================
+    function renderRecentFiles() {
+        const recentFiles = state.recentFiles || [];
+        const section = elements.recentFilesSection;
+        const list = elements.recentFilesList;
+        
+        if (recentFiles.length === 0) {
+            section.style.display = 'none';
+            return;
+        }
+        
+        section.style.display = 'block';
+        
+        list.innerHTML = recentFiles.map((file, index) => {
+            const isActive = file.path === state.activeFile;
+            return `
+                <div class="recent-file-item ${isActive ? 'active' : ''}" data-path="${file.path}">
+                    <svg class="recent-file-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <span class="recent-file-title">${escapeHtml(file.title)}</span>
+                </div>
+            `;
+        }).join('');
+        
+        // Add click handlers
+        list.querySelectorAll('.recent-file-item').forEach(item => {
+            item.addEventListener('click', () => {
+                loadDocument(item.dataset.path);
+            });
+        });
+    }
+
+    function clearRecentFiles() {
+        state.recentFiles = [];
+        storage.set('docs-recent-files', []);
+        renderRecentFiles();
     }
 
     function resetToRoot() {
@@ -697,93 +1039,46 @@
         return parts.join('/');
     }
 
+    // Escape HTML for safe rendering
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
     // ============================================
-    // Event Listeners
+    // Tree Keyboard Navigation
     // ============================================
-    function setupEventListeners() {
-        // Sidebar toggle
-        elements.toggleSidebar.addEventListener('click', toggleSidebar);
+    let focusedNodeIndex = -1;
+    let allTreeNodes = [];
+
+    function updateTreeNodes() {
+        allTreeNodes = Array.from(elements.fileTree.querySelectorAll('.tree-node-content'));
+    }
+
+    function navigateTree(direction) {
+        updateTreeNodes();
         
-        // Theme toggle
-        elements.themeToggle.addEventListener('click', toggleTheme);
+        if (allTreeNodes.length === 0) return;
         
-        // Search
-        let searchTimeout;
-        elements.searchInput.addEventListener('input', (e) => {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                state.searchQuery = e.target.value;
-                setupSearch();
-            }, 200);
-        });
+        // Find currently focused element
+        const focused = document.activeElement;
+        const isInTree = focused && focused.classList.contains('tree-node-content');
+        const currentIndex = isInTree ? allTreeNodes.indexOf(focused) : -1;
         
-        // Close search on escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                clearSearch();
-                elements.searchInput.blur();
-            }
-            // Cmd/Ctrl + K for search
-            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-                e.preventDefault();
-                elements.searchInput.focus();
-            }
-        });
+        let nextIndex;
         
-        // Click outside search to close
-        document.addEventListener('click', (e) => {
-            if (!elements.searchInput.contains(e.target) && 
-                !elements.searchResults.contains(e.target)) {
-                clearSearch();
-            }
-        });
-        
-        // Keyboard navigation in search
-        elements.searchInput.addEventListener('keydown', (e) => {
-            const results = elements.searchResults.querySelectorAll('.search-result-item');
-            const current = elements.searchResults.querySelector('.highlighted');
-            const currentIndex = current ? [...results].indexOf(current) : -1;
-            
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                const next = results[currentIndex + 1] || results[0];
-                if (current) current.classList.remove('highlighted');
-                next.classList.add('highlighted');
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                const prev = results[currentIndex - 1] || results[results.length - 1];
-                if (current) current.classList.remove('highlighted');
-                prev.classList.add('highlighted');
-            } else if (e.key === 'Enter' && current) {
-                e.preventDefault();
-                loadDocument(current.dataset.path);
-                clearSearch();
-            }
-        });
-        
-        // Tree keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            // Only handle tree navigation when not in search input
-            if (e.target === elements.searchInput) return;
-            
-            const focused = document.activeElement;
-            if (!focused || !focused.classList.contains('tree-node-content')) return;
-            
-            const currentNode = focused.parentElement;
-            const allNodes = Array.from(elements.fileTree.querySelectorAll('.tree-node-content'));
-            const currentIndex = allNodes.indexOf(focused);
-            
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                const next = allNodes[currentIndex + 1];
-                if (next) next.focus();
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                const prev = allNodes[currentIndex - 1];
-                if (prev) prev.focus();
-            } else if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                const nodeEl = currentNode;
+        if (direction === 'ArrowDown') {
+            nextIndex = currentIndex < allTreeNodes.length - 1 ? currentIndex + 1 : 0;
+        } else if (direction === 'ArrowUp') {
+            nextIndex = currentIndex > 0 ? currentIndex - 1 : allTreeNodes.length - 1;
+        } else if (direction === 'ArrowRight') {
+            if (isInTree) {
+                const nodeEl = focused.parentElement;
                 if (nodeEl.classList.contains('folder')) {
                     const isExpanded = nodeEl.querySelector('.tree-children')?.classList.contains('expanded');
                     if (!isExpanded) {
@@ -797,13 +1092,19 @@
                             saveExpandedState();
                         }
                     }
-                    // Focus first child
-                    const firstChild = nodeEl.querySelector('.tree-children .tree-node-content');
-                    if (firstChild) firstChild.focus();
+                    // Focus first child after expanding
+                    setTimeout(() => {
+                        updateTreeNodes();
+                        const firstChild = nodeEl.querySelector('.tree-children .tree-node-content');
+                        if (firstChild) firstChild.focus();
+                    }, 50);
+                    return;
                 }
-            } else if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                const nodeEl = currentNode;
+            }
+            return;
+        } else if (direction === 'ArrowLeft') {
+            if (isInTree) {
+                const nodeEl = focused.parentElement;
                 if (nodeEl.classList.contains('folder')) {
                     const isExpanded = nodeEl.querySelector('.tree-children')?.classList.contains('expanded');
                     if (isExpanded) {
@@ -821,29 +1122,55 @@
                         const parentContent = nodeEl.closest('.tree-children')?.previousElementSibling;
                         if (parentContent) parentContent.focus();
                     }
+                    return;
                 }
             }
-        });
+            return;
+        }
         
-        // Hash change
-        window.addEventListener('hashchange', handleHashChange);
-        
-        // Popstate
-        window.addEventListener('popstate', handleHashChange);
-        
-        // Mobile overlay click
-        elements.mobileOverlay.addEventListener('click', () => {
-            elements.sidebar.classList.remove('mobile-open');
-            elements.mobileOverlay.classList.remove('active');
-        });
+        if (nextIndex !== undefined && allTreeNodes[nextIndex]) {
+            allTreeNodes[nextIndex].focus();
+        }
+    }
+
+    function openSelectedFile() {
+        const focused = document.activeElement;
+        if (focused && focused.classList.contains('tree-node-content')) {
+            const nodeEl = focused.parentElement;
+            const path = nodeEl.dataset.path;
+            if (nodeEl.classList.contains('file')) {
+                loadDocument(path);
+            } else if (nodeEl.classList.contains('folder')) {
+                const isExpanded = nodeEl.querySelector('.tree-children')?.classList.contains('expanded');
+                const children = nodeEl.querySelector('.tree-children');
+                const toggle = nodeEl.querySelector('.tree-toggle');
+                if (!isExpanded && children && toggle) {
+                    children.classList.add('expanded');
+                    toggle.classList.add('expanded');
+                    state.expandedFolders.add(path);
+                    saveExpandedState();
+                    // Focus first child
+                    setTimeout(() => {
+                        const firstChild = nodeEl.querySelector('.tree-children .tree-node-content');
+                        if (firstChild) firstChild.focus();
+                    }, 50);
+                }
+            }
+        }
     }
 
     // ============================================
-    // Start Application
+    // Event Listeners
     // ============================================
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-})();
+    function setupEventListeners() {
+        // Sidebar toggle
+        elements.toggleSidebar.addEventListener('click', toggleSidebar);
+        
+        // Mobile menu button
+        if (elements.mobileMenuBtn) {
+            elements.mobileMenuBtn.addEventListener('click', () => {
+                elements.sidebar.classList.add('mobile-open');
+                elements.mobileOverlay.classList.add('active');
+            });
+        }
+        
