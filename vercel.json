@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "lifeos-dashboard",
+  "builds": [
+    {"src": "index.html", "use": "@vercel/static"},
+    {"src": "*.json", "use": "@vercel/static"},
+    {"src": "*.js", "use": "@vercel/static"},
+    {"src": "*.css", "use": "@vercel/static"},
+    {"src": "markdown/**/*", "use": "@vercel/static"}
+  ],
+  "routes": [{"src": "/(.*)", "headers": {"Cache-Control": "public, max-age=0"}}]
+}

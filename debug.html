@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life OS Docs - DEBUG</title>
+    <script>
+        // Capture all errors
+        window.onerror = function(msg, url, line, col, error) {
+            document.getElementById('debug-output').innerHTML += 
+                '<div style="color:red">ERROR: ' + msg + ' at ' + url + ':' + line + '</div>';
+            return false;
+        };
+    </script>
+</head>
+<body>
+    <div id="debug-output" style="background: #1a1a1a; color: #0f0; padding: 20px; font-family: monospace; white-space: pre-wrap;">
+DEBUG CONSOLE:
+==============
+    </div>
+    
+    <!-- Load libraries first -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    
+    <script>
+        document.getElementById('debug-output').innerHTML += 'Libraries loaded successfully\n';
+    </script>
+    
+    <script src="app.js"></script>
+    
+    <script>
+        document.getElementById('debug-output').innerHTML += 'app.js loaded\n';
+    </script>
+</body>
+</html>

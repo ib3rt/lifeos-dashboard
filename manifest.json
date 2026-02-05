@@ -1,0 +1,50 @@
+{
+  "name": "Life OS Docs",
+  "short_name": "Life OS",
+  "description": "Documentation viewer for Life OS - Your Personal Operating System",
+  "start_url": "/docs-viewer/",
+  "display": "standalone",
+  "background_color": "#1a1b1e",
+  "theme_color": "#5c7cfa",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235c7cfa' stroke-width='2'><path d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'></path><path d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'></path></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192' fill='%235c7cfa'><rect width='192' height='192' rx='32' fill='%231a1b1e'/><path d='M48 40h96c4.4 0 8 3.6 8 8v96c0 4.4-3.6 8-8 8H48c-4.4 0-8-3.6-8-8V48c0-4.4 3.6-8 8-8z' fill='none' stroke='%235c7cfa' stroke-width='8'/><path d='M56 72h80M56 96h80M56 120h60' stroke='%235c7cfa' stroke-width='6' stroke-linecap='round'/></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "education", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Search Docs",
+      "short_name": "Search",
+      "description": "Search through documentation",
+      "url": "/docs-viewer/?search=true",
+      "icons": []
+    },
+    {
+      "name": "Favorites",
+      "short_name": "Favs",
+      "description": "View your favorite documents",
+      "url": "/docs-viewer/?view=favorites",
+      "icons": []
+    },
+    {
+      "name": "Recent Files",
+      "short_name": "Recent",
+      "description": "View recently opened files",
+      "url": "/docs-viewer/?view=recent",
+      "icons": []
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

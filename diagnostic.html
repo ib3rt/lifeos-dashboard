@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Docs Viewer Diagnostic</title>
+    <style>
+        body { background: #0a0a0f; color: #00ff88; font-family: monospace; padding: 20px; line-height: 1.6; }
+        h1 { color: #00d4ff; }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #333; border-radius: 8px; }
+        .pass { color: #00ff88; }
+        .fail { color: #ff5555; }
+        .warn { color: #ffaa00; }
+        pre { background: #1a1a1a; padding: 15px; border-radius: 8px; overflow-x: auto; }
+        #all-tests { margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Docs Viewer Diagnostic</h1>
+    
+    <div class="section">
+        <h3>1. JavaScript Execution</h3>
+        <div id="js-test">Testing...</div>
+    </div>
+    
+    <div class="section">
+        <h3>2. DOM Elements</h3>
+        <div id="dom-test">Testing...</div>
+    </div>
+    
+    <div class="section">
+        <h3>3. Fetch Index</h3>
+        <div id="fetch-test">Testing...</div>
+    </div>
+    
+    <div class="section">
+        <h3>4. Data Validation</h3>
+        <div id="data-test">Testing...</div>
+    </div>
+    
+    <div class="section">
+        <h3>5. Render Test</h3>
+        <div id="render-test">Testing...</div>
+    </div>
+    
+    <div class="section" id="all-tests">
+        <h3>📋 All Results</h3>
+        <pre id="results">Running tests...</pre>
+    </div>
+
+    <script>
+        const results = [];
+        
+        function log(section, status, msg) {
+            const el = document.getElementById(section + '-test');
+            const icon = status ? '✅' : '❌';
+            const className = status ? 'pass' : 'fail';
+            el.innerHTML = `<span class="${className}">${icon} ${msg}</span>`;
+            results.push({ section, status, msg });
+            document.getElementById('results').textContent = JSON.stringify(results, null, 2);
+        }
+        
+        // Test 1: JS execution
+        try {
+            log('js', true, 'JavaScript is executing');
+        } catch (e) {
+            log('js', false, 'Error: ' + e.message);
+        }
+        
+        // Test 2: DOM elements
+        const elements = ['fileTree', 'sidebar', 'searchInput', 'document', 'breadcrumbs'];
+        const domStatus = elements.every(id => document.getElementById(id));
+        log('dom', domStatus, domStatus ? 'All DOM elements exist' : 'Missing: ' + elements.filter(id => !document.getElementById(id)).join(', '));
+        
+        // Test 3: Fetch index
+        fetch('search-index.json')
+            .then(r => r.json())
+            .then(data => {
+                log('fetch', true, 'Index loaded: ' + data.files?.length + ' files, ' + data.fileTree?.length + ' tree nodes');
+                
+                // Test 4: Data validation
+                const valid = data.files?.length > 0 && data.fileTree?.length > 0;
+                log('data', valid, valid ? 'Data structure valid' : 'Data structure invalid');
+                
+                // Test 5: Render test
+                try {
+                    const container = document.getElementById('fileTree');
+                    if (container) {
+                        // Render just the first few items
+                        let html = '<div style="padding: 10px;">';
+                        data.fileTree.slice(0, 5).forEach(node => {
+                            const icon = node.type === 'folder' ? '📁' : '📄';
+                            html += `<div>${icon} ${node.name}</div>`;
+                        });
+                        html += '</div>';
+                        container.innerHTML = html;
+                        log('render', true, 'Rendered first 5 items successfully!');
+                    } else {
+                        log('render', false, 'fileTree element not found');
+                    }
+                } catch (e) {
+                    log('render', false, 'Error: ' + e.message);
+                }
+            })
+            .catch(err => {
+                log('fetch', false, 'Error: ' + err.message);
+            });
+    </script>
+</body>
+</html>

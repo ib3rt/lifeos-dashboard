@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Life OS Docs - DEBUG v2</title>
+    <style>
+        body { background: #0a0a0f; color: #0f0; font-family: monospace; padding: 20px; }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #333; }
+        .error { color: #f55; }
+        .success { color: #5f5; }
+        pre { background: #1a1a1a; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Comprehensive Debug</h1>
+    
+    <div class="section" id="network-tests">
+        <h3>🌐 Network Tests</h3>
+        <div id="network-results">Testing...</div>
+    </div>
+    
+    <div class="section" id="dom-tests">
+        <h3>🎯 DOM Tests</h3>
+        <div id="dom-results">Testing...</div>
+    </div>
+    
+    <div class="section" id="app-state">
+        <h3>📊 App State</h3>
+        <div id="app-results">Testing...</div>
+    </div>
+    
+    <div class="section" id="manual-render">
+        <h3>🎨 Manual Render Test</h3>
+        <button onclick="testRender()">Test Render</button>
+        <button onclick="showAllFiles()">Show All Files</button>
+        <div id="render-results" style="margin-top: 10px;"></div>
+    </div>
+
+    <script>
+        async function runTests() {
+            const results = { network: [], dom: [], app: [] };
+            
+            // Test 1: Network
+            const urls = [
+                'search-index.json',
+                'app.js',
+                'styles.css'
+            ];
+            
+            for (const url of urls) {
+                try {
+                    const res = await fetch(url);
+                    const text = await res.text();
+                    results.network.push({
+                        url,
+                        status: res.status,
+                        size: text.length,
+                        preview: text.substring(0, 100)
+                    });
+                } catch (e) {
+                    results.network.push({ url, error: e.message });
+                }
+            }
+            
+            // Test 2: DOM
+            const elements = ['fileTree', 'sidebar', 'searchInput', 'document', 'breadcrumbs'];
+            elements.forEach(id => {
+                const el = document.getElementById(id);
+                results.dom.push({
+                    id,
+                    exists: !!el,
+                    innerHTML: el ? el.innerHTML.substring(0, 200) : 'N/A',
+                    className: el ? el.className : 'N/A'
+                });
+            });
+            
+            // Display results
+            document.getElementById('network-results').innerHTML = '<pre>' + 
+                JSON.stringify(results.network, null, 2) + '</pre>';
+            document.getElementById('dom-results').innerHTML = '<pre>' + 
+                JSON.stringify(results.dom, null, 2) + '</pre>';
+            
+            // Test 3: Load and parse index
+            try {
+                const res = await fetch('search-index.json');
+                const data = await res.json();
+                results.app = {
+                    version: data.version,
+                    filesCount: data.files?.length,
+                    fileTreeCount: data.fileTree?.length,
+                    firstFile: data.files?.[0]
+                };
+                document.getElementById('app-results').innerHTML = '<pre class="success">' + 
+                    JSON.stringify(results.app, null, 2) + '</pre>';
+                
+                // Store for manual render
+                window.debugIndex = data;
+            } catch (e) {
+                document.getElementById('app-results').innerHTML = '<pre class="error">' + 
+                    'Error loading index: ' + e.message + '</pre>';
+            }
+        }
+        
+        async function testRender() {
+            const container = document.getElementById('fileTree');
+            const results = document.getElementById('render-results');
+            
+            if (!window.debugIndex?.fileTree?.length) {
+                results.innerHTML = '<span class="error">No index loaded!</span>';
+                return;
+            }
+            
+            const tree = window.debugIndex.fileTree;
+            let html = '<div style="padding: 10px;">';
+            
+            tree.forEach((node, i) => {
+                if (i > 20) {
+                    html += '<div>... and ' + (tree.length - 20) + ' more</div>';
+                    return;
+                }
+                const icon = node.type === 'folder' ? '📁' : '📄';
+                html += '<div>' + icon + ' ' + node.name + '</div>';
+            });
+            
+            html += '</div>';
+            results.innerHTML = html;
+        }
+        
+        async function showAllFiles() {
+            const results = document.getElementById('render-results');
+            if (!window.debugIndex?.files?.length) {
+                results.innerHTML = '<span class="error">No files in index!</span>';
+                return;
+            }
+            
+            let html = '<div style="padding: 10px; max-height: 400px; overflow-y: auto;"><h4>All ' + 
+                window.debugIndex.files.length + ' Files:</h4>';
+            
+            window.debugIndex.files.forEach(file => {
+                html += '<div style="margin: 5px 0; padding: 5px; background: #1a1a1a;">📄 ' + 
+                    file.path + '</div>';
+            });
+            
+            html += '</div>';
+            results.innerHTML = html;
+        }
+        
+        // Run tests immediately
+        runTests();
+    </script>
+</body>
+</html>

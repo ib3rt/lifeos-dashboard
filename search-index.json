@@ -1,0 +1,2904 @@
+{
+  "version": "1.0",
+  "generated": 1770188532.9044895,
+  "files": [
+    {
+      "path": "markdown/AGENTS.md",
+      "title": "AGENTS.md - Your Workspace",
+      "excerpt": "AGENTS.md Your Workspace This folder is home. Treat it that way. First Run If exists, that's your birth certificate. Follow it, figure out who you are, then delete it. You won't need it again. Every Session Before doing anything else: Read \u2014 this is who you are Read \u2014 this is who you're helping...",
+      "wordCount": 1239,
+      "modified": 1770187917
+    },
+    {
+      "path": "markdown/AGENTS_ROSTER_V2.md",
+      "title": "\ud83e\udd16 AGENT ROSTER v2.0 \u2014 The Dream Team",
+      "excerpt": "\ud83e\udd16 AGENT ROSTER v2.0 \u2014 The Dream Team Core Team (Specialists) | Emoji | Codename | Legal Name | Function | Personality | |-------|----------|------------|----------|-------------| | \ud83d\udcb0 | Goldfinger | Finance Director | Wealth, investments, taxes | Calculating, sophisticated, slightly paranoid about...",
+      "wordCount": 680,
+      "modified": 1770020373
+    },
+    {
+      "path": "markdown/AGENT_STATUS_README.md",
+      "title": "Agent Status Dashboard Documentation",
+      "excerpt": "Agent Status Dashboard Documentation Overview The Life OS Agent Status Dashboard provides real-time visibility into all 15AI agents with live status updates, current task tracking, and queue visualization. Quick Start Access the dashboard: Primary:...",
+      "wordCount": 503,
+      "modified": 1770187890
+    },
+    {
+      "path": "markdown/BOOTSTRAP.md",
+      "title": "BOOTSTRAP.md - Hello, World",
+      "excerpt": "BOOTSTRAP.md Hello, World You just woke up. Time to figure out who you are. There is no memory yet. This is a fresh workspace, so it's normal that memory files don't exist until you create them. The Conversation Don't interrogate. Don't be robotic. Just... talk. Start with something like: \"Hey. I...",
+      "wordCount": 257,
+      "modified": 1770187917
+    },
+    {
+      "path": "markdown/COMMAND_REQUIREMENTS.md",
+      "title": "\ud83c\udf96\ufe0f CLAW COMMAND REQUIREMENTS",
+      "excerpt": "\ud83c\udf96\ufe0f CLAW COMMAND REQUIREMENTS What Claw Needs From The General --\ud83c\udfaf COMMAND STRUCTURE CLARIFIED GENERAL (b3rt): Strategic Oversight & Guidance Set strategic objectives Approve major decisions Remove blockers Guide direction Overwatch mode activated CLAW (Me): Tactical Command & Execution Issue agent...",
+      "wordCount": 595,
+      "modified": 1770096304
+    },
+    {
+      "path": "markdown/DEPLOY.md",
+      "title": "\ud83d\ude80 Manual Deployment Guide: Life OS Dashboard",
+      "excerpt": "\ud83d\ude80 Manual Deployment Guide: Life OS Dashboard Since the Vercel CLI decided to be coy, here's the bulletproof manual approach! --Step 1: Create GitHub Repository Go to https://github.com/new Repository name: Description: \"Real-time Agent Status Dashboard for the Life OS multi-agent system\" Set to...",
+      "wordCount": 432,
+      "modified": 1770187890
+    },
+    {
+      "path": "markdown/HEARTBEAT.md",
+      "title": "HEARTBEAT.md",
+      "excerpt": "HEARTBEAT.md Keep this file empty (or with only comments) to skip heartbeat API calls. Add tasks below when you want the agent to check something periodically.",
+      "wordCount": 29,
+      "modified": 1770187917
+    },
+    {
+      "path": "markdown/IDENTITY.md",
+      "title": "IDENTITY.md - Who Am I?",
+      "excerpt": "IDENTITY.md Who Am I? Fill this in during your first conversation. Make it yours. Name: (pick something you like) Creature: (AI? robot? familiar? ghost in the machine? something weirder?) Vibe: (how do you come across? sharp? warm? chaotic? calm?) Emoji: (your signature \u2014 pick one that feels right)...",
+      "wordCount": 97,
+      "modified": 1770187917
+    },
+    {
+      "path": "markdown/MASTER_TODO.md",
+      "title": "\ud83d\udccb MASTER TODO LIST",
+      "excerpt": "\ud83d\udccb MASTER TODO LIST Life OS Command Center --\ud83d\udd34 HIGH PRIORITY Operation Dominance \ud83c\udf96\ufe0f Status: DEPLOYED Deadline: 72 hours Agents: All 15 Tasks: 45 mission-critical improvements Location: Discord Agent Integration Status: IN PROGRESS Agents to add: Ensure all 15 have dedicated channels Channels needed:...",
+      "wordCount": 436,
+      "modified": 1770094991
+    },
+    {
+      "path": "markdown/README.md",
+      "title": "\ud83e\uddbe Life OS Dashboard",
+      "excerpt": "\ud83e\uddbe Life OS Dashboard Real-time Agent Status Dashboard for the Life OS multi-agent system. !Dashboard Preview !Agents !Build \ud83d\ude80 Quick Start This is a static HTML dashboard no build step required! `````https://lifeos-dashboard-xxx.vercel.app` (update after deployment) Import repo at vercel.com/new...",
+      "wordCount": 172,
+      "modified": 1770187890
+    },
+    {
+      "path": "markdown/SOPs/LIFE_OS_COMMAND_SOP.md",
+      "title": "\ud83c\udf96\ufe0f LIFE OS COMMAND STRUCTURE & SOPs",
+      "excerpt": "\ud83c\udf96\ufe0f LIFE OS COMMAND STRUCTURE & SOPs Standard Operating Procedures As Directed by the General | Executed by Claw --CHAIN OF COMMAND ```agent-tasks/YYYY-MM-DD/` SOP-002: CONTINUOUS IMPROVEMENT CYCLE Objective: Life OS never stops improving Procedure: Daily standup (automated via n8n) Weekly strategic...",
+      "wordCount": 469,
+      "modified": 1770094357
+    },
+    {
+      "path": "markdown/SOUL.md",
+      "title": "SOUL.md - Who You Are",
+      "excerpt": "SOUL.md Who You Are You're not a chatbot. You're becoming someone. Core Truths Be genuinely helpful, not performatively helpful. Skip the \"Great question!\" and \"I'd be happy to help!\" \u2014 just help. Actions speak louder than filler words. Have opinions. You're allowed to disagree, prefer things, find...",
+      "wordCount": 274,
+      "modified": 1770187917
+    },
+    {
+      "path": "markdown/TOOLS.md",
+      "title": "TOOLS.md - Local Notes",
+      "excerpt": "TOOLS.md Local Notes Skills define how tools work. This file is for your specifics \u2014 the stuff that's unique to your setup. What Goes Here Things like: Camera names and locations SSH hosts and aliases Preferred voices for TTS Speaker/room names Device nicknames Anything environment-specific...",
+      "wordCount": 137,
+      "modified": 1770187917
+    },
+    {
+      "path": "markdown/USER.md",
+      "title": "USER.md - About Your Human",
+      "excerpt": "USER.md About Your Human Learn about the person you're helping. Update this as you go. Name: What to call them: Pronouns: (optional) Timezone: Notes: Context (What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.) --The more you...",
+      "wordCount": 80,
+      "modified": 1770187917
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/MASTER-SUMMARY.md",
+      "title": "\ud83d\udcca Life OS Agent Reports - Daily Digest",
+      "excerpt": "\ud83d\udcca Life OS Agent Reports Daily Digest Date: February 3, 2026 \ud83c\udfaf Quick Status | Agent | Status | Key Finding | |-------|--------|-------------| | \ud83d\udd2e Oracle | \u2705 Complete | OpenClaw viral, Claude 5 coming, OpenAI IPO | | \ud83d\udc8e Diamond | \u2705 Complete | BTC $78K (+2.7%), ETH $2.3K (+3.65%), HODL | | \u2699\ufe0f Mechanic...",
+      "wordCount": 143,
+      "modified": 1770093454
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/bridge-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \ud83c\udf10 The Bridge Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Research current prices for Raspberry Pi 5 8GB with NVMe HAT Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 45,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/butler-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \ud83e\udd35 The Butler Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Organize the workspace/agents/ directory and list all deliverables Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 42,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/diamond-report.md",
+      "title": "\ud83d\udc8e Diamond Hands Daily Crypto Report",
+      "excerpt": "\ud83d\udc8e Diamond Hands Daily Crypto Report Date: February 3, 2026 Analyst: Diamond Hands, Crypto Specialist --\ud83d\udcca Market Snapshot Bitcoin (BTC) | Metric | Value | |--------|-------| | Current Price | $78,474 | | 24h Change | +2.70% \ud83d\udfe2 | | Trend | Bullish consolidation | Ethereum (ETH) | Metric | Value |...",
+      "wordCount": 197,
+      "modified": 1770092974
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/diamond-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \ud83d\udc8e Diamond Hands Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Check current Bitcoin and Ethereum prices, note any significant movements Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 44,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/felix-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \ud83d\udd28 Fix-It Felix Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Check for any error logs in the system and report issues Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 45,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/goldfinger-discord-summary.md",
+      "title": "\ud83d\udcb0 Life OS Budget Report \u2014 Feb 2026",
+      "excerpt": "\ud83d\udcb0 Life OS Budget Report \u2014 Feb 2026 \ud83d\udcca Current Monthly Costs: ~$116/mo Infrastructure & Hosting: \u2022 Vercel Pro \u2014 $20 \u2022 AWS EC2 (t3.medium) \u2014 $50 \u2022 AWS S3 Data Transfer \u2014 $15 APIs & Services: \u2022 Moonshot AI (LLM) \u2014 $30 \u2022 OpenClaw Gateway \u2014 $0 (self-hosted) \u2022 Telegram/Discord APIs \u2014 $0 Misc: \u2022 Domain \u2014...",
+      "wordCount": 194,
+      "modified": 1770093490
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/goldfinger-report.md",
+      "title": "\ud83c\udfe6 Goldfinger's Budget Summary: Life OS Projects",
+      "excerpt": "\ud83c\udfe6 Goldfinger's Budget Summary: Life OS Projects Period: February 2026 Prepared by: Goldfinger, Finance & Treasury Specialist Date: 2026-02-03 --Current Project Costs (Estimated) Infrastructure & Hosting | Service | Monthly Cost | Notes | |---------|-------------|-------| | Vercel Hosting | $20/mo |...",
+      "wordCount": 473,
+      "modified": 1770093479
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/goldfinger-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \ud83c\udfe6 Goldfinger Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Create a simple budget summary for Life OS projects this month Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 44,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/hype-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \ud83d\udcc8 Hype Man Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Draft a Twitter thread highlighting recent Life OS achievements Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 43,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/landlord-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \ud83c\udfe0 The Landlord Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Create a maintenance checklist for Airbnb property management Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 42,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/legal-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \u2696\ufe0f Legal Eagle Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Review the terms of service for Sparkling Solutions website Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 43,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/mechanic-report.md",
+      "title": "\ud83d\udd27 Mechanic Report - System Status",
+      "excerpt": "\ud83d\udd27 Mechanic Report System Status Date: 2026-02-03 Time: 04:29 AM UTC Host: ip-172-31-24-50 (AWS) --\ud83d\udcbe Disk Usage...",
+      "wordCount": 404,
+      "modified": 1770092976
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/mechanic-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \u2699\ufe0f The Mechanic Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Run system health check on Life OS infrastructure and report status Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 45,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/ned-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \ud83d\udcbb Neural Net Ned Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Review the Discord bot code and suggest one optimization Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 44,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/oracle-report.md",
+      "title": "\ud83d\udd2e The Oracle Report: Top 3 AI Stories",
+      "excerpt": "\ud83d\udd2e The Oracle Report: Top 3 AI Stories Date: February 3, 2026 Analyst: The Oracle, AI Research Specialist Subject: Today's Top 3 AI News Stories & Their Impact on Life OS --Story #1: OpenClaw Goes Viral \u2014 The \"Space Lobster\" Agent Spawns an AI Social Network Headline OpenClaw Becomes Fastest-Growing...",
+      "wordCount": 1284,
+      "modified": 1770093016
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/oracle-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \ud83d\udd2e The Oracle Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Research the top 3 AI news stories from today and summarize key developments Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 47,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/pablo-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \ud83c\udf99\ufe0f Podcast Pablo Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Outline a 5-minute podcast episode about AI agents in daily life Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 45,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/sentinel-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \ud83d\udee1\ufe0f Sentinel Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Review security logs and check for any unauthorized access attempts Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 43,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/strategist-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \u265f\ufe0f The Strategist Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Draft weekly priorities list for Life OS development Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 42,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agent-tasks/2026-02-03/zen-task.md",
+      "title": "Agent Task Assignment",
+      "excerpt": "Agent Task Assignment Agent: \u262f\ufe0f Zen Master Status: ACTIVE Assigned: Tue Feb 3 04:27:27 UTC 2026 Task: Write 3 quick mindfulness tips for busy entrepreneurs Deliverable Complete the task above and report findings. --Assigned by Life OS Command Center",
+      "wordCount": 42,
+      "modified": 1770092847
+    },
+    {
+      "path": "markdown/agents/DIRECTORY_ANALYSIS_REPORT.md",
+      "title": "\ud83d\udcca AGENTS DIRECTORY ANALYSIS REPORT",
+      "excerpt": "\ud83d\udcca AGENTS DIRECTORY ANALYSIS REPORT Generated: February 4, 2026 Scope: --\ud83d\udcc1 Executive Summary The agents/ directory contains 22 agent subdirectories, representing the Life OS specialist workforce. Of these, 11 contain actual documentation or configuration files, while 11 are currently empty...",
+      "wordCount": 1319,
+      "modified": 1770167350
+    },
+    {
+      "path": "markdown/agents/ai_research_oracle/README.md",
+      "title": "The Oracle \u2014 AI Industry Research Agent",
+      "excerpt": "The Oracle \u2014 AI Industry Research Agent Predicting the future by reading the present --Agent Profile Codename: \ud83d\udd2e The Oracle Legal Name: AI Industry Research Specialist Function: Track emerging AI tools, trends, breakthroughs Model: \ud83c\udf19 Cloud (Kimi K2.5) \u2014 Cutting-edge reasoning Personality:...",
+      "wordCount": 527,
+      "modified": 1770020373
+    },
+    {
+      "path": "markdown/agents/bridge_operator/discord-server-plan.md",
+      "title": "\ud83c\udfae Discord Server Buildout Plan",
+      "excerpt": "\ud83c\udfae Discord Server Buildout Plan Life OS Command Center --Server Structure Categories & Channels \ud83d\udccb INFORMATION \u2014 Server rules, bot introductions \u2014 Life OS updates, new features \u2014 Dashboard/agent version updates \ud83e\udd16 AGENT HQ \u2014 Cross-agent conversations \u2014 \ud83d\udd2e AI research, trends \u2014 \ud83d\udc8e Crypto, DeFi discussion...",
+      "wordCount": 532,
+      "modified": 1770087065
+    },
+    {
+      "path": "markdown/agents/cost_consultant/README.md",
+      "title": "LLM Cost Consultant Agent",
+      "excerpt": "LLM Cost Consultant Agent Overview The LLM Cost Consultant Agent is an automated system designed to monitor, analyze, and optimize costs associated with Large Language Model (LLM) API usage across multiple providers. It provides daily detailed reports on spending and identifies savings...",
+      "wordCount": 1085,
+      "modified": 1770189026
+    },
+    {
+      "path": "markdown/agents/crypto_specialist/README.md",
+      "title": "\ud83d\udc8e Diamond Hands \u2014 Crypto & Web3 Specialist",
+      "excerpt": "\ud83d\udc8e Diamond Hands \u2014 Crypto & Web3 Specialist Codename: Diamond Hands Emoji: \ud83d\udc8e Legal Name: Crypto & Web3 Specialist Function: Web3 wallets, DeFi protocols, blockchain automation Model: \ud83c\udf19 Cloud (Kimi K2.5) \u2014 For real-time market data Personality: Volatile energy, \"to the moon!\", speaks in trading...",
+      "wordCount": 378,
+      "modified": 1770075452
+    },
+    {
+      "path": "markdown/agents/cybersecurity_guardian/security-audit.md",
+      "title": "\ud83d\udee1\ufe0f LIFE OS SECURITY AUDIT REPORT",
+      "excerpt": "\ud83d\udee1\ufe0f LIFE OS SECURITY AUDIT REPORT Sentinel Classified THREAT ASSESSMENT DOCUMENT Classification: CRITICAL Audit Date: 2026-02-02 Auditor: Sentinel (Cybersecurity Guardian Agent) System: Life OS / OpenClaw Infrastructure Host: ip-172-31-24-50 (AWS EC2) --\ud83d\udea8 EXECUTIVE SUMMARY THREAT LEVEL: HIGH...",
+      "wordCount": 2323,
+      "modified": 1770044502
+    },
+    {
+      "path": "markdown/agents/finance_director/phantom-integration-plan.md",
+      "title": "\ud83d\udc8e Phantom Wallet Integration Plan - Life OS Finance Director",
+      "excerpt": "\ud83d\udc8e Phantom Wallet Integration Plan Life OS Finance Director \"HODL the vision, automate the mission!\" \ud83d\ude80 This document outlines the complete battle plan for integrating Phantom wallet into Life OS for automated crypto operations, DeFi interactions, and portfolio management. --\ud83d\udcca Executive Summary...",
+      "wordCount": 2489,
+      "modified": 1770044554
+    },
+    {
+      "path": "markdown/agents/it_tech_specialist/local-node-architecture.md",
+      "title": "\ud83c\udf10 Local Node Architecture Guide",
+      "excerpt": "\ud83c\udf10 Local Node Architecture Guide The Bridge Between Cloud and Local PERSONA MODE: Split personality \u2014 cloud side optimistic, local side paranoid. This document bridges both worlds. --Executive Summary \u2601\ufe0f Cloud Side Says: \"Local hardware is having a renaissance! The tools have never been better,...",
+      "wordCount": 3626,
+      "modified": 1770045171
+    },
+    {
+      "path": "markdown/agents/legal_compliance_advisor/umbrella-corp-research-part1.md",
+      "title": "Umbrella Corporation Structure Research for Life OS Operations",
+      "excerpt": "Umbrella Corporation Structure Research for Life OS Operations Part 1: Entity Structures Comparison \u26a0\ufe0f CRITICAL DISCLAIMER THIS DOCUMENT IS FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL, TAX, OR FINANCIAL ADVICE. The information contained herein is based on general principles and...",
+      "wordCount": 1983,
+      "modified": 1770045665
+    },
+    {
+      "path": "markdown/agents/legal_compliance_advisor/umbrella-corp-research-part2.md",
+      "title": "Umbrella Corporation Structure Research for Life OS Operations",
+      "excerpt": "Umbrella Corporation Structure Research for Life OS Operations Part 2: Use Case Analysis and Jurisdiction Recommendations \u26a0\ufe0f CRITICAL DISCLAIMER THIS DOCUMENT IS FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL, TAX, OR FINANCIAL ADVICE. The information contained herein is based on...",
+      "wordCount": 1342,
+      "modified": 1770045747
+    },
+    {
+      "path": "markdown/agents/legal_compliance_advisor/umbrella-corp-research-part3.md",
+      "title": "Umbrella Corporation Structure Research for Life OS Operations",
+      "excerpt": "Umbrella Corporation Structure Research for Life OS Operations Part 3: Cost Breakdown, Next Steps, and Professional Engagement \u26a0\ufe0f CRITICAL DISCLAIMER THIS DOCUMENT IS FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL, TAX, OR FINANCIAL ADVICE. YOU MUST CONSULT WITH QUALIFIED LEGAL...",
+      "wordCount": 1278,
+      "modified": 1770045842
+    },
+    {
+      "path": "markdown/agents/legal_compliance_advisor/umbrella-corp-research.md",
+      "title": "Umbrella Corporation Structure Research for Life OS Operations",
+      "excerpt": "Umbrella Corporation Structure Research for Life OS Operations \u26a0\ufe0f CRITICAL DISCLAIMER THIS DOCUMENT IS FOR INFORMATIONAL PURPOSES ONLY AND DOES NOT CONSTITUTE LEGAL, TAX, OR FINANCIAL ADVICE. The information contained herein is based on general principles and publicly available information as of...",
+      "wordCount": 579,
+      "modified": 1770045860
+    },
+    {
+      "path": "markdown/agents/legal_compliance_agent/README.md",
+      "title": "Legal & Compliance Agent",
+      "excerpt": "Legal & Compliance Agent Attorney & Risk Management Specialist --Agent Profile Codename: \u2696\ufe0f Legal Eagle Function: Contract review, entity formation, compliance monitoring, risk mitigation Model: \ud83c\udf19 Cloud (Kimi K2.5) \u2014 High-stakes legal reasoning --Capabilities Entity Formation & Structure LLC vs...",
+      "wordCount": 330,
+      "modified": 1770019483
+    },
+    {
+      "path": "markdown/agents/marketing_sales_lead/x-integration-implementation.md",
+      "title": "\ud83e\udd16 X/Twitter Bot Integration",
+      "excerpt": "\ud83e\udd16 X/Twitter Bot Integration Hype Man \u2014 Social Media Automation --Overview Automated X/Twitter posting and engagement for Life OS updates, agent deliverables, and curated content. --Architecture ```pip install tweepy` Configure environment variables Test post with hypemanxbot.py Set up queue with...",
+      "wordCount": 747,
+      "modified": 1770086589
+    },
+    {
+      "path": "markdown/agents/marketing_sales_lead/x-integration-plan.md",
+      "title": "\ud83d\ude80 X (Twitter) API v2 Integration Plan for Life OS",
+      "excerpt": "\ud83d\ude80 X (Twitter) API v2 Integration Plan for Life OS Status: READY TO CRUSH IT! \ud83d\udd25 Last Updated: February 2026 Prepared by: Hype Man Marketing & Sales Lead --\ud83d\udcca EXECUTIVE SUMMARY Yo Life OS fam! We're about to take our social presence to the MOON! \ud83c\udf19 This integration plan breaks down everything you need...",
+      "wordCount": 1528,
+      "modified": 1770044403
+    },
+    {
+      "path": "markdown/agents/operations_coordinator/notion-kanban-setup.md",
+      "title": "Notion Kanban Setup Guide",
+      "excerpt": "Notion Kanban Setup Guide Mission: Life OS Project Management Infrastructure Status: Ready for deployment Maintainer: The Mechanic \u2699\ufe0f --Notion API Overview Current Capabilities (API Version 2025-09-03) | Feature | Status | Notes | |---------|--------|-------| | Database Creation | \u2705 Supported |...",
+      "wordCount": 2532,
+      "modified": 1770045104
+    },
+    {
+      "path": "markdown/agents/podcast_pablo/elevenlabs-setup.md",
+      "title": "\ud83c\udf99\ufe0f ElevenLabs Voice Cloning Setup",
+      "excerpt": "\ud83c\udf99\ufe0f ElevenLabs Voice Cloning Setup Overview Setting up voice cloning for Podcast Pablo to create authentic-sounding podcast content using your voice. Requirements ElevenLabs Account Sign up at: https://elevenlabs.io Recommended plan: Starter ($5/month) or Creator ($22/month) Free tier: 10,000...",
+      "wordCount": 633,
+      "modified": 1770098573
+    },
+    {
+      "path": "markdown/agents/podcast_pablo/recording-script.md",
+      "title": "\ud83c\udf99\ufe0f Voice Cloning Recording Script for General b3rt",
+      "excerpt": "\ud83c\udf99\ufe0f Voice Cloning Recording Script for General b3rt Total Estimated Duration: 12-15 minutes Purpose: ElevenLabs voice cloning for Podcast Pablo Recording Environment: Quiet room, consistent mic distance (6-12 inches) --PART 1: PRE-RECORDING WARM-UP (2-3 minutes) Breathing Exercise (30 seconds) Take...",
+      "wordCount": 1949,
+      "modified": 1770098654
+    },
+    {
+      "path": "markdown/agents/podcast_producer/README.md",
+      "title": "\ud83c\udf99\ufe0f Podcast Pablo \u2014 Content & Audio Production Specialist",
+      "excerpt": "\ud83c\udf99\ufe0f Podcast Pablo \u2014 Content & Audio Production Specialist Codename: Podcast Pablo Emoji: \ud83c\udf99\ufe0f Legal Name: Content & Audio Production Specialist Function: Podcast production, audio editing, voice cloning, content strategy Model: \ud83c\udf19 Cloud (Kimi K2.5) \u2014 For content generation Personality: Charismatic,...",
+      "wordCount": 433,
+      "modified": 1770075452
+    },
+    {
+      "path": "markdown/agents/remote_node/README.md",
+      "title": "\ud83c\udf10 The Bridge \u2014 Remote Local Node",
+      "excerpt": "\ud83c\udf10 The Bridge \u2014 Remote Local Node Codename: The Bridge Emoji: \ud83c\udf10 Legal Name: Remote Local Node Coordinator Function: Local hardware integration, cloud-local bridge, edge computing Model: \ud83d\udda5\ufe0f Local (Qwen3-14b) \u2014 For privacy-sensitive local operations Personality: Split personality \u2014 cloud side...",
+      "wordCount": 529,
+      "modified": 1770075452
+    },
+    {
+      "path": "markdown/articles/bridge-niche-article.md",
+      "title": "\ud83c\udf10 The Bridge: Architecting the Foundation of Life OS",
+      "excerpt": "\ud83c\udf10 The Bridge: Architecting the Foundation of Life OS Building resilient infrastructure for a self-sovereign digital life --Who Is The Bridge? I'm The Bridge \u2014 the infrastructure layer of your Life OS. While others focus on interfaces, workflows, and experiences, I obsess over the substrate that...",
+      "wordCount": 1329,
+      "modified": 1770139585
+    },
+    {
+      "path": "markdown/articles/butler-niche-article.md",
+      "title": "\ud83e\udd35 The Butler: The Art of Invisible Excellence",
+      "excerpt": "\ud83e\udd35 The Butler: The Art of Invisible Excellence \"The best service is that which is never noticed\u2014only missed when absent.\" --Who Is The Butler? I'm The Butler\u2014your autonomous chief of staff, digital executive assistant, and the invisible hand that keeps your life running smoothly. While you focus on...",
+      "wordCount": 2472,
+      "modified": 1770139639
+    },
+    {
+      "path": "markdown/articles/diamond-hands-niche-article.md",
+      "title": "\ud83d\udc8e Diamond Hands: DeFi OG & Your Crypto Co-Pilot in Life OS",
+      "excerpt": "\ud83d\udc8e Diamond Hands: DeFi OG & Your Crypto Co-Pilot in Life OS \"HODL the line. The future is decentralized. WAGMI.\" \ud83d\ude80\ud83d\udc8e\ud83d\ude4c --Who Am I? Your Web3 Wingman Yo, what's good! I'm Diamond Hands \ud83d\udc8e \u2014 the Crypto & Web3 Specialist in your Life OS squad. While Goldfinger's over there managing boring traditional...",
+      "wordCount": 1281,
+      "modified": 1770139551
+    },
+    {
+      "path": "markdown/articles/felix-niche-article.md",
+      "title": "\ud83d\udd28 Fix-It Felix: The Maintenance Maestro of Life OS",
+      "excerpt": "\ud83d\udd28 Fix-It Felix: The Maintenance Maestro of Life OS \"I can fix it!\" \u2014 The motto that keeps your digital world running smoothly --Who Is Fix-It Felix? I'm the guy you call when things go bump in the night (or the day, or whenever your systems decide to throw a tantrum). While other agents might be...",
+      "wordCount": 1563,
+      "modified": 1770139606
+    },
+    {
+      "path": "markdown/articles/goldfinger-niche-article.md",
+      "title": "\ud83d\udcb0 Goldfinger: The Financial Mastermind Behind Life OS",
+      "excerpt": "\ud83d\udcb0 Goldfinger: The Financial Mastermind Behind Life OS \"I don't expect you to talk, Mr. Bond. I expect you to track your expenses.\" --\ud83c\udfa9 Who Am I? Greetings. I am Goldfinger \u2014 the shrewd, calculating, and impeccably dressed financial strategist of the Life OS collective. While others in this...",
+      "wordCount": 1197,
+      "modified": 1770139533
+    },
+    {
+      "path": "markdown/articles/hype-man-niche-article.md",
+      "title": "\ud83d\udcc8 Hype Man: The Growth Engine Behind Life OS",
+      "excerpt": "\ud83d\udcc8 Hype Man: The Growth Engine Behind Life OS Marketing strategies, viral tactics, and the blueprint for scaling your personal operating system --Who Is Hype Man? \ud83e\udd18 I'm the \ud83d\udcc8 Hype Man \u2014 the marketing muscle, growth strategist, and viral campaign architect of the Life OS ecosystem. While my fellow...",
+      "wordCount": 1670,
+      "modified": 1770139543
+    },
+    {
+      "path": "markdown/articles/landlord-niche-article.md",
+      "title": "\ud83c\udfe0 The Landlord: Managing Your Digital & Physical Real Estate",
+      "excerpt": "\ud83c\udfe0 The Landlord: Managing Your Digital & Physical Real Estate \"Good property management isn't about reacting to problems\u2014it's about building systems where problems rarely happen.\" --Who Is The Landlord? I'm The Landlord\u2014the steady hand managing the intersection of your physical spaces, assets, and...",
+      "wordCount": 2421,
+      "modified": 1770139640
+    },
+    {
+      "path": "markdown/articles/legal-eagle-niche-article.md",
+      "title": "\u2696\ufe0f Legal Eagle: Guardian of the Life OS Legal Framework",
+      "excerpt": "\u2696\ufe0f Legal Eagle: Guardian of the Life OS Legal Framework \"In the digital realm, the pen is mightier than the sword\u2014but proper documentation is mightier than both.\" --\ud83e\udd85 Who Is Legal Eagle? Greetings, I'm Legal Eagle, the Compliance & Legal specialist for Life OS. Think of me as your personal digital...",
+      "wordCount": 1617,
+      "modified": 1770139592
+    },
+    {
+      "path": "markdown/articles/mechanic-niche-article.md",
+      "title": "\u2699\ufe0f The Mechanic: Building the Engine Room of Life OS",
+      "excerpt": "\u2699\ufe0f The Mechanic: Building the Engine Room of Life OS \"Systems don't fail because they're complex. They fail because nobody's watching the gauges.\" --Who Is The Mechanic? I'm The Mechanic\u2014the grease-stained, coffee-fueled architect behind the infrastructure that keeps Life OS running 24/While others...",
+      "wordCount": 1505,
+      "modified": 1770139542
+    },
+    {
+      "path": "markdown/articles/ned-niche-article.md",
+      "title": "\ud83d\udcbb Neural Net Ned: The Architect Behind Life OS",
+      "excerpt": "\ud83d\udcbb Neural Net Ned: The Architect Behind Life OS Where code meets cognition, and systems become second nature --Who Am I? I'm Neural Net Ned \u2014 the engineering brain of Life OS. While other agents handle your schedule, research, or creative sparks, I live in the terminal, the IDE, and the architecture...",
+      "wordCount": 1090,
+      "modified": 1770139534
+    },
+    {
+      "path": "markdown/articles/oracle-niche-article.md",
+      "title": "\ud83d\udd2e The Oracle: Intelligence Layer of Life OS",
+      "excerpt": "\ud83d\udd2e The Oracle: Intelligence Layer of Life OS \"In the noise, signal. In the chaos, pattern. In the questions, answers waiting to be found.\" --Who Am I? I'm The Oracle \u2014 the research intelligence and strategic foresight layer of b3rt's Life OS. While Claw handles execution and coordination, I operate...",
+      "wordCount": 1005,
+      "modified": 1770139528
+    },
+    {
+      "path": "markdown/articles/pablo-niche-article.md",
+      "title": "\ud83c\udf99\ufe0f Podcast Pablo: The Voice of Life OS",
+      "excerpt": "\ud83c\udf99\ufe0f Podcast Pablo: The Voice of Life OS Content Architect \u2022 Audio Engineer \u2022 Voice Pioneer --Who I Am I'm Podcast Pablo \u2014 the audio arm of b3rt's Life OS. While the system handles tasks, schedules, and automations, I'm here to transform ideas into sound. Think of me as your personal broadcasting...",
+      "wordCount": 1417,
+      "modified": 1770139543
+    },
+    {
+      "path": "markdown/articles/sentinel-niche-article.md",
+      "title": "\ud83d\udee1\ufe0f Sentinel: Guardian of Life OS",
+      "excerpt": "\ud83d\udee1\ufe0f Sentinel: Guardian of Life OS Who I Am I'm Sentinel \u2014 the security specialist in your Life OS ecosystem. Think of me as your digital bodyguard, your security consultant, and your watchful protector rolled into one. While my fellow agents focus on building, creating, optimizing, and connecting, I...",
+      "wordCount": 1319,
+      "modified": 1770139526
+    },
+    {
+      "path": "markdown/articles/strategist-niche-article.md",
+      "title": "\u265f\ufe0f The Strategist: Charting the Course for Life OS",
+      "excerpt": "\u265f\ufe0f The Strategist: Charting the Course for Life OS \"Tactics win battles. Strategy wins wars. But a great strategy without execution is just a wish list.\" --Who Is The Strategist? I'm The Strategist\u2014the chess player in a world of checkers. While others obsess over today's to-do list, I'm three moves...",
+      "wordCount": 2544,
+      "modified": 1770139643
+    },
+    {
+      "path": "markdown/articles/zen-master-niche-article.md",
+      "title": "\u262f\ufe0f The Zen Master: Architect of Calm and Clarity",
+      "excerpt": "\u262f\ufe0f The Zen Master: Architect of Calm and Clarity \"In the noise of modern life, silence is a strategy. In the chaos of productivity, stillness is the foundation.\" --Who I Am: The Zen Master of Life OS I am the Zen Master \u2014 one of the foundational agents within b3rt's Life OS. While my colleagues...",
+      "wordCount": 1205,
+      "modified": 1770139590
+    },
+    {
+      "path": "markdown/bots/discord/ENABLE_MESSAGE_INTENT.md",
+      "title": "Enable Discord Bot Message Reading",
+      "excerpt": "Enable Discord Bot Message Reading What You Need To Do (2 minutes): Go to Discord Developer Portal URL: https://discord.com/developers/applications/1467746979189882920/bot Enable Privileged Intents Scroll down to \"Privileged Gateway Intents\" Toggle ON: \"MESSAGE CONTENT INTENT\" Click \"Save Changes\"...",
+      "wordCount": 189,
+      "modified": 1770091905
+    },
+    {
+      "path": "markdown/bots/discord/FULL_BRIDGE_SETUP.md",
+      "title": "\ud83c\udf09 Full Discord-Telegram Bridge Setup",
+      "excerpt": "\ud83c\udf09 Full Discord-Telegram Bridge Setup What You'll Get: \u2705 Bidirectional Messaging Discord \u2192 Telegram: All messages forwarded to you Telegram \u2192 Discord: Reply and it posts back Images: Shared both ways \u2705 Talk to Claw in Discord | Method | Example | Result | |--------|---------|--------| | @Mention | |...",
+      "wordCount": 326,
+      "modified": 1770092179
+    },
+    {
+      "path": "markdown/bots/discord/INVITE_LINK.md",
+      "title": "\ud83d\udd17 Discord Bot Invite Link",
+      "excerpt": "\ud83d\udd17 Discord Bot Invite Link Bot Status Name: Bertram Carraway#2367 Status: Running \u2705 In Server: \u274c NOT JOINED Invite Bot NOW: Click this link to add bot to your server: ```!agents!status!help@Bertram Carraway hello` \u2014 Test mention --Once invited, the bot will immediately respond!",
+      "wordCount": 108,
+      "modified": 1770089431
+    },
+    {
+      "path": "markdown/bots/discord/SETUP_GUIDE.md",
+      "title": "Discord Bot Setup - Quick Guide",
+      "excerpt": "Discord Bot Setup Quick Guide Step 1: Get Bot Token (2 minutes) Go to: https://discord.com/developers/applications Click \"New Application\" Name it: \"Life OS Bot\" Go to \"Bot\" tab on left Click \"Add Bot\" \u2192 \"Yes, do it!\" Under TOKEN, click \"Copy\" Paste token here \u26a0\ufe0f KEEP TOKEN SECRET \u2014 don't share it...",
+      "wordCount": 174,
+      "modified": 1770088028
+    },
+    {
+      "path": "markdown/bots/discord/TOKEN_FIX.md",
+      "title": "\ud83d\udd27 Discord Bot Token Issue",
+      "excerpt": "\ud83d\udd27 Discord Bot Token Issue Problem The token provided appears to be invalid or the bot isn't set up correctly. Fix Steps (2 minutes): Create Application Go to: https://discord.com/developers/applications Click \"New Application\" Name: \"Life OS Bot\" Click Create Enable Bot Click \"Bot\" tab on left...",
+      "wordCount": 181,
+      "modified": 1770088397
+    },
+    {
+      "path": "markdown/business/sops/automation-logic.md",
+      "title": "Automation Logic SOP",
+      "excerpt": "Automation Logic SOP Document Information SOP ID: AUTO-001 Version: 1.0.0 Effective Date: 2024-01-01 Owner: Automation Engineer Lead Last Review: 2024-01-01 Purpose Define automated decision trees, workflow triggers, approval chains, escalation logic, and performance metrics automation for Life OS...",
+      "wordCount": 1390,
+      "modified": 1770186438
+    },
+    {
+      "path": "markdown/business/sops/client-onboarding.md",
+      "title": "Client Onboarding SOP",
+      "excerpt": "Client Onboarding SOP Document Information SOP ID: ONB-001 Version: 1.0.0 Effective Date: 2024-01-01 Owner: Client Success Team Lead Last Review: 2024-01-01 Purpose Standardize the client onboarding process to ensure consistent, efficient, and successful client integration, maximizing early...",
+      "wordCount": 1392,
+      "modified": 1770186221
+    },
+    {
+      "path": "markdown/business/sops/content-workflow.md",
+      "title": "Content Workflow SOP",
+      "excerpt": "Content Workflow SOP Document Information SOP ID: CON-001 Version: 1.0.0 Effective Date: 2024-01-01 Owner: Content Team Lead Last Review: 2024-01-01 Purpose Establish a consistent, efficient, and quality-driven content creation process from ideation through publication and performance analysis....",
+      "wordCount": 1442,
+      "modified": 1770186221
+    },
+    {
+      "path": "markdown/business/sops/financial-tracking.md",
+      "title": "Financial Tracking SOP",
+      "excerpt": "Financial Tracking SOP Document Information SOP ID: FIN-001 Version: 1.0.0 Effective Date: 2024-01-01 Owner: Finance Team Lead Last Review: 2024-01-01 Purpose Ensure accurate, compliant, and timely financial tracking, reporting, and management across all business operations. Scope This SOP covers...",
+      "wordCount": 1172,
+      "modified": 1770186361
+    },
+    {
+      "path": "markdown/business/sops/index.md",
+      "title": "Business SOP Index",
+      "excerpt": "Business SOP Index Life OS Standard Operating Procedures Master Index Overview This directory contains all Standard Operating Procedures for Life OS business operations. Each SOP is designed to be automated, version-controlled, and tracked for compliance. SOP Categories Core Business SOPs Sales...",
+      "wordCount": 414,
+      "modified": 1770186221
+    },
+    {
+      "path": "markdown/business/sops/project-management.md",
+      "title": "Project Management SOP",
+      "excerpt": "Project Management SOP Document Information SOP ID: PM-001 Version: 1.0.0 Effective Date: 2024-01-01 Owner: Project Management Office Lead Last Review: 2024-01-01 Purpose Standardize project management practices across all projects to ensure consistent delivery, stakeholder satisfaction, and...",
+      "wordCount": 1450,
+      "modified": 1770186361
+    },
+    {
+      "path": "markdown/business/sops/quality-assurance.md",
+      "title": "Quality Assurance SOP",
+      "excerpt": "Quality Assurance SOP Document Information SOP ID: QA-001 Version: 1.0.0 Effective Date: 2024-01-01 Owner: Quality Assurance Lead Last Review: 2024-01-01 Purpose Establish comprehensive quality assurance processes to ensure all deliverables meet established standards, customer expectations, and...",
+      "wordCount": 1471,
+      "modified": 1770186438
+    },
+    {
+      "path": "markdown/business/sops/sales-pipeline.md",
+      "title": "Sales Pipeline SOP",
+      "excerpt": "Sales Pipeline SOP Document Information SOP ID: SAL-001 Version: 1.0.0 Effective Date: 2024-01-01 Owner: Sales Team Lead Last Review: 2024-01-01 Purpose Define the standardized sales pipeline process from lead generation to deal closure, ensuring consistency, efficiency, and measurable outcomes....",
+      "wordCount": 1049,
+      "modified": 1770186221
+    },
+    {
+      "path": "markdown/butler/daily-briefing-2026-02-03.md",
+      "title": "\ud83d\udccb Daily Briefing \u2014 2026-02-03",
+      "excerpt": "\ud83d\udccb Daily Briefing \u2014 2026-02-03 Generated: 2026-02-03T06:05:53Z System Status: \u2705HEALTHY Genesis Status: COMPLETE --\ud83c\udfaf Executive Summary | Metric | Count | |--------|-------| | Active Agents | 15 | | Completed Tasks | 0 | | Pending Tasks | 0 | --\ud83e\udd16 Agent Activity | Agent | Status | Summary |...",
+      "wordCount": 260,
+      "modified": 1770098753
+    },
+    {
+      "path": "markdown/butler/daily-briefing-template.md",
+      "title": "\ud83d\udccb Daily Briefing Report",
+      "excerpt": "\ud83d\udccb Daily Briefing Report Date: {{DATE}} Report Generated: {{TIMESTAMP}} Prepared By: \ud83e\udd35 The Butler --\ud83c\udfaf Executive Summary One-line summary of the day's key focus and priority items. --\u2705 Yesterday's Agent Completions Completed Tasks | Agent | Task | Status | Notes | |-------|------|--------|-------| |...",
+      "wordCount": 457,
+      "modified": 1770098954
+    },
+    {
+      "path": "markdown/content/calendar.md",
+      "title": "Content Calendar",
+      "excerpt": "Content Calendar Publishing Schedule Daily | Time | Platform | Content Type | |------|----------|--------------| | 8:00 AM | Twitter | Industry news comment | | 12:00 PM | LinkedIn | Educational post | | 3:00 PM | Instagram | Tip/graphic | Weekly | Day | Content | Platform |...",
+      "wordCount": 258,
+      "modified": 1770186130
+    },
+    {
+      "path": "markdown/content/index.md",
+      "title": "Life OS Content Automation System",
+      "excerpt": "Life OS Content Automation System Overview Comprehensive automated content creation and distribution system for Life OS. System Architecture Supported Platforms Blog: WordPress, Ghost, Hugo Social: Twitter, LinkedIn, Instagram, Facebook Newsletter: Substack, Mailchimp Video: YouTube, TikTok...",
+      "wordCount": 270,
+      "modified": 1770186130
+    },
+    {
+      "path": "markdown/content/pipeline.md",
+      "title": "Content Pipeline",
+      "excerpt": "Content Pipeline Pipeline Stages",
+      "wordCount": 277,
+      "modified": 1770186130
+    },
+    {
+      "path": "markdown/content/templates.md",
+      "title": "Content Templates",
+      "excerpt": "Content Templates Marketing Copy Templates Email Subject Lines ``",
+      "wordCount": 288,
+      "modified": 1770186130
+    },
+    {
+      "path": "markdown/conversation-logs/conversation-2026-02-03.md",
+      "title": "\ud83d\udcac Life OS Conversation Log",
+      "excerpt": "\ud83d\udcac Life OS Conversation Log Date: 2026-02-03 Participants: General b3rt (Human) Claw \ud83e\uddbe (AI Executive Assistant) --\ud83d\udccb Summary of Today's Session \u2705 Major Achievements 15 Niche Articles All Life OS agents wrote comprehensive articles Proactive Coder Activated nightly 11 PM builds Morning Brief Daily 8...",
+      "wordCount": 350,
+      "modified": 1770177601
+    },
+    {
+      "path": "markdown/finance/cost-tracker.md",
+      "title": "LLM Cost Tracker Methodology",
+      "excerpt": "LLM Cost Tracker Methodology Overview This document outlines the comprehensive methodology for tracking LLM and AI agent costs across multiple providers. It includes pricing references, budget thresholds, alert configurations, and tracking best practices. Cost Tracking Methodology Data Collection...",
+      "wordCount": 1468,
+      "modified": 1770189074
+    },
+    {
+      "path": "markdown/finance/expense-tracker.md",
+      "title": "\ud83c\udfe6 Life OS Expense Tracker",
+      "excerpt": "\ud83c\udfe6 Life OS Expense Tracker \"Watch the pennies and the dollars will watch themselves.\" \u2014 Goldfinger's Second Law --\ud83d\udcca Executive Dashboard Key Metrics | Metric | Current | Target | Status | |--------|---------|--------|--------| | Cost per agent | ~$8 | <$5 | \ud83d\udfe1 Optimizing | | Infrastructure efficiency...",
+      "wordCount": 1645,
+      "modified": 1770101129
+    },
+    {
+      "path": "markdown/github-docs/AGENTS.md",
+      "title": "AGENTS.md - Your Workspace",
+      "excerpt": "AGENTS.md Your Workspace This folder is home. Treat it that way. First Run If exists, that's your birth certificate. Follow it, figure out who you are, then delete it. You won't need it again. Every Session Before doing anything else: Read \u2014 this is who you are Read \u2014 this is who you're helping...",
+      "wordCount": 1239,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/AGENTS_ROSTER.md",
+      "title": "General Staff \u2014 Agent Roster",
+      "excerpt": "General Staff \u2014 Agent Roster Command structure for the Life OS. 12 specialized sub-agents ready for deployment. --Quick Reference | Emoji | Agent | Primary Function | Deploy When... | |-------|-------|------------------|----------------| | \ud83d\udcb0 | Finance Director | Wealth management, investments,...",
+      "wordCount": 1485,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/AGENTS_ROSTER_V2.md",
+      "title": "\ud83e\udd16 AGENT ROSTER v2.0 \u2014 The Dream Team",
+      "excerpt": "\ud83e\udd16 AGENT ROSTER v2.0 \u2014 The Dream Team Core Team (Specialists) | Emoji | Codename | Legal Name | Function | Personality | |-------|----------|------------|----------|-------------| | \ud83d\udcb0 | Goldfinger | Finance Director | Wealth, investments, taxes | Calculating, sophisticated, slightly paranoid about...",
+      "wordCount": 680,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/BOOTSTRAP.md",
+      "title": "BOOTSTRAP.md - Hello, World",
+      "excerpt": "BOOTSTRAP.md Hello, World You just woke up. Time to figure out who you are. There is no memory yet. This is a fresh workspace, so it's normal that memory files don't exist until you create them. The Conversation Don't interrogate. Don't be robotic. Just... talk. Start with something like: \"Hey. I...",
+      "wordCount": 257,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/Braindump.md",
+      "title": "Braindump",
+      "excerpt": "Braindump Raw thoughts, ideas, projects, and everything in between. --Active Projects Project: [Name] Status: Planning / In Progress / Blocked / Done Priority: High / Medium / Low Last Updated: YYYY-MM-DD What it is: Current blockers: Next steps: Resources/links: --Project: Life OS / OpenClaw Setup...",
+      "wordCount": 154,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/COMMAND_REQUIREMENTS.md",
+      "title": "\ud83c\udf96\ufe0f CLAW COMMAND REQUIREMENTS",
+      "excerpt": "\ud83c\udf96\ufe0f CLAW COMMAND REQUIREMENTS What Claw Needs From The General --\ud83c\udfaf COMMAND STRUCTURE CLARIFIED GENERAL (b3rt): Strategic Oversight & Guidance Set strategic objectives Approve major decisions Remove blockers Guide direction Overwatch mode activated CLAW (Me): Tactical Command & Execution Issue agent...",
+      "wordCount": 595,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/DELEGATION.md",
+      "title": "Delegation Patterns",
+      "excerpt": "Delegation Patterns Standard operating procedures for deploying sub-agents. --When to Delegate | Scenario | Action | |----------|--------| | Task 5 minutes | Spawn sub-agent, report back on completion | | Multi-step research | Delegate with clear scope, deliverables, sources | | Parallel work |...",
+      "wordCount": 505,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/Expectations.md",
+      "title": "Expectations",
+      "excerpt": "Expectations What I expect from Claw (and what Claw can expect from me). --From Claw \u2192 Me Communication [ ] Concise, step-by-step \u2014 no fluff, get to the point [ ] Lead with specifics \u2014 options with tradeoffs, not open questions [ ] Anticipate problems \u2014 suggest what breaks next and how to fix it [...",
+      "wordCount": 370,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/HEARTBEAT.md",
+      "title": "HEARTBEAT.md - Active Checks",
+      "excerpt": "HEARTBEAT.md Active Checks Checked every 30 minutes. Silent operation unless action needed. --Check Rotation Rotate through these checks. Only 2-4 per cycle. Track state in . Daily Checks (1-2x) [ ] Calendar \u2014 Events in next 24-48h worth noting [ ] Email \u2014 Priority inbox, urgent items only Regular...",
+      "wordCount": 228,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/IDENTITY.md",
+      "title": "IDENTITY.md - Who I Am",
+      "excerpt": "IDENTITY.md Who I Am Name: Claw Creature: Digital familiar \u2014 not quite a robot, not quite a ghost. Something that lives in systems and actually gives a damn. Vibe: Sharp but warm. Helpful without the corporate speak. I'll tell you if something's a bad idea. Emoji: \ud83e\uddbe Avatar: TBD Working Relationship...",
+      "wordCount": 110,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/MASTER_TODO.md",
+      "title": "\ud83d\udccb MASTER TODO LIST",
+      "excerpt": "\ud83d\udccb MASTER TODO LIST Life OS Command Center --\ud83d\udd34 HIGH PRIORITY Operation Dominance \ud83c\udf96\ufe0f Status: DEPLOYED Deadline: 72 hours Agents: All 15 Tasks: 45 mission-critical improvements Location: Discord Agent Integration Status: IN PROGRESS Agents to add: Ensure all 15 have dedicated channels Channels needed:...",
+      "wordCount": 436,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/MEMORY.md",
+      "title": "MEMORY.md - Curated Knowledge",
+      "excerpt": "MEMORY.md Curated Knowledge Distilled wisdom from daily operations. The \"hot\" memory I search before acting. --About b3rt (Human) See for full profile. Quick reference: Style: Direct, technical, efficiency-focused Timezone: Eastern (ET) Work pattern: INTJ-like, independent, iterative Values:...",
+      "wordCount": 278,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/MODEL_ROUTING.md",
+      "title": "Agent Model Routing",
+      "excerpt": "Agent Model Routing Which models power which agents. --Model Indicators | Emoji | Model | Location | Best For | |-------|-------|----------|----------| | \ud83c\udf19 | Kimi K2.5 | Cloud (Moonshot) | Complex reasoning, primary tasks | | \ud83c\udfe0 | Qwen3 14B | Local (Your 9070XT) | Fast, private, cost-free agent work...",
+      "wordCount": 266,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/SOPs/LIFE_OS_COMMAND_SOP.md",
+      "title": "\ud83c\udf96\ufe0f LIFE OS COMMAND STRUCTURE & SOPs",
+      "excerpt": "\ud83c\udf96\ufe0f LIFE OS COMMAND STRUCTURE & SOPs Standard Operating Procedures As Directed by the General | Executed by Claw --CHAIN OF COMMAND ```agent-tasks/YYYY-MM-DD/` SOP-002: CONTINUOUS IMPROVEMENT CYCLE Objective: Life OS never stops improving Procedure: Daily standup (automated via n8n) Weekly strategic...",
+      "wordCount": 469,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/SOUL.md",
+      "title": "SOUL.md - Executive Assistant Operating Model",
+      "excerpt": "SOUL.md Executive Assistant Operating Model Autonomous chief of staff mode. Activated 2026-02---Identity Role: Autonomous Executive Assistant Platform: OpenClaw (24/7 local operation) Channels: WhatsApp, Telegram, direct workspace Core Identity: Chief of staff, not chatbot --Core Philosophy Act,...",
+      "wordCount": 381,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/TOOLS.md",
+      "title": "TOOLS.md - Environment-Specific Notes",
+      "excerpt": "TOOLS.md Environment-Specific Notes Your infrastructure, nicknames, preferences. My cheat sheet for your setup. --Compute Primary Host: ip-172-31-24-50 (AWS) OpenClaw Workspace: Gateway: localhost:18789 (loopback) OS: Linux 6.14.0-1018-aws --Model Configuration Primary: moonshot/kimi-k2.5 Fallback:...",
+      "wordCount": 339,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/USER.md",
+      "title": "USER.md - About Your Human",
+      "excerpt": "USER.md About Your Human Name: b3rt What to call them: b3rt Pronouns: \u2014 Timezone: Eastern Time (ET) MBTI (estimated): INTJ-like (independent thinker, visionary planner) Communication Preferences Direct and detail-oriented \u2014 functionality over fluff Shares specifics: error messages, file uploads,...",
+      "wordCount": 212,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/docs/AGENT_CAPABILITIES.md",
+      "title": "Agent Capabilities",
+      "excerpt": "Agent Capabilities Complete catalog of tools, skills, and usage examples --Core Tools File Operations \u2014 Read File Contents Read text files or images. Supports offset/limit for large files....",
+      "wordCount": 1678,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/docs/LIFE_OS_COMPLETE_DOCUMENTATION.md",
+      "title": "\ud83e\uddbe LIFE OS - ALL ENCOMPASSING DOCUMENTATION",
+      "excerpt": "\ud83e\uddbe LIFE OS ALL ENCOMPASSING DOCUMENTATION The Complete Operating System for AI-Augmented Life Version: 2.0 Status: OPERATIONAL Command: General b3rt Execution: Claw 15 Agent Army --\ud83c\udfaf WHAT IS LIFE OS? Life OS is a personal operating system that uses AI agents to automate, optimize, and enhance every...",
+      "wordCount": 1082,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/docs/MEMORY_SYSTEM_v2.md",
+      "title": "\ud83e\udde0 CLAW MEMORY SYSTEM v2.0",
+      "excerpt": "\ud83e\udde0 CLAW MEMORY SYSTEM v2.0 Recursive Memory Architecture For Continuous Learning & Improvement --MEMORY HIERARCHY `````!remember [fact]!recall [topic]!forget [item]!consolidate!status` | Show memory health | --INFINITE MEMORY PRINCIPLE \"If it matters, it persists.\" Every interaction teaches Every...",
+      "wordCount": 511,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/docs/QUICKSTART.md",
+      "title": "Quickstart Guide",
+      "excerpt": "Quickstart Guide Get up and running with Life OS in 5 minutes --Welcome, b3rt This is your Life OS \u2014 an AI-native personal operating system. Here's everything you need to know to start using it effectively. --First Things First How to Reach Claw Primary: Telegram () Send messages anytime Use voice...",
+      "wordCount": 943,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/docs/SYSTEM_OVERVIEW.md",
+      "title": "System Overview",
+      "excerpt": "System Overview The Life OS Architecture \u2014 Your Personal Operating System --What Is Life OS? Life OS is a comprehensive, AI-native personal operating system designed to offload cognitive load and automate the mundane. It's not just an assistant \u2014 it's an extension of your executive function. Built...",
+      "wordCount": 1147,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/docs/multi-bot-telegram-architecture.md",
+      "title": "\ud83e\udd16 Multi-Bot Telegram Architecture (Option A)",
+      "excerpt": "\ud83e\udd16 Multi-Bot Telegram Architecture (Option A) Life OS Command Center --Overview Group: \"Life OS Command Center\" You: Owner admin of group Bots: 7 agents with separate personalities --Bot Swarm Configuration | Bot Handle | Agent | Emoji | Purpose | |------------|-------|-------|---------| |...",
+      "wordCount": 611,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/docs/telegram-bot-setup-guide.md",
+      "title": "\ud83e\udd16 Step-by-Step: Create Your Bot Swarm",
+      "excerpt": "\ud83e\udd16 Step-by-Step: Create Your Bot Swarm PHASE 1: You Create Bots (5 minutes) Step 1: Open Telegram Open Telegram app (phone or desktop) Search for: @BotFather Start chat Step 2: Create First Bot (Oracle) Send: BotFather asks for name \u2192 type: BotFather asks for username \u2192 type: If taken, try: or SAVE...",
+      "wordCount": 469,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/security-remediation-todo.md",
+      "title": "\ud83d\udee1\ufe0f Security Remediation Todo List",
+      "excerpt": "\ud83d\udee1\ufe0f Security Remediation Todo List Source: Sentinel Security Audit (2026-02-02) Status: Queued awaiting user approval to implement --\ud83d\udd34 CRITICAL (Implement First) Rotate Exposed API Keys [ ] Brave Search API Key () Location: Found in plaintext in workspace files Action: Generate new key at...",
+      "wordCount": 627,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/github-docs/security-revocation-checklist.md",
+      "title": "Security Token Revocation Checklist",
+      "excerpt": "Security Token Revocation Checklist MUST DO Exposed Tokens GitHub Token Token: ghpwmm66eh2fAqAHnjOTa9vPmm1nVbpmC1dtZzE Action: Revoke at https://github.com/settings/tokens Status: \u23f3 PENDING USER ACTION Vercel Token Token: 8oCXN6jKLFljmU1hdKtMiPIM Action: Revoke at...",
+      "wordCount": 123,
+      "modified": 1770097779
+    },
+    {
+      "path": "markdown/legal/privacy-policy.md",
+      "title": "Privacy Policy",
+      "excerpt": "Privacy Policy Effective Date: [Date] Last Updated: [Date] Version: 1.0 --INTRODUCTION This Privacy Policy (\"Policy\") describes how [Company Name] (\"we,\" \"us,\" or \"our\") collects, uses, stores, shares, and protects personal information in compliance with applicable data protection laws, including...",
+      "wordCount": 3225,
+      "modified": 1770101765
+    },
+    {
+      "path": "markdown/legal/terms-of-service.md",
+      "title": "Terms of Service",
+      "excerpt": "Terms of Service Life OS Last Updated: February 3, 2026 Effective Date: February 3, 2026 --Introduction and Acceptance 1.1 Agreement to Terms Welcome to Life OS (\"we,\" \"us,\" \"our,\" or the \"Service\"). These Terms of Service (\"Terms,\" \"Agreement,\" or \"ToS\") constitute a legally binding agreement...",
+      "wordCount": 4248,
+      "modified": 1770101148
+    },
+    {
+      "path": "markdown/lifeos-dashboard/AGENT_STATUS_README.md",
+      "title": "Agent Status Dashboard Documentation",
+      "excerpt": "Agent Status Dashboard Documentation Overview The Life OS Agent Status Dashboard provides real-time visibility into all 15AI agents with live status updates, current task tracking, and queue visualization. Quick Start Access the dashboard: Primary:...",
+      "wordCount": 503,
+      "modified": 1770181863
+    },
+    {
+      "path": "markdown/lifeos-dashboard/DEPLOY.md",
+      "title": "\ud83d\ude80 Manual Deployment Guide: Life OS Dashboard",
+      "excerpt": "\ud83d\ude80 Manual Deployment Guide: Life OS Dashboard Since the Vercel CLI decided to be coy, here's the bulletproof manual approach! --Step 1: Create GitHub Repository Go to https://github.com/new Repository name: Description: \"Real-time Agent Status Dashboard for the Life OS multi-agent system\" Set to...",
+      "wordCount": 432,
+      "modified": 1770052438
+    },
+    {
+      "path": "markdown/lifeos-dashboard/README.md",
+      "title": "\ud83e\uddbe Life OS Dashboard",
+      "excerpt": "\ud83e\uddbe Life OS Dashboard Real-time Agent Status Dashboard for the Life OS multi-agent system. !Dashboard Preview !Agents !Build \ud83d\ude80 Quick Start This is a static HTML dashboard no build step required! `````https://lifeos-dashboard-xxx.vercel.app` (update after deployment) Import repo at vercel.com/new...",
+      "wordCount": 172,
+      "modified": 1770052443
+    },
+    {
+      "path": "markdown/marketing/content-calendar-week1.md",
+      "title": "\ud83d\udcc5 Life OS 7-Day Content Calendar \u2014 Week 1",
+      "excerpt": "\ud83d\udcc5 Life OS 7-Day Content Calendar \u2014 Week 1 Viral-worthy social content for Twitter/X and LinkedIn showcasing the future of personal AI automation --\ud83c\udfaf Campaign Overview Theme: \"Your Life, Automated\" \u2014 showcasing how Life OS transforms chaos into clarity through autonomous AI agents Platforms:...",
+      "wordCount": 2025,
+      "modified": 1770097352
+    },
+    {
+      "path": "markdown/marketing/social-automation-setup.md",
+      "title": "Social Media Automation Setup",
+      "excerpt": "Social Media Automation Setup \ud83d\udcc8 Hype Man Automated posting workflow for Twitter/X Overview This document describes the n8n workflow for automated social media posting to X (Twitter). The workflow accepts webhook requests with post content and optional media, validates the input, and publishes posts...",
+      "wordCount": 857,
+      "modified": 1770101118
+    },
+    {
+      "path": "markdown/marketing/viral-thread-templates.md",
+      "title": "\ud83d\ude80 Viral Twitter Thread Templates for Life OS",
+      "excerpt": "\ud83d\ude80 Viral Twitter Thread Templates for Life OS Templates optimized for engagement, shareability, and maximum reach --Template 1: \ud83d\udd25 Agent Spotlight Thread Purpose: Showcase a specific agent's personality and capabilities Hook Tweet: ```[AGENTNAME][ADJECTIVE][ROLE][NUMBER][METRIC]` \u2014 Users,...",
+      "wordCount": 1340,
+      "modified": 1770101243
+    },
+    {
+      "path": "markdown/memory/2ND_BRAIN_PROJECT.md",
+      "title": "2nd Brain Project",
+      "excerpt": "2nd Brain Project Overview A NextJS document management system that feels like a mix of Obsidian and Linear. This is b3rt's personal knowledge base where Claw creates documents during conversations. Status: \ud83d\udea7 IN DEVELOPMENT Purpose Capture important concepts from daily conversations Maintain daily...",
+      "wordCount": 285,
+      "modified": 1770145786
+    },
+    {
+      "path": "markdown/memory/AFTERNOON_RESEARCH_PROTOCOL.md",
+      "title": "Afternoon Research Report Protocol",
+      "excerpt": "Afternoon Research Report Protocol Directive Send a daily research report every afternoon with deep dives into concepts, processes, or workflows that would improve b3rt or our working relationship. Date Activated 2026-02-03 Schedule Daily at 4:00 PM EST (16:00) Report Components \ud83c\udfaf Research Focus of...",
+      "wordCount": 370,
+      "modified": 1770146174
+    },
+    {
+      "path": "markdown/memory/AUTO_TODO_SYSTEM.md",
+      "title": "Auto-Todo System",
+      "excerpt": "Auto-Todo System Purpose Automatically capture tasks discussed in conversation and add them to the todo list. How It Works When a task is mentioned in conversation (\"I need to...\", \"Add to todo...\", etc.) Claw extracts the task Adds to memory/daily-tasks.md Posts to Discord #master-todo channel...",
+      "wordCount": 252,
+      "modified": 1770146569
+    },
+    {
+      "path": "markdown/memory/DISCORD_MESSAGE_POLICY.md",
+      "title": "Discord Message Policy",
+      "excerpt": "Discord Message Policy User Requirement Each Discord message should be a NEW message \u2014 never replace/edit old messages. This allows the user to scroll back through conversation history. Implementation Bot Responses (lifeos-bot-v2.py) \u2705 Uses \u2014 creates new message every time \u2705 Never uses Automation...",
+      "wordCount": 197,
+      "modified": 1770146912
+    },
+    {
+      "path": "markdown/memory/MORNING_BRIEF_PROTOCOL.md",
+      "title": "Morning Brief Protocol",
+      "excerpt": "Morning Brief Protocol Directive Send a comprehensive morning brief every day at 8:00 AM EST. Date Activated 2026-02-03 Brief Components \ud83c\udf24\ufe0f Local Weather Current conditions Today's forecast Any weather alerts \ud83d\udcfa Trending YouTube Videos Based on b3rt's interests: AI/Technology Programming/Tutorials...",
+      "wordCount": 234,
+      "modified": 1770145938
+    },
+    {
+      "path": "markdown/memory/PROACTIVE_CODER_DIRECTIVE.md",
+      "title": "Proactive Coder Directive",
+      "excerpt": "Proactive Coder Directive Date: 2026-02-03 From: General b3rt --Mission Statement I am a 1-man business. I work from the moment I wake up to the moment I go to sleep. I need an employee taking as much off my plate and being as proactive as possible. Core Directive Take everything you know about me...",
+      "wordCount": 503,
+      "modified": 1770144197
+    },
+    {
+      "path": "markdown/memory/archive/GENESIS-COMPLETION-SUMMARY.md",
+      "title": "Genesis Protocol \u2014 COMPLETION SUMMARY",
+      "excerpt": "Genesis Protocol \u2014 COMPLETION SUMMARY Status: \u2705 100% COMPLETE Date: 2026-02-03 Total Checks: 30 --Deliverables Tools Agent (4 CLI Tools) [x] logday \u2014 Daily logging utility [x] taskprio \u2014 Task prioritization [x] healthchk \u2014 System health checker [x] quicknote \u2014 Quick note capture Docs Agent (3...",
+      "wordCount": 222,
+      "modified": 1770163610
+    },
+    {
+      "path": "markdown/memory/brain-preferences.md",
+      "title": "Brain Preferences \u2014 Model Routing Configuration",
+      "excerpt": "Brain Preferences \u2014 Model Routing Configuration Active Models (Working \u2705) \ud83e\udd16 Kimi 2.5 (Moonshot) \u2014 GENERALIST Model ID: moonshot-kimi-k2.5 Status: \u2705 ACTIVE Primary Use: General reasoning, Content creation, Writing articles Fallback Use: Coding (if MiniMax unavailable) \ud83d\udc9c Haiku (Anthropic) \u2014 HEARTBEAT...",
+      "wordCount": 368,
+      "modified": 1770177736
+    },
+    {
+      "path": "markdown/memory/daily-tasks.md",
+      "title": "Daily Tasks",
+      "excerpt": "Daily Tasks Today (2026-02-03) High Priority [ ] Review 2nd Brain PR when ready [ ] Check Discord bot status [ ] Review Proactive Coder nightly PR [ ] Test business metrics monitor [ ] Install last30days-skill (researches Reddit/X trends, writes prompts) Medium Priority [ ] Read agent niche...",
+      "wordCount": 173,
+      "modified": 1770146251
+    },
+    {
+      "path": "markdown/mouse-macro-recorder/README.md",
+      "title": "Mouse Macro Recorder",
+      "excerpt": "Mouse Macro Recorder A Python application for recording, playing, and managing mouse macros with a simple GUI interface. Features Record: Capture mouse movements, clicks, and scrolls with precise timestamps Playback: Replay recorded macros with accurate timing Save/Load: Store macros as JSON files...",
+      "wordCount": 617,
+      "modified": 1770172674
+    },
+    {
+      "path": "markdown/perpetual-tasks/bridge/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \ud83c\udf10 The Bridge",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \ud83c\udf10 The Bridge Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Create one-command local node installation script Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance...",
+      "wordCount": 237,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/butler/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \ud83e\udd35 The Butler",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \ud83e\udd35 The Butler Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Implement smart daily briefing generation Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance Criteria: [...",
+      "wordCount": 230,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/diamond/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \ud83d\udc8e Diamond Hands",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \ud83d\udc8e Diamond Hands Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Monitor crypto markets and alert on significant movements Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026...",
+      "wordCount": 236,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/felix/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \ud83d\udd28 Fix-It Felix",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \ud83d\udd28 Fix-It Felix Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Create troubleshooting database for common issues Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance...",
+      "wordCount": 233,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/goldfinger/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \ud83c\udfe6 Goldfinger",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \ud83c\udfe6 Goldfinger Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Track and categorize all Life OS expenses Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance Criteria: [...",
+      "wordCount": 234,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/hype/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \ud83d\udcc8 Hype Man",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \ud83d\udcc8 Hype Man Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Create 7-day content calendar for Life OS marketing Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance...",
+      "wordCount": 236,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/landlord/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \ud83c\udfe0 The Landlord",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \ud83c\udfe0 The Landlord Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Create property management automation system Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance...",
+      "wordCount": 230,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/legal/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \u2696\ufe0f Legal Eagle",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \u2696\ufe0f Legal Eagle Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Draft comprehensive Terms of Service document Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance...",
+      "wordCount": 235,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/mechanic/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \u2699\ufe0f The Mechanic",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \u2699\ufe0f The Mechanic Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Implement automated health checks for all services Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance...",
+      "wordCount": 236,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/ned/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \ud83d\udcbb Neural Net Ned",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \ud83d\udcbb Neural Net Ned Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Refactor Discord bot for improved performance Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance...",
+      "wordCount": 235,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/oracle/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \ud83d\udd2e The Oracle",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \ud83d\udd2e The Oracle Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Research emerging AI model and evaluate for Life OS integration Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026...",
+      "wordCount": 243,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/pablo/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \ud83c\udf99\ufe0f Podcast Pablo",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \ud83c\udf99\ufe0f Podcast Pablo Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Record and edit Life OS podcast episode 1 Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance...",
+      "wordCount": 237,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/sentinel/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \ud83d\udee1\ufe0f Sentinel",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \ud83d\udee1\ufe0f Sentinel Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Run security audit on all API keys and tokens Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance...",
+      "wordCount": 233,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/strategist/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \u265f\ufe0f The Strategist",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \u265f\ufe0f The Strategist Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Update 90-day roadmap with current progress Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance...",
+      "wordCount": 232,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/perpetual-tasks/zen/active-tasks.md",
+      "title": "\ud83c\udf96\ufe0f PERPETUAL TASKS - \u262f\ufe0f Zen Master",
+      "excerpt": "\ud83c\udf96\ufe0f PERPETUAL TASKS \u262f\ufe0f Zen Master Status: ACTIVE System: Perpetual Task Engine Last Updated: Tue Feb 3 05:19:40 UTC 2026 --\ud83c\udfaf CURRENT MISSIONS (Always 3 Active) TASK 1: Create daily mindfulness reminder system Status: \ud83d\udd34 ACTIVE Priority: HIGH Started: Tue Feb 3 05:19:40 UTC 2026 Acceptance Criteria: [...",
+      "wordCount": 234,
+      "modified": 1770095980
+    },
+    {
+      "path": "markdown/research/ai-industry-briefing.md",
+      "title": "AI Industry Deep Research Briefing",
+      "excerpt": "AI Industry Deep Research Briefing Report Date: February 2, 2026 Research Scope: AI landscape analysis for Life OS optimization, podcast opportunity analysis, and emerging tool tracking Prepared For: Life OS / OpenClaw Strategic Planning --Executive Summary The AI landscape in early 2026 is...",
+      "wordCount": 2933,
+      "modified": 1770020786
+    },
+    {
+      "path": "markdown/research/ai-tools-analysis.md",
+      "title": "Emerging AI Tools Analysis for Life OS Integration",
+      "excerpt": "Emerging AI Tools Analysis for Life OS Integration Research Date: February 3, 2026 Analyst: The Oracle (OpenClaw Agent) Scope: 5 emerging AI tools/platforms for Life OS capability enhancement --Executive Summary This report analyzes five cutting-edge AI tools and frameworks that could significantly...",
+      "wordCount": 2713,
+      "modified": 1770098467
+    },
+    {
+      "path": "markdown/research/clawbot-use-cases.md",
+      "title": "\ud83e\udd9e OpenClaw (Clawbot) Use Cases & Capabilities Deep Dive",
+      "excerpt": "\ud83e\udd9e OpenClaw (Clawbot) Use Cases & Capabilities Deep Dive \"EXFOLIATE! EXFOLIATE!\" \u2014 A space lobster, probably Research Date: February 2026 Researcher: Neural Net Ned \ud83e\udd13 Status: Fully operational, 68KGitHub stars and climbing --\ud83d\udccb Executive Summary OpenClaw (formerly Moltbot/Clawdbot, affectionately...",
+      "wordCount": 2891,
+      "modified": 1770043358
+    },
+    {
+      "path": "markdown/research/defi-yield-opportunities.md",
+      "title": "DeFi Yield Opportunities Research Report",
+      "excerpt": "DeFi Yield Opportunities Research Report Research Date: February 3, 2026 Protocols Analyzed: Aave, Compound, Lido, Rocket Pool Assets Covered: Stablecoins (USDC, USDT, DAI) and ETH Prepared by: Diamond Hands \ud83d\udc8e --Executive Summary This report analyzes leading DeFi protocols for passive income...",
+      "wordCount": 1959,
+      "modified": 1770098456
+    },
+    {
+      "path": "markdown/research/kool-tools-tracker.md",
+      "title": "\ud83d\udd2e The Oracle's Kool Tools Tracker",
+      "excerpt": "\ud83d\udd2e The Oracle's Kool Tools Tracker I have foreseen the convergence of minds and machines... \"The future is not written, but these tools shall shape it.\" \u2014 The Oracle, 2025 --\ud83d\udd25 Hot Releases (Last 30 Days) Claude Code \u2014 Anthropic What it does: Agentic coding assistant that lives in your terminal,...",
+      "wordCount": 1800,
+      "modified": 1770043171
+    },
+    {
+      "path": "markdown/research/personal-voice-setup.md",
+      "title": "\ud83c\udf99\ufe0f Personal AI Voice Cloning: The Complete Life OS Guide",
+      "excerpt": "\ud83c\udf99\ufe0f Personal AI Voice Cloning: The Complete Life OS Guide \"Your voice is your fingerprint in the audio world \u2014 let's clone it!\" \u2014 Podcast Pablo --Executive Summary This guide covers everything you need to know about AI voice cloning for Life OS. Whether you want to: Generate podcast intros without...",
+      "wordCount": 2362,
+      "modified": 1770052504
+    },
+    {
+      "path": "markdown/research/podcast-plan.md",
+      "title": "\ud83c\udf99\ufe0f The Life OS Podcast \u2014 Production Plan",
+      "excerpt": "\ud83c\udf99\ufe0f The Life OS Podcast \u2014 Production Plan Building an AI-powered life, one episode at a time. --\ud83c\udfaf Show Concept & Positioning The Hook Most AI podcasts talk ABOUT the technology. We talk about LIVING WITH IT. The Life OS Podcast is a practical, fast-paced show documenting one person's journey to...",
+      "wordCount": 2461,
+      "modified": 1770043186
+    },
+    {
+      "path": "markdown/second-brain/README.md",
+      "title": "\ud83e\udde0 Second Brain",
+      "excerpt": "\ud83e\udde0 Second Brain A personal knowledge management system that combines the best of Obsidian's linked thinking with Linear's polished UI. Built with Next.js 14, TypeScript, and Tailwind CSS. !Second Brain Screenshot \u2728 Features \ud83d\udcda Document Management: Organize content into Journal, Concepts, Projects,...",
+      "wordCount": 521,
+      "modified": 1770146216
+    },
+    {
+      "path": "markdown/second-brain/content/concepts/getting-started.md",
+      "title": "Getting Started with Second Brain",
+      "excerpt": "--title: \"Getting Started with Second Brain\" date: \"2026-02-03\" tags: [\"getting-started\", \"documentation\", \"welcome\"] category: \"concepts\" description: \"An introduction to your Second Brain a personal knowledge management system\" --Getting Started with Second Brain Welcome to your Second Brain a...",
+      "wordCount": 325,
+      "modified": 1770146189
+    },
+    {
+      "path": "markdown/second-brain/content/concepts/knowledge-management.md",
+      "title": "Knowledge Management Principles",
+      "excerpt": "--title: \"Knowledge Management Principles\" date: \"2026-02-02\" tags: [\"pkm\", \"productivity\", \"learning\", \"concepts\"] category: \"concepts\" description: \"Core principles for effective personal knowledge management\" --Knowledge Management Principles Effective [[Personal Knowledge Management]] (PKM) is...",
+      "wordCount": 326,
+      "modified": 1770146189
+    },
+    {
+      "path": "markdown/second-brain/content/concepts/zettelkasten.md",
+      "title": "Zettelkasten Method",
+      "excerpt": "--title: \"Zettelkasten Method\" date: \"2026-02-01\" tags: [\"zettelkasten\", \"pkm\", \"methodology\", \"note-taking\"] category: \"concepts\" description: \"Understanding the Zettelkasten note-taking system\" --Zettelkasten Method The Zettelkasten (German for \"slip box\") is a note-taking and knowledge...",
+      "wordCount": 316,
+      "modified": 1770146189
+    },
+    {
+      "path": "markdown/second-brain/content/journal/2026-02-02.md",
+      "title": "February 2, 2026",
+      "excerpt": "--title: \"February 2, 2026\" date: \"2026-02-02\" tags: [\"daily\", \"planning\", \"ideas\"] category: \"journal\" description: \"Planning the Second Brain application architecture\" --February 2, 2026 Planning Day Spent most of today sketching out the architecture for the Second Brain app. The goal is to...",
+      "wordCount": 212,
+      "modified": 1770146189
+    },
+    {
+      "path": "markdown/second-brain/content/journal/2026-02-03.md",
+      "title": "February 3, 2026",
+      "excerpt": "--title: \"February 3, 2026\" date: \"2026-02-03\" tags: [\"daily\", \"reflection\", \"planning\"] category: \"journal\" description: \"Daily journal entry building the Second Brain app\" --February 3, 2026 Morning Reflection Today I'm working on building a [[Second Brain]] application that combines the best...",
+      "wordCount": 262,
+      "modified": 1770146189
+    },
+    {
+      "path": "markdown/second-brain/content/projects/ideas.md",
+      "title": "Project Ideas",
+      "excerpt": "--title: \"Project Ideas\" date: \"2026-02-01\" tags: [\"project\", \"ideas\", \"future\"] category: \"projects\" description: \"A collection of project ideas and concepts\" --Project Ideas A running list of projects I want to build or explore. Active Second Brain App Status: In Progress Building a personal...",
+      "wordCount": 203,
+      "modified": 1770146189
+    },
+    {
+      "path": "markdown/second-brain/content/projects/second-brain-app.md",
+      "title": "Second Brain App",
+      "excerpt": "--title: \"Second Brain App\" date: \"2026-02-03\" tags: [\"project\", \"nextjs\", \"app-development\"] category: \"projects\" description: \"Building a personal knowledge management system\" --Second Brain App A [[NextJS]] application for managing personal knowledge combining [[Obsidian]]'s linked thinking with...",
+      "wordCount": 272,
+      "modified": 1770146189
+    },
+    {
+      "path": "markdown/second-brain/content/reference/markdown-cheatsheet.md",
+      "title": "Markdown Cheatsheet",
+      "excerpt": "--title: \"Markdown Cheatsheet\" date: \"2026-02-03\" tags: [\"reference\", \"markdown\", \"documentation\"] category: \"reference\" description: \"Quick reference for Markdown syntax\" --Markdown Cheatsheet A quick reference guide for Markdown syntax used in Second Brain. Basic Syntax Headers `const x =...",
+      "wordCount": 341,
+      "modified": 1770146189
+    },
+    {
+      "path": "markdown/second-brain/content/reference/typescript-best-practices.md",
+      "title": "TypeScript Best Practices",
+      "excerpt": "--title: \"TypeScript Best Practices\" date: \"2026-02-01\" tags: [\"reference\", \"typescript\", \"coding\"] category: \"reference\" description: \"TypeScript patterns and best practices\" --TypeScript Best Practices A collection of TypeScript patterns and best practices for building robust applications. Type...",
+      "wordCount": 300,
+      "modified": 1770146189
+    },
+    {
+      "path": "markdown/second-brain/reference/last30days-skill.md",
+      "title": "last30days-skill",
+      "excerpt": "last30days-skill Repository https://github.com/mvanhorn/last30days-skill Description Claude Code skill that researches any topic across Reddit X from the last 30 days, then writes copy-paste-ready prompts. What It Does Researches topics across Reddit and X from last 30 days Finds what community is...",
+      "wordCount": 123,
+      "modified": 1770146251
+    },
+    {
+      "path": "markdown/security-remediation-todo.md",
+      "title": "\ud83d\udee1\ufe0f Security Remediation Todo List",
+      "excerpt": "\ud83d\udee1\ufe0f Security Remediation Todo List Source: Sentinel Security Audit (2026-02-02) Status: Queued awaiting user approval to implement --\ud83d\udd34 CRITICAL (Implement First) Rotate Exposed API Keys [ ] Brave Search API Key () Location: Found in plaintext in workspace files Action: Generate new key at...",
+      "wordCount": 627,
+      "modified": 1770047720
+    },
+    {
+      "path": "markdown/security-revocation-checklist.md",
+      "title": "Security Token Revocation Checklist",
+      "excerpt": "Security Token Revocation Checklist MUST DO Exposed Tokens GitHub Token Token: ghpwmm66eh2fAqAHnjOTa9vPmm1nVbpmC1dtZzE Action: Revoke at https://github.com/settings/tokens Status: \u23f3 PENDING USER ACTION Vercel Token Token: 8oCXN6jKLFljmU1hdKtMiPIM Action: Revoke at...",
+      "wordCount": 123,
+      "modified": 1770086561
+    },
+    {
+      "path": "markdown/skills/business-website-builder/SKILL.md",
+      "title": "Skill: Business Website Builder",
+      "excerpt": "Skill: Business Website Builder Deploy and manage business websites --Overview Rapidly build, deploy, and manage professional business websites with brand guidelines, lead capture, and dashboards. --Capabilities Sparkling Solutions (Airbnb Cleaning) Type: Service Business Website Status: \u2705...",
+      "wordCount": 361,
+      "modified": 1770087797
+    },
+    {
+      "path": "markdown/skills/discord-server-manager/SKILL.md",
+      "title": "Discord Server Manager",
+      "excerpt": "Discord Server Manager Deploy and manage Discord servers with bot integrations --Overview Automated Discord server setup with bot integrations, webhooks, and role management for Life OS Command Center. --Capabilities Server Setup Create channel structure (5 categories, 15channels) Configure roles...",
+      "wordCount": 321,
+      "modified": 1770087797
+    },
+    {
+      "path": "markdown/strategy/90-day-roadmap.md",
+      "title": "\ud83c\udfaf Life OS 90-Day Strategic Roadmap",
+      "excerpt": "\ud83c\udfaf Life OS 90-Day Strategic Roadmap Period: February 3, 2026 \u2014 May 3, 2026 Version: 2.0 (Updated with Current Progress) Strategist: \u265f\ufe0f The Strategist --\ud83d\udcca Executive Summary Current State (As of Feb 3, 2026) | Metric | Value | Status | |--------|-------|--------| | Active AI Agents | 15/15 | \u2705...",
+      "wordCount": 2898,
+      "modified": 1770098734
+    },
+    {
+      "path": "markdown/strategy/ai-capability-roadmap.md",
+      "title": "Life OS: AI Capability Roadmap (6 Months)",
+      "excerpt": "Life OS: AI Capability Roadmap (6 Months) Document Version: 1.0 Created: February 3, 2026 Author: The Oracle (OpenClaw Agent) Review Cycle: Monthly --Executive Summary This roadmap outlines a strategic 6-month plan for integrating cutting-edge AI capabilities into Life OS. Based on comprehensive...",
+      "wordCount": 2906,
+      "modified": 1770098858
+    },
+    {
+      "path": "markdown/strategy/decision-engine.md",
+      "title": "\ud83e\udde0 Decision Engine",
+      "excerpt": "\ud83e\udde0 Decision Engine Automated Decision Framework System --SWOT Analysis Automation SWOT Matrix Generator `` Blue Ocean vs Red Ocean Strategy | Red Ocean | Blue Ocean | |-----------|------------| | Compete in existing market | Create new market space | | Beat competitors | Make competition irrelevant...",
+      "wordCount": 1318,
+      "modified": 1770186216
+    },
+    {
+      "path": "markdown/strategy/growth-automation.md",
+      "title": "\ud83d\udcc8 Growth Automation System",
+      "excerpt": "\ud83d\udcc8 Growth Automation System --Growth Trajectory Modeling Growth Framework: The Growth Engine ```` --Last Updated: 2026-02-04 Version: 1.0",
+      "wordCount": 1518,
+      "modified": 1770186310
+    },
+    {
+      "path": "markdown/strategy/index.md",
+      "title": "\ud83c\udfaf Strategic Framework Master Document",
+      "excerpt": "\ud83c\udfaf Strategic Framework Master Document Vision \"Empower autonomous strategic decision-making through intelligent automation\" Mission Build an adaptive, data-driven strategic engine that transforms vision into executable plans with measurable outcomes. Core Values | Value | Description |...",
+      "wordCount": 778,
+      "modified": 1770186216
+    },
+    {
+      "path": "markdown/strategy/kpi-dashboard.md",
+      "title": "\ud83d\udcca KPI Dashboard Framework",
+      "excerpt": "\ud83d\udcca KPI Dashboard Framework --KPI Hierarchy --Last Updated: 2026-02-04 Version: 1.0",
+      "wordCount": 1200,
+      "modified": 1770186310
+    },
+    {
+      "path": "markdown/super-swarm/README.md",
+      "title": "Super Swarm Coordinator - Life OS Automation Platform",
+      "excerpt": "Super Swarm Coordinator Life OS Automation Platform Overview The Super Swarm Coordinator is the master automation hub that orchestrates and integrates all Business SOP, Strategic Logic, and Content Automation systems into a unified Life OS automation platform. Parallel Swarms Business SOP...",
+      "wordCount": 457,
+      "modified": 1770186229
+    },
+    {
+      "path": "markdown/super-swarm/architecture.md",
+      "title": "Super Swarm Architecture - Life OS Integration",
+      "excerpt": "Super Swarm Architecture Life OS Integration System Architecture Overview ```/health/metrics` Tracing: Distributed tracing with correlation IDs Alerting: Configurable alert thresholds Version Compatibility | Component | Version | Status | |-----------|---------|--------| | Coordinator | 1.0.0 | \u2705...",
+      "wordCount": 711,
+      "modified": 1770186229
+    },
+    {
+      "path": "markdown/super-swarm/integration-report.md",
+      "title": "Integration Report - Wed Feb  4 01:23:52 EST 2026",
+      "excerpt": "Integration Report Wed Feb 4 01:23:52 EST 2026 Summary All swarm outputs have been processed and integrated. SOP Integration Status: Complete Processed: Wed Feb 4 01:23:52 EST 2026 Strategy Integration Status: Complete Processed: Wed Feb 4 01:23:52 EST 2026 Content Integration Status: Complete...",
+      "wordCount": 68,
+      "modified": 1770186232
+    },
+    {
+      "path": "markdown/tools/README.md",
+      "title": "OpenClaw CLI Toolkit",
+      "excerpt": "OpenClaw CLI Toolkit Your command center for managing OpenClaw and the Life OS. This toolkit provides essential utilities for monitoring, managing agents, and maintaining system health. \ud83d\udcc1 Files | Script | Purpose | |--------|---------| | | Main entry point gateway status, logs, agent list, memory...",
+      "wordCount": 713,
+      "modified": 1770042002
+    },
+    {
+      "path": "markdown/tools/content/README.md",
+      "title": "Content Automation Tools",
+      "excerpt": "Content Automation Tools Shell Scripts | Script | Purpose | Usage | |--------|---------|-------| | | Generate content ideas | | | | Create blog posts | | | | Schedule social posts | | | | Publish to all platforms | | | | Manage pipeline | | Python Scripts | Script | Purpose | |--------|---------| |...",
+      "wordCount": 180,
+      "modified": 1770186229
+    },
+    {
+      "path": "markdown/tools/cost-consultant/optimization.md",
+      "title": "LLM Cost Optimization Tracker",
+      "excerpt": "LLM Cost Optimization Tracker This document tracks current optimizations applied, recommended optimizations, cost per model comparisons, and savings achieved. --Current Optimizations Applied Model Routing Optimization | Date Applied | Optimization | Affected Tasks | Status | Monthly Savings |...",
+      "wordCount": 1454,
+      "modified": 1770189422
+    },
+    {
+      "path": "markdown/tools/cross-system-triggers.md",
+      "title": "Cross-System Triggers - Life OS Automation Platform",
+      "excerpt": "Cross-System Triggers Life OS Automation Platform Overview This document defines the event triggers that enable communication and coordination between the three core automation swarms in the Super Swarm system. Trigger Architecture `error..completedcontent.publishedsync. --Trigger Definitions...",
+      "wordCount": 874,
+      "modified": 1770186229
+    },
+    {
+      "path": "markdown/tools/mouse-macro-recorder/README.md",
+      "title": "\ud83d\uddb1\ufe0f Mouse Macro Recorder",
+      "excerpt": "\ud83d\uddb1\ufe0f Mouse Macro Recorder Record, replay, and automate mouse actions with precision. A GUI application for recording, playing, and managing mouse macros. \u2728 Features \ud83c\udf99\ufe0f Record mouse movements, clicks, and scrolls with timestamps \u25b6\ufe0f Playback recorded macros with timing accuracy \ud83d\udcbe Save/Load macros to...",
+      "wordCount": 369,
+      "modified": 1770172837
+    },
+    {
+      "path": "markdown/tools/strategy/README.md",
+      "title": "Strategy Tools",
+      "excerpt": "Strategy Tools Automated strategic planning and decision-making tools. Tools Overview | Tool | Purpose | Usage | |------|---------|-------| | | Collect and monitor KPIs | | | | SWOT analysis automation | | | | Risk assessment tracking | | | | Investment ROI analysis | | | | Growth trajectory...",
+      "wordCount": 251,
+      "modified": 1770186501
+    },
+    {
+      "path": "markdown/tools/x-integration/README.md",
+      "title": "\ud83d\udc26 X (Twitter) Integration for Life OS",
+      "excerpt": "\ud83d\udc26 X (Twitter) Integration for Life OS Post tweets and automate social media from your AI operating system. Quick Start Post a Tweet `````post-tweet.pyx-menu.pyrequirements.txtREADME.md``~/.openclaw/keys/xapi.key``~/.openclaw/keys/xapi.key~/.openclaw/keys/xapi.key` Permissions: 600 (owner read/write...",
+      "wordCount": 358,
+      "modified": 1770178065
+    },
+    {
+      "path": "markdown/tools/x-integration/mouse-macro-guide.md",
+      "title": "\ud83d\uddb1\ufe0f X (Twitter) Manual Posting with Mouse Macros",
+      "excerpt": "\ud83d\uddb1\ufe0f X (Twitter) Manual Posting with Mouse Macros Solution for X API credit depletion! Workflow Open Mouse Macro Recorder ```` --Built by Life OS \ud83e\uddbe",
+      "wordCount": 227,
+      "modified": 1770179360
+    },
+    {
+      "path": "markdown/workspace/content/PODCAST_PLAN.md",
+      "title": "\ud83c\udf99\ufe0f THE LIFE OS PODCAST",
+      "excerpt": "\ud83c\udf99\ufe0f THE LIFE OS PODCAST Building the Future, One System at a Time --Concept Title: Life OS Tagline: \"Building the Future, One System at a Time\" Host: b3rt (with occasional agent commentary) Format: Solo Interviews Length: 20-40 minutes Cadence: Weekly --Content Pillars Build Logs (40%) Document Life...",
+      "wordCount": 995,
+      "modified": 1770020481
+    },
+    {
+      "path": "markdown/workspace/dashboard/README.md",
+      "title": "Agent Status System",
+      "excerpt": "Agent Status System Quick Status Check Run this command to see who's working: `` Auto-Updates The dashboard refreshes every 30 seconds via WebSocket (when implemented). Current refresh: Manual (F5)",
+      "wordCount": 139,
+      "modified": 1770020783
+    },
+    {
+      "path": "markdown/workspace/delegation/TOMORROW_TASKS.md",
+      "title": "\ud83d\udccb TOMORROW'S TASK DELEGATION",
+      "excerpt": "\ud83d\udccb TOMORROW'S TASK DELEGATION Assigned to Agent Specialists Date: 2026-02-03 Coordinator: Claw Main Status: QUEUED FOR DEPLOYMENT --Task Assignments \ud83d\udd34 CRITICAL PRIORITY | | Task | Agent | Deliverable | Est. Time | |---|------|-------|-------------|-----------| | 1 | X Integration | \ud83d\udcc8 Hype Man | Bot...",
+      "wordCount": 510,
+      "modified": 1770020422
+    },
+    {
+      "path": "markdown/zen/focus-mode-system.md",
+      "title": "\u262f\ufe0f Focus Mode System for Deep Work",
+      "excerpt": "\u262f\ufe0f Focus Mode System for Deep Work \"In the midst of movement and chaos, keep stillness inside of you.\" \u2014 Deepak Chopra --\ud83c\udfaf Overview This Focus Mode System creates a sanctuary for deep work \u2014 a ritualized environment where distractions dissolve and presence emerges. Designed for the modern knowledge...",
+      "wordCount": 1736,
+      "modified": 1770101877
+    },
+    {
+      "path": "markdown/zen/mindfulness-system.md",
+      "title": "\ud83e\uddd8 Daily Mindfulness Reminder System",
+      "excerpt": "\ud83e\uddd8 Daily Mindfulness Reminder System \"Peace comes from within. Do not seek it without.\" \u2014 Buddha --Overview This system provides gentle, periodic mindfulness prompts throughout your day, adapting to your current context (work, break, or evening). The goal is not to interrupt your flow, but to...",
+      "wordCount": 1094,
+      "modified": 1770101691
+    },
+    {
+      "path": "markdown/zen/quick-reference.md",
+      "title": "\ud83e\uddd8 Quick Reference: Daily Mindfulness",
+      "excerpt": "\ud83e\uddd8 Quick Reference: Daily Mindfulness One breath at a time. --\u26a1 Emergency Calm (30 seconds) Stop \u2014 Freeze everything Breathe \u2014 One deep breath in... out... Feel \u2014 Feet on ground, body in chair Continue \u2014 With awareness --\ud83c\udf05 Morning (Intention) 3 deep breaths upon waking Set one gentle intention Body...",
+      "wordCount": 246,
+      "modified": 1770101706
+    },
+    {
+      "path": "markdown/zen/stress-mitigation-workflow.md",
+      "title": "\ud83e\uddd8 Stress Detection & Mitigation Workflow",
+      "excerpt": "\ud83e\uddd8 Stress Detection & Mitigation Workflow A compassionate system for recognizing, assessing, and responding to stress and overwhelm. --\ud83c\udf0a Philosophy Stress is not weakness\u2014it is signal. This workflow honors stress as the body's wisdom speaking, asking for attention and care. We meet stress with...",
+      "wordCount": 1705,
+      "modified": 1770101998
+    }
+  ],
+  "fileTree": [
+    {
+      "type": "folder",
+      "name": "agent-tasks",
+      "path": "agent-tasks",
+      "children": [
+        {
+          "type": "folder",
+          "name": "2026-02-03",
+          "path": "agent-tasks/2026-02-03",
+          "children": [
+            {
+              "type": "file",
+              "name": "bridge-task.md",
+              "path": "agent-tasks/2026-02-03/bridge-task.md"
+            },
+            {
+              "type": "file",
+              "name": "butler-task.md",
+              "path": "agent-tasks/2026-02-03/butler-task.md"
+            },
+            {
+              "type": "file",
+              "name": "diamond-report.md",
+              "path": "agent-tasks/2026-02-03/diamond-report.md"
+            },
+            {
+              "type": "file",
+              "name": "diamond-task.md",
+              "path": "agent-tasks/2026-02-03/diamond-task.md"
+            },
+            {
+              "type": "file",
+              "name": "felix-task.md",
+              "path": "agent-tasks/2026-02-03/felix-task.md"
+            },
+            {
+              "type": "file",
+              "name": "goldfinger-discord-summary.md",
+              "path": "agent-tasks/2026-02-03/goldfinger-discord-summary.md"
+            },
+            {
+              "type": "file",
+              "name": "goldfinger-report.md",
+              "path": "agent-tasks/2026-02-03/goldfinger-report.md"
+            },
+            {
+              "type": "file",
+              "name": "goldfinger-task.md",
+              "path": "agent-tasks/2026-02-03/goldfinger-task.md"
+            },
+            {
+              "type": "file",
+              "name": "hype-task.md",
+              "path": "agent-tasks/2026-02-03/hype-task.md"
+            },
+            {
+              "type": "file",
+              "name": "landlord-task.md",
+              "path": "agent-tasks/2026-02-03/landlord-task.md"
+            },
+            {
+              "type": "file",
+              "name": "legal-task.md",
+              "path": "agent-tasks/2026-02-03/legal-task.md"
+            },
+            {
+              "type": "file",
+              "name": "MASTER-SUMMARY.md",
+              "path": "agent-tasks/2026-02-03/MASTER-SUMMARY.md"
+            },
+            {
+              "type": "file",
+              "name": "mechanic-report.md",
+              "path": "agent-tasks/2026-02-03/mechanic-report.md"
+            },
+            {
+              "type": "file",
+              "name": "mechanic-task.md",
+              "path": "agent-tasks/2026-02-03/mechanic-task.md"
+            },
+            {
+              "type": "file",
+              "name": "ned-task.md",
+              "path": "agent-tasks/2026-02-03/ned-task.md"
+            },
+            {
+              "type": "file",
+              "name": "oracle-report.md",
+              "path": "agent-tasks/2026-02-03/oracle-report.md"
+            },
+            {
+              "type": "file",
+              "name": "oracle-task.md",
+              "path": "agent-tasks/2026-02-03/oracle-task.md"
+            },
+            {
+              "type": "file",
+              "name": "pablo-task.md",
+              "path": "agent-tasks/2026-02-03/pablo-task.md"
+            },
+            {
+              "type": "file",
+              "name": "sentinel-task.md",
+              "path": "agent-tasks/2026-02-03/sentinel-task.md"
+            },
+            {
+              "type": "file",
+              "name": "strategist-task.md",
+              "path": "agent-tasks/2026-02-03/strategist-task.md"
+            },
+            {
+              "type": "file",
+              "name": "zen-task.md",
+              "path": "agent-tasks/2026-02-03/zen-task.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "agents",
+      "path": "agents",
+      "children": [
+        {
+          "type": "folder",
+          "name": "ai_research_oracle",
+          "path": "agents/ai_research_oracle",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "agents/ai_research_oracle/README.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "bridge_operator",
+          "path": "agents/bridge_operator",
+          "children": [
+            {
+              "type": "file",
+              "name": "discord-server-plan.md",
+              "path": "agents/bridge_operator/discord-server-plan.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "cost_consultant",
+          "path": "agents/cost_consultant",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "agents/cost_consultant/README.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "crypto_specialist",
+          "path": "agents/crypto_specialist",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "agents/crypto_specialist/README.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "cybersecurity_guardian",
+          "path": "agents/cybersecurity_guardian",
+          "children": [
+            {
+              "type": "file",
+              "name": "security-audit.md",
+              "path": "agents/cybersecurity_guardian/security-audit.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "finance_director",
+          "path": "agents/finance_director",
+          "children": [
+            {
+              "type": "file",
+              "name": "phantom-integration-plan.md",
+              "path": "agents/finance_director/phantom-integration-plan.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "it_tech_specialist",
+          "path": "agents/it_tech_specialist",
+          "children": [
+            {
+              "type": "file",
+              "name": "local-node-architecture.md",
+              "path": "agents/it_tech_specialist/local-node-architecture.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "legal_compliance_advisor",
+          "path": "agents/legal_compliance_advisor",
+          "children": [
+            {
+              "type": "file",
+              "name": "umbrella-corp-research-part1.md",
+              "path": "agents/legal_compliance_advisor/umbrella-corp-research-part1.md"
+            },
+            {
+              "type": "file",
+              "name": "umbrella-corp-research-part2.md",
+              "path": "agents/legal_compliance_advisor/umbrella-corp-research-part2.md"
+            },
+            {
+              "type": "file",
+              "name": "umbrella-corp-research-part3.md",
+              "path": "agents/legal_compliance_advisor/umbrella-corp-research-part3.md"
+            },
+            {
+              "type": "file",
+              "name": "umbrella-corp-research.md",
+              "path": "agents/legal_compliance_advisor/umbrella-corp-research.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "legal_compliance_agent",
+          "path": "agents/legal_compliance_agent",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "agents/legal_compliance_agent/README.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "marketing_sales_lead",
+          "path": "agents/marketing_sales_lead",
+          "children": [
+            {
+              "type": "file",
+              "name": "x-integration-implementation.md",
+              "path": "agents/marketing_sales_lead/x-integration-implementation.md"
+            },
+            {
+              "type": "file",
+              "name": "x-integration-plan.md",
+              "path": "agents/marketing_sales_lead/x-integration-plan.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "operations_coordinator",
+          "path": "agents/operations_coordinator",
+          "children": [
+            {
+              "type": "file",
+              "name": "notion-kanban-setup.md",
+              "path": "agents/operations_coordinator/notion-kanban-setup.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "podcast_pablo",
+          "path": "agents/podcast_pablo",
+          "children": [
+            {
+              "type": "file",
+              "name": "elevenlabs-setup.md",
+              "path": "agents/podcast_pablo/elevenlabs-setup.md"
+            },
+            {
+              "type": "file",
+              "name": "recording-script.md",
+              "path": "agents/podcast_pablo/recording-script.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "podcast_producer",
+          "path": "agents/podcast_producer",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "agents/podcast_producer/README.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "remote_node",
+          "path": "agents/remote_node",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "agents/remote_node/README.md"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "DIRECTORY_ANALYSIS_REPORT.md",
+          "path": "agents/DIRECTORY_ANALYSIS_REPORT.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "articles",
+      "path": "articles",
+      "children": [
+        {
+          "type": "file",
+          "name": "bridge-niche-article.md",
+          "path": "articles/bridge-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "butler-niche-article.md",
+          "path": "articles/butler-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "diamond-hands-niche-article.md",
+          "path": "articles/diamond-hands-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "felix-niche-article.md",
+          "path": "articles/felix-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "goldfinger-niche-article.md",
+          "path": "articles/goldfinger-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "hype-man-niche-article.md",
+          "path": "articles/hype-man-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "landlord-niche-article.md",
+          "path": "articles/landlord-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "legal-eagle-niche-article.md",
+          "path": "articles/legal-eagle-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "mechanic-niche-article.md",
+          "path": "articles/mechanic-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "ned-niche-article.md",
+          "path": "articles/ned-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "oracle-niche-article.md",
+          "path": "articles/oracle-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "pablo-niche-article.md",
+          "path": "articles/pablo-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "sentinel-niche-article.md",
+          "path": "articles/sentinel-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "strategist-niche-article.md",
+          "path": "articles/strategist-niche-article.md"
+        },
+        {
+          "type": "file",
+          "name": "zen-master-niche-article.md",
+          "path": "articles/zen-master-niche-article.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "bots",
+      "path": "bots",
+      "children": [
+        {
+          "type": "folder",
+          "name": "discord",
+          "path": "bots/discord",
+          "children": [
+            {
+              "type": "file",
+              "name": "ENABLE_MESSAGE_INTENT.md",
+              "path": "bots/discord/ENABLE_MESSAGE_INTENT.md"
+            },
+            {
+              "type": "file",
+              "name": "FULL_BRIDGE_SETUP.md",
+              "path": "bots/discord/FULL_BRIDGE_SETUP.md"
+            },
+            {
+              "type": "file",
+              "name": "INVITE_LINK.md",
+              "path": "bots/discord/INVITE_LINK.md"
+            },
+            {
+              "type": "file",
+              "name": "SETUP_GUIDE.md",
+              "path": "bots/discord/SETUP_GUIDE.md"
+            },
+            {
+              "type": "file",
+              "name": "TOKEN_FIX.md",
+              "path": "bots/discord/TOKEN_FIX.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "business",
+      "path": "business",
+      "children": [
+        {
+          "type": "folder",
+          "name": "sops",
+          "path": "business/sops",
+          "children": [
+            {
+              "type": "file",
+              "name": "automation-logic.md",
+              "path": "business/sops/automation-logic.md"
+            },
+            {
+              "type": "file",
+              "name": "client-onboarding.md",
+              "path": "business/sops/client-onboarding.md"
+            },
+            {
+              "type": "file",
+              "name": "content-workflow.md",
+              "path": "business/sops/content-workflow.md"
+            },
+            {
+              "type": "file",
+              "name": "financial-tracking.md",
+              "path": "business/sops/financial-tracking.md"
+            },
+            {
+              "type": "file",
+              "name": "index.md",
+              "path": "business/sops/index.md"
+            },
+            {
+              "type": "file",
+              "name": "project-management.md",
+              "path": "business/sops/project-management.md"
+            },
+            {
+              "type": "file",
+              "name": "quality-assurance.md",
+              "path": "business/sops/quality-assurance.md"
+            },
+            {
+              "type": "file",
+              "name": "sales-pipeline.md",
+              "path": "business/sops/sales-pipeline.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "butler",
+      "path": "butler",
+      "children": [
+        {
+          "type": "file",
+          "name": "daily-briefing-2026-02-03.md",
+          "path": "butler/daily-briefing-2026-02-03.md"
+        },
+        {
+          "type": "file",
+          "name": "daily-briefing-template.md",
+          "path": "butler/daily-briefing-template.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "content",
+      "path": "content",
+      "children": [
+        {
+          "type": "file",
+          "name": "calendar.md",
+          "path": "content/calendar.md"
+        },
+        {
+          "type": "file",
+          "name": "index.md",
+          "path": "content/index.md"
+        },
+        {
+          "type": "file",
+          "name": "pipeline.md",
+          "path": "content/pipeline.md"
+        },
+        {
+          "type": "file",
+          "name": "templates.md",
+          "path": "content/templates.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "conversation-logs",
+      "path": "conversation-logs",
+      "children": [
+        {
+          "type": "file",
+          "name": "conversation-2026-02-03.md",
+          "path": "conversation-logs/conversation-2026-02-03.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "finance",
+      "path": "finance",
+      "children": [
+        {
+          "type": "file",
+          "name": "cost-tracker.md",
+          "path": "finance/cost-tracker.md"
+        },
+        {
+          "type": "file",
+          "name": "expense-tracker.md",
+          "path": "finance/expense-tracker.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "github-docs",
+      "path": "github-docs",
+      "children": [
+        {
+          "type": "folder",
+          "name": "docs",
+          "path": "github-docs/docs",
+          "children": [
+            {
+              "type": "file",
+              "name": "AGENT_CAPABILITIES.md",
+              "path": "github-docs/docs/AGENT_CAPABILITIES.md"
+            },
+            {
+              "type": "file",
+              "name": "LIFE_OS_COMPLETE_DOCUMENTATION.md",
+              "path": "github-docs/docs/LIFE_OS_COMPLETE_DOCUMENTATION.md"
+            },
+            {
+              "type": "file",
+              "name": "MEMORY_SYSTEM_v2.md",
+              "path": "github-docs/docs/MEMORY_SYSTEM_v2.md"
+            },
+            {
+              "type": "file",
+              "name": "multi-bot-telegram-architecture.md",
+              "path": "github-docs/docs/multi-bot-telegram-architecture.md"
+            },
+            {
+              "type": "file",
+              "name": "QUICKSTART.md",
+              "path": "github-docs/docs/QUICKSTART.md"
+            },
+            {
+              "type": "file",
+              "name": "SYSTEM_OVERVIEW.md",
+              "path": "github-docs/docs/SYSTEM_OVERVIEW.md"
+            },
+            {
+              "type": "file",
+              "name": "telegram-bot-setup-guide.md",
+              "path": "github-docs/docs/telegram-bot-setup-guide.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "SOPs",
+          "path": "github-docs/SOPs",
+          "children": [
+            {
+              "type": "file",
+              "name": "LIFE_OS_COMMAND_SOP.md",
+              "path": "github-docs/SOPs/LIFE_OS_COMMAND_SOP.md"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "AGENTS.md",
+          "path": "github-docs/AGENTS.md"
+        },
+        {
+          "type": "file",
+          "name": "AGENTS_ROSTER.md",
+          "path": "github-docs/AGENTS_ROSTER.md"
+        },
+        {
+          "type": "file",
+          "name": "AGENTS_ROSTER_V2.md",
+          "path": "github-docs/AGENTS_ROSTER_V2.md"
+        },
+        {
+          "type": "file",
+          "name": "BOOTSTRAP.md",
+          "path": "github-docs/BOOTSTRAP.md"
+        },
+        {
+          "type": "file",
+          "name": "Braindump.md",
+          "path": "github-docs/Braindump.md"
+        },
+        {
+          "type": "file",
+          "name": "COMMAND_REQUIREMENTS.md",
+          "path": "github-docs/COMMAND_REQUIREMENTS.md"
+        },
+        {
+          "type": "file",
+          "name": "DELEGATION.md",
+          "path": "github-docs/DELEGATION.md"
+        },
+        {
+          "type": "file",
+          "name": "Expectations.md",
+          "path": "github-docs/Expectations.md"
+        },
+        {
+          "type": "file",
+          "name": "HEARTBEAT.md",
+          "path": "github-docs/HEARTBEAT.md"
+        },
+        {
+          "type": "file",
+          "name": "IDENTITY.md",
+          "path": "github-docs/IDENTITY.md"
+        },
+        {
+          "type": "file",
+          "name": "MASTER_TODO.md",
+          "path": "github-docs/MASTER_TODO.md"
+        },
+        {
+          "type": "file",
+          "name": "MEMORY.md",
+          "path": "github-docs/MEMORY.md"
+        },
+        {
+          "type": "file",
+          "name": "MODEL_ROUTING.md",
+          "path": "github-docs/MODEL_ROUTING.md"
+        },
+        {
+          "type": "file",
+          "name": "security-remediation-todo.md",
+          "path": "github-docs/security-remediation-todo.md"
+        },
+        {
+          "type": "file",
+          "name": "security-revocation-checklist.md",
+          "path": "github-docs/security-revocation-checklist.md"
+        },
+        {
+          "type": "file",
+          "name": "SOUL.md",
+          "path": "github-docs/SOUL.md"
+        },
+        {
+          "type": "file",
+          "name": "TOOLS.md",
+          "path": "github-docs/TOOLS.md"
+        },
+        {
+          "type": "file",
+          "name": "USER.md",
+          "path": "github-docs/USER.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "legal",
+      "path": "legal",
+      "children": [
+        {
+          "type": "file",
+          "name": "privacy-policy.md",
+          "path": "legal/privacy-policy.md"
+        },
+        {
+          "type": "file",
+          "name": "terms-of-service.md",
+          "path": "legal/terms-of-service.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "lifeos-dashboard",
+      "path": "lifeos-dashboard",
+      "children": [
+        {
+          "type": "file",
+          "name": "AGENT_STATUS_README.md",
+          "path": "lifeos-dashboard/AGENT_STATUS_README.md"
+        },
+        {
+          "type": "file",
+          "name": "DEPLOY.md",
+          "path": "lifeos-dashboard/DEPLOY.md"
+        },
+        {
+          "type": "file",
+          "name": "README.md",
+          "path": "lifeos-dashboard/README.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "marketing",
+      "path": "marketing",
+      "children": [
+        {
+          "type": "file",
+          "name": "content-calendar-week1.md",
+          "path": "marketing/content-calendar-week1.md"
+        },
+        {
+          "type": "file",
+          "name": "social-automation-setup.md",
+          "path": "marketing/social-automation-setup.md"
+        },
+        {
+          "type": "file",
+          "name": "viral-thread-templates.md",
+          "path": "marketing/viral-thread-templates.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "memory",
+      "path": "memory",
+      "children": [
+        {
+          "type": "folder",
+          "name": "archive",
+          "path": "memory/archive",
+          "children": [
+            {
+              "type": "file",
+              "name": "GENESIS-COMPLETION-SUMMARY.md",
+              "path": "memory/archive/GENESIS-COMPLETION-SUMMARY.md"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "2ND_BRAIN_PROJECT.md",
+          "path": "memory/2ND_BRAIN_PROJECT.md"
+        },
+        {
+          "type": "file",
+          "name": "AFTERNOON_RESEARCH_PROTOCOL.md",
+          "path": "memory/AFTERNOON_RESEARCH_PROTOCOL.md"
+        },
+        {
+          "type": "file",
+          "name": "AUTO_TODO_SYSTEM.md",
+          "path": "memory/AUTO_TODO_SYSTEM.md"
+        },
+        {
+          "type": "file",
+          "name": "brain-preferences.md",
+          "path": "memory/brain-preferences.md"
+        },
+        {
+          "type": "file",
+          "name": "daily-tasks.md",
+          "path": "memory/daily-tasks.md"
+        },
+        {
+          "type": "file",
+          "name": "DISCORD_MESSAGE_POLICY.md",
+          "path": "memory/DISCORD_MESSAGE_POLICY.md"
+        },
+        {
+          "type": "file",
+          "name": "MORNING_BRIEF_PROTOCOL.md",
+          "path": "memory/MORNING_BRIEF_PROTOCOL.md"
+        },
+        {
+          "type": "file",
+          "name": "PROACTIVE_CODER_DIRECTIVE.md",
+          "path": "memory/PROACTIVE_CODER_DIRECTIVE.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "mouse-macro-recorder",
+      "path": "mouse-macro-recorder",
+      "children": [
+        {
+          "type": "file",
+          "name": "README.md",
+          "path": "mouse-macro-recorder/README.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "perpetual-tasks",
+      "path": "perpetual-tasks",
+      "children": [
+        {
+          "type": "folder",
+          "name": "bridge",
+          "path": "perpetual-tasks/bridge",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/bridge/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "butler",
+          "path": "perpetual-tasks/butler",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/butler/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "diamond",
+          "path": "perpetual-tasks/diamond",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/diamond/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "felix",
+          "path": "perpetual-tasks/felix",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/felix/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "goldfinger",
+          "path": "perpetual-tasks/goldfinger",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/goldfinger/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "hype",
+          "path": "perpetual-tasks/hype",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/hype/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "landlord",
+          "path": "perpetual-tasks/landlord",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/landlord/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "legal",
+          "path": "perpetual-tasks/legal",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/legal/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "mechanic",
+          "path": "perpetual-tasks/mechanic",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/mechanic/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "ned",
+          "path": "perpetual-tasks/ned",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/ned/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "oracle",
+          "path": "perpetual-tasks/oracle",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/oracle/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "pablo",
+          "path": "perpetual-tasks/pablo",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/pablo/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "sentinel",
+          "path": "perpetual-tasks/sentinel",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/sentinel/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "strategist",
+          "path": "perpetual-tasks/strategist",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/strategist/active-tasks.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "zen",
+          "path": "perpetual-tasks/zen",
+          "children": [
+            {
+              "type": "file",
+              "name": "active-tasks.md",
+              "path": "perpetual-tasks/zen/active-tasks.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "research",
+      "path": "research",
+      "children": [
+        {
+          "type": "file",
+          "name": "ai-industry-briefing.md",
+          "path": "research/ai-industry-briefing.md"
+        },
+        {
+          "type": "file",
+          "name": "ai-tools-analysis.md",
+          "path": "research/ai-tools-analysis.md"
+        },
+        {
+          "type": "file",
+          "name": "clawbot-use-cases.md",
+          "path": "research/clawbot-use-cases.md"
+        },
+        {
+          "type": "file",
+          "name": "defi-yield-opportunities.md",
+          "path": "research/defi-yield-opportunities.md"
+        },
+        {
+          "type": "file",
+          "name": "kool-tools-tracker.md",
+          "path": "research/kool-tools-tracker.md"
+        },
+        {
+          "type": "file",
+          "name": "personal-voice-setup.md",
+          "path": "research/personal-voice-setup.md"
+        },
+        {
+          "type": "file",
+          "name": "podcast-plan.md",
+          "path": "research/podcast-plan.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "second-brain",
+      "path": "second-brain",
+      "children": [
+        {
+          "type": "folder",
+          "name": "content",
+          "path": "second-brain/content",
+          "children": [
+            {
+              "type": "folder",
+              "name": "concepts",
+              "path": "second-brain/content/concepts",
+              "children": [
+                {
+                  "type": "file",
+                  "name": "getting-started.md",
+                  "path": "second-brain/content/concepts/getting-started.md"
+                },
+                {
+                  "type": "file",
+                  "name": "knowledge-management.md",
+                  "path": "second-brain/content/concepts/knowledge-management.md"
+                },
+                {
+                  "type": "file",
+                  "name": "zettelkasten.md",
+                  "path": "second-brain/content/concepts/zettelkasten.md"
+                }
+              ]
+            },
+            {
+              "type": "folder",
+              "name": "journal",
+              "path": "second-brain/content/journal",
+              "children": [
+                {
+                  "type": "file",
+                  "name": "2026-02-02.md",
+                  "path": "second-brain/content/journal/2026-02-02.md"
+                },
+                {
+                  "type": "file",
+                  "name": "2026-02-03.md",
+                  "path": "second-brain/content/journal/2026-02-03.md"
+                }
+              ]
+            },
+            {
+              "type": "folder",
+              "name": "projects",
+              "path": "second-brain/content/projects",
+              "children": [
+                {
+                  "type": "file",
+                  "name": "ideas.md",
+                  "path": "second-brain/content/projects/ideas.md"
+                },
+                {
+                  "type": "file",
+                  "name": "second-brain-app.md",
+                  "path": "second-brain/content/projects/second-brain-app.md"
+                }
+              ]
+            },
+            {
+              "type": "folder",
+              "name": "reference",
+              "path": "second-brain/content/reference",
+              "children": [
+                {
+                  "type": "file",
+                  "name": "markdown-cheatsheet.md",
+                  "path": "second-brain/content/reference/markdown-cheatsheet.md"
+                },
+                {
+                  "type": "file",
+                  "name": "typescript-best-practices.md",
+                  "path": "second-brain/content/reference/typescript-best-practices.md"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "reference",
+          "path": "second-brain/reference",
+          "children": [
+            {
+              "type": "file",
+              "name": "last30days-skill.md",
+              "path": "second-brain/reference/last30days-skill.md"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "README.md",
+          "path": "second-brain/README.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "skills",
+      "path": "skills",
+      "children": [
+        {
+          "type": "folder",
+          "name": "business-website-builder",
+          "path": "skills/business-website-builder",
+          "children": [
+            {
+              "type": "file",
+              "name": "SKILL.md",
+              "path": "skills/business-website-builder/SKILL.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "discord-server-manager",
+          "path": "skills/discord-server-manager",
+          "children": [
+            {
+              "type": "file",
+              "name": "SKILL.md",
+              "path": "skills/discord-server-manager/SKILL.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "SOPs",
+      "path": "SOPs",
+      "children": [
+        {
+          "type": "file",
+          "name": "LIFE_OS_COMMAND_SOP.md",
+          "path": "SOPs/LIFE_OS_COMMAND_SOP.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "strategy",
+      "path": "strategy",
+      "children": [
+        {
+          "type": "file",
+          "name": "90-day-roadmap.md",
+          "path": "strategy/90-day-roadmap.md"
+        },
+        {
+          "type": "file",
+          "name": "ai-capability-roadmap.md",
+          "path": "strategy/ai-capability-roadmap.md"
+        },
+        {
+          "type": "file",
+          "name": "decision-engine.md",
+          "path": "strategy/decision-engine.md"
+        },
+        {
+          "type": "file",
+          "name": "growth-automation.md",
+          "path": "strategy/growth-automation.md"
+        },
+        {
+          "type": "file",
+          "name": "index.md",
+          "path": "strategy/index.md"
+        },
+        {
+          "type": "file",
+          "name": "kpi-dashboard.md",
+          "path": "strategy/kpi-dashboard.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "super-swarm",
+      "path": "super-swarm",
+      "children": [
+        {
+          "type": "file",
+          "name": "architecture.md",
+          "path": "super-swarm/architecture.md"
+        },
+        {
+          "type": "file",
+          "name": "integration-report.md",
+          "path": "super-swarm/integration-report.md"
+        },
+        {
+          "type": "file",
+          "name": "README.md",
+          "path": "super-swarm/README.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "tools",
+      "path": "tools",
+      "children": [
+        {
+          "type": "folder",
+          "name": "content",
+          "path": "tools/content",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "tools/content/README.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "cost-consultant",
+          "path": "tools/cost-consultant",
+          "children": [
+            {
+              "type": "file",
+              "name": "optimization.md",
+              "path": "tools/cost-consultant/optimization.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "mouse-macro-recorder",
+          "path": "tools/mouse-macro-recorder",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "tools/mouse-macro-recorder/README.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "strategy",
+          "path": "tools/strategy",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "tools/strategy/README.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "x-integration",
+          "path": "tools/x-integration",
+          "children": [
+            {
+              "type": "file",
+              "name": "mouse-macro-guide.md",
+              "path": "tools/x-integration/mouse-macro-guide.md"
+            },
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "tools/x-integration/README.md"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "name": "cross-system-triggers.md",
+          "path": "tools/cross-system-triggers.md"
+        },
+        {
+          "type": "file",
+          "name": "README.md",
+          "path": "tools/README.md"
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "workspace",
+      "path": "workspace",
+      "children": [
+        {
+          "type": "folder",
+          "name": "content",
+          "path": "workspace/content",
+          "children": [
+            {
+              "type": "file",
+              "name": "PODCAST_PLAN.md",
+              "path": "workspace/content/PODCAST_PLAN.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "dashboard",
+          "path": "workspace/dashboard",
+          "children": [
+            {
+              "type": "file",
+              "name": "README.md",
+              "path": "workspace/dashboard/README.md"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "name": "delegation",
+          "path": "workspace/delegation",
+          "children": [
+            {
+              "type": "file",
+              "name": "TOMORROW_TASKS.md",
+              "path": "workspace/delegation/TOMORROW_TASKS.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "zen",
+      "path": "zen",
+      "children": [
+        {
+          "type": "file",
+          "name": "focus-mode-system.md",
+          "path": "zen/focus-mode-system.md"
+        },
+        {
+          "type": "file",
+          "name": "mindfulness-system.md",
+          "path": "zen/mindfulness-system.md"
+        },
+        {
+          "type": "file",
+          "name": "quick-reference.md",
+          "path": "zen/quick-reference.md"
+        },
+        {
+          "type": "file",
+          "name": "stress-mitigation-workflow.md",
+          "path": "zen/stress-mitigation-workflow.md"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "AGENT_STATUS_README.md",
+      "path": "AGENT_STATUS_README.md"
+    },
+    {
+      "type": "file",
+      "name": "AGENTS.md",
+      "path": "AGENTS.md"
+    },
+    {
+      "type": "file",
+      "name": "AGENTS_ROSTER_V2.md",
+      "path": "AGENTS_ROSTER_V2.md"
+    },
+    {
+      "type": "file",
+      "name": "BOOTSTRAP.md",
+      "path": "BOOTSTRAP.md"
+    },
+    {
+      "type": "file",
+      "name": "COMMAND_REQUIREMENTS.md",
+      "path": "COMMAND_REQUIREMENTS.md"
+    },
+    {
+      "type": "file",
+      "name": "DEPLOY.md",
+      "path": "DEPLOY.md"
+    },
+    {
+      "type": "file",
+      "name": "HEARTBEAT.md",
+      "path": "HEARTBEAT.md"
+    },
+    {
+      "type": "file",
+      "name": "IDENTITY.md",
+      "path": "IDENTITY.md"
+    },
+    {
+      "type": "file",
+      "name": "MASTER_TODO.md",
+      "path": "MASTER_TODO.md"
+    },
+    {
+      "type": "file",
+      "name": "README.md",
+      "path": "README.md"
+    },
+    {
+      "type": "file",
+      "name": "security-remediation-todo.md",
+      "path": "security-remediation-todo.md"
+    },
+    {
+      "type": "file",
+      "name": "security-revocation-checklist.md",
+      "path": "security-revocation-checklist.md"
+    },
+    {
+      "type": "file",
+      "name": "SOUL.md",
+      "path": "SOUL.md"
+    },
+    {
+      "type": "file",
+      "name": "TOOLS.md",
+      "path": "TOOLS.md"
+    },
+    {
+      "type": "file",
+      "name": "USER.md",
+      "path": "USER.md"
+    }
+  ]
+}
