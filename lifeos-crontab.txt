@@ -1,0 +1,147 @@
+# Life OS Cron Jobs - Automated Maintenance
+# Install with: crontab lifeos-crontab.txt
+
+# ============================================
+# SYSTEM HEALTH & MONITORING
+# ============================================
+
+# System health check every 30 minutes
+*/30 * * * * cd ~/.openclaw/workspace && ./tools/system-health.sh --quick >> ~/.openclaw/logs/health.log 2>&1
+
+# Disk space alert if >80% (runs every hour)
+0 * * * * df -h / | awk 'NR==2 {if($5+0 > 80) print "DISK ALERT: "$5" used"}' >> ~/.openclaw/logs/alerts.log 2>&1
+
+# Memory check every 2 hours
+0 */2 * * * free -m | awk 'NR==2{printf "Memory: %s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }' >> ~/.openclaw/logs/memory.log 2>&1
+
+# ============================================
+# BACKUP AUTOMATION
+# ============================================
+
+# Daily backup at 2 AM
+0 2 * * * cd ~/.openclaw/workspace && ./tools/master-backup.sh >> ~/.openclaw/logs/backups.log 2>&1
+
+# Weekly full backup on Sundays at 3 AM
+0 3 * * 0 cd ~/.openclaw/workspace && ./tools/master-backup.sh --full >> ~/.openclaw/logs/backups.log 2>&1
+
+# ============================================
+# AGENT & TASK MONITORING
+# ============================================
+
+# Check perpetual task status every hour
+0 * * * * cd ~/.openclaw/workspace && ./tools/perpetual-task-system.sh --check >> ~/.openclaw/logs/tasks.log 2>&1
+
+# Daily agent status report at 8 AM
+0 8 * * * cd ~/.openclaw/workspace && ./tools/agent-manager.sh status >> ~/.openclaw/logs/agents.log 2>&1
+
+# ============================================
+# FINANCE & REPORTING
+# ============================================
+
+# Daily expense log reminder at 9 PM
+0 21 * * * echo "$(date '+%Y-%m-%d') - Log daily expenses" >> ~/.openclaw/workspace/finance/daily-expense-reminders.txt
+
+# Weekly budget check (Mondays at 10 AM)
+0 10 * * 1 cd ~/.openclaw/workspace/finance && ./budget-variance-analyzer.sh >> ~/.openclaw/logs/budget.log 2>&1
+
+# Monthly expense report (1st of month at 9 AM)
+0 9 1 * * cd ~/.openclaw/workspace && cat finance/expense-tracker.md >> ~/.openclaw/logs/monthly-reports.log
+
+# ============================================
+# WELLNESS & PRODUCTIVITY
+# ============================================
+
+# Morning mindfulness reminder (7 AM weekdays)
+0 7 * * 1-5 cd ~/.openclaw/workspace/zen && ./reminder.sh morning >> ~/.openclaw/logs/wellness.log 2>&1
+
+# Midday focus check (1 PM)
+0 13 * * 1-5 cd ~/.openclaw/workspace/zen && ./reminder.sh focus >> ~/.openclaw/logs/wellness.log 2>&1
+
+# Evening wind-down (9 PM)
+0 21 * * * cd ~/.openclaw/workspace/zen && ./reminder.sh evening >> ~/.openclaw/logs/wellness.log 2>&1
+
+# ============================================
+# CONTENT & MARKETING
+# ============================================
+
+# Daily content calendar reminder (10 AM)
+0 10 * * * echo "📅 Check content calendar for today's posts" >> ~/.openclaw/workspace/marketing/content-reminders.txt
+
+# Weekly marketing review (Fridays at 4 PM)
+0 16 * * 5 echo "📈 Review Hype Man metrics and content performance" >> ~/.openclaw/workspace/marketing/weekly-review.txt
+
+# ============================================
+# SECURITY
+# ============================================
+
+# Weekly security audit (Sundays at 4 AM)
+0 4 * * 0 cd ~/.openclaw/workspace && ./tools/check-security.sh >> ~/.openclaw/logs/security.log 2>&1
+
+# Daily API key rotation reminder (check which keys need rotation)
+0 12 * * * echo "🔑 Check API keys for rotation needs" >> ~/.openclaw/workspace/security/key-rotation-reminders.txt
+
+# ============================================
+# DISCORD NOTIFICATIONS
+# ============================================
+
+# Daily status update to Discord (9 AM)
+0 9 * * * cd ~/.openclaw/workspace && python3 bots/discord/daily-status-bot.py >> ~/.openclaw/logs/discord.log 2>&1
+
+# Weekly summary to Discord (Mondays at 10 AM)
+0 10 * * 1 cd ~/.openclaw/workspace && python3 bots/discord/weekly-summary-bot.py >> ~/.openclaw/logs/discord.log 2>&1
+
+# ============================================
+# MAINTENANCE & CLEANUP
+# ============================================
+
+# Clean old logs weekly (Sundays at 5 AM - keep 30 days)
+0 5 * * 0 find ~/.openclaw/logs -name "*.log" -mtime +30 -delete
+
+# Archive old daily memory files (monthly - 1st at 6 AM)
+0 6 1 * * cd ~/.openclaw/workspace/memory && tar -czf archive/$(date -d 'last month' +%Y-%m).tar.gz $(date -d 'last month' +%Y-%m-)*.md 2>/dev/null
+
+# ============================================
+# LIFE OS SPECIFIC
+# ============================================
+
+# Perpetual task replenishment check (every 2 hours)
+0 */2 * * * cd ~/.openclaw/workspace && ./tools/check-task-replenishment.sh >> ~/.openclaw/logs/tasks.log 2>&1
+
+# Daily briefing generation (8:30 AM)
+30 8 * * * cd ~/.openclaw/workspace && ./butler/generate-daily-briefing.sh >> ~/.openclaw/logs/butler.log 2>&1
+
+# n8n workflow health check (every 6 hours)
+0 */6 * * * curl -s http://localhost:5678/health >> ~/.openclaw/logs/n8n-health.log 2>&1 || echo "n8n DOWN $(date)" >> ~/.openclaw/logs/n8n-health.log
+
+# Dashboard deployment check (every 4 hours)
+0 */4 * * * curl -s -o /dev/null -w "%{http_code}" https://lifeos-dashboard-three.vercel.app >> ~/.openclaw/logs/dashboard.log 2>&1
+
+# ============================================
+# NOTES
+# ============================================
+# To install these cron jobs:
+#   crontab ~/.openclaw/workspace/lifeos-crontab.txt
+#
+# To view current cron jobs:
+#   crontab -l
+#
+# To remove all cron jobs:
+#   crontab -r
+#
+# Logs location: ~/.openclaw/logs/
+# Make sure to create the logs directory first!
+#
+# Proactive Coder - 11 PM Build Session
+0 23 * * * cd ~/.openclaw/workspace && ./tools/proactive-coder-nightly.sh
+
+# Morning Brief - 8:00 AM EST
+0 13 * * * cd ~/.openclaw/workspace && ./tools/morning-brief.sh
+
+# Afternoon Research Report - 4:00 PM EST
+0 21 * * * cd ~/.openclaw/workspace && ./tools/afternoon-research.sh
+
+# 2nd Brain Auto-Poster - check for new docs every hour
+0 * * * * cd ~/.openclaw/workspace && ./tools/second-brain-poster.sh
+
+# Conversation Log Upload - End of day
+0 23 * * * cd ~/.openclaw/workspace && ./tools/conversation-logger.sh

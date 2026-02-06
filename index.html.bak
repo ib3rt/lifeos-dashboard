@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Life OS Reports Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            padding: 2rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .header h1 {
+            font-size: 2rem;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .date { color: #888; margin-top: 0.5rem; }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .report-card {
+            background: #15151a;
+            border: 1px solid #252530;
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        .report-card:hover {
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+        }
+        
+        .agent-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #252530;
+        }
+        .agent-emoji { font-size: 1.5rem; }
+        .agent-name { 
+            color: #00d4ff; 
+            font-size: 1.25rem; 
+            font-weight: 600;
+        }
+        .agent-role { 
+            color: #888; 
+            font-size: 0.875rem;
+            margin-left: auto;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .status-complete { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .status-progress { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+        
+        .key-finding {
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 0.5rem;
+            background: #0f0f14;
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+        .metric {
+            text-align: center;
+        }
+        .metric-value {
+            color: #00d4ff;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .metric-label {
+            color: #666;
+            font-size: 0.625rem;
+            text-transform: uppercase;
+        }
+        
+        .quick-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background: #1a1a2e;
+            border: 1px solid #252530;
+            border-radius: 6px;
+            color: #888;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .action-btn:hover {
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+        
+        .master-stats {
+            background: linear-gradient(135deg, #1a1a2e 0%, #15151a 100%);
+            border: 1px solid #00d4ff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .master-stats h2 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #0f0f14;
+            border-radius: 8px;
+        }
+        .stat-number {
+            font-size: 2rem;
+            color: #00d4ff;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: #888;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Life OS Reports Dashboard</h1>
+        <div class="date">February 3, 2026</div>
+    </div>
+    
+    <div class="master-stats">
+        <h2>📈 Daily Overview</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">15</div>
+                <div class="stat-label">Active Agents</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Reports Complete</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">🟢</div>
+                <div class="stat-label">System Status</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$0</div>
+                <div class="stat-label">Est. Daily Cost</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="summary-grid">
+        <!-- Oracle Report -->
+        <div class="report-card">
+            <div class="agent-header">
+                <span class="agent-emoji">🔮</span>
+                <span class="agent-name">The Oracle</span>
+                <span class="agent-role">AI Research</span>
+            </div>
+            <span class="status-badge status-complete">✅ COMPLETE</span>
+            <div class="key-finding">
+                <strong>Top Story:</strong> OpenClaw hits 100K+ GitHub stars, validates Life OS architecture. Claude 5 launching with superior coding capabilities.
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">Stories</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">🔥</div>
+                    <div class="metric-label">Trend</div>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <a href="https://lifeos-dashboard-three.vercel.app" class="action-btn">View Full Report</a>
+                <a href="https://discord.com/channels/@me/1468077571722969191/1468077936067493980" class="action-btn">Discord</a>
+            </div>
+        </div>
+        
+        <!-- Diamond Hands Report -->
+        <div class="report-card">
+            <div class="agent-header">
+                <span class="agent-emoji">💎</span>
+                <span class="agent-name">Diamond Hands</span>
+                <span class="agent-role">Crypto</span>
+            </div>
+            <span class="status-badge status-complete">✅ COMPLETE</span>
+            <div class="key-finding">
+                <strong>Verdict:</strong> HODL! Both BTC and ETH showing bullish momentum. ETH outperforming with 3.65% gain vs BTC's 2.70%.
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">$78K</div>
+                    <div class="metric-label">BTC</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">$2.3K</div>
+                    <div class="metric-label">ETH</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">🟢</div>
+                    <div class="metric-label">Trend</div>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <a href="#" class="action-btn">View Full Report</a>
+                <a href="https://discord.com/channels/@me/1468077571722969191/1468077936067493981" class="action-btn">Discord</a>
+            </div>
+        </div>
+        
+        <!-- Mechanic Report -->
+        <div class="report-card">
+            <div class="agent-header">
+                <span class="agent-emoji">⚙️</span>
+                <span class="agent-name">The Mechanic</span>
+                <span class="agent-role">Operations</span>
+            </div>
+            <span class="status-badge status-complete">✅ COMPLETE</span>
+            <div class="key-finding">
+                <strong>Status:</strong> All systems operational. Disk at healthy 28%, memory at 18%. n8n, Discord bot, and Docker all running smoothly.
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">28%</div>
+                    <div class="metric-label">Disk</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">18%</div>
+                    <div class="metric-label">Memory</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">🟢</div>
+                    <div class="metric-label">Status</div>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <a href="#" class="action-btn">View Full Report</a>
+                <a href="https://discord.com/channels/@me/1468077571722969191/1468077936067493982" class="action-btn">Discord</a>
+            </div>
+        </div>
+        
+        <!-- Goldfinger Report -->
+        <div class="report-card">
+            <div class="agent-header">
+                <span class="agent-emoji">🏦</span>
+                <span class="agent-name">Goldfinger</span>
+                <span class="agent-role">Finance</span>
+            </div>
+            <span class="status-badge status-progress">🔄 WORKING</span>
+            <div class="key-finding">
+                <strong>Task:</strong> Creating budget summary for Life OS projects. Analyzing current costs and projecting monthly expenses.
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value">TBD</div>
+                    <div class="metric-label">Budget</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">📊</div>
+                    <div class="metric-label">Status</div>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <span class="action-btn">Report Pending</span>
+            </div>
+        </div>
+        
+        <!-- Placeholder for more agents -->
+        <div class="report-card">
+            <div class="agent-header">
+                <span class="agent-emoji">🤖</span>
+                <span class="agent-name">More Agents</span>
+                <span class="agent-role">11 Active</span>
+            </div>
+            <span class="status-badge status-progress">🔄 IDLE</span>
+            <div class="key-finding">
+                11 additional agents (Ned, Pablo, Legal, Sentinel, etc.) are active and ready for tasks. Talk to them in their Discord channels!
+            </div>
+            <div class="quick-actions">
+                <a href="https://discord.gg/Bpq2DRAG" class="action-btn">Go to Discord</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life OS — Personal Command Center</title>
+    <style>
+        /* CSS Variables for theming */
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #15151a;
+            --bg-card: #1a1a2e;
+            --bg-hover: #252530;
+            --bg-nav: #15151a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #888;
+            --text-muted: #666;
+            --text-inverse: #1a1a1a;
+            --accent-primary: #00d4ff;
+            --accent-secondary: #7b2cbf;
+            --border-color: #252530;
+            --border-hover: #00d4ff;
+            --status-complete-bg: rgba(34, 197, 94, 0.2);
+            --status-complete-text: #22c55e;
+            --status-progress-bg: rgba(234, 179, 8, 0.2);
+            --status-progress-text: #eab308;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --gradient-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --gradient-text: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            --card-icon-bg: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Light theme variables */
+        [data-theme="light"] {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-card: #f1f3f4;
+            --bg-hover: #e8eaed;
+            --bg-nav: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #5f6368;
+            --text-muted: #9aa0a6;
+            --text-inverse: #ffffff;
+            --accent-primary: #1a73e8;
+            --accent-secondary: #7c4dff;
+            --border-color: #dadce0;
+            --border-hover: #1a73e8;
+            --status-complete-bg: rgba(34, 197, 94, 0.15);
+            --status-complete-text: #1e8e3e;
+            --status-progress-bg: rgba(234, 179, 8, 0.15);
+            --status-progress-text: #f9ab00;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --gradient-bg: linear-gradient(135deg, #e8eaed 0%, #d2d6dc 100%);
+            --gradient-text: linear-gradient(90deg, #1a73e8, #7c4dff);
+            --card-icon-bg: rgba(26, 115, 232, 0.1);
+        }
+
+        /* Smooth transitions for theme changes */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Dark Mode Toggle Button */
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--bg-hover);
+            border-radius: 15px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .theme-toggle-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-icon.sun {
+            left: 8px;
+            opacity: 1;
+        }
+
+        .theme-toggle-icon.moon {
+            right: 8px;
+            opacity: 0.3;
+        }
+
+        [data-theme="light"] .theme-toggle-icon.sun {
+            opacity: 0.3;
+        }
+
+        [data-theme="light"] .theme-toggle-icon.moon {
+            opacity: 1;
+        }
+
+        .theme-toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] .theme-toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .header {
+            background: var(--gradient-bg);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: bold;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline { color: var(--text-secondary); font-size: 0.875rem; }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .theme-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .storage-bar {
+            background: var(--bg-secondary);
+            padding: 0.75rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .storage-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .storage-label { color: var(--text-secondary); font-size: 0.875rem; min-width: 100px; }
+
+        .storage-track {
+            flex: 1;
+            height: 8px;
+            background: var(--bg-hover);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .storage-fill {
+            height: 100%;
+            background: var(--gradient-text);
+            border-radius: 4px;
+            width: 45%;
+        }
+
+        .storage-info { color: var(--accent-primary); font-size: 0.875rem; min-width: 120px; text-align: right; }
+
+        .nav {
+            background: var(--bg-nav);
+            padding: 0 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0;
+        }
+
+        .nav-btn {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover { color: var(--accent-primary); background: var(--bg-hover); }
+        .nav-btn.active { color: var(--accent-primary); border-bottom-color: var(--accent-primary); }
+
+        .main { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+        .section { display: none; }
+        .section.active { display: block; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: 0 4px 12px var(--shadow-color); }
+
+        .card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+
+        .card-icon {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-icon-bg);
+            border-radius: 12px;
+        }
+
+        .card-title { font-size: 1.125rem; font-weight: 600; color: var(--text-primary); }
+        .card-subtitle { color: var(--text-secondary); font-size: 0.875rem; }
+        .card-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; }
+
+        .card-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--status-complete-bg);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--status-complete-text);
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label { color: var(--text-secondary); font-size: 0.875rem; margin-top: 0.25rem; }
+
+        .section-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary); }
+        .section-desc { color: var(--text-secondary); margin-bottom: 2rem; }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .quick-link:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; gap: 1rem; text-align: center; }
+            .header-actions { flex-direction: column; gap: 0.5rem; }
+            .nav-content { overflow-x: auto; }
+            .nav-btn { padding: 1rem 1.5rem; white-space: nowrap; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <div class="logo">🦾 Life OS</div>
+                <div class="tagline">Personal Navigator, Info & Command Center</div>
+            </div>
+            <div class="header-actions">
+                <div class="theme-label">
+                    <span>🌙</span>
+                    <span>☀️</span>
+                </div>
+                <div class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                    <div class="theme-toggle-slider"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="storage-bar">
+        <div class="storage-content">
+            <span class="storage-label">Storage Used</span>
+            <div class="storage-track">
+                <div class="storage-fill" id="storage-fill"></div>
+            </div>
+            <span class="storage-info" id="storage-info">Loading...</span>
+        </div>
+    </div>
+    <nav class="nav">
+        <div class="nav-content">
+            <button class="nav-btn active" onclick="showSection('overview')">🏠 Overview</button>
+            <button class="nav-btn" onclick="showSection('agents')">🤖 Agents</button>
+            <button class="nav-btn" onclick="showSection('tools')">🛠️ Tools</button>
+            <button class="nav-btn" onclick="showSection('docs')">📚 Docs</button>
+            <button class="nav-btn" onclick="showSection('websites')">🌐 Websites</button>
+            <button class="nav-btn" onclick="showSection('todo')">✅ Todo</button>
+        </div>
+    </nav>
+    <main class="main">
+        <section id="overview" class="section active">
+            <h2 class="section-title">System Overview</h2>
+            <p class="section-desc">Your personal AI operating system status and quick access</p>
+            <div class="stats-row">
+                <div class="stat-card"><div class="stat-value">5</div><div class="stat-label">Active Models</div></div>
+                <div class="stat-card"><div class="stat-value">15</div><div class="stat-label">AI Agents</div></div>
+                <div class="stat-card"><div class="stat-value">20+</div><div class="stat-label">Tools</div></div>
+                <div class="stat-card"><div class="stat-value">3</div><div class="stat-label">Websites</div></div>
+            </div>
+            <h3 class="section-title">Quick Access</h3>
+            <div class="quick-links">
+                <a href="https://discord.gg/" target="_blank" class="quick-link"><span>💬</span> Discord</a>
+                <a href="https://t.me/" target="_blank" class="quick-link"><span>✈️</span> Telegram</a>
+                <a href="https://github.com/" target="_blank" class="quick-link"><span>🐙</span> GitHub</a>
+                <a href="https://vercel.com/dashboard" target="_blank" class="quick-link"><span>▲</span> Vercel</a>
+            </div>
+            <h3 class="section-title">Active Models</h3>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header"><div class="card-icon">🤖</div><div><div class="card-title">Kimi 2.5</div><div class="card-subtitle">Moonshot • General/Brain</div></div></div>
+                    <div class="card-desc">Primary model for general reasoning, content creation, and fallback for all tasks.</div>
+                    <div class="card-status">✅ Active</div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><div class="card-icon">💜</div><div><div class="card-title">Haiku</div><div class="card-subtitle">Anthropic • Heartbeat</div></div></div>
+                    <div class="card-desc">Fast, efficient model for system health checks and quick status updates.</div>
+                    <div class="card-status">✅ Active</div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><div class="card-icon">🔍</div><div><div class="card-title">DeepSeek V3</div><div class="card-subtitle">DeepSeek • Search</div></div></div>
+                    <div class="card-desc">Research and web search specialist for information retrieval.</div>
+                    <div class="card-status">✅ Active</div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><div class="card-icon">⚡</div><div><div class="card-title">Gemini 2.5</div><div class="card-subtitle">Google • Understanding</div></div></div>
+                    <div class="card-desc">Document understanding and TTS voice generation capabilities.</div>
+                    <div class="card-status">✅ Active</div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><div class="card-icon">🚀</div><div><div class="card-title">MiniMax-M2.1</div><div class="card-subtitle">MiniMax • Coding</div></div></div>
+                    <div class="card-desc">Primary coding model. Built Mouse Macro Recorder successfully!</div>
+                    <div class="card-status">✅ Active</div>
+                </div>
+            </div>
+        </section>
+        <section id="agents" class="section">
+            <h2 class="section-title">AI Agents</h2>
+            <p class="section-desc">15 specialized agents with distinct personas handling different tasks</p>
+            <a href="agent-status.html" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent-primary); text-decoration: none; margin-bottom: 1rem; padding: 0.5rem 1rem; background: var(--card-icon-bg); border-radius: 8px;">
+                <span>📊</span> Open Real-Time Status Dashboard
+            </a>
+            <div class="grid" id="agents-grid"></div>
+        </section>
+        <section id="tools" class="section">
+            <h2 class="section-title">Tools & Utilities</h2>
+            <p class="section-desc">Productivity tools built for your Life OS</p>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header"><div class="card-icon">🖱️</div><div><div class="card-title">Mouse Macro Recorder</div><div class="card-subtitle">Automation</div></div></div>
+                    <div class="card-desc">Record, replay, and automate mouse actions. Perfect for repetitive tasks and X posting.</div>
+                    <div class="card-status">✅ Ready</div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><div class="card-icon">🐦</div><div><div class="card-title">X Integration</div><div class="card-subtitle">Social Media</div></div></div>
+                    <div class="card-desc">Twitter/X posting integration. Use with Mouse Macro for credit-free posting!</div>
+                    <div class="card-status">✅ Ready</div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><div class="card-icon">🧠</div><div><div class="card-title">Proactive Coder</div><div class="card-subtitle">Automation</div></div></div>
+                    <div class="card-desc">Builds while you sleep. Generates code, PRs, and automation nightly at 11 PM.</div>
+                    <div class="card-status">✅ Active</div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><div class="card-icon">📊</div><div><div class="card-title">Morning Brief</div><div class="card-subtitle">Daily Report</div></div></div>
+                    <div class="card-desc">Daily summary at 8 AM EST with weather, tasks, news, and recommendations.</div>
+                    <div class="card-status">✅ Active</div>
+                </div>
+            </div>
+        </section>
+        <section id="docs" class="section">
+            <h2 class="section-title">Documentation</h2>
+            <p class="section-desc">Complete guide to your Life OS setup and capabilities</p>
+            <div class="grid">
+                <div class="card"><div class="card-header"><div class="card-icon">📖</div><div><div class="card-title">Quick Start Guide</div><div class="card-subtitle">Feb 2</div></div></div><div class="card-desc">Get started with Life OS quickly.</div></div>
+                <div class="card"><div class="card-header"><div class="card-icon">🧠</div><div><div class="card-title">System Overview</div><div class="card-subtitle">Feb 2</div></div></div><div class="card-desc">Complete system architecture and capabilities.</div></div>
+                <div class="card"><div class="card-header"><div class="card-icon">📚</div><div><div class="card-title">Complete Documentation</div><div class="card-subtitle">Feb 3</div></div></div><div class="card-desc">Full Life OS documentation.</div></div>
+                <div class="card"><div class="card-header"><div class="card-icon">🗂️</div><div><div class="card-title">Memory System v2</div><div class="card-subtitle">Feb 3</div></div></div><div class="card-desc">How memory and context work.</div></div>
+            </div>
+        </section>
+        <section id="websites" class="section">
+            <h2 class="section-title">Websites</h2>
+            <p class="section-desc">Your deployed websites and web properties</p>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header"><div class="card-icon">🦾</div><div><div class="card-title">Life OS Dashboard</div><div class="card-subtitle">Command Center</div></div></div>
+                    <div class="card-desc">Your personal navigator, info, and command center.</div>
+                    <a href="https://lifeos.b3rt.dev" target="_blank" style="color: var(--accent-primary);">🌐 lifeos.b3rt.dev →</a>
+                </div>
+            </div>
+        </section>
+        <section id="todo" class="section">
+            <h2 class="section-title">Tasks & Todo</h2>
+            <p class="section-desc">System tasks and pending items</p>
+            <div class="card">
+                <div class="card-header"><div class="card-icon">📋</div><div><div class="card-title">Master Todo</div><div class="card-subtitle">Live from Discord</div></div></div>
+                <div class="card-desc">Tasks synced from Discord #master-todo channel. Check Discord for full list.</div>
+                <div class="card-status">✅ Synced</div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>🦾 Life OS — Built with AI, operated by You</p>
+        <p style="margin-top: 0.5rem; color: var(--text-muted);">5 Active Models • 15 Agents • 20+ Tools</p>
+    </footer>
+
+    <script>
+        // Theme Management
+        const ThemeManager = {
+            STORAGE_KEY: 'lifeos-theme',
+            DEFAULT_DARK: true,
+
+            init() {
+                // Apply theme on page load
+                this.applyTheme(this.getTheme());
+                
+                // Set up toggle listener
+                document.getElementById('theme-toggle').addEventListener('click', () => {
+                    this.toggleTheme();
+                });
+            },
+
+            getTheme() {
+                // Check localStorage first
+                const saved = localStorage.getItem(this.STORAGE_KEY);
+                if (saved) return saved;
+
+                // Check system preference
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    return 'light';
+                }
+
+                return 'dark';
+            },
+
+            setTheme(theme) {
+                localStorage.setItem(this.STORAGE_KEY, theme);
+                this.applyTheme(theme);
+            },
+
+            toggleTheme() {
+                const current = document.documentElement.getAttribute('data-theme');
+                const newTheme = current === 'dark' ? 'light' : 'dark';
+                this.setTheme(newTheme);
+            },
+
+            applyTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+            }
+        };
+
+        // Navigation
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Agents data
+        const agents = [
+            {icon: '🔮', name: 'AI Research Oracle', role: 'Research', desc: 'Deep-dive research on AI/ML topics'},
+            {icon: '💎', name: 'Diamond Hands', role: 'Crypto', desc: 'Cryptocurrency analysis and tracking'},
+            {icon: '🔧', name: 'The Mechanic', role: 'Infrastructure', desc: 'System maintenance and repairs'},
+            {icon: '🛡️', name: 'Sentinel', role: 'Security', desc: 'Security monitoring and alerts'},
+            {icon: '📢', name: 'Hype Man', role: 'Marketing', desc: 'Social media and engagement'},
+            {icon: '🧠', name: 'Neural Net Ned', role: 'ML/AI', desc: 'Machine learning operations'},
+            {icon: '🎙️', name: 'Podcast Pablo', role: 'Content', desc: 'Podcast production and voice'},
+            {icon: '💰', name: 'Goldfinger', role: 'Finance', desc: 'Financial analysis and planning'},
+            {icon: '⚖️', name: 'Legal Eagle', role: 'Legal', desc: 'Legal compliance and contracts'},
+            {icon: '🌐', name: 'The Bridge', role: 'Integration', desc: 'Cross-system connections'},
+            {icon: '🧘', name: 'Zen Master', role: 'Strategy', desc: 'Strategic planning and clarity'},
+            {icon: '🎯', name: 'The Strategist', role: 'Planning', desc: 'Business strategy and growth'},
+            {icon: '🤵', name: 'The Butler', role: 'Operations', desc: 'Daily operations management'},
+            {icon: '🔨', name: 'Fix-It Felix', role: 'Support', desc: 'Troubleshooting and fixes'},
+            {icon: '🏠', name: 'The Landlord', role: 'Assets', desc: 'Asset and resource management'}
+        ];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            ThemeManager.init();
+
+            // Render agents
+            document.getElementById('agents-grid').innerHTML = agents.map(a => `
+                <div class="card">
+                    <div class="card-header"><div class="card-icon">${a.icon}</div><div><div class="card-title">${a.name}</div><div class="card-subtitle">${a.role}</div></div></div>
+                    <div class="card-desc">${a.desc}</div>
+                    <div class="card-status">✅ Active</div>
+                </div>
+            `).join('');
+
+            // Update metadata
+            document.getElementById('last-update').textContent = new Date().toLocaleString();
+            document.getElementById('storage-fill').style.width = '45%';
+            document.getElementById('storage-info').textContent = '4.5 GB / 10 GB';
+        });
+    </script>
+</body>
+</html>

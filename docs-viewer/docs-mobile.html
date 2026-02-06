@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life OS Docs - Mobile</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            display: flex;
+            height: 100vh;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+        }
+        
+        /* LEFT SIDEBAR - ALWAYS VISIBLE */
+        #sidebar {
+            width: 320px;
+            min-width: 320px;
+            background: #12121a;
+            border-right: 1px solid #2a2a3a;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .sidebar-header {
+            padding: 16px;
+            border-bottom: 1px solid #2a2a3a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .sidebar-header h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #00d4ff;
+        }
+        
+        .sidebar-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Search */
+        .search-container {
+            padding: 12px 16px;
+            border-bottom: 1px solid #2a2a3a;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 10px 14px;
+            background: #1a1a24;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+        
+        /* File Tree */
+        .file-tree {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        
+        .tree-item {
+            padding: 10px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: background 0.15s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .tree-item:hover {
+            background: #1f1f2e;
+        }
+        
+        .tree-item.folder {
+            font-weight: 600;
+            color: #00d4ff;
+        }
+        
+        .tree-item.file {
+            color: #ccc;
+            padding-left: 32px;
+        }
+        
+        .tree-item .icon {
+            flex-shrink: 0;
+            width: 18px;
+            text-align: center;
+        }
+        
+        /* Recent Section */
+        .recent-section {
+            padding: 12px 16px;
+            border-top: 1px solid #2a2a3a;
+            background: #0e0e14;
+        }
+        
+        .section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        /* MAIN CONTENT */
+        #main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .header {
+            padding: 12px 20px;
+            border-bottom: 1px solid #2a2a3a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0a0a0f;
+        }
+        
+        .breadcrumbs {
+            font-size: 13px;
+            color: #888;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            background: #1a1a24;
+            border: 1px solid #2a2a3a;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #252530;
+        }
+        
+        /* Content */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+        
+        .welcome {
+            max-width: 700px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        
+        .welcome h1 {
+            font-size: 28px;
+            color: #00d4ff;
+            margin-bottom: 16px;
+        }
+        
+        .welcome p {
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .welcome .hint {
+            font-size: 13px;
+            color: #555;
+            margin-top: 24px;
+        }
+        
+        /* Document */
+        .document {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .document h1 { font-size: 28px; color: #00d4ff; margin: 24px 0 16px; }
+        .document h2 { font-size: 22px; color: #fff; margin: 20px 0 12px; }
+        .document h3 { font-size: 18px; color: #ccc; margin: 16px 0 10px; }
+        .document p { margin: 12px 0; color: #bbb; }
+        .document code { background: #1a1a24; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+        .document pre { background: #1a1a24; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; }
+        .document pre code { background: none; padding: 0; }
+        .document ul, .document ol { margin: 12px 0; padding-left: 24px; }
+        .document li { margin: 6px 0; color: #bbb; }
+        .document blockquote { border-left: 3px solid #00d4ff; padding-left: 16px; margin: 16px 0; color: #888; }
+        .document hr { border: none; border-top: 1px solid #2a2a3a; margin: 24px 0; }
+        .document a { color: #00d4ff; text-decoration: none; }
+        .document a:hover { text-decoration: underline; }
+        
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+        
+        /* Error */
+        .error {
+            background: rgba(255, 80, 80, 0.1);
+            border: 1px solid rgba(255, 80, 80, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            color: #ff6b6b;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            #sidebar { 
+                width: 100%; 
+                min-width: 100%;
+                height: 40vh;
+                border-right: none;
+                border-bottom: 1px solid #2a2a3a;
+            }
+            #main { height: 60vh; }
+        }
+    </style>
+</head>
+<body>
+    <!-- LEFT SIDEBAR -->
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title">
+                <span style="font-size: 20px;">📚</span>
+                <h2>Life OS Docs</h2>
+            </div>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-input" id="search" placeholder="🔍 Search files... (⌘K)">
+        </div>
+        
+        <div class="file-tree" id="fileTree">
+            <div class="loading">Loading files...</div>
+        </div>
+        
+        <div class="recent-section">
+            <div class="section-title">🕐 Recent</div>
+            <div id="recentList">
+                <div style="color: #555; font-size: 13px;">No recent files</div>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- MAIN CONTENT -->
+    <main id="main">
+        <div class="header">
+            <div class="breadcrumbs" id="breadcrumbs">📚 Life OS Docs</div>
+            <div class="header-actions">
+                <button class="btn" id="homeBtn">🏠 Home</button>
+                <button class="btn" id="themeBtn">🌙</button>
+            </div>
+        </div>
+        
+        <div class="content" id="content">
+            <div class="welcome">
+                <h1>📚 Life OS Documentation</h1>
+                <p>Select a file from the sidebar to view its contents.</p>
+                <p>All 196 markdown files organized in folders.</p>
+                <p class="hint">🔍 Type to search | ⌨️ Click to open | 📁 Folders expand on click</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let allFiles = [];
+        let tree = {};
+        let currentFolder = null;
+        
+        async function init() {
+            try {
+                const res = await 'search-index.json');
+                const data = await res.json();
+                allFiles = data.files || [];
+                tree = buildTree(allFiles);
+                renderTree(tree);
+                console.log('✓ Loaded ' + allFiles.length + ' files');
+            } catch (e) {
+                document.getElementById('fileTree').innerHTML = '<div class="loading" style="color: #f55;">Error: ' + e.message + '</div>';
+            }
+        }
+        
+        function buildTree(files) {
+            const root = {};
+            files.forEach(file => {
+                const parts = file.path.split('/');
+                let current = root;
+                let path = '';
+                parts.forEach((part, i) => {
+                    path = path ? path + '/' + part : part;
+                    if (!current[part]) {
+                        current[part] = {
+                            name: part,
+                            path: path,
+                            type: i === parts.length - 1 ? 'file' : 'folder',
+                            children: {}
+                        };
+                    }
+                    current = current[part].children;
+                });
+            });
+            return root;
+        }
+        
+        function renderTree(nodes, showAll = true) {
+            const container = document.getElementById('fileTree');
+            container.innerHTML = '';
+            
+            const keys = Object.keys(nodes).sort((a, b) => {
+                const aNode = nodes[a];
+                const bNode = nodes[b];
+                if (aNode.type !== bNode.type) return aNode.type === 'folder' ? -1 : 1;
+                return a.localeCompare(b);
+            });
+            
+            keys.forEach(key => {
+                const node = nodes[key];
+                const div = document.createElement('div');
+                div.className = 'tree-item ' + node.type;
+                div.innerHTML = '<span class="icon">' + (node.type === 'folder' ? '📁' : '📄') + '</span>' + node.name;
+                
+                div.onclick = () => {
+                    if (node.type === 'folder') {
+                        currentFolder = node.path;
+                        document.getElementById('breadcrumbs').textContent = '📁 ' + node.path;
+                        renderTree(node.children);
+                    } else {
+                        loadFile(node.path);
+                    }
+                };
+                
+                container.appendChild(div);
+            });
+        }
+        
+        async function loadFile(path) {
+            document.getElementById('content').innerHTML = '<div class="loading">Loading ' + 'markdown/' + path + '...</div>';
+            
+            try {
+                const res = await fetch(path);
+                if (!res.ok) throw new Error('File not found');
+                const text = await res.text();
+                const html = parseMarkdown(text);
+                document.getElementById('content').innerHTML = html;
+                document.getElementById('breadcrumbs').textContent = '📄 ' + 'markdown/' + path;
+                addToRecent(path);
+            } catch (e) {
+                document.getElementById('content').innerHTML = '<div class="error"><h3>Error loading ' + 'markdown/' + path + '</h3><p>' + e.message + '</p></div>';
+            }
+        }
+        
+        function parseMarkdown(text) {
+            let html = '<div class="document">';
+            const lines = text.split('\n');
+            let inCode = false;
+            let codeBuf = [];
+            
+            lines.forEach(line => {
+                if (line.startsWith('```')) {
+                    if (inCode) {
+                        html += '<pre><code>' + codeBuf.join('\n') + '</code></pre>';
+                        codeBuf = [];
+                    }
+                    inCode = !inCode;
+                    return;
+                }
+                if (inCode) { codeBuf.push(escapeHtml(line)); return; }
+                
+                if (line.startsWith('#### ')) html += '<h4>' + escapeHtml(line.slice(5)) + '</h4>';
+                else if (line.startsWith('### ')) html += '<h3>' + escapeHtml(line.slice(4)) + '</h3>';
+                else if (line.startsWith('## ')) html += '<h2>' + escapeHtml(line.slice(3)) + '</h2>';
+                else if (line.startsWith('# ')) html += '<h1>' + escapeHtml(line.slice(2)) + '</h1>';
+                else if (line.startsWith('---')) html += '<hr>';
+                else if (line.startsWith('> ')) html += '<blockquote>' + escapeHtml(line.slice(2)) + '</blockquote>';
+                else if (line.match(/^\d+\.\s/)) html += '<ol><li>' + escapeHtml(line.replace(/^\d+\.\s/, '')) + '</li></ol>';
+                else if (line.startsWith('- ') || line.startsWith('* ')) html += '<ul><li>' + escapeHtml(line.slice(2)) + '</li></ul>';
+                else if (line.trim()) {
+                    let p = escapeHtml(line);
+                    p = p.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                    p = p.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+                    p = p.replace(/`([^`]+)`/g, '<code>$1</code>');
+                    html += '<p>' + p + '</p>';
+                }
+            });
+            
+            html += '</div>';
+            return html;
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Recent files
+        let recent = JSON.parse(localStorage.getItem('docs-recent') || '[]');
+        function addToRecent(path) {
+            recent = recent.filter(p => p !== path);
+            recent.unshift(path);
+            recent = recent.slice(0, 10);
+            localStorage.setItem('docs-recent', JSON.stringify(recent));
+            renderRecent();
+        }
+        
+        function renderRecent() {
+            const el = document.getElementById('recentList');
+            if (recent.length === 0) {
+                el.innerHTML = '<div style="color: #555; font-size: 13px;">No recent files</div>';
+                return;
+            }
+            el.innerHTML = '';
+            recent.forEach(path => {
+                const div = document.createElement('div');
+                div.className = 'tree-item file';
+                div.style.paddingLeft = '32px';
+                div.innerHTML = '<span class="icon">📄</span>' + 'markdown/' + path;
+                div.onclick = () => loadFile(path);
+                el.appendChild(div);
+            });
+        }
+        
+        // Search
+        document.getElementById('search').addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase();
+            if (!q) { renderTree(tree); return; }
+            
+            const results = allFiles.filter(f => f.path.toLowerCase().includes(q) || f.title.toLowerCase().includes(q));
+            const container = document.getElementById('fileTree');
+            container.innerHTML = '';
+            
+            if (results.length === 0) {
+                container.innerHTML = '<div class="loading">No files found</div>';
+                return;
+            }
+            
+            results.forEach(f => {
+                const div = document.createElement('div');
+                div.className = 'tree-item file';
+                div.innerHTML = '<span class="icon">📄</span>' + f.path;
+                div.onclick = () => loadFile(f.path);
+                container.appendChild(div);
+            });
+        });
+        
+        // Home button
+        document.getElementById('homeBtn').onclick = () => {
+            currentFolder = null;
+            document.getElementById('breadcrumbs').textContent = '📚 Life OS Docs';
+            document.getElementById('content').innerHTML = '<div class="welcome"><h1>📚 Life OS Documentation</h1><p>Select a file from the sidebar.</p><p class="hint">🔍 Type to search | ⌨️ Click to open</p></div>';
+            renderTree(tree);
+        };
+        
+        // Theme toggle
+        let dark = true;
+        document.getElementById('themeBtn').onclick = () => {
+            dark = !dark;
+            document.body.style.background = dark ? '#0a0a0f' : '#f5f5f5';
+            document.body.style.color = dark ? '#e0e0e0' : '#1a1a1a';
+        };
+        
+        renderRecent();
+        init();
+    </script>
+</body>
+</html>

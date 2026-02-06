@@ -1,0 +1,78 @@
+{
+  "name": "Example Click Macro",
+  "created_at": 1700000000.0,
+  "events": [
+    {
+      "timestamp": 0.0,
+      "event_type": "move",
+      "x": 400,
+      "y": 300,
+      "button": null,
+      "pressed": null,
+      "dx": null,
+      "dy": null
+    },
+    {
+      "timestamp": 0.5,
+      "event_type": "click",
+      "x": 400,
+      "y": 300,
+      "button": "left",
+      "pressed": true,
+      "dx": null,
+      "dy": null
+    },
+    {
+      "timestamp": 0.55,
+      "event_type": "click",
+      "x": 400,
+      "y": 300,
+      "button": "left",
+      "pressed": false,
+      "dx": null,
+      "dy": null
+    },
+    {
+      "timestamp": 1.0,
+      "event_type": "move",
+      "x": 500,
+      "y": 400,
+      "button": null,
+      "pressed": null,
+      "dx": null,
+      "dy": null
+    },
+    {
+      "timestamp": 1.5,
+      "event_type": "scroll",
+      "x": 500,
+      "y": 400,
+      "button": null,
+      "pressed": null,
+      "dx": 0,
+      "dy": -1
+    },
+    {
+      "timestamp": 2.0,
+      "event_type": "click",
+      "x": 500,
+      "y": 400,
+      "button": "right",
+      "pressed": true,
+      "dx": null,
+      "dy": null
+    },
+    {
+      "timestamp": 2.05,
+      "event_type": "click",
+      "x": 500,
+      "y": 400,
+      "button": "right",
+      "pressed": false,
+      "dx": null,
+      "dy": null
+    }
+  ],
+  "description": "Example macro demonstrating move, left click, scroll, and right click",
+  "version": "1.0"
+}

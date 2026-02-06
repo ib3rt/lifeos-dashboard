@@ -40,8 +40,9 @@
 
 ## Active Projects
 
-- Setting up OpenClaw/Life OS
-- TBD — update as we go
+- Life OS / OpenClaw setup
+- Sprint 2 - Super Swarm (149 agents) pending
+- Website redesign complete, awaiting deployment
 
 ---
 

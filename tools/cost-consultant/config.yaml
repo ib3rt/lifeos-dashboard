@@ -1,0 +1,221 @@
+# LLM Cost Consultant Configuration
+# Copy this file to config.yaml and update values
+
+# Budget Configuration
+budgets:
+  daily:
+    soft_limit: 50.00      # Warning threshold
+    hard_limit: 75.00      # Critical threshold
+  weekly:
+    soft_limit: 300.00
+    hard_limit: 450.00
+  monthly:
+    soft_limit: 1200.00
+    hard_limit: 1800.00
+  per_agent:
+    default: 20.00
+    research_agent: 50.00
+    coding_agent: 100.00
+    chat_agent: 10.00
+  per_model:
+    gpt-4: 30.00
+    claude-3-opus: 30.00
+    default: 50.00
+
+# Alert Thresholds
+alert_thresholds:
+  warning_percentage: 0.80    # Alert at 80% of budget
+  critical_percentage: 0.95  # Critical alert at 95%
+  anomaly_zscore: 3.0        # Flag values >3 standard deviations
+
+# Alert Channels
+alerts:
+  budget_warning:
+    channels:
+      - telegram
+      - discord
+    priority: medium
+
+  budget_critical:
+    channels:
+      - telegram
+      - discord
+      - email
+    priority: high
+
+  cost_anomaly:
+    channels:
+      - telegram
+      - discord
+    priority: high
+
+# Discord Configuration
+discord:
+  webhook_url: ${DISCORD_WEBHOOK}
+  channel: cost-reports
+  username: Cost Consultant
+  avatar_url: https://example.com/icon.png
+
+# Telegram Configuration
+telegram:
+  bot_token: ${TELEGRAM_BOT_TOKEN}
+  chat_id: ${TELEGRAM_CHAT_ID}
+  parse_mode: Markdown
+
+# Email Configuration (optional)
+email:
+  smtp_server: smtp.example.com
+  smtp_port: 587
+  smtp_user: ${SMTP_USER}
+  smtp_password: ${SMTP_PASSWORD}
+  from_address: cost-consultant@example.com
+  to_addresss:
+    - admin@example.com
+  use_tls: true
+
+# Report Configuration
+reports:
+  daily:
+    enabled: true
+    time: "08:00"
+    format: markdown
+    channels:
+      - discord
+      - telegram
+
+  weekly:
+    enabled: true
+    day: monday
+    time: "09:00"
+    format: markdown
+    channels:
+      - discord
+
+  monthly:
+    enabled: true
+    day: 1
+    time: "09:00"
+    format: markdown
+    channels:
+      - discord
+      - email
+
+# Model Routing Rules
+model_routing:
+  # Default routing for task types
+  defaults:
+    simple_chat: gpt-4o-mini
+    complex_chat: gpt-4o
+    code_generation: deepseek-coder-v2.5
+    code_review: claude-3-5-sonnet
+    analysis: claude-3-5-sonnet
+    reasoning: claude-3-5-sonnet
+    summarization: claude-3-haiku
+    long_context: gemini-1.5-pro
+
+  # Fallback routes (if primary fails)
+  fallbacks:
+    gpt-4o: claude-3-5-sonnet
+    claude-3-5-sonnet: gpt-4o
+    deepseek-coder-v2.5: claude-3-5-sonnet
+
+# Caching Configuration
+caching:
+  enabled: true
+  ttl_hours: 24
+  similarity_threshold: 0.85
+  max_cache_size_mb: 100
+  providers:
+    anthropic:
+      enabled: true
+      discount: 0.90  # 90% discount on cached tokens
+    openai:
+      enabled: true
+      discount: 0.75  # 75% discount on cached tokens
+    google:
+      enabled: false
+      discount: 0.75
+
+# Batching Configuration
+batching:
+  enabled: true
+  max_batch_size: 100
+  max_wait_time_seconds: 30
+  min_requests_per_batch: 5
+  eligible_models:
+    - gpt-4o-mini
+    - claude-3-haiku
+    - deepseek-v2.5
+
+# Provider Credentials (use environment variables in production)
+providers:
+  openai:
+    api_key: ${OPENAI_API_KEY}
+    organization: ${OPENAI_ORG_ID}
+
+  anthropic:
+    api_key: ${ANTHROPIC_API_KEY}
+
+  google:
+    api_key: ${GOOGLE_API_KEY}
+
+  deepseek:
+    api_key: ${DEEPSEEK_API_KEY}
+
+  minimax:
+    api_key: ${MINIMAX_API_KEY}
+
+  moonshot:
+    api_key: ${MOONSHOT_API_KEY}
+
+# Database Configuration
+database:
+  path: data/costs.db
+  backup_interval_hours: 24
+  retention_days: 90  # Keep 90 days of raw data
+
+# Logging Configuration
+logging:
+  level: INFO
+  format: "[%(asctime)s] [%(levelname)s] %(message)s"
+  file: logs/cost-consultant.log
+  max_size_mb: 10
+  backup_count: 5
+
+# Integration Settings
+integrations:
+  cron:
+    enabled: true
+    user: www-data
+
+  dashboard:
+    enabled: true
+    refresh_interval_seconds: 300
+
+  api:
+    enabled: false
+    port: 8080
+    auth_required: true
+
+# Cost Targets
+targets:
+  monthly_budget: 1000.00
+  max_cost_per_token: 0.01
+  max_avg_request_cost: 0.05
+  savings_target_percent: 30
+
+# Optimization Rules
+optimizations:
+  auto_apply:
+    enabled: false
+    min_savings_threshold: 0.20  # Only auto-apply if >20% savings
+    require_approval:
+      - model_switches
+      - provider_changes
+
+  recommendations:
+    min_savings_to_recommend: 0.10  # $10/month minimum
+    max_recommendations: 10
+    exclude_patterns:
+      - "*test*"
+      - "*dev*"

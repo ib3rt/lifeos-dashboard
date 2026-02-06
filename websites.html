@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌐 Life OS Websites</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem;
+        }
+        h1 {
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        .subtitle {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+        .sites {
+            display: grid;
+            gap: 1rem;
+            max-width: 600px;
+            width: 100%;
+        }
+        .site {
+            background: #15151a;
+            border: 1px solid #252530;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        .site:hover {
+            border-color: #00d4ff;
+            transform: translateX(5px);
+        }
+        .site-name {
+            color: #00d4ff;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .site-url {
+            color: #22c55e;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            word-break: break-all;
+        }
+        .site-desc {
+            color: #888;
+            font-size: 0.875rem;
+        }
+        .footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.875rem;
+        }
+        .footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌐 Life OS Websites</h1>
+    <div class="subtitle">All your deployed sites in one place</div>
+    
+    <div class="sites">
+        <a href="https://sparkling-solutions.vercel.app" class="site" target="_blank">
+            <div class="site-name">✨ Sparkling Solutions</div>
+            <div class="site-url">sparkling-solutions.vercel.app</div>
+            <div class="site-desc">Airbnb Cleaning Specialists — Professional cleaning service with host dashboard and lead capture</div>
+        </a>
+        
+        <a href="https://be-repaired.vercel.app" class="site" target="_blank">
+            <div class="site-name">🔧 BE Repaired</div>
+            <div class="site-url">be-repaired.vercel.app</div>
+            <div class="site-desc">Handyman Services — CTA funnels, service pricing, brand guidelines</div>
+        </a>
+        
+        <a href="https://personal-tech-seven.vercel.app" class="site" target="_blank">
+            <div class="site-name">💻 Personal Tech</div>
+            <div class="site-url">personal-tech-seven.vercel.app</div>
+            <div class="site-desc">Tech Portfolio — Personal technology portfolio and consulting site</div>
+        </a>
+        
+        <a href="https://lifeos-dashboard-three.vercel.app" class="site" target="_blank">
+            <div class="site-name">🦾 Life OS Dashboard</div>
+            <div class="site-url">lifeos-dashboard-three.vercel.app</div>
+            <div class="site-desc">Command Center — 15 AI agents, reports, tools, real-time status</div>
+        </a>
+    </div>
+    
+    <div class="footer">
+        <p>Part of the <strong>Life OS</strong> ecosystem</p>
+        <p style="margin-top: 0.5rem;">Built by <a href="https://github.com/ib3rt">@ib3rt</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sidebar Debug</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { display: flex; height: 100vh; background: #0a0a0f; color: #fff; font-family: sans-serif; }
+        .sidebar { width: 280px; background: #1a1a1a; border-right: 1px solid #333; padding: 20px; }
+        .main-content { flex: 1; padding: 20px; }
+        .item { padding: 8px 12px; margin: 4px 0; background: #252525; border-radius: 6px; cursor: pointer; }
+        .item:hover { background: #333; }
+        .folder { font-weight: bold; color: #00d4ff; }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <h2 style="margin-bottom: 20px;">📁 File Tree</h2>
+        <div id="file-list">Loading...</div>
+    </div>
+    <div class="main-content">
+        <h1>📄 Document Viewer</h1>
+        <p id="status">Select a file from the sidebar</p>
+    </div>
+
+    <script>
+        async function loadFiles() {
+            try {
+                const res = await fetch('search-index.json');
+                const data = await res.json();
+                
+                const fileList = document.getElementById('file-list');
+                fileList.innerHTML = '';
+                
+                // Build simple tree
+                const tree = {};
+                data.files.forEach(file => {
+                    const parts = file.path.split('/');
+                    let current = tree;
+                    parts.forEach((part, i) => {
+                        if (!current[part]) {
+                            current[part] = { type: i === parts.length - 1 ? 'file' : 'folder', path: file.path };
+                        }
+                        if (i < parts.length - 1) {
+                            current[part].children = current[part].children || {};
+                            current = current[part].children;
+                        }
+                    });
+                });
+                
+                function renderTree(obj, indent = 0) {
+                    let html = '';
+                    Object.keys(obj).sort((a, b) => {
+                        const aIsFolder = obj[a].type === 'folder';
+                        const bIsFolder = obj[b].type === 'folder';
+                        if (aIsFolder !== bIsFolder) return aIsFolder ? -1 : 1;
+                        return a.localeCompare(b);
+                    }).forEach(key => {
+                        const item = obj[key];
+                        const icon = item.type === 'folder' ? '📁' : '📄';
+                        html += `<div class="item ${item.type}" style="padding-left: ${indent + 12}px" onclick="selectFile('${item.path}')">${icon} ${key}</div>`;
+                    });
+                    return html;
+                }
+                
+                fileList.innerHTML = renderTree(tree);
+                document.getElementById('status').textContent = `Found ${data.files.length} files. Click to view.`;
+            } catch (e) {
+                document.getElementById('file-list').innerHTML = '<p style="color: red;">Error: ' + e.message + '</p>';
+            }
+        }
+        
+        function selectFile(path) {
+            document.getElementById('status').textContent = 'Loading: ' + path + '...';
+            fetch(path)
+                .then(r => r.text())
+                .then(content => {
+                    document.getElementById('status').innerHTML = '<h2>' + path + '</h2><pre style="background: #1a1a1a; padding: 20px; margin-top: 20px; overflow-x: auto;">' + content.substring(0, 2000) + '</pre>';
+                })
+                .catch(e => {
+                    document.getElementById('status').innerHTML = '<p style="color: red;">Error loading: ' + e.message + '</p>';
+                });
+        }
+        
+        loadFiles();
+    </script>
+</body>
+</html>

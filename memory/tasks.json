@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "task": "Test Super Swarm agents",
+    "priority": "medium",
+    "effort": "medium",
+    "status": "pending",
+    "created": "2026-02-05T22:57:00.857930",
+    "tags": []
+  }
+]

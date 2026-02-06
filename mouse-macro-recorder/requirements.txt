@@ -1,0 +1,8 @@
+# Mouse Macro Recorder Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core dependency for mouse/keyboard input
+pynput>=1.7.6
+
+# No additional dependencies required - uses tkinter (built-in)
+# Python 3.7+ includes tkinter by default

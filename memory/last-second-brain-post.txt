@@ -1,0 +1,9 @@
+/home/ubuntu/.openclaw/workspace/second-brain/content/journal/2026-02-03.md
+/home/ubuntu/.openclaw/workspace/second-brain/content/journal/2026-02-02.md
+/home/ubuntu/.openclaw/workspace/second-brain/content/concepts/zettelkasten.md
+/home/ubuntu/.openclaw/workspace/second-brain/content/concepts/knowledge-management.md
+/home/ubuntu/.openclaw/workspace/second-brain/content/concepts/getting-started.md
+/home/ubuntu/.openclaw/workspace/second-brain/content/projects/ideas.md
+/home/ubuntu/.openclaw/workspace/second-brain/content/projects/second-brain-app.md
+/home/ubuntu/.openclaw/workspace/second-brain/content/reference/markdown-cheatsheet.md
+/home/ubuntu/.openclaw/workspace/second-brain/content/reference/typescript-best-practices.md

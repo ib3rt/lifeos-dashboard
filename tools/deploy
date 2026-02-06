@@ -1,0 +1,4 @@
+#!/bin/bash
+# Simple deploy command - just type: deploy
+
+/home/ubuntu/.openclaw/workspace/tools/auto-deploy-dashboard.sh

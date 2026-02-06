@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life OS — Agent Status Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #252530;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.75rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .polling-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #888;
+        }
+        .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse 2s infinite;
+        }
+        .pulse.polling { background: #f59e0b; }
+        .pulse.offline { background: #ef4444; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        .main { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        
+        /* Summary Stats */
+        .summary-bar {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: #15151a;
+            border: 1px solid #252530;
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .summary-card:hover { transform: translateY(-2px); }
+        .summary-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        .summary-label { color: #888; font-size: 0.875rem; }
+        .summary-card.total .summary-value { color: #00d4ff; }
+        .summary-card.active .summary-value { color: #22c55e; }
+        .summary-card.busy .summary-value { color: #f59e0b; }
+        .summary-card.idle .summary-value { color: #6b7280; }
+        .summary-card.offline .summary-value { color: #ef4444; }
+        
+        /* Status Filter */
+        .filter-bar {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: #15151a;
+            border: 1px solid #252530;
+            border-radius: 20px;
+            color: #888;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        .filter-btn:hover { border-color: #00d4ff; color: #00d4ff; }
+        .filter-btn.active {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+        
+        /* Agent Grid */
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.25rem;
+        }
+        .agent-card {
+            background: #15151a;
+            border: 1px solid #252530;
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .agent-card:hover {
+            border-color: #00d4ff;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.1);
+        }
+        .agent-card.status-active { border-left: 4px solid #22c55e; }
+        .agent-card.status-busy { border-left: 4px solid #f59e0b; }
+        .agent-card.status-idle { border-left: 4px solid #6b7280; }
+        .agent-card.status-offline { border-left: 4px solid #ef4444; opacity: 0.7; }
+        
+        /* Status Indicator */
+        .status-indicator {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-indicator.active { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+        .status-indicator.busy { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+        .status-indicator.idle { background: rgba(107, 114, 128, 0.1); color: #6b7280; }
+        .status-indicator.offline { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: statusPulse 2s infinite;
+        }
+        .status-indicator.active .status-dot { background: #22c55e; }
+        .status-indicator.busy .status-dot { background: #f59e0b; }
+        .status-indicator.idle .status-dot { background: #6b7280; animation: none; }
+        .status-indicator.offline .status-dot { background: #ef4444; animation: none; }
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        
+        /* Agent Header */
+        .agent-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .agent-icon {
+            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 16px;
+        }
+        .agent-info h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+        .agent-info .role {
+            color: #888;
+            font-size: 0.875rem;
+        }
+        
+        /* Current Task */
+        .current-task {
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+        }
+        .task-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #00d4ff;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+        .task-text {
+            color: #e0e0e0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        /* Agent Meta */
+        .agent-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #252530;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #888;
+            font-size: 0.8rem;
+        }
+        .meta-icon { font-size: 0.9rem; }
+        .queue-badge {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .queue-badge:empty,
+        .queue-badge[data-count="0"] { display: none; }
+        
+        /* Capabilities */
+        .capabilities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #252530;
+        }
+        .capability-tag {
+            background: rgba(123, 44, 191, 0.1);
+            color: #a855f7;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.875rem;
+            margin-top: 2rem;
+        }
+        .last-updated {
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .agent-card { animation: fadeIn 0.3s ease forwards; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">🦾 Life OS</div>
+            <div class="header-meta">
+                <div class="polling-status">
+                    <span class="pulse" id="pollIndicator"></span>
+                    <span id="pollText">Connected</span>
+                </div>
+                <div style="color: #888; font-size: 0.875rem;">
+                    Last Updated: <span id="lastUpdated">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main">
+        <!-- Summary Stats -->
+        <div class="summary-bar">
+            <div class="summary-card total">
+                <div class="summary-value" id="totalAgents">-</div>
+                <div class="summary-label">Total Agents</div>
+            </div>
+            <div class="summary-card active">
+                <div class="summary-value" id="activeAgents">-</div>
+                <div class="summary-label">🟢 Active</div>
+            </div>
+            <div class="summary-card busy">
+                <div class="summary-value" id="busyAgents">-</div>
+                <div class="summary-label">🟡 Busy</div>
+            </div>
+            <div class="summary-card idle">
+                <div class="summary-value" id="idleAgents">-</div>
+                <div class="summary-label">⚪ Idle</div>
+            </div>
+            <div class="summary-card offline">
+                <div class="summary-value" id="offlineAgents">-</div>
+                <div class="summary-label">🔴 Offline</div>
+            </div>
+        </div>
+        
+        <!-- Filter -->
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">All Agents</button>
+            <button class="filter-btn" data-filter="active">🟢 Active</button>
+            <button class="filter-btn" data-filter="busy">🟡 Busy</button>
+            <button class="filter-btn" data-filter="idle">⚪ Idle</button>
+            <button class="filter-btn" data-filter="offline">🔴 Offline</button>
+        </div>
+        
+        <!-- Agent Grid -->
+        <div class="agent-grid" id="agentGrid"></div>
+    </main>
+    
+    <footer class="footer">
+        <div class="last-updated">Last data refresh: <span id="footerUpdated">-</span></div>
+        <p>🦾 Life OS — Real-Time Agent Status Dashboard</p>
+        <p style="margin-top: 0.5rem; color: #666;">Auto-refreshes every 30 seconds</p>
+    </footer>
+
+    <script>
+        // Configuration
+        const POLL_INTERVAL = 30000; // 30 seconds
+        const DATA_FILE = '/memory/agent-status.json';
+        
+        // State
+        let currentFilter = 'all';
+        let agentData = null;
+        
+        // DOM Elements
+        const agentGrid = document.getElementById('agentGrid');
+        const pollIndicator = document.getElementById('pollIndicator');
+        const pollText = document.getElementById('pollText');
+        const lastUpdated = document.getElementById('lastUpdated');
+        const footerUpdated = document.getElementById('footerUpdated');
+        
+        // Filter handling
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                if (agentData) renderAgents();
+            });
+        });
+        
+        // Format relative time
+        function formatRelativeTime(dateStr) {
+            const date = new Date(dateStr);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins}m ago`;
+            if (diffHours < 24) return `${diffHours}h ago`;
+            return date.toLocaleDateString();
+        }
+        
+        // Render agent card
+        function renderAgentCard(agent) {
+            const statusClass = `status-${agent.status}`;
+            const statusText = agent.status.charAt(0).toUpperCase() + agent.status.slice(1);
+            const queueCount = agent.queue || 0;
+            const queueHtml = queueCount > 0 ? `<span class="queue-badge" data-count="${queueCount}">${queueCount} queued</span>` : '';
+            
+            const capabilitiesHtml = agent.capabilities 
+                ? `<div class="capabilities">${agent.capabilities.map(c => `<span class="capability-tag">${c}</span>`).join('')}</div>` 
+                : '';
+            
+            return `
+                <div class="agent-card ${statusClass}" data-status="${agent.status}">
+                    <div class="status-indicator ${agent.status}">
+                        <span class="status-dot"></span>
+                        ${statusText}
+                    </div>
+                    
+                    <div class="agent-header">
+                        <div class="agent-icon">${agent.icon}</div>
+                        <div class="agent-info">
+                            <h3>${agent.name}</h3>
+                            <div class="role">${agent.fullName || agent.role}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="current-task">
+                        <div class="task-label">Current Task</div>
+                        <div class="task-text">${agent.currentTask || 'No active task'}</div>
+                    </div>
+                    
+                    <div class="agent-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">🕐</span>
+                            <span>${formatRelativeTime(agent.lastActive)}</span>
+                        </div>
+                        ${queueHtml}
+                    </div>
+                    
+                    ${capabilitiesHtml}
+                </div>
+            `;
+        }
+        
+        // Render all agents
+        function renderAgents() {
+            if (!agentData) return;
+            
+            // Update summary
+            const summary = agentData.summary;
+            document.getElementById('totalAgents').textContent = summary.total;
+            document.getElementById('activeAgents').textContent = summary.active;
+            document.getElementById('busyAgents').textContent = summary.busy;
+            document.getElementById('idleAgents').textContent = summary.idle;
+            document.getElementById('offlineAgents').textContent = summary.offline;
+            
+            // Filter and render agents
+            let agents = agentData.agents;
+            if (currentFilter !== 'all') {
+                agents = agents.filter(a => a.status === currentFilter);
+            }
+            
+            agentGrid.innerHTML = agents.map(renderAgentCard).join('');
+            
+            // Update timestamps
+            const lastUpdate = new Date(agentData.lastUpdated);
+            lastUpdated.textContent = lastUpdate.toLocaleTimeString();
+            footerUpdated.textContent = lastUpdate.toLocaleString();
+        }
+        
+        // Fetch data
+        async function fetchAgentStatus() {
+            // Simulate fetching by reading from localStorage/file
+            // In production, this would fetch from the server
+            try {
+                const response = await fetch(DATA_FILE + '?t=' + Date.now());
+                if (!response.ok) throw new Error('Failed to fetch');
+                agentData = await response.json();
+                
+                // Update poll status
+                pollIndicator.className = 'pulse';
+                pollText.textContent = 'Connected';
+                
+                renderAgents();
+            } catch (error) {
+                console.error('Failed to fetch agent status:', error);
+                pollIndicator.className = 'pulse offline';
+                pollText.textContent = 'Disconnected';
+            }
+        }
+        
+        // Initialize with sample data for demo
+        function initWithSampleData() {
+            // This will be replaced by actual fetch
+            fetchAgentStatus();
+        }
+        
+        // Poll for updates
+        function startPolling() {
+            // Initial fetch
+            fetchAgentStatus();
+            
+            // Set up polling
+            setInterval(fetchAgentStatus, POLL_INTERVAL);
+            
+            // Visual indicator during polling
+            let pollPhase = 0;
+            setInterval(() => {
+                pollPhase = (pollPhase + 1) % 4;
+                if (pollPhase === 0) {
+                    pollIndicator.className = 'pulse';
+                }
+            }, 500);
+        }
+        
+        // Start
+        document.addEventListener('DOMContentLoaded', startPolling);
+        
+        // Also start immediately
+        startPolling();
+    </script>
+</body>
+</html>

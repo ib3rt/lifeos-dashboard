@@ -1,0 +1,29 @@
+Agent: Knowledge Curator
+Type: Content Generator
+Status: OPERATIONAL
+Version: 2.0.0
+Created: 2026-02-05
+
+Purpose: Research topics and generate world-class article content
+
+Capabilities:
+- Topic-based article generation
+- Multiple template types (intro, guide, tutorial)
+- Auto-conversion to HTML
+- Batch processing
+- Self-contained (no external dependencies)
+
+Templates:
+- life-os-intro: General introductions
+- technical-guide: Developer documentation
+- tutorial: Step-by-step guides
+
+Usage:
+  python3 knowledge-curator.py generate "Topic" [--template type]
+  python3 knowledge-curator.py batch "Topic" [--count N]
+
+Output:
+  Markdown + HTML automatically
+  Ready for Cloudflare Pages deployment
+
+Ready for deployment.

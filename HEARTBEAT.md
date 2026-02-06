@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # HEARTBEAT.md - Active Checks
 
 *Checked every 30 minutes. Silent operation unless action needed.*
@@ -63,3 +64,10 @@ Execute silently. Log to daily file. Report in next non-heartbeat interaction.
 ---
 
 *Keep this file minimal. Too many checks = noise. Rotate intelligently.*
+=======
+# HEARTBEAT.md
+
+# Keep this file empty (or with only comments) to skip heartbeat API calls.
+
+# Add tasks below when you want the agent to check something periodically.
+>>>>>>> eaa0fd5 (Docs viewer standalone)

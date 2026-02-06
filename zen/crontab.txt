@@ -1,0 +1,63 @@
+# 🧘 Mindfulness Reminder Crontab Configuration
+# Add these lines to your crontab with: crontab -e
+# Or save and load: crontab zen/crontab.txt
+
+# Set path to reminder script
+ZEN_SCRIPT="${HOME}/.openclaw/workspace/zen/reminder.sh"
+
+# ─────────────────────────────────────────────────────────────
+# MORNING (Intention Setting)
+# ─────────────────────────────────────────────────────────────
+# 7:00 AM - Morning intention reminder
+0 7 * * * $ZEN_SCRIPT morning
+
+# ─────────────────────────────────────────────────────────────
+# WORK HOURS (09:00 - 17:00)
+# ─────────────────────────────────────────────────────────────
+# Hourly micro-pause at the top of the hour (:00)
+0 9-17 * * 1-5 $ZEN_SCRIPT hourly
+
+# Posture check at half past (:30)
+30 9-17 * * 1-5 $ZEN_SCRIPT half-hour
+
+# 12:00 PM - Mindful lunch reminder
+0 12 * * 1-5 $ZEN_SCRIPT lunch
+
+# 3:00 PM - Afternoon nature reset
+0 15 * * 1-5 $ZEN_SCRIPT afternoon
+
+# ─────────────────────────────────────────────────────────────
+# EVENING (Wind-down)
+# ─────────────────────────────────────────────────────────────
+# 6:00 PM - Work-to-home transition
+0 18 * * * $ZEN_SCRIPT evening
+
+# 8:00 PM - Digital sunset reminder
+0 20 * * * $ZEN_SCRIPT sunset
+
+# 8:30 PM - Gratitude practice
+30 20 * * * $ZEN_SCRIPT gratitude
+
+# 9:00 PM - Prepare for rest
+0 21 * * * $ZEN_SCRIPT wind-down
+
+# ─────────────────────────────────────────────────────────────
+# NOTES
+# ─────────────────────────────────────────────────────────────
+# 
+# Format: minute hour day month weekday command
+# Weekdays: 0=Sunday, 1=Monday, ... 5=Friday, 6=Saturday
+# 1-5 = Monday through Friday (work days)
+#
+# To install: crontab zen/crontab.txt
+# To view: crontab -l
+# To edit: crontab -e
+# 
+# Make sure the script is executable:
+#   chmod +x ~/.openclaw/workspace/zen/reminder.sh
+#
+# To disable all reminders temporarily:
+#   crontab -r
+#
+# To re-enable:
+#   crontab ~/.openclaw/workspace/zen/crontab.txt

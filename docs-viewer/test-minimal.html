@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minimal Test</title>
+    <style>
+        body { background: #1a1a1a; color: #0f0; font-family: monospace; padding: 20px; }
+        .success { color: #5f5; }
+        .error { color: #f55; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Minimal Test</h1>
+    <div id="output"></div>
+    
+    <script>
+        const output = document.getElementById('output');
+        
+        output.innerHTML += '<p>Testing fetch...</p>';
+        
+        fetch('search-index.json')
+            .then(r => r.json())
+            .then(data => {
+                output.innerHTML += '<p class="success">✓ Fetch worked!</p>';
+                output.innerHTML += '<p>Files: ' + data.files.length + '</p>';
+                output.innerHTML += '<p>FileTree: ' + data.fileTree.length + '</p>';
+                output.innerHTML += '<p class="success">All data loaded successfully!</p>';
+            })
+            .catch(err => {
+                output.innerHTML += '<p class="error">✗ Error: ' + err.message + '</p>';
+            });
+    </script>
+</body>
+</html>

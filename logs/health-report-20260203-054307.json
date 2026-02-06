@@ -1,0 +1,152 @@
+{
+  "timestamp": "2026-02-03T05:43:07+00:00",
+  "hostname": "ip-172-31-24-50",
+  "checks": {
+    "disk_space": {
+      "status": "healthy",
+      "message": "All filesystems healthy",
+      "max_usage_percent": 28,
+      "filesystems": [
+        {
+          "filesystem": "/dev/root",
+          "mount": "/",
+          "size": "29G",
+          "used": "7.7G",
+          "available": "21G",
+          "percent": "28%",
+          "status": "healthy"
+        },
+        {
+          "filesystem": "/dev/nvme0n1p16",
+          "mount": "/boot",
+          "size": "881M",
+          "used": "89M",
+          "available": "730M",
+          "percent": "11%",
+          "status": "healthy"
+        },
+        {
+          "filesystem": "/dev/nvme0n1p15",
+          "mount": "/boot/efi",
+          "size": "105M",
+          "used": "6.2M",
+          "available": "99M",
+          "percent": "6%",
+          "status": "healthy"
+        }
+      ]
+    },
+    "memory": {
+      "status": "healthy",
+      "message": "Memory usage normal",
+      "total_mb": 7780,
+      "used_mb": 1593,
+      "available_mb": 6186,
+      "usage_percent": 20.5,
+      "swap_total_mb": 0,
+      "swap_used_mb": 0,
+      "swap_percent": 0
+    },
+    "cpu": {
+      "status": "healthy",
+      "message": "CPU usage normal",
+      "usage_percent": 0.0,
+      "load_1min": 0.00,
+      "load_5min": 0.00,
+      "load_15min": 0.00,
+      "cores": 2
+    },
+    "docker": {
+      "status": "critical",
+      "message": "CRITICAL: Docker daemon is not running",
+      "details": {}
+    },
+    "n8n": {
+      "status": "healthy",
+      "message": "n8n workflow engine is running",
+      "details": {
+        "port": 5678,
+        "pid": "50923",
+        "memory_mb": 233
+      }
+    },
+    "discord_bot": {
+      "status": "healthy",
+      "message": "Discord bridge bot is running (2 instances)",
+      "details": {
+        "instances": 2
+      }
+    },
+    "network": {
+      "status": "healthy",
+      "message": "Network connectivity OK",
+      "total_tested": 6,
+      "failed": 0,
+      "endpoints": [
+        {
+          "name": "Google_DNS",
+          "host": "8.8.8.8",
+          "reachable": true,
+          "latency_ms": 0.876
+        },
+        {
+          "name": "Cloudflare_DNS",
+          "host": "1.1.1.1",
+          "reachable": true,
+          "latency_ms": 3.04
+        },
+        {
+          "name": "Google_HTTP",
+          "host": "google.com",
+          "reachable": true,
+          "latency_ms": 1.38
+        },
+        {
+          "name": "GitHub",
+          "host": "github.com",
+          "reachable": true,
+          "latency_ms": 0.935
+        },
+        {
+          "name": "Telegram_API",
+          "host": "api.telegram.org",
+          "reachable": true,
+          "latency_ms": 85.6
+        },
+        {
+          "name": "Discord_API",
+          "host": "discord.com",
+          "reachable": true,
+          "latency_ms": 1.25
+        }
+      ]
+    },
+    "git": {
+      "status": "warning",
+      "message": "WARNING: 53 uncommitted changes",
+      "details": {
+        "branch": "master",
+        "commit": "263bbf3",
+        "uncommitted_changes": 53,
+        "commits_ahead": 0,
+        "commits_behind": 0,
+        "last_commit": "2026-02-02 15:01:11 +0000"
+      }
+    },
+    "openclaw_gateway": {
+      "status": "healthy",
+      "message": "OpenClaw Gateway is running",
+      "details": {
+        "endpoint": "localhost:18789",
+        "version": "unknown"
+      }
+    }
+  },
+  "summary": {
+    "total": 9,
+    "healthy": 7,
+    "warning": 1,
+    "critical": 1
+  },
+  "overall_status": "critical"
+}
